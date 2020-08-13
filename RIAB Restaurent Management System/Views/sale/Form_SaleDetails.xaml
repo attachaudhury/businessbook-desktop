@@ -1,0 +1,17 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.sale.Form_SaleDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sale Details" Height="345.113" Width="606.767" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="dg_ItemPurchased" HorizontalAlignment="Left" Margin="258,29,0,0" VerticalAlignment="Top" Height="258" Width="322"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="24,29,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_CustomerName" Content="" HorizontalAlignment="Left" Margin="118,29,0,0" VerticalAlignment="Top"/>
+        <Label Content="Sale Id" HorizontalAlignment="Left" Margin="24,57,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_SaleId" Content="0" HorizontalAlignment="Left" Margin="117,57,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date" HorizontalAlignment="Left" Margin="24,84,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_Date" Content="0" HorizontalAlignment="Left" Margin="117,84,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total" HorizontalAlignment="Left" Margin="24,108,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_Total" Content="0" HorizontalAlignment="Left" Margin="116,108,0,0" VerticalAlignment="Top"/>
+        <Button Content="Print" Click="printDuplicateRecipt" HorizontalAlignment="Left" Margin="45,179,0,0" VerticalAlignment="Top" Width="109"/>
+    </Grid>
+</Window>

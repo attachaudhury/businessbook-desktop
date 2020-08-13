@@ -1,0 +1,20 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.kitchen.Form_EditKitchenInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Kitchen Item" Height="261.285" Width="951.438" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="72,28,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Name" Text="" HorizontalAlignment="Left" Height="23" Margin="164,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
+        <Label Content="Quantity" HorizontalAlignment="Left" Margin="72,63,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Quantity" Text="10" HorizontalAlignment="Left" Height="23" Margin="164,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
+        <Label Content="Minimum" HorizontalAlignment="Left" Margin="72,106,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_MinimumQuantity" Text="5" HorizontalAlignment="Left" Height="23" Margin="164,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
+        <Label Content="Purchase Price" HorizontalAlignment="Left" Margin="72,147,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_PurchasePrice" Text="10" HorizontalAlignment="Left" Height="23" Margin="164,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
+        <Label Content="Expiry Date" HorizontalAlignment="Left" Margin="548,27,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dp_ExpiryDate" HorizontalAlignment="Left" Margin="641,26,0,0" VerticalAlignment="Top" Width="233"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="549,77,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_Category" SelectionChanged="cb_Category_SelectionChanged" HorizontalAlignment="Left" Margin="641,76,0,0" VerticalAlignment="Top" Width="233"/>
+        <Button Click="btn_Update" Content="Update" HorizontalAlignment="Left" Margin="706,128,0,0" VerticalAlignment="Top" Width="85" Height="35" Background="#FF678FB8"/>
+    </Grid>
+</Window>

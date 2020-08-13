@@ -1,0 +1,17 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.foodndeals.Form_ManageFoodItems"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage Food Items" Height="639.189" Width="957.726" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button Click="btn_DeleteAFoodItem" Content="Delete" HorizontalAlignment="Left" Margin="750,234,0,0" VerticalAlignment="Top" Width="142" Height="43" Background="#FFF37052"/>
+        <Button Click="btn_EditAFoodItem" Content="Edit" HorizontalAlignment="Left" Margin="750,293,0,0" VerticalAlignment="Top" Width="142" Height="43"/>
+        <DataGrid x:Name="dg_AllFoodItems" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="27,26,0,0" VerticalAlignment="Top" Height="546" Width="661">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding SalePrice}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding tbl_FoodItemCategory.Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

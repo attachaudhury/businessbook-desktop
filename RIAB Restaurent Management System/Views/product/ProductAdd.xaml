@@ -1,0 +1,34 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.product.ProductAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.product"
+        mc:Ignorable="d"
+        Title="Add" Height="450" Width="800">
+    <Grid>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="25,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.521"/>
+        <TextBox x:Name="tb_name" HorizontalAlignment="Left" Height="26" Margin="110,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label Content="Sale Price" HorizontalAlignment="Left" Margin="25,63,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_saleprice" HorizontalAlignment="Left" Height="26" Margin="110,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label Content="Purchase Price" HorizontalAlignment="Left" Margin="25,105,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_purchaseprice" HorizontalAlignment="Left" Height="26" Margin="110,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label Content="Discount" HorizontalAlignment="Left" Margin="25,147,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_discount" HorizontalAlignment="Left" Height="26" Margin="110,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label Content="Carry Cost" HorizontalAlignment="Left" Margin="25,191,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_carrycost" HorizontalAlignment="Left" Height="26" Margin="110,189,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label Content="Barcode" HorizontalAlignment="Left" Margin="25,235,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_barcode" HorizontalAlignment="Left" Height="26" Margin="110,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label Content="Quantity" HorizontalAlignment="Left" Margin="25,273,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_quantity" HorizontalAlignment="Left" Height="26" Margin="110,271,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+
+        <Label Content="Type" HorizontalAlignment="Left" Margin="25,310,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cb_Type" SelectedIndex="0" HorizontalAlignment="Left" Margin="110,310,0,0" VerticalAlignment="Top" Width="264" Height="26"/>
+
+        <CheckBox x:Name="cbx_SaleActive" Content="Sale Active" HorizontalAlignment="Left" Margin="646,297,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbx_PurchaseActive" Content="Purchase Active" HorizontalAlignment="Left" Margin="646,323,0,0" VerticalAlignment="Top"/>
+        <Button Click="btn_Save" Content="Save" HorizontalAlignment="Left" Margin="480,377,0,0" VerticalAlignment="Top" Width="302"/>
+
+
+    </Grid>
+</Window>

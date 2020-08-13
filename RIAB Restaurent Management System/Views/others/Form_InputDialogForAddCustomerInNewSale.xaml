@@ -1,0 +1,15 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.Form_InputDialogForAddCustomerInNewSale"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Customer" Height="270.517" Width="469.173" Background="#FFD7DEE4">
+    <Grid>
+        <ComboBox Name="cb_DeliveryBoy" HorizontalAlignment="Left" Margin="268,4,0,0" VerticalAlignment="Top" Width="169" Height="46"/>
+        <Label Content="Phone" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Phone" PreviewKeyDown="tb_Phone_PreviewKeyDown" TextChanged="tb_Phone_TextChanged" HorizontalAlignment="Left" Height="46" Margin="88,4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158" />
+        <Label Content="Name" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Name" TabIndex="1" Text="" HorizontalAlignment="Left" Height="46" Margin="88,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158"/>
+        <Label Content="Address"  HorizontalAlignment="Left" Margin="25,122,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Address" PreviewKeyDown="tb_Address_PreviewKeyDown" HorizontalAlignment="Left" Height="69" Margin="88,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="349"/>
+        <Button Content="OK" Click="OKButton_Click" HorizontalAlignment="Left" Margin="176,198,0,0" VerticalAlignment="Top" Width="117" Height="33"/>
+    </Grid>
+</Window>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.finance.Form_CashInHand"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.finance"
+        mc:Ignorable="d"
+        Title="Finance Report" Height="676" Width="1150.429" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid Name="dg_FinanceChart" HorizontalAlignment="Left" Height="488" Width="982" Margin="13,72,0,0" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Width="100" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Opening Balance" Width="120" Binding="{Binding OpeningBalance}" />
+                <DataGridTextColumn Header="Sale" Width="100" Binding="{Binding Sale}" />
+                <DataGridTextColumn Header="Delivery" Width="100" Binding="{Binding Delivery}" />
+                <DataGridTextColumn Header="Total Sale" Width="100" Binding="{Binding TotalSale}" />
+                <DataGridTextColumn Header="Total Cash" Width="100" Binding="{Binding TotalCash}" />
+                <DataGridTextColumn Header="Deposit" Width="100" Binding="{Binding Deposit}" />
+                <DataGridTextColumn Header="Expence" Binding="{Binding Expence}" />
+                <DataGridTextColumn Header="Closing Balance" Binding="{Binding ClosingBalance}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Export Excel" Click="btn_ExportExcel" HorizontalAlignment="Left" Margin="1020,140,0,0" VerticalAlignment="Top" Width="113" Height="46"/>
+        <Label Name="lbl_TotalSale" FontSize="16" Content="0" HorizontalAlignment="Left" Margin="404,585,0,0" VerticalAlignment="Top" Width="97"/>
+        <Label x:Name="lbl_TotalDeposit" FontSize="16" Content="0" HorizontalAlignment="Left" Margin="628,585,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label Name="lbl_TotalExpence" FontSize="16" Content="0" HorizontalAlignment="Left" Margin="828,585,0,0" VerticalAlignment="Top" Width="105"/>
+        <DatePicker Name="dp_from" HorizontalAlignment="Left" Margin="282,25,0,0" VerticalAlignment="Top" Width="214"/>
+        <DatePicker Name="dp_to" HorizontalAlignment="Left" Margin="628,25,0,0" VerticalAlignment="Top" Width="196"/>
+        <Button Click="btn_CustomDateSearch" Content="Search" HorizontalAlignment="Left" Margin="849,23,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="206,25,0,0" VerticalAlignment="Top"/>
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="546,25,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total Sale" HorizontalAlignment="Left" Margin="327,587,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total Deposit" HorizontalAlignment="Left" Margin="533,587,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total Expence" HorizontalAlignment="Left" Margin="733,587,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

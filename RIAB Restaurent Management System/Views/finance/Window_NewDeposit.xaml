@@ -1,0 +1,19 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.finance.Window_NewDeposit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.finance"
+        mc:Ignorable="d"
+        Title="New Deposit" Height="303.384" Width="417.293" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Ammount" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Ammount" HorizontalAlignment="Left" Margin="119,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" Height="34"/>
+        <Label Content="Comment" HorizontalAlignment="Left" Margin="33,91,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Comment" HorizontalAlignment="Left" Height="38" Margin="119,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205"/>
+        <Label Content="Deposit Head" HorizontalAlignment="Left" Margin="20,147,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_Head" HorizontalAlignment="Left" Margin="119,135,0,0" VerticalAlignment="Top" Width="205" Height="38"/>
+        <Button Content="Save" Click="btn_Save" HorizontalAlignment="Left" Margin="142,201,0,0" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

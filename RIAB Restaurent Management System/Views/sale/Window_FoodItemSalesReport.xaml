@@ -1,0 +1,35 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.sale.Window_FoodItemSalesReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.sale"
+        mc:Ignorable="d"
+        Title="FoodItem Sales Report" Height="538.979" Width="1021.764" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox Name="tb_Search" PreviewKeyDown="tb_Search_PreviewKeyDown" TextChanged="tb_Search_TextChanged" HorizontalAlignment="Left" Height="35" Margin="32,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167"/>
+        <ListView Name="lv_SearchFoodItem" Panel.ZIndex="1" Visibility="Hidden" HorizontalAlignment="Left" Height="205" Margin="20,80,0,0" VerticalAlignment="Top" Width="191">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <DatePicker x:Name="dp_from" HorizontalAlignment="Left" Margin="316,24,0,0" VerticalAlignment="Top" Height="32" Width="205"/>
+        <DatePicker x:Name="dp_to" HorizontalAlignment="Left" Margin="604,24,0,0" VerticalAlignment="Top" Width="171" Height="32"/>
+        <Button Click="btn_CustomDateSearch" Content="Search" HorizontalAlignment="Left" Margin="798,24,0,0" VerticalAlignment="Top" Width="179"/>
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="248,24,0,0" VerticalAlignment="Top"/>
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="534,24,0,0" VerticalAlignment="Top"/>
+        <DataGrid Name="dg_ItemSaleSearch" BorderBrush="Gray" BorderThickness="1" AlternatingRowBackground="LightGray" HorizontalAlignment="Left" Height="348" Margin="227,82,0,0" VerticalAlignment="Top" Width="631">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Total" Binding="{Binding Total}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Total Amount" HorizontalAlignment="Left" Margin="650,450,0,0" VerticalAlignment="Top"/>
+        <Label Name="lbl_total" FontSize="20" Background="Gray" Content="0" HorizontalAlignment="Left" Margin="749,446,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Total Quantity" HorizontalAlignment="Left" Margin="397,450,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_totalQuantity" FontSize="20" Background="Gray" Content="0" HorizontalAlignment="Left" Margin="519,446,0,0" VerticalAlignment="Top" Width="110"/>
+    </Grid>
+</Window>

@@ -1,0 +1,10 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.Form_InputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Input Value" Height="215.413" Width="454.511" Background="#FFFFCECE" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Please Enter Value" HorizontalAlignment="Left" Margin="25,29,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ResponseTextBox" Text="" HorizontalAlignment="Left" Height="32" Margin="25,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392"/>
+        <Button Content="OK" Click="OKButton_Click" HorizontalAlignment="Left" Margin="160,106,0,0" VerticalAlignment="Top" Width="117" Height="33" Background="#FFAFF39F"/>
+    </Grid>
+</Window>

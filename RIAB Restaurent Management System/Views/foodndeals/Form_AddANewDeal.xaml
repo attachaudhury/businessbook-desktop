@@ -1,0 +1,30 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.foodndeals.Form_AddANewDeal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add New Deal" Height="562.539" Width="873.688" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="19,32,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_DealName" HorizontalAlignment="Left" Height="35" Margin="83,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185"/>
+        <Label Content="Price" HorizontalAlignment="Left" Margin="19,80,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_DealSalePrice" HorizontalAlignment="Left" Height="39" Margin="83,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="21,139,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cb_Cat" HorizontalAlignment="Left" Margin="83,121,0,0" VerticalAlignment="Top" Width="185" Height="39"/>
+        <CheckBox x:Name="cbx_ManageInventory" Content="Manage Inventory" HorizontalAlignment="Left" Margin="19,190,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dg_DealFoodItems" HorizontalAlignment="Left" Margin="19,220,0,0" VerticalAlignment="Top" Height="263" Width="348">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="125" Foreground="#FF151515"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="125" Foreground="#FF151515"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dg_AllFoodItems" HorizontalAlignment="Left" Margin="568,11,0,0" VerticalAlignment="Top" Height="400" Width="276">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="125" Foreground="#FF151515"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="125" Foreground="#FF151515"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Click="btn_AddToDeal" Content="Add To Deal" BorderBrush="LightGreen" HorizontalAlignment="Left" Margin="407,203,0,0" VerticalAlignment="Top" Width="130" Height="41" Background="#FF5BB964"/>
+        <Button Click="btn_RemoveFromDeal" Content="Remove" HorizontalAlignment="Left" Margin="407,264,0,0" VerticalAlignment="Top" Width="130" Height="39" Background="#FFE4674B"/>
+        <Button Click="btn_SaveDeal" Content="Save Deal" BorderBrush="LightGreen" HorizontalAlignment="Left" Margin="568,429,0,0" VerticalAlignment="Top" Width="276" Height="59" Background="#FF49B03F"/>
+        <Label x:Name="lbl_Total" FontSize="18" Background="Black" Foreground="White" Content="0" HorizontalAlignment="Left" Margin="286,483,0,0" VerticalAlignment="Top" Width="82"/>
+    </Grid>
+</Window>

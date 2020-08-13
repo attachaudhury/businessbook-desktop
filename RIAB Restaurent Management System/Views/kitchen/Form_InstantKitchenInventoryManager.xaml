@@ -1,0 +1,28 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.kitchen.Form_InstantKitchenInventoryManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Instant Kitchen Inventory Manager" Height="620.122" Width="841.237" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="All Items" HorizontalAlignment="Left" Margin="28,15,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dg_AllKitchenItems" HorizontalAlignment="Left" Margin="29,50,0,0" VerticalAlignment="Top" Height="510" Width="300">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Remaining" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Min Level" Binding="{Binding MinimumQuantity}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Low Inventory" HorizontalAlignment="Left" Margin="494,14,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dg_AllLowInventoryItems" HorizontalAlignment="Left" Margin="494,54,0,0" VerticalAlignment="Top" Height="506" Width="297">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Remaining" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Min Level" Binding="{Binding MinimumQuantity}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Quantity" HorizontalAlignment="Left" Margin="360,103,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Quantity" KeyDown="tb_Quantity_KeyDown_PressEnter" HorizontalAlignment="Left" Margin="358,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85" ToolTip="Please Enter After Updating"/>
+        <Label Content="Price" HorizontalAlignment="Left" Margin="360,176,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Price" KeyDown="tb_Price_KeyDown_PressEnter" HorizontalAlignment="Left" Margin="358,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="89"/>
+
+    </Grid>
+</Window>

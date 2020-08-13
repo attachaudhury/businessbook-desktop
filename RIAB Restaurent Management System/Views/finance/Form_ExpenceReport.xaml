@@ -1,0 +1,34 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+        x:Class="RIAB_Restaurent_Management_System.Views.finance.Form_ExpenceReport"
+        Title="Expence Report" Height="760.5" Width="1352.697"
+        WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button Click="btn_FindExpencesByHead" Content="Find By Head" HorizontalAlignment="Left" Margin="993,24,0,0" VerticalAlignment="Top" Width="125" Height="39"/>
+        <Button Click="btn_FindExpencesBySubHead" Content="Find By Sub Head" HorizontalAlignment="Left" Margin="1139,23,0,0" VerticalAlignment="Top" Width="152" Height="39"/>
+        <DatePicker x:Name="dp_StartDate" HorizontalAlignment="Left" Margin="52,29,0,0" VerticalAlignment="Top" Width="154"/>
+        <DatePicker x:Name="dp_EndDate" HorizontalAlignment="Left" Margin="226,30,0,0" VerticalAlignment="Top" Width="154"/>
+        <DataGrid x:Name="dg_AllExpences" AlternatingRowBackground="White"  BorderBrush="DarkGray" BorderThickness="1" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="84,134,0,0" VerticalAlignment="Top" Height="437" Width="1181">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Date/Time" Binding="{Binding DatenTime}"/>
+                <DataGridTextColumn Header="Head" Binding="{Binding tbl_ExpenceHead.Name}"/>
+                <DataGridTextColumn Header="Sub Head" Binding="{Binding tbl_ExpenceSubHead.Name}"/>
+                <DataGridTextColumn Header="Total Amount" Binding="{Binding Amount}"/>
+                <DataGridTextColumn Header="Comments" Binding="{Binding Comment}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox x:Name="cb_Head" SelectionChanged="cb_Head_SelectionChanged" HorizontalAlignment="Left" Margin="488,33,0,0" VerticalAlignment="Top" Width="233"/>
+        <ComboBox x:Name="cb_SubHead" HorizontalAlignment="Left" Margin="751,33,0,0" VerticalAlignment="Top" Width="221"/>
+        <Button Content="Excel" HorizontalAlignment="Left" Margin="1196,620,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Form" HorizontalAlignment="Left" Margin="44,6,0,0" VerticalAlignment="Top"/>
+        <Label Content="To" HorizontalAlignment="Left" Margin="226,7,0,0" VerticalAlignment="Top"/>
+        <Button Click="btn_Search" Content="Search" HorizontalAlignment="Left" Margin="395,27,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Heads" HorizontalAlignment="Left" Margin="493,6,0,0" VerticalAlignment="Top"/>
+        <Label Content="Sub Heads" HorizontalAlignment="Left" Margin="747,6,0,0" VerticalAlignment="Top" Width="119"/>
+        <Label Content="Expences" HorizontalAlignment="Left" Margin="78,104,0,0" VerticalAlignment="Top"/>
+        <Label Name="lbl_total" FontStyle="Italic" FontFamily="Times" Content="0" FontSize="20" HorizontalAlignment="Left" Height="85.6" Margin="930,580,0,0" VerticalAlignment="Top" Width="208"/>
+    </Grid>
+</Window>

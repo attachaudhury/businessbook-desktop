@@ -1,0 +1,17 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.foodndeals.Form_EditAFoodItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit FoodItem" Height="433.665" Width="636.09" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="34,22,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_FoodItemName" HorizontalAlignment="Left" Height="26" Margin="110,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <Label Content="Sale Price" HorizontalAlignment="Left" Margin="34,61,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_FoodSalePrice" HorizontalAlignment="Left" Height="26" Margin="110,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="34,102,0,0" VerticalAlignment="Top"/>
+        <ComboBox SelectionChanged="cb_FoodItemCategory_SelectionChanged" x:Name="cb_FoodItemCategory"  HorizontalAlignment="Left" Margin="110,102,0,0" VerticalAlignment="Top" Width="304"/>
+        <CheckBox Name="cbx_ManageInventory" Content="Manage Inventory" HorizontalAlignment="Left" Margin="38,176,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_FoodItemRecipe" HorizontalAlignment="Left" Height="104" Margin="109,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="440"/>
+        <Button Click="btn_UpdateFoodItem" Content="Update" HorizontalAlignment="Left" Margin="284,351,0,0" VerticalAlignment="Top" Width="89"/>
+        <Label Content="Recipe" HorizontalAlignment="Left" Margin="38,226,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

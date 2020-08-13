@@ -1,0 +1,18 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.kitchen.Form_ManageKitchenInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage Kitchen" Height="510.33" Width="1027.282" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="dg_AllKitchenInventory" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Height="423" Width="776">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding tbl_KitchenInventoryCategory.Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Click="btn_AddNewKitchenInventory" Content="New" HorizontalAlignment="Left" Margin="839,164,0,0" VerticalAlignment="Top" Width="118" Background="#FF63CD7B"/>
+        <Button Click="btn_DeleteKitchenInventory" Content="Delete" HorizontalAlignment="Left" Margin="839,206,0,0" VerticalAlignment="Top" Width="118" Background="#FFFF8383"/>
+        <Button Click="btn_UpdateKitchenInventory" Content="Update" HorizontalAlignment="Left" Margin="839,249,0,0" VerticalAlignment="Top" Width="118" Background="#FF7495EE"/>
+        <Button Click="btn_InstantKitchenInventoryManager" Content="Inventory Manager" HorizontalAlignment="Left" Margin="820,293,0,0" VerticalAlignment="Top" Width="161"/>
+    </Grid>
+</Window>

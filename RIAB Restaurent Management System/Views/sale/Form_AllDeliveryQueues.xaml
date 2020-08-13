@@ -1,0 +1,17 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.sale.Form_AllDeliveryQueues"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Delivery Queues" Height="386.655" Width="617.686" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="dg_AllQueues" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="322" Width="438">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sale Id" Binding="{Binding SaleId}" />
+                <DataGridTextColumn Header="Customer Id" Binding="{Binding CustomerId}" />
+                <DataGridTextColumn Header="Total Bill" Binding="{Binding TotalBill}" />
+                <DataGridTextColumn Header="Delivery Boy" Binding="{Binding DeliveryBoyName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Click="btn_Delivered" Content="Delivered" HorizontalAlignment="Left" Margin="477,135,0,0" VerticalAlignment="Top" Width="100" BorderBrush="LightGreen" Background="#FF62BD40"/>
+        <Button Click="btn_Canceled" Content="Canceled" HorizontalAlignment="Left" Margin="477,181,0,0" VerticalAlignment="Top" Width="100"/>
+    </Grid>
+</Window>

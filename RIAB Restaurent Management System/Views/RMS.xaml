@@ -1,0 +1,66 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.RMS"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Business Book" Height="695" Width="1371.5" WindowState="Maximized">
+    <Window.Background>
+        <ImageBrush ImageSource="/RIAB Restaurent Management System;component/media/restaurant3.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Menu Background="#FF363636" Foreground="#DDC7C7C7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1364">
+            <MenuItem  Header="Customers">
+                <MenuItem Header="Add New Customer" Click="mi_AddNewCustomer"/>
+                <MenuItem Header="View All Customers" Click="mi_ViewAllCustomers"/>
+            </MenuItem>
+            <MenuItem x:Name="m_FoodsnDeals" Header="Foods n Deals">
+                <MenuItem Header="Categories" Click="mi_ManageFoodIemCategories"/>
+                <MenuItem Header="Add Food Item" Click="mi_AddFoodIem"/>
+                <MenuItem Header="All Food Items" Click="mi_ManageFoodIems"/>
+                <MenuItem Header="Add Deal" Click="mi_AddDeal"/>
+                <MenuItem Header="All Deals" Click="mi_ManageDeals"/>
+                <MenuItem Header="Add Product" Click="mi_ProductAdd"/>
+                <MenuItem Header="All Products" Click="mi_ProductList"/>
+            </MenuItem>
+            <MenuItem Header="Sale">
+                <MenuItem Header="New Sale" Click="mi_NewSale"/>
+                <MenuItem Header="POS" Click="pos"/>
+                <MenuItem Header="Delivery Queue" Click="mi_DeliveryQueue"/>
+                <MenuItem x:Name="m_Sale_AllSales" Header="All Sales" Click="mi_AllSales"/>
+                <MenuItem x:Name="m_Sale_DailySaleReport" Header="Daily Sale Report" Click="mi_DailySaleReport"/>
+                <MenuItem x:Name="m_Sale_SearchSaleByCustomer" Header="Search Sale By Customer" Click="mi_SearchSaleByCustomer"/>
+                <MenuItem x:Name="m_Sale_FoodItemSalesReport" Header="Food Item Sales Report" Click="mi_FoodItemSalesReport"/>
+                <MenuItem x:Name="m_Sale_DeliveryBoysReport" Header="Delivery Boys Report " Click="mi_DeliveryBoysReport"/>
+
+            </MenuItem>
+            <MenuItem x:Name="m_Kitchen" Header="Kitchen">
+                <MenuItem Header="_Manage Kitchen Categories" Click="mi_ManageKitchenCategories"/>
+                <MenuItem Header="_Manage Kitchen Inventory" Click="mi_ManageKitchenInventory"/>
+                <MenuItem Header="_Link Kitchen Inventory" Click="mi_LinkKitchenInventory"/>
+            </MenuItem>
+            <MenuItem Header="Finances">
+                <MenuItem x:Name="m_NewExpence" Header="New Expence" Click="mi_NewExpence"/>
+                <MenuItem x:Name="m_ManageExpenceTypes" Header="Manage Expence Types" Click="mi_ManageExpenceTypes"/>
+                <MenuItem x:Name="m_ExpenceReport" Header="Expence Report" Click="mi_ExpenceReport"/>
+                <MenuItem x:Name="m_FinanceReport" Header="Finance Report" Click="mi_CashInHand"/>
+                <MenuItem  Header="Do Closing" Click="mi_DoClosing"/>
+                <MenuItem x:Name="m_NewDepositHead" Header="New Deposit Head" Click="mi_NewDepositHead"/>
+                <MenuItem Header="New Deposit" Click="mi_NewDeposit"/>
+                <MenuItem x:Name="m_ViewDeposits" Header="View Deposits" Click="mi_ViewDeposit"/>
+            </MenuItem>
+            <MenuItem x:Name="m_Staff" Header="Staff">
+                <MenuItem Header="Add Staff" Click="mi_AddStaff"/>
+                <MenuItem Header="View Staff" Click="mi_AllStaff"/>
+            </MenuItem>
+            <MenuItem Header="Log Out" Click="mi_LogOut">
+            </MenuItem>
+        </Menu>
+
+        <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Width="1364" Background="#FF363636" Height="25" Foreground="#DDC7C7C7"/>
+        <Button Click="btn_Sale" Content="Sale" Background="Chocolate" HorizontalAlignment="Left" Margin="59,228,0,0" VerticalAlignment="Top" Width="183"/>
+        <Button Click="btn_Expence" Content="Expence" Background="DodgerBlue" HorizontalAlignment="Left" Margin="59,265,0,0" VerticalAlignment="Top" Width="183"/>
+        <Button Click="btn_Customer" Content="Customer" Background="Red" HorizontalAlignment="Left" Margin="59,302,0,0" VerticalAlignment="Top" Width="183"/>
+    </Grid>
+
+</Window>

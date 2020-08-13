@@ -1,0 +1,12 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.sale.Form_FindSaleByCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Find Sale By Customer" Height="319.173" Width="506.391" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Phone Number" HorizontalAlignment="Left" Margin="13,24,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Phone" HorizontalAlignment="Left" Margin="17,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="141"/>
+        <Button Click="btn_FindSales" Content="Find" HorizontalAlignment="Left" Margin="32,107,0,0" VerticalAlignment="Top" Width="99" />
+        <DataGrid x:Name="dg_AllCustomerSales" IsEnabled="False" HorizontalAlignment="Left" Margin="187,22,0,0" VerticalAlignment="Top" Height="234" Width="284"/>
+
+    </Grid>
+</Window>

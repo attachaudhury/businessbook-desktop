@@ -1,0 +1,23 @@
+﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.kitchen.Form_LinkFoodsToInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.kitchen"
+        mc:Ignorable="d"
+        Title="Link Foods Item To Inventory" Height="551.786" Width="899.869" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ComboBox Name="cb_AllFoodItems" SelectionChanged="cb_AllFoodItems_SelectionChanged" HorizontalAlignment="Left" Margin="24,96,0,0" VerticalAlignment="Top" Width="193"/>
+        <ComboBox Name="cb_AllDeals" SelectionChanged="cb_AllDeals_SelectionChanged" HorizontalAlignment="Left" Margin="27,216,0,0" VerticalAlignment="Top" Width="198"/>
+        <DataGrid Name="dg_AllInventoryItems" HorizontalAlignment="Left" Height="385" Margin="624,47,0,0" VerticalAlignment="Top" Width="218"/>
+        <Button Content="Link" Click="btn_Add" HorizontalAlignment="Left" Margin="507,145,0,0" VerticalAlignment="Top" Width="66" Background="#FF3B82C9" RenderTransformOrigin="0.652,0.639"/>
+        <Label Content="Food Items" HorizontalAlignment="Left" Margin="22,69,0,0" VerticalAlignment="Top"/>
+        <Label Content="Deals" HorizontalAlignment="Left" Margin="25,189,0,0" VerticalAlignment="Top"/>
+        <Label Content="All Inventory" HorizontalAlignment="Left" Margin="624,15,0,0" VerticalAlignment="Top"/>
+        <DataGrid Name="dg_SelectedInventoryItems"  HorizontalAlignment="Left" Height="385" Margin="269,47,0,0" VerticalAlignment="Top" Width="214"/>
+        <Button Content="Save" Click="btn_Save" HorizontalAlignment="Left" Margin="656,461,0,0" VerticalAlignment="Top" Width="156" Background="Green"/>
+        <TextBox Name="tb_Quantity" HorizontalAlignment="Left" Margin="508,228,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="97"/>
+        <Button Content="Quantity" Click="btn_UpdateQuantity"  HorizontalAlignment="Left" Margin="504,263,0,0" VerticalAlignment="Top" Width="101" Background="#FF3B81BB"/>
+        <Label Content="Linked" HorizontalAlignment="Left" Margin="268,15,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
