@@ -256,7 +256,7 @@ groupid int,
 name varchar(50),
 amount float,
 status varchar(50),
-createddate datetime,
+date datetime,
 childof int,
 paymentmethod varchar(30),
 referencenumber varchar(50),
@@ -264,59 +264,38 @@ bank varchar(50),
 branch varchar(100),
 chequedate datetime,
 details varchar(200),
-
 fk_createdbyuser_user_financetransaction int,
 constraint fk_createdbyuser_user_financetransaction foreign key (fk_createdbyuser_user_financetransaction) references [user](id),
-
 fk_targettouser_user_financetransaction int,
 constraint fk_targettouser_user_financetransaction foreign key (fk_targettouser_user_financetransaction) references [user](id),
-
-
 fk_financeaccount_financeaccount_financetransaction int,
 constraint fk_financeaccount_financeaccount_financetransaction foreign key (fk_financeaccount_financeaccount_financetransaction) references financeaccount(id),
-
-
 );
+
 create table salepurchaseproduct(
 id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 price float,
 quantity float,
 total float,
-FK_Product_Id int,
-FK_Finance_Transaction_Id int,
-foreign key (FK_Product_Id) references Product(Id),
-foreign key (FK_Finance_Transaction_Id) references financetransaction(Id),
-
-fk_product_salepurchaseproduct_salepurchaseproduct int,
-constraint fk_product_salepurchaseproduct_salepurchaseproduct foreign key (fk_product_salepurchaseproduct_salepurchaseproduct) references product(Id),
-
-fk_financetransaction_salepurchaseproduct_finacetransaction int,
-constraint fk_financetransaction_salepurchaseproduct_finacetransaction foreign key (fk_financetransaction_salepurchaseproduct_finacetransaction) references fk_financeaccount_financeaccount_financetransaction(Id),
-
-
+fk_product_salepurchaseproduct_product int,
+constraint fk_product_salepurchaseproduct_product foreign key (fk_product_salepurchaseproduct_product) references product(id),
+fk_financetransaction_salepurchaseproduct_financetransaction int,
+constraint fk_financetransaction_salepurchaseproduct_financetransaction foreign key (fk_financetransaction_salepurchaseproduct_financetransaction) references financetransaction(id),
 );
 
-create table Closing(
+create table closing(
 id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-DateTime datetime,
-Expence float,
-Income float,
-ClosingBalance float,
-Comment varchar(200),
-Note1 int,
-Note2 int,
-Note3 int,
-Note4 int,
-Note5 int,
-Note6 int,
-Note7 int,
-Note8 int,
-Note9 int,
-FK_aspnetusers_Id varchar(200),
-foreign key (FK_aspnetusers_Id) references aspnetusers(Id)
+[date] datetime,
+expence float,
+income float,
+closingbalance float,
+comment varchar(200),
+fk_user_closing_user int,
+constraint fk_user_closing_user foreign key (fk_user_closing_user) references [user](id),
 );
 
 
+SET IDENTITY_INSERT financeaccount ON
 /* asset Accounts */
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(101,'bank','asset',null);
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(1011,'meezan bank','asset',101);
@@ -351,6 +330,7 @@ insert into financeaccount(id,name,type,fk_parent_financeaccount) values(509,'di
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(510,'other','expence',null);
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(511,'inventory loss','expence',null);
 
+SET IDENTITY_INSERT financeaccount OFF
 
 
 

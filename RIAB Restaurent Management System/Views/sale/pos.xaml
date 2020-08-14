@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.sale"
         mc:Ignorable="d"
-        Title="Sale Terminal"  Height="572.5" Width="914.5"
+        Title="POS Terminal"  Height="572.5" Width="914.5"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
@@ -19,8 +19,8 @@
         <ListView HorizontalAlignment="Left" Visibility="Hidden" Name="lv_SearchFoodItem" Height="182" Margin="8,55,0,0" VerticalAlignment="Top" Width="357">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=SalePrice}" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" />
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=price}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -28,10 +28,10 @@
 
         <DataGrid Name="dg_SellingList" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="459,10,0,0" VerticalAlignment="Top" Width="440">
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header="Name" Binding="{Binding Name}"></materialDesign:DataGridTextColumn>
-                <materialDesign:DataGridTextColumn Header="Qty" Binding="{Binding Quantity}"></materialDesign:DataGridTextColumn>
-                <materialDesign:DataGridTextColumn Header="Price" Binding="{Binding SalePrice}"></materialDesign:DataGridTextColumn>
-                <materialDesign:DataGridTextColumn Header="Total" Binding="{Binding Total}"></materialDesign:DataGridTextColumn>
+                <materialDesign:DataGridTextColumn Header="Name" Binding="{Binding name}"></materialDesign:DataGridTextColumn>
+                <materialDesign:DataGridTextColumn Header="Qty" Binding="{Binding quantity}"></materialDesign:DataGridTextColumn>
+                <materialDesign:DataGridTextColumn Header="Price" Binding="{Binding price}"></materialDesign:DataGridTextColumn>
+                <materialDesign:DataGridTextColumn Header="Total" Binding="{Binding total}"></materialDesign:DataGridTextColumn>
 
                 <DataGridTemplateColumn Header="Add Qty">
                     <DataGridTemplateColumn.CellTemplate>

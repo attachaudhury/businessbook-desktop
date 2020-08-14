@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RMSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="closing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="expence" Type="float" />
+          <Property Name="income" Type="float" />
+          <Property Name="closingbalance" Type="float" />
+          <Property Name="comment" Type="varchar" MaxLength="200" />
+          <Property Name="fk_user_closing_user" Type="int" />
+        </EntityType>
         <EntityType Name="dealproduct">
           <Key>
             <PropertyRef Name="id" />
@@ -13,6 +25,36 @@
           <Property Name="fk_deal_product_dealproduct" Type="int" />
           <Property Name="fk_product_product_dealproduct" Type="int" />
           <Property Name="quantity" Type="float" />
+        </EntityType>
+        <EntityType Name="financeaccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="fk_parent_financeaccount" Type="int" />
+        </EntityType>
+        <EntityType Name="financetransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupid" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="amount" Type="float" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="childof" Type="int" />
+          <Property Name="paymentmethod" Type="varchar" MaxLength="30" />
+          <Property Name="referencenumber" Type="varchar" MaxLength="50" />
+          <Property Name="bank" Type="varchar" MaxLength="50" />
+          <Property Name="branch" Type="varchar" MaxLength="100" />
+          <Property Name="chequedate" Type="datetime" />
+          <Property Name="details" Type="varchar" MaxLength="200" />
+          <Property Name="fk_createdbyuser_user_financetransaction" Type="int" />
+          <Property Name="fk_targettouser_user_financetransaction" Type="int" />
+          <Property Name="fk_financeaccount_financeaccount_financetransaction" Type="int" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -29,6 +71,17 @@
           <Property Name="saleprice" Type="float" />
           <Property Name="saleactive" Type="bit" />
           <Property Name="type" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="salepurchaseproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="fk_product_salepurchaseproduct_product" Type="int" />
+          <Property Name="fk_financetransaction_salepurchaseproduct_financetransaction" Type="int" />
         </EntityType>
         <EntityType Name="tbl_Customer">
           <Key>
@@ -489,6 +542,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_createdbyuser_user_financetransaction">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_createdbyuser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_deal_product_dealproduct">
           <End Role="product" Type="Self.product" Multiplicity="0..1" />
           <End Role="dealproduct" Type="Self.dealproduct" Multiplicity="*" />
@@ -498,6 +563,42 @@
             </Principal>
             <Dependent Role="dealproduct">
               <PropertyRef Name="fk_deal_product_dealproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financeaccount_financeaccount_financetransaction">
+          <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_financeaccount_financeaccount_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financetransaction_salepurchaseproduct_financetransaction">
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="0..1" />
+          <End Role="salepurchaseproduct" Type="Self.salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financetransaction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_financetransaction_salepurchaseproduct_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_parent_financeaccount">
+          <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
+          <End Role="financeaccount1" Type="Self.financeaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financeaccount1">
+              <PropertyRef Name="fk_parent_financeaccount" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -513,9 +614,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_product_salepurchaseproduct_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="salepurchaseproduct" Type="Self.salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_product_salepurchaseproduct_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_targettouser_user_financetransaction">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_targettouser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_closing_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="closing" Type="Self.closing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="closing">
+              <PropertyRef Name="fk_user_closing_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RMSDBModelStoreContainer">
+          <EntitySet Name="closing" EntityType="Self.closing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dealproduct" EntityType="Self.dealproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="financeaccount" EntityType="Self.financeaccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="financetransaction" EntityType="Self.financetransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salepurchaseproduct" EntityType="Self.salepurchaseproduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Deal" EntityType="Self.tbl_Deal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_DealFoodItem" EntityType="Self.tbl_DealFoodItem" Schema="dbo" store:Type="Tables" />
@@ -613,13 +754,41 @@
             <End Role="tbl_StaffCategory" EntitySet="tbl_StaffCategory" />
             <End Role="tbl_Staff" EntitySet="tbl_Staff" />
           </AssociationSet>
+          <AssociationSet Name="fk_createdbyuser_user_financetransaction" Association="Self.fk_createdbyuser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
           <AssociationSet Name="fk_deal_product_dealproduct" Association="Self.fk_deal_product_dealproduct">
             <End Role="product" EntitySet="product" />
             <End Role="dealproduct" EntitySet="dealproduct" />
           </AssociationSet>
+          <AssociationSet Name="fk_financeaccount_financeaccount_financetransaction" Association="Self.fk_financeaccount_financeaccount_financetransaction">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financetransaction_salepurchaseproduct_financetransaction" Association="Self.fk_financetransaction_salepurchaseproduct_financetransaction">
+            <End Role="financetransaction" EntitySet="financetransaction" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_parent_financeaccount" Association="Self.fk_parent_financeaccount">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financeaccount1" EntitySet="financeaccount" />
+          </AssociationSet>
           <AssociationSet Name="fk_product_product_dealproduct" Association="Self.fk_product_product_dealproduct">
             <End Role="product" EntitySet="product" />
             <End Role="dealproduct" EntitySet="dealproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_salepurchaseproduct_product" Association="Self.fk_product_salepurchaseproduct_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_targettouser_user_financetransaction" Association="Self.fk_targettouser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_closing_user" Association="Self.fk_user_closing_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="closing" EntitySet="closing" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -733,6 +902,38 @@
           <AssociationSet Name="fk_product_product_dealproduct" Association="RMSDBModel.fk_product_product_dealproduct">
             <End Role="product" EntitySet="product" />
             <End Role="dealproduct" EntitySet="dealproduct" />
+          </AssociationSet>
+          <EntitySet Name="closing" EntityType="RMSDBModel.closing" />
+          <EntitySet Name="financeaccount" EntityType="RMSDBModel.financeaccount" />
+          <EntitySet Name="financetransaction" EntityType="RMSDBModel.financetransaction" />
+          <EntitySet Name="salepurchaseproduct" EntityType="RMSDBModel.salepurchaseproduct" />
+          <AssociationSet Name="fk_user_closing_user" Association="RMSDBModel.fk_user_closing_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="closing" EntitySet="closing" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financeaccount_financeaccount_financetransaction" Association="RMSDBModel.fk_financeaccount_financeaccount_financetransaction">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_parent_financeaccount" Association="RMSDBModel.fk_parent_financeaccount">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financeaccount1" EntitySet="financeaccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_createdbyuser_user_financetransaction" Association="RMSDBModel.fk_createdbyuser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financetransaction_salepurchaseproduct_financetransaction" Association="RMSDBModel.fk_financetransaction_salepurchaseproduct_financetransaction">
+            <End Role="financetransaction" EntitySet="financetransaction" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_targettouser_user_financetransaction" Association="RMSDBModel.fk_targettouser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_salepurchaseproduct_product" Association="RMSDBModel.fk_product_salepurchaseproduct_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_Customer">
@@ -1246,6 +1447,7 @@
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="dealproduct" Relationship="RMSDBModel.fk_deal_product_dealproduct" FromRole="product" ToRole="dealproduct" />
           <NavigationProperty Name="dealproduct1" Relationship="RMSDBModel.fk_product_product_dealproduct" FromRole="product" ToRole="dealproduct" />
+          <NavigationProperty Name="salepurchaseproduct" Relationship="RMSDBModel.fk_product_salepurchaseproduct_product" FromRole="product" ToRole="salepurchaseproduct" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -1258,6 +1460,9 @@
           <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="closing" Relationship="RMSDBModel.fk_user_closing_user" FromRole="user" ToRole="closing" />
+          <NavigationProperty Name="financetransaction" Relationship="RMSDBModel.fk_createdbyuser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
+          <NavigationProperty Name="financetransaction1" Relationship="RMSDBModel.fk_targettouser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
         </EntityType>
         <Association Name="fk_deal_product_dealproduct">
           <End Type="RMSDBModel.product" Role="product" Multiplicity="0..1" />
@@ -1280,6 +1485,153 @@
             </Principal>
             <Dependent Role="dealproduct">
               <PropertyRef Name="fk_product_product_dealproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="closing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="expence" Type="Double" />
+          <Property Name="income" Type="Double" />
+          <Property Name="closingbalance" Type="Double" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fk_user_closing_user" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="RMSDBModel.fk_user_closing_user" FromRole="closing" ToRole="user" />
+        </EntityType>
+        <EntityType Name="financeaccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fk_parent_financeaccount" Type="Int32" />
+          <NavigationProperty Name="financetransaction" Relationship="RMSDBModel.fk_financeaccount_financeaccount_financetransaction" FromRole="financeaccount" ToRole="financetransaction" />
+          <NavigationProperty Name="financeaccount1" Relationship="RMSDBModel.fk_parent_financeaccount" FromRole="financeaccount" ToRole="financeaccount1" />
+          <NavigationProperty Name="financeaccount2" Relationship="RMSDBModel.fk_parent_financeaccount" FromRole="financeaccount1" ToRole="financeaccount" />
+        </EntityType>
+        <EntityType Name="financetransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupid" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="childof" Type="Int32" />
+          <Property Name="paymentmethod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="referencenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="branch" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="chequedate" Type="DateTime" Precision="3" />
+          <Property Name="details" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fk_createdbyuser_user_financetransaction" Type="Int32" />
+          <Property Name="fk_targettouser_user_financetransaction" Type="Int32" />
+          <Property Name="fk_financeaccount_financeaccount_financetransaction" Type="Int32" />
+          <NavigationProperty Name="financeaccount" Relationship="RMSDBModel.fk_financeaccount_financeaccount_financetransaction" FromRole="financetransaction" ToRole="financeaccount" />
+          <NavigationProperty Name="user" Relationship="RMSDBModel.fk_createdbyuser_user_financetransaction" FromRole="financetransaction" ToRole="user" />
+          <NavigationProperty Name="salepurchaseproduct" Relationship="RMSDBModel.fk_financetransaction_salepurchaseproduct_financetransaction" FromRole="financetransaction" ToRole="salepurchaseproduct" />
+          <NavigationProperty Name="user1" Relationship="RMSDBModel.fk_targettouser_user_financetransaction" FromRole="financetransaction" ToRole="user" />
+        </EntityType>
+        <EntityType Name="salepurchaseproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="price" Type="Double" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="fk_product_salepurchaseproduct_product" Type="Int32" />
+          <Property Name="fk_financetransaction_salepurchaseproduct_financetransaction" Type="Int32" />
+          <NavigationProperty Name="financetransaction" Relationship="RMSDBModel.fk_financetransaction_salepurchaseproduct_financetransaction" FromRole="salepurchaseproduct" ToRole="financetransaction" />
+          <NavigationProperty Name="product" Relationship="RMSDBModel.fk_product_salepurchaseproduct_product" FromRole="salepurchaseproduct" ToRole="product" />
+        </EntityType>
+        <Association Name="fk_user_closing_user">
+          <End Type="RMSDBModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="RMSDBModel.closing" Role="closing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="closing">
+              <PropertyRef Name="fk_user_closing_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financeaccount_financeaccount_financetransaction">
+          <End Type="RMSDBModel.financeaccount" Role="financeaccount" Multiplicity="0..1" />
+          <End Type="RMSDBModel.financetransaction" Role="financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_financeaccount_financeaccount_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_parent_financeaccount">
+          <End Type="RMSDBModel.financeaccount" Role="financeaccount" Multiplicity="0..1" />
+          <End Type="RMSDBModel.financeaccount" Role="financeaccount1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financeaccount1">
+              <PropertyRef Name="fk_parent_financeaccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_createdbyuser_user_financetransaction">
+          <End Type="RMSDBModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="RMSDBModel.financetransaction" Role="financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_createdbyuser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financetransaction_salepurchaseproduct_financetransaction">
+          <End Type="RMSDBModel.financetransaction" Role="financetransaction" Multiplicity="0..1" />
+          <End Type="RMSDBModel.salepurchaseproduct" Role="salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financetransaction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_financetransaction_salepurchaseproduct_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_targettouser_user_financetransaction">
+          <End Type="RMSDBModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="RMSDBModel.financetransaction" Role="financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_targettouser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_salepurchaseproduct_product">
+          <End Type="RMSDBModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="RMSDBModel.salepurchaseproduct" Role="salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_product_salepurchaseproduct_product" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1580,6 +1932,63 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="closing">
+            <EntityTypeMapping TypeName="RMSDBModel.closing">
+              <MappingFragment StoreEntitySet="closing">
+                <ScalarProperty Name="fk_user_closing_user" ColumnName="fk_user_closing_user" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="closingbalance" ColumnName="closingbalance" />
+                <ScalarProperty Name="income" ColumnName="income" />
+                <ScalarProperty Name="expence" ColumnName="expence" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="financeaccount">
+            <EntityTypeMapping TypeName="RMSDBModel.financeaccount">
+              <MappingFragment StoreEntitySet="financeaccount">
+                <ScalarProperty Name="fk_parent_financeaccount" ColumnName="fk_parent_financeaccount" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="financetransaction">
+            <EntityTypeMapping TypeName="RMSDBModel.financetransaction">
+              <MappingFragment StoreEntitySet="financetransaction">
+                <ScalarProperty Name="fk_financeaccount_financeaccount_financetransaction" ColumnName="fk_financeaccount_financeaccount_financetransaction" />
+                <ScalarProperty Name="fk_targettouser_user_financetransaction" ColumnName="fk_targettouser_user_financetransaction" />
+                <ScalarProperty Name="fk_createdbyuser_user_financetransaction" ColumnName="fk_createdbyuser_user_financetransaction" />
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="chequedate" ColumnName="chequedate" />
+                <ScalarProperty Name="branch" ColumnName="branch" />
+                <ScalarProperty Name="bank" ColumnName="bank" />
+                <ScalarProperty Name="referencenumber" ColumnName="referencenumber" />
+                <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
+                <ScalarProperty Name="childof" ColumnName="childof" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="groupid" ColumnName="groupid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salepurchaseproduct">
+            <EntityTypeMapping TypeName="RMSDBModel.salepurchaseproduct">
+              <MappingFragment StoreEntitySet="salepurchaseproduct">
+                <ScalarProperty Name="fk_financetransaction_salepurchaseproduct_financetransaction" ColumnName="fk_financetransaction_salepurchaseproduct_financetransaction" />
+                <ScalarProperty Name="fk_product_salepurchaseproduct_product" ColumnName="fk_product_salepurchaseproduct_product" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -14,13 +14,13 @@
         <Label Content="Purchase Price" HorizontalAlignment="Left" Margin="25,105,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_purchaseprice" HorizontalAlignment="Left" Height="26" Margin="110,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
         <Label Content="Discount" HorizontalAlignment="Left" Margin="25,147,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_discount" HorizontalAlignment="Left" Height="26" Margin="110,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <TextBox x:Name="tb_discount" HorizontalAlignment="Left" Height="26" Margin="110,145,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="264"/>
         <Label Content="Carry Cost" HorizontalAlignment="Left" Margin="25,191,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_carrycost" HorizontalAlignment="Left" Height="26" Margin="110,189,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <TextBox x:Name="tb_carrycost" HorizontalAlignment="Left" Height="26" Margin="110,189,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="264"/>
         <Label Content="Barcode" HorizontalAlignment="Left" Margin="25,235,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_barcode" HorizontalAlignment="Left" Height="26" Margin="110,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <TextBox x:Name="tb_barcode" HorizontalAlignment="Left" Height="26" Margin="110,233,0,0" TextWrapping="Wrap" Text="1234567" VerticalAlignment="Top" Width="264"/>
         <Label Content="Quantity" HorizontalAlignment="Left" Margin="25,273,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_quantity" HorizontalAlignment="Left" Height="26" Margin="110,271,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <TextBox x:Name="tb_quantity" HorizontalAlignment="Left" Height="26" Margin="110,271,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="264"/>
 
         <Label Content="Type" HorizontalAlignment="Left" Margin="25,310,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="cb_Type" SelectedIndex="0" HorizontalAlignment="Left" Margin="110,310,0,0" VerticalAlignment="Top" Width="264" Height="26"/>

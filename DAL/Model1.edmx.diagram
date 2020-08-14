@@ -52,6 +52,17 @@
         <EntityTypeShape EntityType="RMSDBModel.user" Width="1.5" PointX="14.375" PointY="5.75" />
         <AssociationConnector Association="RMSDBModel.fk_deal_product_dealproduct" />
         <AssociationConnector Association="RMSDBModel.fk_product_product_dealproduct" />
+        <EntityTypeShape EntityType="RMSDBModel.closing" Width="1.5" PointX="16.625" PointY="14.5" />
+        <EntityTypeShape EntityType="RMSDBModel.financeaccount" Width="1.5" PointX="14.375" PointY="15" />
+        <EntityTypeShape EntityType="RMSDBModel.financetransaction" Width="1.5" PointX="16.625" PointY="4.75" />
+        <EntityTypeShape EntityType="RMSDBModel.salepurchaseproduct" Width="1.5" PointX="18.875" PointY="4" />
+        <AssociationConnector Association="RMSDBModel.fk_user_closing_user" />
+        <AssociationConnector Association="RMSDBModel.fk_financeaccount_financeaccount_financetransaction" />
+        <AssociationConnector Association="RMSDBModel.fk_parent_financeaccount" />
+        <AssociationConnector Association="RMSDBModel.fk_createdbyuser_user_financetransaction" />
+        <AssociationConnector Association="RMSDBModel.fk_financetransaction_salepurchaseproduct_financetransaction" />
+        <AssociationConnector Association="RMSDBModel.fk_targettouser_user_financetransaction" />
+        <AssociationConnector Association="RMSDBModel.fk_product_salepurchaseproduct_product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

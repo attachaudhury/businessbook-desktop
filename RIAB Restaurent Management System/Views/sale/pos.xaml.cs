@@ -29,13 +29,17 @@ namespace RIAB_Restaurent_Management_System.Views.sale
     {
         List<productsaleorpurchase> mappedproducts;
         List<productsaleorpurchase> salelist = new List<productsaleorpurchase>();
-        List<Brush> myBrushes = new List<Brush>();
         int customerId = 0;
         bool isDelivery = false;
         int deliveryBoyId;
         string customerAddress = "";
-        
 
+        public pos()
+        {
+            InitializeComponent();
+            initFormOperations();
+
+        }
 
         void initFormOperations()
         {

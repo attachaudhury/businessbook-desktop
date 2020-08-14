@@ -12,29 +12,24 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class financeaccount
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public financeaccount()
         {
-            this.closing = new HashSet<closing>();
             this.financetransaction = new HashSet<financetransaction>();
-            this.financetransaction1 = new HashSet<financetransaction>();
+            this.financeaccount1 = new HashSet<financeaccount>();
         }
     
         public int id { get; set; }
-        public string address { get; set; }
         public string name { get; set; }
-        public string password { get; set; }
-        public string username { get; set; }
-        public string phone { get; set; }
-        public string role { get; set; }
+        public string type { get; set; }
+        public Nullable<int> fk_parent_financeaccount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<closing> closing { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<financetransaction> financetransaction { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<financetransaction> financetransaction1 { get; set; }
+        public virtual ICollection<financeaccount> financeaccount1 { get; set; }
+        public virtual financeaccount financeaccount2 { get; set; }
     }
 }
