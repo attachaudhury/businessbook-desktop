@@ -76,6 +76,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
@@ -96,7 +97,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="bll\printing.cs" />
+    <Compile Include="bll\productutils.cs" />
+    <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\userutils.cs" />
+    <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
     <Compile Include="Views\finance\Form_CashInHand.xaml.cs">
       <DependentUpon>Form_CashInHand.xaml</DependentUpon>
     </Compile>
