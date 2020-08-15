@@ -97,11 +97,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="bll\financeutils.cs" />
     <Compile Include="bll\printing.cs" />
     <Compile Include="bll\productutils.cs" />
     <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\userutils.cs" />
     <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
+    <Compile Include="other\Class1.cs" />
+    <Compile Include="Views\finance\expencenew.xaml.cs">
+      <DependentUpon>expencenew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\expences.xaml.cs">
+      <DependentUpon>expences.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\finance\Form_CashInHand.xaml.cs">
       <DependentUpon>Form_CashInHand.xaml</DependentUpon>
     </Compile>
@@ -110,6 +118,21 @@
     </Compile>
     <Compile Include="Views\finance\Form_ExpenceReport.xaml.cs">
       <DependentUpon>Form_ExpenceReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\purchasenew.xaml.cs">
+      <DependentUpon>purchasenew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\purchases.xaml.cs">
+      <DependentUpon>purchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\saledetails.xaml.cs">
+      <DependentUpon>saledetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\sales.xaml.cs">
+      <DependentUpon>sales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\transactions.xaml.cs">
+      <DependentUpon>transactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\Window_NewDeposit.xaml.cs">
       <DependentUpon>Window_NewDeposit.xaml</DependentUpon>
@@ -231,6 +254,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\finance\expencenew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\expences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\finance\Form_CashInHand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +273,26 @@
     <Page Include="Views\finance\Form_ExpenceReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\finance\purchasenew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\purchases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\saledetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\sales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\transactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\finance\Window_NewDeposit.xaml">
       <SubType>Designer</SubType>

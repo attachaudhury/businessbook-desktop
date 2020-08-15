@@ -236,7 +236,7 @@ namespace RIAB_Restaurent_Management_System.Views.sale
             bool reciept2 = cbx_Receipt2.IsChecked.Value;
             bool reciept3 = cbx_Receipt3.IsChecked.Value;
             double discount = 0;
-            saleutils.newsale(salelist, discount, totalBill, Remaining, customerId, reciept1, reciept2, reciept3, saleType, customerAddress, deliveryBoyId);
+            saleutils.newsale(salelist, totalBill, Remaining, customerId, reciept1, reciept2, reciept3, saleType, customerAddress, deliveryBoyId);
 
             AutoClosingMessageBox.Show("Ammount " + totalBill, "Success", 2000);
             Close();

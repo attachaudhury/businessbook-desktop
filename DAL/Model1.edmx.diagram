@@ -47,11 +47,8 @@
         <AssociationConnector Association="RMSDBModel.FK__tbl_Sale__Staff___4F7CD00D" />
         <AssociationConnector Association="RMSDBModel.FK__tbl_SaleI__Sale___619B8048" />
         <AssociationConnector Association="RMSDBModel.FK__tbl_Staff__Staff__46E78A0C" />
-        <EntityTypeShape EntityType="RMSDBModel.dealproduct" Width="1.5" PointX="16.625" PointY="1.625" />
         <EntityTypeShape EntityType="RMSDBModel.product" Width="1.5" PointX="14.375" PointY="1" />
         <EntityTypeShape EntityType="RMSDBModel.user" Width="1.5" PointX="14.375" PointY="5.75" />
-        <AssociationConnector Association="RMSDBModel.fk_deal_product_dealproduct" />
-        <AssociationConnector Association="RMSDBModel.fk_product_product_dealproduct" />
         <EntityTypeShape EntityType="RMSDBModel.closing" Width="1.5" PointX="16.625" PointY="14.5" />
         <EntityTypeShape EntityType="RMSDBModel.financeaccount" Width="1.5" PointX="14.375" PointY="15" />
         <EntityTypeShape EntityType="RMSDBModel.financetransaction" Width="1.5" PointX="16.625" PointY="4.75" />
@@ -63,6 +60,9 @@
         <AssociationConnector Association="RMSDBModel.fk_financetransaction_salepurchaseproduct_financetransaction" />
         <AssociationConnector Association="RMSDBModel.fk_targettouser_user_financetransaction" />
         <AssociationConnector Association="RMSDBModel.fk_product_salepurchaseproduct_product" />
+        <EntityTypeShape EntityType="RMSDBModel.subproduct" Width="1.5" PointX="16.625" PointY="1.75" />
+        <AssociationConnector Association="RMSDBModel.fk_product_product_subproduct" />
+        <AssociationConnector Association="RMSDBModel.fk_subproduct_product_subproduct" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3,6 +3,7 @@ using DAL;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,46 +12,70 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class saleutils
     {
-        public static void newsale(List<productsaleorpurchase> saleList, double discount, int totalBill, int remaining, int customerId, bool receipt1, bool receipt2, bool receipt3, int saletype, string customerAddress, int deliveryBoyId)
+        public static void newsale(List<productsaleorpurchase> saleList, int totalpayment, int remaining, int customerId, bool receipt1, bool receipt2, bool receipt3, int saletype, string customerAddress, int deliveryBoyId)
         {
-            RMSDBEntities db = new RMSDBEntities();
-            tbl_Sale sale = new tbl_Sale();
-            sale.Staff_id = 0;
-            sale.Date_Time = DateTime.Now;
-
-            user c = db.user.Find(customerId);
-            if (c != null)
-            {
-                sale.Customer_Id = customerId;
-            }
-
-            sale.Amount = totalBill;
-            sale.SaleType = saletype;
-            db.tbl_Sale.Add(sale);
-            db.SaveChanges();
-            
-            // printing
+            var saleid = financeutils.insertSaleTransactions(saleList, totalpayment, customerId);
             if (receipt1)
             {
-                printing.printSaleReceipt(sale.Id, saleList, totalBill, remaining, saletype, customerAddress);
+                printing.printSaleReceipt(saleid, saleList, totalpayment, remaining, saletype, customerAddress);
             }
             if (receipt2)
             {
-                printing.printSaleReceipt(sale.Id, saleList, totalBill, remaining, saletype, customerAddress);
+                printing.printSaleReceipt(saleid, saleList, totalpayment, remaining, saletype, customerAddress);
             }
             if (receipt3)
             {
-                printing.printSaleReceipt(sale.Id, saleList, totalBill, remaining, saletype, customerAddress);
+                printing.printSaleReceipt(saleid, saleList, totalpayment, remaining, saletype, customerAddress);
             }
-            //foreach (ItemOrDealSaleModel item in saleList)
-            //{
-            //    tbl_SaleItem saleItem = new tbl_SaleItem();
-            //    saleItem.Item_id = item.Id;
-            //    saleItem.Sale_id = sale.Id;
-            //    saleItem.Quantity = item.Quantity;
-            //    SaleItem.insert(saleItem);
-            //}
-            //DetuctInventory.detuctInventoryOfList(saleList);
+            
+            Task.Run(() => {
+                insertSellingProductsInDatabase(saleList, saleid);
+                updateInventory(saleList);
+            });
+        }
+        private static void insertSellingProductsInDatabase(List<productsaleorpurchase> saleList, int saleid)
+        {
+            RMSDBEntities db = new RMSDBEntities();
+            foreach (productsaleorpurchase item in saleList)
+            {
+                salepurchaseproduct saleItem = new salepurchaseproduct();
+                saleItem.price = item.price;
+                saleItem.quantity = item.quantity;
+                saleItem.total = item.total;
+                saleItem.fk_product_salepurchaseproduct_product = item.id;
+                saleItem.fk_financetransaction_salepurchaseproduct_financetransaction = saleid;
+                db.salepurchaseproduct.Add(saleItem);
+            }
+            db.SaveChanges();
+        }
+        private static void updateInventory(List<productsaleorpurchase> salelist)
+        {
+            RMSDBEntities db = new RMSDBEntities();
+            foreach (var item in salelist)
+            {
+                product p = db.product.Find(item.id);
+                p.quantity = p.quantity - item.quantity;
+                db.Entry(p).State = EntityState.Modified;
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+                db.Configuration.ValidateOnSaveEnabled = true;
+                manageSubProductInventory(item);
+            }
+        }
+        private static void manageSubProductInventory(productsaleorpurchase sellingProduct)
+        {
+            RMSDBEntities db = new RMSDBEntities();
+            var subproducts = db.subproduct.Where(a => (a.fk_product_product_subproduct == sellingProduct.id)).ToList();
+            foreach (var item in subproducts)
+            {
+                product p = db.product.Find(item.fk_subproduct_product_subproduct);
+                p.quantity = p.quantity - (sellingProduct.quantity*item.quantity);
+                db.Entry(p).State = EntityState.Modified;
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+                db.Configuration.ValidateOnSaveEnabled = true;
+            }
+            
         }
     }
 }

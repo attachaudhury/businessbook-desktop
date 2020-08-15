@@ -56,7 +56,6 @@ namespace RIAB_Restaurent_Management_System.Views
         }
 
 
-        #region Product
         private void mi_AddFoodIem(object sender, RoutedEventArgs e)
         {
             new Form_AddNewFoodItem().Show();
@@ -66,15 +65,8 @@ namespace RIAB_Restaurent_Management_System.Views
         {
             new Form_AddANewDeal().Show();
         }
-        private void mi_ProductAdd(object sender, RoutedEventArgs e)
-        {
-            new ProductAdd().Show();
-        }
-        private void mi_ProductList(object sender, RoutedEventArgs e)
-        {
-            new ProductList().Show();
-        }
-        #endregion Product
+        
+   
 
         private void mi_ViewAllCustomers(object sender, RoutedEventArgs e)
         {
@@ -110,10 +102,7 @@ namespace RIAB_Restaurent_Management_System.Views
         {
             new Window_NewSale().Show();
         }
-        private void pos(object sender, RoutedEventArgs e)
-        {
-            new pos().Show();
-        }
+        
 
   
 
@@ -261,5 +250,57 @@ namespace RIAB_Restaurent_Management_System.Views
         {
             new Form_AddNewExpence().Show();
         }
+
+
+
+
+
+
+        #region menuitem_products
+        private void productadd(object sender, RoutedEventArgs e)
+        {
+            new ProductAdd().Show();
+        }
+        private void products(object sender, RoutedEventArgs e)
+        {
+            new ProductList().Show();
+        }
+        #endregion menuitem_products
+
+
+        #region menuitem_sales
+        private void pos(object sender, RoutedEventArgs e)
+        {
+            new pos().Show();
+        }
+        #endregion menuitem_sales
+
+
+        #region menuitem_finance
+        private void transactionsshow(object sender, RoutedEventArgs e)
+        {
+            new transactions().Show();
+        }
+        private void salesshow(object sender, RoutedEventArgs e)
+        {
+            new Views.finance.sales().Show();
+        }
+        private void purchasenewshow(object sender, RoutedEventArgs e)
+        {
+            new Views.finance.purchasenew().Show();
+        }
+        private void purchasesshow(object sender, RoutedEventArgs e)
+        {
+            new Views.finance.purchases().Show();
+        }
+        private void expencenewshow(object sender, RoutedEventArgs e)
+        {
+            new Views.finance.expencenew().Show();
+        }
+        private void expencesshow(object sender, RoutedEventArgs e)
+        {
+            new Views.finance.expences().Show();
+        }
+        #endregion menuitem_finance
     }
 }

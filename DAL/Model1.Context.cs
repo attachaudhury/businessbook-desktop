@@ -49,12 +49,12 @@ namespace DAL
         public virtual DbSet<tbl_Staff> tbl_Staff { get; set; }
         public virtual DbSet<tbl_StaffCategory> tbl_StaffCategory { get; set; }
         public virtual DbSet<tbl_Supplier> tbl_Supplier { get; set; }
-        public virtual DbSet<dealproduct> dealproduct { get; set; }
         public virtual DbSet<product> product { get; set; }
         public virtual DbSet<user> user { get; set; }
         public virtual DbSet<closing> closing { get; set; }
         public virtual DbSet<financeaccount> financeaccount { get; set; }
         public virtual DbSet<financetransaction> financetransaction { get; set; }
         public virtual DbSet<salepurchaseproduct> salepurchaseproduct { get; set; }
+        public virtual DbSet<subproduct> subproduct { get; set; }
     }
 }

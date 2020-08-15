@@ -183,12 +183,12 @@ CREATE TABLE tbl_FoodItem(
 	[type] nvarchar(100), -- eg product deal
 )
 
-	CREATE TABLE dealproduct(
+	CREATE TABLE subproduct(
 	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	fk_deal_product_dealproduct int,
-	constraint fk_deal_product_dealproduct foreign key (fk_deal_product_dealproduct) references Product(Id),
-	fk_product_product_dealproduct int,
-	constraint fk_product_product_dealproduct foreign key (fk_product_product_dealproduct) references Product(Id),
+	fk_product_product_subproduct int,
+	constraint fk_product_product_subproduct foreign key (fk_product_product_subproduct) references product(id),
+	fk_subproduct_product_subproduct int,
+	constraint fk_subproduct_product_subproduct foreign key (fk_subproduct_product_subproduct) references product(id),
 	quantity float,
 )
 
@@ -318,7 +318,7 @@ insert into financeaccount(id,name,type,fk_parent_financeaccount) values(301,'ow
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(302,'share capital','equity',null);
 /*income Accounts */
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(401,'pos sale','income',null);
-insert into financeaccount(id,name,type,fk_parent_financeaccount) values(402,'services sale','income',null);
+insert into financeaccount(id,name,type,fk_parent_financeaccount) values(402,'service sale','income',null);
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(403,'other','income',null);
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(405,'inventory gain','income',null);
 /*expence Accounts */

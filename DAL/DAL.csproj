@@ -53,9 +53,6 @@
     <Compile Include="closing.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="dealproduct.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="financeaccount.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -82,6 +79,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="salepurchaseproduct.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="subproduct.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_Customer.cs">

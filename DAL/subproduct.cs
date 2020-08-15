@@ -12,11 +12,11 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class dealproduct
+    public partial class subproduct
     {
         public int id { get; set; }
-        public Nullable<int> fk_deal_product_dealproduct { get; set; }
-        public Nullable<int> fk_product_product_dealproduct { get; set; }
+        public Nullable<int> fk_product_product_subproduct { get; set; }
+        public Nullable<int> fk_subproduct_product_subproduct { get; set; }
         public Nullable<double> quantity { get; set; }
     
         public virtual product product { get; set; }

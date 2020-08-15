@@ -20,18 +20,18 @@
                 <MenuItem Header="All Food Items" Click="mi_ManageFoodIems"/>
                 <MenuItem Header="Add Deal" Click="mi_AddDeal"/>
                 <MenuItem Header="All Deals" Click="mi_ManageDeals"/>
-                <MenuItem Header="Add Product" Click="mi_ProductAdd"/>
-                <MenuItem Header="All Products" Click="mi_ProductList"/>
+                <MenuItem Header="Add Product" Click="productadd"/>
+                <MenuItem Header="All Products" Click="products"/>
             </MenuItem>
             <MenuItem Header="Sale">
                 <MenuItem Header="New Sale" Click="mi_NewSale"/>
-                <MenuItem Header="POS" Click="pos"/>
                 <MenuItem Header="Delivery Queue" Click="mi_DeliveryQueue"/>
                 <MenuItem x:Name="m_Sale_AllSales" Header="All Sales" Click="mi_AllSales"/>
                 <MenuItem x:Name="m_Sale_DailySaleReport" Header="Daily Sale Report" Click="mi_DailySaleReport"/>
                 <MenuItem x:Name="m_Sale_SearchSaleByCustomer" Header="Search Sale By Customer" Click="mi_SearchSaleByCustomer"/>
                 <MenuItem x:Name="m_Sale_FoodItemSalesReport" Header="Food Item Sales Report" Click="mi_FoodItemSalesReport"/>
                 <MenuItem x:Name="m_Sale_DeliveryBoysReport" Header="Delivery Boys Report " Click="mi_DeliveryBoysReport"/>
+                <MenuItem Header="POS" Click="pos"/>
 
             </MenuItem>
             <MenuItem x:Name="m_Kitchen" Header="Kitchen">
@@ -48,6 +48,14 @@
                 <MenuItem x:Name="m_NewDepositHead" Header="New Deposit Head" Click="mi_NewDepositHead"/>
                 <MenuItem Header="New Deposit" Click="mi_NewDeposit"/>
                 <MenuItem x:Name="m_ViewDeposits" Header="View Deposits" Click="mi_ViewDeposit"/>
+
+                <MenuItem Header="All Transaction" Click="transactionsshow"/>
+                <MenuItem Header="All Sales" Click="salesshow"/>
+                <MenuItem Header="New Purchase" Click="purchasenewshow"/>
+                <MenuItem Header="Purchases" Click="purchasesshow"/>
+                <MenuItem Header="New Expence" Click="expencenewshow"/>
+                <MenuItem Header="Expences" Click="expencesshow"/>
+
             </MenuItem>
             <MenuItem x:Name="m_Staff" Header="Staff">
                 <MenuItem Header="Add Staff" Click="mi_AddStaff"/>

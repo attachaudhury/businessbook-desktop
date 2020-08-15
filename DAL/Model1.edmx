@@ -17,15 +17,6 @@
           <Property Name="comment" Type="varchar" MaxLength="200" />
           <Property Name="fk_user_closing_user" Type="int" />
         </EntityType>
-        <EntityType Name="dealproduct">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fk_deal_product_dealproduct" Type="int" />
-          <Property Name="fk_product_product_dealproduct" Type="int" />
-          <Property Name="quantity" Type="float" />
-        </EntityType>
         <EntityType Name="financeaccount">
           <Key>
             <PropertyRef Name="id" />
@@ -82,6 +73,15 @@
           <Property Name="total" Type="float" />
           <Property Name="fk_product_salepurchaseproduct_product" Type="int" />
           <Property Name="fk_financetransaction_salepurchaseproduct_financetransaction" Type="int" />
+        </EntityType>
+        <EntityType Name="subproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_product_product_subproduct" Type="int" />
+          <Property Name="fk_subproduct_product_subproduct" Type="int" />
+          <Property Name="quantity" Type="float" />
         </EntityType>
         <EntityType Name="tbl_Customer">
           <Key>
@@ -554,18 +554,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_deal_product_dealproduct">
-          <End Role="product" Type="Self.product" Multiplicity="0..1" />
-          <End Role="dealproduct" Type="Self.dealproduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="dealproduct">
-              <PropertyRef Name="fk_deal_product_dealproduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_financeaccount_financeaccount_financetransaction">
           <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
           <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
@@ -602,15 +590,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_product_product_dealproduct">
+        <Association Name="fk_product_product_subproduct">
           <End Role="product" Type="Self.product" Multiplicity="0..1" />
-          <End Role="dealproduct" Type="Self.dealproduct" Multiplicity="*" />
+          <End Role="subproduct" Type="Self.subproduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="product">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="dealproduct">
-              <PropertyRef Name="fk_product_product_dealproduct" />
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_product_product_subproduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -623,6 +611,18 @@
             </Principal>
             <Dependent Role="salepurchaseproduct">
               <PropertyRef Name="fk_product_salepurchaseproduct_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subproduct_product_subproduct">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="subproduct" Type="Self.subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_subproduct_product_subproduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -652,11 +652,11 @@
         </Association>
         <EntityContainer Name="RMSDBModelStoreContainer">
           <EntitySet Name="closing" EntityType="Self.closing" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="dealproduct" EntityType="Self.dealproduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="financeaccount" EntityType="Self.financeaccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="financetransaction" EntityType="Self.financetransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="salepurchaseproduct" EntityType="Self.salepurchaseproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subproduct" EntityType="Self.subproduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Deal" EntityType="Self.tbl_Deal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_DealFoodItem" EntityType="Self.tbl_DealFoodItem" Schema="dbo" store:Type="Tables" />
@@ -758,10 +758,6 @@
             <End Role="user" EntitySet="user" />
             <End Role="financetransaction" EntitySet="financetransaction" />
           </AssociationSet>
-          <AssociationSet Name="fk_deal_product_dealproduct" Association="Self.fk_deal_product_dealproduct">
-            <End Role="product" EntitySet="product" />
-            <End Role="dealproduct" EntitySet="dealproduct" />
-          </AssociationSet>
           <AssociationSet Name="fk_financeaccount_financeaccount_financetransaction" Association="Self.fk_financeaccount_financeaccount_financetransaction">
             <End Role="financeaccount" EntitySet="financeaccount" />
             <End Role="financetransaction" EntitySet="financetransaction" />
@@ -774,13 +770,17 @@
             <End Role="financeaccount" EntitySet="financeaccount" />
             <End Role="financeaccount1" EntitySet="financeaccount" />
           </AssociationSet>
-          <AssociationSet Name="fk_product_product_dealproduct" Association="Self.fk_product_product_dealproduct">
+          <AssociationSet Name="fk_product_product_subproduct" Association="Self.fk_product_product_subproduct">
             <End Role="product" EntitySet="product" />
-            <End Role="dealproduct" EntitySet="dealproduct" />
+            <End Role="subproduct" EntitySet="subproduct" />
           </AssociationSet>
           <AssociationSet Name="fk_product_salepurchaseproduct_product" Association="Self.fk_product_salepurchaseproduct_product">
             <End Role="product" EntitySet="product" />
             <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subproduct_product_subproduct" Association="Self.fk_subproduct_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
           </AssociationSet>
           <AssociationSet Name="fk_targettouser_user_financetransaction" Association="Self.fk_targettouser_user_financetransaction">
             <End Role="user" EntitySet="user" />
@@ -892,17 +892,8 @@
             <End Role="tbl_StaffCategory" EntitySet="tbl_StaffCategory" />
             <End Role="tbl_Staff" EntitySet="tbl_Staff" />
           </AssociationSet>
-          <EntitySet Name="dealproduct" EntityType="RMSDBModel.dealproduct" />
           <EntitySet Name="product" EntityType="RMSDBModel.product" />
           <EntitySet Name="user" EntityType="RMSDBModel.user" />
-          <AssociationSet Name="fk_deal_product_dealproduct" Association="RMSDBModel.fk_deal_product_dealproduct">
-            <End Role="product" EntitySet="product" />
-            <End Role="dealproduct" EntitySet="dealproduct" />
-          </AssociationSet>
-          <AssociationSet Name="fk_product_product_dealproduct" Association="RMSDBModel.fk_product_product_dealproduct">
-            <End Role="product" EntitySet="product" />
-            <End Role="dealproduct" EntitySet="dealproduct" />
-          </AssociationSet>
           <EntitySet Name="closing" EntityType="RMSDBModel.closing" />
           <EntitySet Name="financeaccount" EntityType="RMSDBModel.financeaccount" />
           <EntitySet Name="financetransaction" EntityType="RMSDBModel.financetransaction" />
@@ -934,6 +925,15 @@
           <AssociationSet Name="fk_product_salepurchaseproduct_product" Association="RMSDBModel.fk_product_salepurchaseproduct_product">
             <End Role="product" EntitySet="product" />
             <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <EntitySet Name="subproduct" EntityType="RMSDBModel.subproduct" />
+          <AssociationSet Name="fk_product_product_subproduct" Association="RMSDBModel.fk_product_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subproduct_product_subproduct" Association="RMSDBModel.fk_subproduct_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_Customer">
@@ -1419,17 +1419,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="dealproduct">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fk_deal_product_dealproduct" Type="Int32" />
-          <Property Name="fk_product_product_dealproduct" Type="Int32" />
-          <Property Name="quantity" Type="Double" />
-          <NavigationProperty Name="product" Relationship="RMSDBModel.fk_deal_product_dealproduct" FromRole="dealproduct" ToRole="product" />
-          <NavigationProperty Name="product1" Relationship="RMSDBModel.fk_product_product_dealproduct" FromRole="dealproduct" ToRole="product" />
-        </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="id" />
@@ -1445,9 +1434,9 @@
           <Property Name="saleprice" Type="Double" />
           <Property Name="saleactive" Type="Boolean" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="dealproduct" Relationship="RMSDBModel.fk_deal_product_dealproduct" FromRole="product" ToRole="dealproduct" />
-          <NavigationProperty Name="dealproduct1" Relationship="RMSDBModel.fk_product_product_dealproduct" FromRole="product" ToRole="dealproduct" />
           <NavigationProperty Name="salepurchaseproduct" Relationship="RMSDBModel.fk_product_salepurchaseproduct_product" FromRole="product" ToRole="salepurchaseproduct" />
+          <NavigationProperty Name="subproduct" Relationship="RMSDBModel.fk_product_product_subproduct" FromRole="product" ToRole="subproduct" />
+          <NavigationProperty Name="subproduct1" Relationship="RMSDBModel.fk_subproduct_product_subproduct" FromRole="product" ToRole="subproduct" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -1464,30 +1453,6 @@
           <NavigationProperty Name="financetransaction" Relationship="RMSDBModel.fk_createdbyuser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
           <NavigationProperty Name="financetransaction1" Relationship="RMSDBModel.fk_targettouser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
         </EntityType>
-        <Association Name="fk_deal_product_dealproduct">
-          <End Type="RMSDBModel.product" Role="product" Multiplicity="0..1" />
-          <End Type="RMSDBModel.dealproduct" Role="dealproduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="dealproduct">
-              <PropertyRef Name="fk_deal_product_dealproduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_product_product_dealproduct">
-          <End Type="RMSDBModel.product" Role="product" Multiplicity="0..1" />
-          <End Type="RMSDBModel.dealproduct" Role="dealproduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="dealproduct">
-              <PropertyRef Name="fk_product_product_dealproduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="closing">
           <Key>
             <PropertyRef Name="id" />
@@ -1632,6 +1597,41 @@
             </Principal>
             <Dependent Role="salepurchaseproduct">
               <PropertyRef Name="fk_product_salepurchaseproduct_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="subproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_product_product_subproduct" Type="Int32" />
+          <Property Name="fk_subproduct_product_subproduct" Type="Int32" />
+          <Property Name="quantity" Type="Double" />
+          <NavigationProperty Name="product" Relationship="RMSDBModel.fk_product_product_subproduct" FromRole="subproduct" ToRole="product" />
+          <NavigationProperty Name="product1" Relationship="RMSDBModel.fk_subproduct_product_subproduct" FromRole="subproduct" ToRole="product" />
+        </EntityType>
+        <Association Name="fk_product_product_subproduct">
+          <End Type="RMSDBModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="RMSDBModel.subproduct" Role="subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_product_product_subproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subproduct_product_subproduct">
+          <End Type="RMSDBModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="RMSDBModel.subproduct" Role="subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_subproduct_product_subproduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1896,16 +1896,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dealproduct">
-            <EntityTypeMapping TypeName="RMSDBModel.dealproduct">
-              <MappingFragment StoreEntitySet="dealproduct">
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="fk_product_product_dealproduct" ColumnName="fk_product_product_dealproduct" />
-                <ScalarProperty Name="fk_deal_product_dealproduct" ColumnName="fk_deal_product_dealproduct" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="product">
             <EntityTypeMapping TypeName="RMSDBModel.product">
               <MappingFragment StoreEntitySet="product">
@@ -1989,6 +1979,16 @@
                 <ScalarProperty Name="total" ColumnName="total" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subproduct">
+            <EntityTypeMapping TypeName="RMSDBModel.subproduct">
+              <MappingFragment StoreEntitySet="subproduct">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="fk_subproduct_product_subproduct" ColumnName="fk_subproduct_product_subproduct" />
+                <ScalarProperty Name="fk_product_product_subproduct" ColumnName="fk_product_product_subproduct" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
