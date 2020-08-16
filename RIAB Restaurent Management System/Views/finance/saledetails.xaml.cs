@@ -1,4 +1,5 @@
 ﻿using DAL;
+using RIAB_Restaurent_Management_System.bll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         }
         public void printPeceipt(object sender, RoutedEventArgs e)
         {
+            saleutils.printDuplicateRecipt(saleid);
         }
     }
 }

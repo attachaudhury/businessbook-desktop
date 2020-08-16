@@ -30,5 +30,25 @@ namespace RIAB_Restaurent_Management_System.bll
             }
             return mappedList;
         }
+        public static dynamic mapproducttoproductpurchasemodel(List<DAL.product> products)
+        {
+            var mappedList = new List<productsaleorpurchase>();
+            foreach (DAL.product item in products)
+            {
+                productsaleorpurchase a = new productsaleorpurchase();
+                a.id = item.id;
+                a.name = item.name;
+                a.quantity = 1;
+                a.price = 0;
+                if (item.purchaseprice != null)
+                {
+                    a.price = (double)item.purchaseprice;
+                }
+                a.total = a.price;
+                mappedList.Add(a);
+            }
+            return mappedList;
+        }
+
     }
 }

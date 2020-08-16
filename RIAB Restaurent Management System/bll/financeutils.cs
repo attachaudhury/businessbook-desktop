@@ -11,7 +11,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class financeutils
     {
-        public static int insertSaleTransactions(List<productsaleorpurchase> saleList,float totalpayment, int targetuserid)
+        public static int insertSaleTransactions(List<productsaleorpurchase> purchaseList,float totalpayment, int targetuserid)
         {
             var loggedinuserid = userutils.loggedinuser.id;
             var db = new RMSDBEntities();
@@ -25,7 +25,7 @@ namespace RIAB_Restaurent_Management_System.bll
       
             double totalbill = 0;
             double costofgoodssold = 0;
-            foreach (var item in saleList)
+            foreach (var item in purchaseList)
             {
                 totalbill += (item.price * item.quantity);
                 product p = db.product.Find(item.id);
@@ -115,7 +115,7 @@ namespace RIAB_Restaurent_Management_System.bll
             // new inventory detct transaction against against sale
             financetransaction ftid = new financetransaction();
             ftid.amount = -costofgoodssold;
-            ftid.name = "--inventory-- against Sale no " + ftsale.id; ;
+            ftid.name = "--inventory--on--sale-- against Sale no " + ftsale.id; ;
             ftid.fk_financeaccount_financeaccount_financetransaction = inventoryaccountid;
             ftid.date = DateTime.Now;
             ftid.status = "posted";
@@ -127,6 +127,79 @@ namespace RIAB_Restaurent_Management_System.bll
 
             return ftsale.id;
             
+        }
+
+        public static int insertPurchaseTransactions(List<productsaleorpurchase> purchaseList, float totalpayment, int targetuserid)
+        {
+            var loggedinuserid = userutils.loggedinuser.id;
+            var db = new RMSDBEntities();
+            List<financeaccount> accounts = db.financeaccount.ToList();
+            var possaleaccountid = accounts.Where(a => a.name == "pos sale").FirstOrDefault().id;
+            var discountaccountid = accounts.Where(a => a.name == "discount").FirstOrDefault().id;
+            var cashaccountid = accounts.Where(a => a.name == "cash").FirstOrDefault().id;
+            var accountreciveableaccountid = accounts.Where(a => a.name == "account receivable").FirstOrDefault().id;
+            var accountpayableableaccountid = accounts.Where(a => a.name == "account payable").FirstOrDefault().id;
+            var cgsaccountid = accounts.Where(a => a.name == "cgs").FirstOrDefault().id;
+            var inventoryaccountid = accounts.Where(a => a.name == "inventory").FirstOrDefault().id;
+
+            double totalbill = 0;
+            foreach (var item in purchaseList)
+            {
+                totalbill += (item.price * item.quantity);
+            }
+
+
+            //New purchase Transaction
+            financetransaction ftpurchase = new financetransaction();
+            ftpurchase.amount = totalbill;
+            ftpurchase.name = "--inventory--on--purchase--";
+            ftpurchase.fk_financeaccount_financeaccount_financetransaction = inventoryaccountid;
+            ftpurchase.fk_targettouser_user_financetransaction = targetuserid;
+            ftpurchase.date = DateTime.Now;
+            ftpurchase.status = "posted";
+            ftpurchase.fk_createdbyuser_user_financetransaction = loggedinuserid;
+            db.financetransaction.Add(ftpurchase);
+            db.SaveChanges();
+            ftpurchase.groupid = ftpurchase.id;
+            db.Entry(ftpurchase).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+
+            //New Payment Transaction against sale . if we are paying some money
+            if (totalpayment > 0)
+            {
+                financetransaction ftpayment = new financetransaction();
+                ftpayment.amount = -(totalpayment);
+                ftpayment.name = "--cash-- aginst purchase # " + ftpurchase.id;
+                ftpayment.fk_financeaccount_financeaccount_financetransaction = cashaccountid;
+                ftpayment.fk_targettouser_user_financetransaction = targetuserid;
+                ftpayment.date = DateTime.Now;
+                ftpayment.status = "posted";
+                ftpayment.groupid = ftpurchase.id;
+                ftpayment.fk_createdbyuser_user_financetransaction = loggedinuserid;
+                db.financetransaction.Add(ftpayment);
+                db.SaveChanges();
+            }
+
+
+            // New AP Transaction if TotalRemaining has ammount
+            if (totalpayment != totalbill)
+            {
+                financetransaction ftap = new financetransaction();
+                ftap.amount = -(totalbill - totalpayment);
+                ftap.name = "--account payable-- against Purchase no " + ftpurchase.id ;
+                ftap.fk_financeaccount_financeaccount_financetransaction = accountpayableableaccountid;
+                ftap.fk_targettouser_user_financetransaction = targetuserid;
+                ftap.date = DateTime.Now;
+                ftap.status = "Posted";
+                ftap.groupid = ftpurchase.id;
+                ftap.fk_createdbyuser_user_financetransaction = loggedinuserid;
+                db.financetransaction.Add(ftap);
+                db.SaveChanges();
+            }
+            return ftpurchase.id;
+
         }
     }
 }

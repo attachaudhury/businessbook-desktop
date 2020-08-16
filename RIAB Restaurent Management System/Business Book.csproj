@@ -100,6 +100,7 @@
     <Compile Include="bll\financeutils.cs" />
     <Compile Include="bll\printing.cs" />
     <Compile Include="bll\productutils.cs" />
+    <Compile Include="bll\purchaseutils.cs" />
     <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\userutils.cs" />
     <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
@@ -118,6 +119,9 @@
     </Compile>
     <Compile Include="Views\finance\Form_ExpenceReport.xaml.cs">
       <DependentUpon>Form_ExpenceReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\purchasedetails.xaml.cs">
+      <DependentUpon>purchasedetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\purchasenew.xaml.cs">
       <DependentUpon>purchasenew.xaml</DependentUpon>
@@ -273,6 +277,10 @@
     <Page Include="Views\finance\Form_ExpenceReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\finance\purchasedetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\finance\purchasenew.xaml">
       <SubType>Designer</SubType>

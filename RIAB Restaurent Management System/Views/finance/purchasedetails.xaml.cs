@@ -16,24 +16,19 @@ using System.Windows.Shapes;
 namespace RIAB_Restaurent_Management_System.Views.finance
 {
     /// <summary>
-    /// Interaction logic for purchases.xaml
+    /// Interaction logic for purchasedetails.xaml
     /// </summary>
-    public partial class purchases : Window
+    public partial class purchasedetails : Window
     {
-        public purchases()
+        public purchasedetails(int purchaseid)
         {
             InitializeComponent();
             var db = new RMSDBEntities();
-            var list = db.financetransaction.Where(a => (a.financeaccount.name == "inventory") &&(a.name== "--inventory--on--purchase--")).ToList();
-            foreach (var item in list)
+            var productsinsale = db.salepurchaseproduct.Where(a => a.fk_financetransaction_salepurchaseproduct_financetransaction == purchaseid).ToList();
+            foreach (var item in productsinsale)
             {
                 dg.Items.Add(item);
             }
-        }
-        public void details(object sender, RoutedEventArgs e)
-        {
-            financetransaction obj = ((FrameworkElement)sender).DataContext as financetransaction;
-            new purchasedetails(obj.id).Show();
         }
     }
 }

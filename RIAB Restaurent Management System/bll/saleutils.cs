@@ -77,5 +77,41 @@ namespace RIAB_Restaurent_Management_System.bll
             }
             
         }
+        public static void printDuplicateRecipt(int saleid)
+        {
+            var db = new RMSDBEntities();
+            var ft = db.financetransaction.Find(saleid);
+            user customer = null;
+            if (ft.fk_targettouser_user_financetransaction != null) {
+                customer = db.user.Find(ft.fk_targettouser_user_financetransaction);
+            }
+            var soldproducts = db.salepurchaseproduct.Where(a => a.fk_financetransaction_salepurchaseproduct_financetransaction == saleid).ToList();
+
+            float totalbill = 0;
+            var salelist = new List<productsaleorpurchase>();
+
+            foreach (var item in soldproducts)
+            {
+                totalbill = totalbill + (float)(item.price * item.quantity);
+                var dbproduct = db.product.Find(item.fk_product_salepurchaseproduct_product);
+                var p = new productsaleorpurchase();
+                p.id = dbproduct.id;
+                p.name = dbproduct.name;
+                p.price = (double)item.price;
+                p.quantity = (double)item.quantity;
+                p.total = (double)item.total;
+            };
+
+            //int salesId, List< ItemOrDealSaleModel > list, int totalBill,int remaining, int saleType,string customerAddress
+            string customerAddress ="";
+            if (customer != null)
+            {
+                customerAddress = customer.address + " " + customer.phone;
+            }
+            
+
+            printing.printSaleReceipt(saleid, salelist, (int)totalbill, 0, 3, customerAddress);
+
+        }
     }
 }

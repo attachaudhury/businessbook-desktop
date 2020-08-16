@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BLL;
+using DAL;
+using RIAB_Restaurent_Management_System.bll;
+using RIAB_Restaurent_Management_System.data.viewmodel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +23,201 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     /// </summary>
     public partial class purchasenew : Window
     {
+        List<productsaleorpurchase> mappedproducts;
+        List<productsaleorpurchase> purchase = new List<productsaleorpurchase>();
+        int vendorid = 0;
+        
         public purchasenew()
         {
             InitializeComponent();
+            initFormOperations();
+        }
+
+        void initFormOperations()
+        {
+            var db = new RMSDBEntities();
+            var products = db.product.ToList();
+            mappedproducts = productutils.mapproducttoproductsalemodel(db.product.ToList());
+            tb_Search.Focus();
+        }
+
+        private void tb_Paying_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                int total = Convert.ToInt32(tb_Paying.Text) - Convert.ToInt32(lbl_Total.Content);
+                lbl_Remaining.Content = total;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tb_Paying_KeyDownPressEnter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                donePurchase();
+            }
+        }
+
+        private void tb_Discount_KeyDown_PressEnter(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Enter)
+                {
+                    int discount = Convert.ToInt32(tb_Discount.Text);
+                    int total = Convert.ToInt32(lbl_Total.Content);
+                    double discounedBill = total - ((total * discount) / 100);
+                    lbl_Total.Content = Convert.ToInt32(discounedBill);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        void addItem_To_purchase(productsaleorpurchase item)
+        {
+            foreach (productsaleorpurchase oldItem in purchase)
+            {
+                if (item.id == oldItem.id)
+                {
+                    oldItem.quantity += 1;
+                    oldItem.total = oldItem.quantity * oldItem.price;
+                    dg_SellingList.Items.Clear();
+                    double totalBill1 = 0;
+                    foreach (productsaleorpurchase item1 in purchase)
+                    {
+                        totalBill1 += item1.total;
+                        dg_SellingList.Items.Add(item1);
+                    }
+                    lbl_Total.Content = totalBill1;
+                    return;
+                }
+            }
+            purchase.Add(item);
+            dg_SellingList.Items.Clear();
+            double totalBill = 0;
+            foreach (productsaleorpurchase item1 in purchase)
+            {
+                totalBill += item1.total;
+                dg_SellingList.Items.Add(item1);
+            }
+            lbl_Total.Content = totalBill;
+        }
+
+        private void btn_AddQuantity(object sender, RoutedEventArgs e)
+        {
+            productsaleorpurchase obj = ((FrameworkElement)sender).DataContext as productsaleorpurchase;
+            addItem_To_purchase(obj);
+        }
+
+        private void btn_RemoveQuantity(object sender, RoutedEventArgs e)
+        {
+            productsaleorpurchase obj = ((FrameworkElement)sender).DataContext as productsaleorpurchase;
+
+            foreach (productsaleorpurchase oldItem in purchase)
+            {
+                if (obj.id == oldItem.id)
+                {
+                    if (oldItem.quantity > 1)
+                    {
+                        oldItem.quantity -= 1;
+                        oldItem.total = oldItem.quantity * oldItem.price;
+                        dg_SellingList.Items.Clear();
+                        double totalBill1 = 0;
+                        foreach (productsaleorpurchase item1 in purchase)
+                        {
+                            totalBill1 += item1.total;
+                            dg_SellingList.Items.Add(item1);
+                        }
+                        lbl_Total.Content = totalBill1;
+                        return;
+                    }
+                    else
+                    {
+                        purchase.Remove(obj);
+                        dg_SellingList.Items.Clear();
+                        double totalBill1 = 0;
+                        foreach (productsaleorpurchase item1 in purchase)
+                        {
+                            totalBill1 += item1.total;
+                            dg_SellingList.Items.Add(item1);
+                        }
+                        lbl_Total.Content = totalBill1;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tb_Search.Text != "")
+            {
+                string s = tb_Search.Text;
+                List<productsaleorpurchase> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).ToList();
+                lv_SearchFoodItem.ItemsSource = null;
+                lv_SearchFoodItem.ItemsSource = productList;
+                lv_SearchFoodItem.Visibility = Visibility.Visible;
+                lv_SearchFoodItem.SelectedIndex = 0;
+                lv_SearchFoodItem.Visibility = Visibility.Visible;
+            }
+            else { lv_SearchFoodItem.Visibility = Visibility.Hidden; }
+        }
+
+        private void tb_Search_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                var dialog = new Form_InputDialogForAddCustomerInNewSale();
+                if (dialog.ShowDialog() == true)
+                {
+                    vendorid = dialog.Customer_Id;
+                    return;
+                }
+            }
+            if (e.Key == Key.Down)
+            {
+                int index = lv_SearchFoodItem.SelectedIndex + 1;
+                lv_SearchFoodItem.SelectedIndex = index;
+                return;
+            }
+            if (e.Key == Key.Up)
+            {
+                int index = lv_SearchFoodItem.SelectedIndex - 1;
+                lv_SearchFoodItem.SelectedIndex = index;
+                return;
+            }
+            if (e.Key == Key.Enter)
+            {
+                if (lv_SearchFoodItem.SelectedItem != null)
+                {
+                    productsaleorpurchase item = (productsaleorpurchase)lv_SearchFoodItem.SelectedItem;
+                    addItem_To_purchase(item);
+                    tb_Search.Text = "";
+                    lv_SearchFoodItem.Visibility = Visibility.Hidden;
+                }
+            }
+
+        }
+
+        private void btn_doPurchase(object sender, RoutedEventArgs e)
+        {
+            donePurchase();
+        }
+
+        void donePurchase()
+        {
+
+            int totalBill = Convert.ToInt32(lbl_Total.Content);
+            int Remaining = Convert.ToInt32(lbl_Remaining.Content);
+            purchaseutils.newpurchase(purchase, totalBill, Remaining, vendorid);
+
+            AutoClosingMessageBox.Show("Ammount " + totalBill, "Success", 2000);
+            Close();
+            new purchasenew().Show();
         }
     }
 }

@@ -568,7 +568,8 @@
 //        }
 //        public void updateInventoryOnSale(List<SaleItem> list)
 //        {
-//            new System.Threading.Tasks.Task(() => {
+//            new System.Threading.Tasks.Task(() =>
+//            {
 //                MyDbContext db = new MyDbContext();
 //                foreach (SaleItem item in list)
 //                {
@@ -1714,7 +1715,8 @@
 //                  Total = g.Sum(x => x.Amount)
 //              }
 //        ).AsEnumerable()
-//         .Select(g => new {
+//         .Select(g => new
+//         {
 //             Period = g.Year + "-" + g.Month,
 //             Total = g.Total
 //         });
