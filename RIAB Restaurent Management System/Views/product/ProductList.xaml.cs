@@ -35,7 +35,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         public void details(object sender, RoutedEventArgs e)
         {
-            financetransaction obj = ((FrameworkElement)sender).DataContext as financetransaction;
+            DAL.product obj = ((FrameworkElement)sender).DataContext as DAL.product;
             new ProductAdd(obj.id).Show();
         }
     }
