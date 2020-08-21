@@ -24,7 +24,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     public partial class purchasenew : Window
     {
         List<productsaleorpurchase> mappedproducts;
-        List<productsaleorpurchase> purchase = new List<productsaleorpurchase>();
+        List<productsaleorpurchase> purchaselist = new List<productsaleorpurchase>();
         int vendorid = 0;
         
         public purchasenew()
@@ -37,72 +37,36 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             var db = new RMSDBEntities();
             var products = db.product.ToList();
-            mappedproducts = productutils.mapproducttoproductsalemodel(db.product.ToList());
+            mappedproducts = productutils.mapproducttoproductpurchasemodel(db.product.ToList());
             tb_Search.Focus();
-        }
-
-        private void tb_Paying_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                int total = Convert.ToInt32(tb_Paying.Text) - Convert.ToInt32(lbl_Total.Content);
-                lbl_Remaining.Content = total;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void tb_Paying_KeyDownPressEnter(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                donePurchase();
-            }
-        }
-
-        private void tb_Discount_KeyDown_PressEnter(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.Key == Key.Enter)
-                {
-                    int discount = Convert.ToInt32(tb_Discount.Text);
-                    int total = Convert.ToInt32(lbl_Total.Content);
-                    double discounedBill = total - ((total * discount) / 100);
-                    lbl_Total.Content = Convert.ToInt32(discounedBill);
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         void addItem_To_purchase(productsaleorpurchase item)
         {
-            foreach (productsaleorpurchase oldItem in purchase)
+            foreach (productsaleorpurchase oldItem in purchaselist)
             {
                 if (item.id == oldItem.id)
                 {
                     oldItem.quantity += 1;
                     oldItem.total = oldItem.quantity * oldItem.price;
-                    dg_SellingList.Items.Clear();
+                    dg.Items.Clear();
                     double totalBill1 = 0;
-                    foreach (productsaleorpurchase item1 in purchase)
+                    foreach (productsaleorpurchase item1 in purchaselist)
                     {
                         totalBill1 += item1.total;
-                        dg_SellingList.Items.Add(item1);
+                        dg.Items.Add(item1);
                     }
                     lbl_Total.Content = totalBill1;
                     return;
                 }
             }
-            purchase.Add(item);
-            dg_SellingList.Items.Clear();
+            purchaselist.Add(item);
+            dg.Items.Clear();
             double totalBill = 0;
-            foreach (productsaleorpurchase item1 in purchase)
+            foreach (productsaleorpurchase item1 in purchaselist)
             {
                 totalBill += item1.total;
-                dg_SellingList.Items.Add(item1);
+                dg.Items.Add(item1);
             }
             lbl_Total.Content = totalBill;
         }
@@ -117,7 +81,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             productsaleorpurchase obj = ((FrameworkElement)sender).DataContext as productsaleorpurchase;
 
-            foreach (productsaleorpurchase oldItem in purchase)
+            foreach (productsaleorpurchase oldItem in purchaselist)
             {
                 if (obj.id == oldItem.id)
                 {
@@ -125,25 +89,25 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     {
                         oldItem.quantity -= 1;
                         oldItem.total = oldItem.quantity * oldItem.price;
-                        dg_SellingList.Items.Clear();
+                        dg.Items.Clear();
                         double totalBill1 = 0;
-                        foreach (productsaleorpurchase item1 in purchase)
+                        foreach (productsaleorpurchase item1 in purchaselist)
                         {
                             totalBill1 += item1.total;
-                            dg_SellingList.Items.Add(item1);
+                            dg.Items.Add(item1);
                         }
                         lbl_Total.Content = totalBill1;
                         return;
                     }
                     else
                     {
-                        purchase.Remove(obj);
-                        dg_SellingList.Items.Clear();
+                        purchaselist.Remove(obj);
+                        dg.Items.Clear();
                         double totalBill1 = 0;
-                        foreach (productsaleorpurchase item1 in purchase)
+                        foreach (productsaleorpurchase item1 in purchaselist)
                         {
                             totalBill1 += item1.total;
-                            dg_SellingList.Items.Add(item1);
+                            dg.Items.Add(item1);
                         }
                         lbl_Total.Content = totalBill1;
                         return;
@@ -211,13 +175,18 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         void donePurchase()
         {
 
+            if (tb_Paying.Text == "") 
+            {
+                AutoClosingMessageBox.Show("Please Enter payment", "Success", 2000);
+            }
             int totalBill = Convert.ToInt32(lbl_Total.Content);
-            int Remaining = Convert.ToInt32(lbl_Remaining.Content);
-            purchaseutils.newpurchase(purchase, totalBill, Remaining, vendorid);
+            int totalPayment = Convert.ToInt32(tb_Paying.Text);
+            
+            purchaseutils.newpurchase(purchaselist, totalBill, totalPayment, vendorid);
 
             AutoClosingMessageBox.Show("Ammount " + totalBill, "Success", 2000);
             Close();
-            new purchasenew().Show();
+            
         }
     }
 }

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.product"
         mc:Ignorable="d"
-        Title="List" Height="450" Width="800">
+        Title="List">
     <Grid>
-        <DataGrid x:Name="dg_ProductList" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Height="366" Width="772">
+        <DataGrid x:Name="dg_ProductList" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
@@ -20,6 +20,13 @@
                 <DataGridTextColumn Header="type" Binding="{Binding type}"/>
                 <DataGridTextColumn Header="saleactive" Binding="{Binding saleactive}"/>
                 <DataGridTextColumn Header="purchaseactive" Binding="{Binding purchaseactive}"/>
+                <DataGridTemplateColumn Header="Details">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="details">Details</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

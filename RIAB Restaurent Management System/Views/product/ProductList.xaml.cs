@@ -33,5 +33,10 @@ namespace RIAB_Restaurent_Management_System.Views.product
             dg_ProductList.ItemsSource = db.product.ToList();
             UpdateLayout();
         }
+        public void details(object sender, RoutedEventArgs e)
+        {
+            financetransaction obj = ((FrameworkElement)sender).DataContext as financetransaction;
+            new ProductAdd(obj.id).Show();
+        }
     }
 }

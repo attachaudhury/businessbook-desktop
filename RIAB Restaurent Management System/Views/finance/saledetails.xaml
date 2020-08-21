@@ -11,9 +11,9 @@
         <DataGrid Name="dg" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding product.name}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding price}" />
-                <DataGridTextColumn Header="Quantity" Binding="{Binding qantity}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" />
                 <DataGridTextColumn Header="Total" Binding="{Binding total}" />
             </DataGrid.Columns>
         </DataGrid>

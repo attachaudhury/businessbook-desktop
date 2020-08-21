@@ -180,7 +180,7 @@ CREATE TABLE tbl_FoodItem(
     quantity float,
     saleprice float,
     saleactive bit,
-	[type] nvarchar(100), -- eg product deal
+	--[type] nvarchar(100), -- eg product raw deal
 )
 
 	CREATE TABLE subproduct(

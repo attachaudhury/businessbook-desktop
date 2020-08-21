@@ -16,6 +16,8 @@
      FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <TextBox Name="tb_Search" PreviewKeyDown="tb_Search_PreviewKeyDown" TextChanged="tb_Search_TextChanged" HorizontalAlignment="Left" Height="41" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186"/>
+        <Label Content="Search" HorizontalAlignment="Left" Margin="206,31,0,0" VerticalAlignment="Top"/>
+
         <ListView HorizontalAlignment="Left" Visibility="Hidden" Name="lv_SearchFoodItem" Height="182" Margin="8,55,0,0" VerticalAlignment="Top" Width="357">
             <ListView.View>
                 <GridView>
@@ -26,7 +28,7 @@
         </ListView>
 
 
-        <DataGrid Name="dg_SellingList" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="459,10,0,0" VerticalAlignment="Top" Width="440">
+        <DataGrid Name="dg" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="459,10,0,0" VerticalAlignment="Top" Width="440">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="Name" Binding="{Binding name}"></materialDesign:DataGridTextColumn>
                 <materialDesign:DataGridTextColumn Header="Qty" Binding="{Binding quantity}"></materialDesign:DataGridTextColumn>
@@ -53,16 +55,11 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox Name="tb_Discount" KeyDown="tb_Discount_KeyDown_PressEnter" Text="" HorizontalAlignment="Left" Height="33" Margin="782,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Name="lbl_Total" Content="0" HorizontalAlignment="Left" Margin="781,308,0,0" VerticalAlignment="Top" Width="118" Background="Gray"/>
-        <TextBox Name="tb_Paying" TabIndex="1" TextChanged="tb_Paying_TextChanged" KeyDown="tb_Paying_KeyDownPressEnter" Text="" HorizontalAlignment="Left" Height="34" Margin="783,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Name="lbl_Remaining" Content="0" HorizontalAlignment="Left" Margin="784,385,0,0" VerticalAlignment="Top" Width="118" Background="Gray"/>
-        <Button Content="Purchase" Click="btn_doPurchase" HorizontalAlignment="Left" Margin="690,470,0,0" VerticalAlignment="Top" Width="210" Height="51"/>
-        <Label Content="Dis" HorizontalAlignment="Left" Margin="734,280,0,0" VerticalAlignment="Top"/>
         <Label Content="Ttl" HorizontalAlignment="Left" Margin="734,311,0,0" VerticalAlignment="Top"/>
+        <Label Name="lbl_Total" Content="0" HorizontalAlignment="Left" Margin="781,308,0,0" VerticalAlignment="Top" Width="118" Background="Gray"/>
+        <TextBox Name="tb_Paying" TabIndex="1" Text="0" HorizontalAlignment="Left" Height="34" Margin="783,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Pay" HorizontalAlignment="Left" Margin="734,355,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rem" HorizontalAlignment="Left" Margin="733,386,0,0" VerticalAlignment="Top"/>
-        <Label Content="Search" HorizontalAlignment="Left" Margin="206,31,0,0" VerticalAlignment="Top"/>
+        <Button Content="Purchase" Click="btn_doPurchase" HorizontalAlignment="Left" Margin="690,470,0,0" VerticalAlignment="Top" Width="210" Height="51"/>
     </Grid>
 </Window>
 
