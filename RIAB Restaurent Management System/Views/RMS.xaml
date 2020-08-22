@@ -1,6 +1,8 @@
-﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.RMS"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        x:Class="RIAB_Restaurent_Management_System.Views.RMS"
         Title="Business Book" Height="Auto" Width="Auto" WindowState="Maximized">
     <Grid>
         <Menu Background="#FF363636" Foreground="#DDC7C7C7" VerticalAlignment="Top"   Margin="0,0,0,0">
@@ -30,11 +32,9 @@
             <MenuItem Header="Others">
                 <MenuItem Header="Setting" Click="mi_Setting"/>
             </MenuItem>
-            <MenuItem Header="Log Out" Click="mi_LogOut">
-            </MenuItem>
+            <MenuItem Header="Log Out" Click="mi_LogOut"/>
         </Menu>
-        <Button Click="pos" Content="Sale" Background="Chocolate" HorizontalAlignment="Left" Margin="59,228,0,0" VerticalAlignment="Top" Width="183"/>
-        <Button Click="mi_AddNewCustomer" Content="Customer" Background="Red" HorizontalAlignment="Left" Margin="59,265,0,0" VerticalAlignment="Top" Width="183"/>
+        <WebBrowser Name="webview" Margin="0,48,0,25"></WebBrowser>
         <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF363636" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
     </Grid>
 

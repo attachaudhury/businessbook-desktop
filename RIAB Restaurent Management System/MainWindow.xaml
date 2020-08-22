@@ -1,6 +1,7 @@
 ﻿<Window x:Class="RIAB_Restaurent_Management_System.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         Title="Start System" Height="328.503" Width="509.79" Background="Gray" Opacity="0.9" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="tb_Name" Text="admin" FontSize="12" HorizontalAlignment="Left" Margin="132,85,0,0"  VerticalAlignment="Top" Width="254" ToolTip="Username" BorderBrush="#FF494646" Foreground="#FFD1D1D1">
@@ -15,7 +16,7 @@
         </Button>
         <Label Content="Business Book" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="164" FontFamily="DokChampa" FontSize="24" Foreground="#FFDEDEDE"/>
         <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020"  VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF363636" Height="25" Foreground="#DDC7C7C7"/>
-
+        
     </Grid>
 
 </Window>

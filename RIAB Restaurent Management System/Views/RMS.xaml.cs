@@ -5,9 +5,12 @@ using RIAB_Restaurent_Management_System.Views.others;
 using RIAB_Restaurent_Management_System.Views.product;
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
+using System.Runtime.InteropServices;
 
 namespace RIAB_Restaurent_Management_System.Views
 {
+
+    [ComVisible(true)]
     public partial class RMS : Window
     {
         user loggininuser;
@@ -21,11 +24,73 @@ namespace RIAB_Restaurent_Management_System.Views
             {
                 hideAdminMenu();
             }
+
+            string html = @"
+ <html>
+<head>
+  <style>
+    .main{
+      font-family: arial;
+    }
+    .blocks{
+      float: left;
+      width: 20%;
+      margin: 1%;
+      border: 1px solid #ddd;
+      padding: 10px 20px;
+      border-radius: 4px; 
+    }
+    .blocks h4{
+      margin: 0;
+      font-weight: 600;
+      color: #888;
+    }
+    .blocks p{
+      text-align: center;
+      font-size: 28px;
+    }
+    p.a{
+      color:rgb(98, 147, 211);
+    }
+    p.b{
+      color:red;
+    }
+    p.c{
+      color:#8418e6;
+    }
+    p.d{
+      color:green;
+    }
+  </style>
+</head>
+<body>
+  <div class='main'>
+    <div class='blocks'>
+      <h4>Sales</h4>
+      <p class='a'>30</p>
+    </div>
+    <div class='blocks'>
+      <h4>Customers</h4>
+       <p class='b'>30</p>
+    </div>
+    <div class='blocks'>
+      <h4>Sales</h4>
+       <p class='c'>30</p>
+    </div>
+    <div class='blocks'>
+      <h4>Sales</h4>
+       <p class='d'>30</p>
+    </div>
+  <div>
+</body>
+</html>";
+            webview.NavigateToString(html);
+
         }
         private void hideAdminMenu() {
             m_Staff.Visibility = Visibility.Collapsed;
         }
-
+        
         
         
         #region customer
