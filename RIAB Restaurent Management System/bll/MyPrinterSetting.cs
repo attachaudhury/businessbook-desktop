@@ -1,5 +1,4 @@
-﻿using BLL.Properties;
-using RIAB_Restaurent_Management_System.Properties;
+﻿using RIAB_Restaurent_Management_System.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;

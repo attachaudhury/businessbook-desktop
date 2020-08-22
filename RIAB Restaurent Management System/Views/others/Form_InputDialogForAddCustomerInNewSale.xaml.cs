@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DAL;
-using BLL;
 
 namespace RIAB_Restaurent_Management_System.Views
 {

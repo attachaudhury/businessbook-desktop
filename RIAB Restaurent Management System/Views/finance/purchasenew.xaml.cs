@@ -1,5 +1,4 @@
-﻿using BLL;
-using DAL;
+﻿using DAL;
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;

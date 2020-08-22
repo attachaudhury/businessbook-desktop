@@ -11,7 +11,6 @@ using System.Windows.Shapes;
 using System.Drawing.Printing;
 using System.Printing;
 using System.Windows.Media;
-using BLL.Properties;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using RIAB_Restaurent_Management_System.Properties;
 

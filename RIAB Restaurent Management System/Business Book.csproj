@@ -278,10 +278,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{8d33211e-5751-4357-b19b-9dc8eeb23ec6}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{70d21d1b-9a9b-4df3-9cd1-a83f1324cd52}</Project>
       <Name>DAL</Name>

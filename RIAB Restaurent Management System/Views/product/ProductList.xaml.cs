@@ -1,5 +1,4 @@
-﻿using BLL;
-using DAL;
+﻿using DAL;
 using RIAB_Restaurent_Management_System.data;
 using System;
 using System.Collections.Generic;
