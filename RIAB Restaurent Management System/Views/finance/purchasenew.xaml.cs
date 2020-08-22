@@ -177,14 +177,14 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
             if (tb_Paying.Text == "") 
             {
-                AutoClosingMessageBox.Show("Please Enter payment", "Success", 2000);
+                MessageBox.Show("Please Enter payment", "Success");
             }
             int totalBill = Convert.ToInt32(lbl_Total.Content);
             int totalPayment = Convert.ToInt32(tb_Paying.Text);
             
             purchaseutils.newpurchase(purchaselist, totalBill, totalPayment, vendorid);
 
-            AutoClosingMessageBox.Show("Ammount " + totalBill, "Success", 2000);
+            MessageBox.Show("Ammount " + totalBill, "Success");
             Close();
             
         }

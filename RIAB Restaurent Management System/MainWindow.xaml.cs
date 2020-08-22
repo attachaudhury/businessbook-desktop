@@ -64,7 +64,7 @@ namespace RIAB_Restaurent_Management_System
             }
             else
             {
-                    BLL.AutoClosingMessageBox.Show("Username or password not exists", "Failed", 3000);
+                    MessageBox.Show("Username or password not exists", "Failed");
 
             }
 

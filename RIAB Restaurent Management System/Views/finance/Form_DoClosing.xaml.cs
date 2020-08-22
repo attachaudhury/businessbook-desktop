@@ -32,7 +32,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             if (tb_OpeningBalance.Text == "" || tb_Sale.Text == "" || tb_Delivery.Text == "" || tb_TotalSale.Text == "" || tb_TotalCash.Text == "" || tb_Deposit.Text == "" || tb_Expence.Text == "" || tb_ClosingBalance.Text == "")
             {
-                AutoClosingMessageBox.Show("Please Fill all fields", "Alert", 2000);
+                MessageBox.Show("Please Fill all fields", "Alert");
             }
             else
             {
@@ -50,11 +50,11 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     fc.ClosingBalance = Convert.ToInt32(tb_ClosingBalance.Text);
                     FinanceChart.insert(fc);
                     Close();
-                    AutoClosingMessageBox.Show("Closings saved", "Success", 2000);
+                    MessageBox.Show("Closings saved", "Success");
                 }
                 catch
                 {
-                    AutoClosingMessageBox.Show("Please try again", "Fail", 2000);
+                    MessageBox.Show("Please try again", "Fail");
                 }
             }
         }

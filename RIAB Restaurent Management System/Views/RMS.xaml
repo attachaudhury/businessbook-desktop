@@ -34,7 +34,7 @@
                 <MenuItem Header="View Staff" Click="mi_AllStaff"/>
             </MenuItem>
             <MenuItem Header="Others">
-                <MenuItem Header="Add Staff" Click="mi_Setting"/>
+                <MenuItem Header="Setting" Click="mi_Setting"/>
             </MenuItem>
             <MenuItem Header="Log Out" Click="mi_LogOut">
             </MenuItem>

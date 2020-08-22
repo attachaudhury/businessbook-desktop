@@ -54,7 +54,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoClosingMessageBox.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="DBOperations\DeliveryQueue.cs" />
     <Compile Include="DBOperations\Deposit.cs" />

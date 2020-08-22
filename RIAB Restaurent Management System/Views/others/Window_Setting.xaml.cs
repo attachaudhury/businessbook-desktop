@@ -43,7 +43,7 @@ namespace RIAB_Restaurent_Management_System.Views.others
                 string footer = tb_Footer.Text;
                 int Reciptlineheight = Convert.ToInt32(tb_Reciptlineheight.Text);
                 MyPrinterSetting.saveSettings(pageWidth, marginLeft, title, subTitle, footer, Reciptlineheight);
-                AutoClosingMessageBox.Show("Setting Saved","Success",2000);
+                MessageBox.Show("Setting Saved","Success");
                 
             }
             catch

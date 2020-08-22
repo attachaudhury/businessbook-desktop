@@ -46,7 +46,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
             RMSDBEntities db = DBContext.getInstance();
             if (tb_name.Text == "" || tb_saleprice.Text == "" || tb_purchaseprice.Text == "")
             {
-                AutoClosingMessageBox.Show("Please fill form", "Information", 2000);
+                MessageBox.Show("Please fill form", "Information");
                 return;
             }
             if (this.createmode)
@@ -79,7 +79,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 db.SaveChanges();
                 selectedproduct = r;
                 this.createmode = false;
-                AutoClosingMessageBox.Show("Product saved", "Information", 2000);
+                MessageBox.Show("Product saved", "Information");
             }
             else
             {
@@ -105,25 +105,25 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 selectedproduct.purchaseactive = cbx_PurchaseActive.IsChecked.Value;
                 db.product.AddOrUpdate(selectedproduct);
                 db.SaveChanges();
-                AutoClosingMessageBox.Show("product saved", "Information", 2000);
+                MessageBox.Show("product saved", "Information");
             }
         }
         private void btn_AddSubProduct(object sender, RoutedEventArgs e)
         {
             if (this.createmode)
             {
-                AutoClosingMessageBox.Show("Please save product first", "Information", 2000);
+                MessageBox.Show("Please save product first", "Information");
             }
             else
             {
                 if (products_cb.SelectedItem == null)
                 {
-                    AutoClosingMessageBox.Show("Please select product", "Information", 2000);
+                    MessageBox.Show("Please select product", "Information");
                     return;
                 }
                 if (tb_subproductquantity.Text == "" || tb_subproductquantity.Text == "0")
                 {
-                    AutoClosingMessageBox.Show("Please add quantity", "Information", 2000);
+                    MessageBox.Show("Please add quantity", "Information");
                     return;
                 }
                 var products_cb_selectedobject = products_cb.SelectedItem as DAL.product;

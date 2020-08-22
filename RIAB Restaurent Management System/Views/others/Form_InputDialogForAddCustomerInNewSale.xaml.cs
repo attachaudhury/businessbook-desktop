@@ -64,7 +64,7 @@ namespace RIAB_Restaurent_Management_System.Views
             }
             if (tb_Address.Text == "")
             {
-                AutoClosingMessageBox.Show("Please Enter Address", "Error", 2000);
+                MessageBox.Show("Please Enter Address", "Error");
             }
             else
             {

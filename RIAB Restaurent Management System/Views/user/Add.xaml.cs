@@ -44,17 +44,17 @@ namespace RIAB_Restaurent_Management_System.Views.person
         {
             if (tb_Name.Text == "")
             {
-                BLL.AutoClosingMessageBox.Show("Please enter name", "Failed", 3000);
+                MessageBox.Show("Please enter name", "Failed");
                 return;
             }
             if (cb_Role.SelectedValue == null)
             {
-                BLL.AutoClosingMessageBox.Show("Please select role", "Failed", 3000);
+                MessageBox.Show("Please select role", "Failed");
                 return;
             }
             if ((string)cb_Role.SelectedValue == "admin" || (string)cb_Role.SelectedValue == "user") {
                 if (tb_UserName.Text == "" || tb_Password.Text=="") {
-                    BLL.AutoClosingMessageBox.Show("Enter Username or password", "Failed", 3000);
+                    MessageBox.Show("Enter Username or password", "Failed");
                     return;
                 }
             }

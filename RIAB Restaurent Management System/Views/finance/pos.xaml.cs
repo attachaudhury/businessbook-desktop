@@ -238,7 +238,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             double discount = 0;
             saleutils.newsale(salelist, totalBill, Remaining, customerId, reciept1, reciept2, reciept3, saleType, customerAddress, deliveryBoyId);
 
-            AutoClosingMessageBox.Show("Ammount " + totalBill, "Success", 2000);
+            MessageBox.Show("Ammount " + totalBill, "Success");
             Close();
             new pos().Show();
         }
