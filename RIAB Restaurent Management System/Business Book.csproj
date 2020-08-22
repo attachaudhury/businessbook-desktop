@@ -132,32 +132,11 @@
     <Compile Include="Views\finance\transactions.xaml.cs">
       <DependentUpon>transactions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\kitchen\Form_LinkFoodsToInventory.xaml.cs">
-      <DependentUpon>Form_LinkFoodsToInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\kitchen\Form_LinkKitchenInventory.xaml.cs">
-      <DependentUpon>Form_LinkKitchenInventory.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\others\Form_InputDialog.xaml.cs">
       <DependentUpon>Form_InputDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\others\Form_InputDialogForAddCustomerInNewSale.xaml.cs">
       <DependentUpon>Form_InputDialogForAddCustomerInNewSale.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\kitchen\Form_AddNewKitchenInventory.xaml.cs">
-      <DependentUpon>Form_AddNewKitchenInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\kitchen\Form_EditKitchenInventory.xaml.cs">
-      <DependentUpon>Form_EditKitchenInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\kitchen\Form_InstantKitchenInventoryManager.xaml.cs">
-      <DependentUpon>Form_InstantKitchenInventoryManager.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\kitchen\Form_ManageKitchenInventory.xaml.cs">
-      <DependentUpon>Form_ManageKitchenInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\kitchen\Form_ManageKitchenInventoryCategories.xaml.cs">
-      <DependentUpon>Form_ManageKitchenInventoryCategories.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\others\Window_Setting.xaml.cs">
       <DependentUpon>Window_Setting.xaml</DependentUpon>
@@ -228,39 +207,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\kitchen\Form_LinkFoodsToInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\kitchen\Form_LinkKitchenInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\others\Form_InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\others\Form_InputDialogForAddCustomerInNewSale.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\kitchen\Form_AddNewKitchenInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\kitchen\Form_EditKitchenInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\kitchen\Form_InstantKitchenInventoryManager.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\kitchen\Form_ManageKitchenInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\kitchen\Form_ManageKitchenInventoryCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

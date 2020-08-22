@@ -27,25 +27,7 @@ namespace RIAB_Restaurent_Management_System.Views
         }
 
         
-        private void mi_LogOut(object sender, RoutedEventArgs e)
-        {
-            new MainWindow().Show();
-            Close();
-        }
-        private void mi_CloseApplication(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-        private void mi_DoClosing(object sender, RoutedEventArgs e)
-        {
-            new Form_DoClosing().Show();
-        }
-        private void mi_Setting(object sender, RoutedEventArgs e)
-        {
-            new Window_Setting().Show();
-        }
-
-
+        
         #region customer
         private void mi_ViewAllCustomers(object sender, RoutedEventArgs e)
         {
@@ -83,16 +65,11 @@ namespace RIAB_Restaurent_Management_System.Views
         }
         #endregion menuitem_products
 
-
-        #region menuitem_sales
+        #region menuitem_finance
         private void pos(object sender, RoutedEventArgs e)
         {
             new pos().Show();
         }
-        #endregion menuitem_sales
-
-
-        #region menuitem_finance
         private void transactionsshow(object sender, RoutedEventArgs e)
         {
             new transactions().Show();
@@ -117,6 +94,25 @@ namespace RIAB_Restaurent_Management_System.Views
         {
             new Views.finance.expences().Show();
         }
+        private void mi_DoClosing(object sender, RoutedEventArgs e)
+        {
+            new Form_DoClosing().Show();
+        }
+
         #endregion menuitem_finance
+
+        #region others
+        private void mi_Setting(object sender, RoutedEventArgs e)
+        {
+            new Window_Setting().Show();
+        }
+        #endregion others
+
+        private void mi_LogOut(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            Close();
+        }
+
     }
 }
