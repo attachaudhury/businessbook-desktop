@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Sales List">
     <Grid>
-        <DataGrid Name="dg" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,10">
+        <DataGrid Name="dg">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                 <DataGridTextColumn Header="Amount" Binding="{Binding amount}" />

@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Bokehlicia-Captiva-Checkbox.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -311,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\HTMLPage1.html" />
+    <Resource Include="Bokehlicia-Captiva-Checkbox.ico" />
     <Content Include="data\bbdb.sql" />
     <Content Include="data\model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

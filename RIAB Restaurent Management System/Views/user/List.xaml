@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.user"
         mc:Ignorable="d"
-        Title="List" Height="504.968" Width="759.667" WindowStartupLocation="CenterScreen">
+        Title="Person List">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="178*"/>
-            <ColumnDefinition Width="575*"/>
-        </Grid.ColumnDefinitions>
-        <DataGrid Name="dg_AllStaff" BorderBrush="Gray" BorderThickness="1" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="454" Margin="10,10,0,0" VerticalAlignment="Top" Width="732" Grid.ColumnSpan="2">
+        <DataGrid Name="dg_AllStaff" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
                 <DataGridTextColumn Header="Role" Binding="{Binding role}"/>
