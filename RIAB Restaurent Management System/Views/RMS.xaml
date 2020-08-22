@@ -1,9 +1,9 @@
 ﻿<Window x:Class="RIAB_Restaurent_Management_System.Views.RMS"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Business Book" Height="695" Width="1371.5" WindowState="Maximized">
+        Title="Business Book" Height="Auto" Width="Auto" WindowState="Maximized">
     <Grid>
-        <Menu Background="#FF363636" Foreground="#DDC7C7C7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1364">
+        <Menu Background="#FF363636" Foreground="#DDC7C7C7" VerticalAlignment="Top"   Margin="0,0,0,0">
             <MenuItem  Header="Customers">
                 <MenuItem Header="Add New Customer" Click="mi_AddNewCustomer"/>
                 <MenuItem Header="View All Customers" Click="mi_ViewAllCustomers"/>
@@ -12,7 +12,7 @@
                 <MenuItem Header="Add Product" Click="productadd"/>
                 <MenuItem Header="All Products" Click="products"/>
             </MenuItem>
-            
+
             <MenuItem Header="Finances">
                 <MenuItem Header="POS" Click="pos"/>
                 <MenuItem Header="All Transaction" Click="transactionsshow"/>
@@ -35,7 +35,7 @@
         </Menu>
         <Button Click="pos" Content="Sale" Background="Chocolate" HorizontalAlignment="Left" Margin="59,228,0,0" VerticalAlignment="Top" Width="183"/>
         <Button Click="mi_AddNewCustomer" Content="Customer" Background="Red" HorizontalAlignment="Left" Margin="59,265,0,0" VerticalAlignment="Top" Width="183"/>
-        <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Width="1364" Background="#FF363636" Height="25" Foreground="#DDC7C7C7"/>
+        <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF363636" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
     </Grid>
 
 </Window>
