@@ -32,7 +32,6 @@ namespace RIAB_Restaurent_Management_System.data
         public Nullable<double> quantity { get; set; }
         public Nullable<double> saleprice { get; set; }
         public Nullable<bool> saleactive { get; set; }
-        public string type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subproduct> subproduct { get; set; }

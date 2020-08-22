@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -55,11 +56,13 @@ namespace RIAB_Restaurent_Management_System.Views
 
         private void OKButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            tbl_Customer c = new tbl_Customer();
-            c.PhoneNo = tb_Phone.Text;
+            var db = new dbctx();
+            user c = new user();
+            c.phone = tb_Phone.Text;
+            c.role = "customer";
             if (tb_Name.Text != "")
             {
-                c.Name = tb_Name.Text;
+                c.name = tb_Name.Text;
             }
             if (tb_Address.Text == "")
             {
@@ -67,30 +70,32 @@ namespace RIAB_Restaurent_Management_System.Views
             }
             else
             {
-                c.Address = tb_Address.Text;
+                c.address = tb_Address.Text;
             }
-            //Customer.insert(c);
-            Customer_Id = c.Id;
+            db.user.Add(c);
+            db.SaveChanges();
+            Customer_Id = c.id;
             DialogResult = true;
         }
 
         private void tb_Phone_TextChanged(object sender, TextChangedEventArgs e)
         {
+            var db = new dbctx();
             if (tb_Phone.Text != null)
             {
                 try
                 {
-                    //tbl_Customer customer = Customer.getByPhoneNumber(tb_Phone.Text);
-                    //if (customer == null)
-                    //{
-                    //    return;
-                    //}
-                    //else
-                    //{
-                    //    tb_Name.Text = customer.Name;                        
-                    //    tb_Address.Text = customer.Address;
-                    //    Customer_Id = customer.Id;
-                    //}
+                    user customer = db.user.Where(a=>a.phone==tb_Phone.Text).FirstOrDefault();
+                    if (customer == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        tb_Name.Text = customer.name;
+                        tb_Address.Text = customer.address;
+                        Customer_Id = customer.id;
+                    }
                 } catch { }
             }
         }

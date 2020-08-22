@@ -140,76 +140,7 @@
     <Compile Include="data\subproduct.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
-    <Compile Include="data\tbl_Customer.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Deal.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_DealFoodItem.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_DeliveryQueue.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Deposit.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_DepositHead.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_DetuctInventory.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Expence.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_ExpenceHead.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_ExpenceSubHead.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
     <Compile Include="data\tbl_FinanceChart.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_FoodItem.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_FoodItemCategory.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_KitchenInventory.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_KitchenInventoryCategory.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_PaymentMode.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_PurchaseOrder.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_PurchaseOrderItem.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Sale.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_SaleItem.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Sitting.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Staff.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_StaffCategory.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_Supplier.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
     <Compile Include="data\user.cs">
@@ -407,13 +338,8 @@
       <DependentUpon>model.edmx</DependentUpon>
       <LastGenOutput>model.cs</LastGenOutput>
     </Content>
-    <Content Include="media\2.wav" />
     <Content Include="other\old software\Old Demo Data.sql" />
     <Content Include="other\old software\Old.sql" />
-    <Resource Include="media\restaurant3.jpg" />
-    <Resource Include="media\restaurant2.jpg" />
-    <Resource Include="media\restaurant.jpg" />
-    <Resource Include="media\restaurant1.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
