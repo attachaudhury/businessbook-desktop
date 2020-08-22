@@ -111,14 +111,8 @@
     <Compile Include="Views\finance\expences.xaml.cs">
       <DependentUpon>expences.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\finance\Form_CashInHand.xaml.cs">
-      <DependentUpon>Form_CashInHand.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\finance\Form_DoClosing.xaml.cs">
       <DependentUpon>Form_DoClosing.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\Form_ExpenceReport.xaml.cs">
-      <DependentUpon>Form_ExpenceReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\purchasedetails.xaml.cs">
       <DependentUpon>purchasedetails.xaml</DependentUpon>
@@ -138,26 +132,11 @@
     <Compile Include="Views\finance\transactions.xaml.cs">
       <DependentUpon>transactions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\finance\Window_NewDeposit.xaml.cs">
-      <DependentUpon>Window_NewDeposit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\Window_NewDepositHead.xaml.cs">
-      <DependentUpon>Window_NewDepositHead.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\Window_ViewDeposits.xaml.cs">
-      <DependentUpon>Window_ViewDeposits.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\kitchen\Form_LinkFoodsToInventory.xaml.cs">
       <DependentUpon>Form_LinkFoodsToInventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\kitchen\Form_LinkKitchenInventory.xaml.cs">
       <DependentUpon>Form_LinkKitchenInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\Form_AddNewExpence.xaml.cs">
-      <DependentUpon>Form_AddNewExpence.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\Form_ExpenceHeads.xaml.cs">
-      <DependentUpon>Form_ExpenceHeads.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\foodndeals\Form_AddANewDeal.xaml.cs">
       <DependentUpon>Form_AddANewDeal.xaml</DependentUpon>
@@ -266,17 +245,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\finance\Form_CashInHand.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\finance\Form_DoClosing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\Form_ExpenceReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\finance\purchasedetails.xaml">
       <SubType>Designer</SubType>
@@ -302,31 +273,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\finance\Window_NewDeposit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\Window_NewDepositHead.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\Window_ViewDeposits.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\kitchen\Form_LinkFoodsToInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\kitchen\Form_LinkKitchenInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\Form_AddNewExpence.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\Form_ExpenceHeads.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
