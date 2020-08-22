@@ -183,7 +183,7 @@
     <Compile Include="Views\others\Window_Setting.xaml.cs">
       <DependentUpon>Window_Setting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\sale\pos.xaml.cs">
+    <Compile Include="Views\finance\pos.xaml.cs">
       <DependentUpon>pos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\user\Add.xaml.cs">
@@ -200,30 +200,6 @@
     </Compile>
     <Compile Include="Views\RMS.xaml.cs">
       <DependentUpon>RMS.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Form_AllDeliveryQueues.xaml.cs">
-      <DependentUpon>Form_AllDeliveryQueues.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Form_AllSales.xaml.cs">
-      <DependentUpon>Form_AllSales.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Form_FindSaleByCustomer.xaml.cs">
-      <DependentUpon>Form_FindSaleByCustomer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Form_SaleDetails.xaml.cs">
-      <DependentUpon>Form_SaleDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Window_DailySaleReport.xaml.cs">
-      <DependentUpon>Window_DailySaleReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Window_DeliveryBoysReport.xaml.cs">
-      <DependentUpon>Window_DeliveryBoysReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Window_FoodItemSalesReport.xaml.cs">
-      <DependentUpon>Window_FoodItemSalesReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\sale\Window_NewSale.xaml.cs">
-      <DependentUpon>Window_NewSale.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -341,7 +317,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\sale\pos.xaml">
+    <Page Include="Views\finance\pos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -362,38 +338,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RMS.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Form_AllDeliveryQueues.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Form_AllSales.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\sale\Form_FindSaleByCustomer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Form_SaleDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Window_DailySaleReport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Window_DeliveryBoysReport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Window_FoodItemSalesReport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\sale\Window_NewSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

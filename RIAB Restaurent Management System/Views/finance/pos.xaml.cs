@@ -240,7 +240,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
             AutoClosingMessageBox.Show("Ammount " + totalBill, "Success", 2000);
             Close();
-            new Window_NewSale().Show();
+            new pos().Show();
         }
     }
 
