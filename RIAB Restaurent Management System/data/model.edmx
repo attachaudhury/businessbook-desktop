@@ -61,6 +61,7 @@
           <Property Name="quantity" Type="float" />
           <Property Name="saleprice" Type="float" />
           <Property Name="saleactive" Type="bit" />
+          <Property Name="category" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="salepurchaseproduct">
           <Key>
@@ -108,6 +109,7 @@
           <Property Name="username" Type="varchar" MaxLength="20" />
           <Property Name="phone" Type="varchar" MaxLength="30" />
           <Property Name="role" Type="varchar" MaxLength="20" />
+          <Property Name="phone2" Type="varchar" MaxLength="30" />
         </EntityType>
         <Association Name="fk_createdbyuser_user_financetransaction">
           <End Role="user" Type="Self.user" Multiplicity="0..1" />
@@ -380,6 +382,7 @@
           <NavigationProperty Name="subproduct" Relationship="bbdbModel.fk_product_product_subproduct" FromRole="product" ToRole="subproduct" />
           <NavigationProperty Name="salepurchaseproduct" Relationship="bbdbModel.fk_product_salepurchaseproduct_product" FromRole="product" ToRole="salepurchaseproduct" />
           <NavigationProperty Name="subproduct1" Relationship="bbdbModel.fk_subproduct_product_subproduct" FromRole="product" ToRole="subproduct" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="salepurchaseproduct">
           <Key>
@@ -434,6 +437,7 @@
           <NavigationProperty Name="closing" Relationship="bbdbModel.fk_user_closing_user" FromRole="user" ToRole="closing" />
           <NavigationProperty Name="financetransaction" Relationship="bbdbModel.fk_createdbyuser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
           <NavigationProperty Name="financetransaction1" Relationship="bbdbModel.fk_targettouser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
+          <Property Name="phone2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_user_closing_user">
           <End Type="bbdbModel.user" Role="user" Multiplicity="0..1" />
@@ -597,6 +601,7 @@
           <EntitySetMapping Name="product">
             <EntityTypeMapping TypeName="bbdbModel.product">
               <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="saleactive" ColumnName="saleactive" />
                 <ScalarProperty Name="saleprice" ColumnName="saleprice" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
@@ -651,6 +656,7 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="bbdbModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="phone2" ColumnName="phone2" />
                 <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="username" ColumnName="username" />

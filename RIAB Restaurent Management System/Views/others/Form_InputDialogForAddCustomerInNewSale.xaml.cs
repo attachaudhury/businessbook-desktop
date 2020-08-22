@@ -57,7 +57,7 @@ namespace RIAB_Restaurent_Management_System.Views
         private void OKButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var db = new dbctx();
-            user c = new user();
+            data.user c = new data.user();
             c.phone = tb_Phone.Text;
             c.role = "customer";
             if (tb_Name.Text != "")
@@ -85,7 +85,7 @@ namespace RIAB_Restaurent_Management_System.Views
             {
                 try
                 {
-                    user customer = db.user.Where(a=>a.phone==tb_Phone.Text).FirstOrDefault();
+                    data.user customer = db.user.Where(a=>a.phone==tb_Phone.Text).FirstOrDefault();
                     if (customer == null)
                     {
                         return;

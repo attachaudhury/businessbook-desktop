@@ -15,21 +15,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace RIAB_Restaurent_Management_System.Views.person
+namespace RIAB_Restaurent_Management_System.Views.user
 {
     /// <summary>
     /// Interaction logic for Add.xaml
     /// </summary>
     public partial class Add : Window
     {
-        user loggedinperson;
+        data.user loggedinperson;
         public Add(string roletype)
         {
             InitializeComponent();
             loggedinperson = userutils.loggedinuser;
             var db = new dbctx();
 
-            var roles = new string[] { "admin", "user", "customer" };
+            var roles = new string[] { "admin", "user", "customer","vendor" };
             if (roletype == "staff")
             {
                 roles = new string[] { "admin", "user" };
@@ -37,6 +37,10 @@ namespace RIAB_Restaurent_Management_System.Views.person
             else if (roletype == "customer")
             {
                 roles = new string[] { "customer" };
+            }
+            else if (roletype == "vendor")
+            {
+                roles = new string[] { "vendor" };
             }
             cb_Role.ItemsSource = roles;
         }
@@ -58,7 +62,7 @@ namespace RIAB_Restaurent_Management_System.Views.person
                     return;
                 }
             }
-            user person = new user();
+            data.user person = new data.user();
             person.name = tb_Name.Text;
             person.role = (string)cb_Role.SelectedValue;
             try
@@ -74,7 +78,6 @@ namespace RIAB_Restaurent_Management_System.Views.person
             db.user.Add(person);
             db.SaveChanges();
             Close();
-            new List("staff").Show();
         }
     }
 }

@@ -6,6 +6,7 @@ using RIAB_Restaurent_Management_System.Views.product;
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace RIAB_Restaurent_Management_System.Views
 {
@@ -13,20 +14,35 @@ namespace RIAB_Restaurent_Management_System.Views
     [ComVisible(true)]
     public partial class RMS : Window
     {
-        user loggininuser;
+        data.user loggininuser;
 
         public RMS()
         {
-            
+
             InitializeComponent();
-            loggininuser= userutils.loggedinuser;
+            loggininuser = userutils.loggedinuser;
             if (loggininuser.role != "admin")
             {
                 hideAdminMenu();
             }
 
-            string html = @"
- <html>
+            initpage();
+
+        }
+        void initpage()
+        {
+
+            var db = new dbctx();
+            var sales = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").Sum(a => a.amount);
+            if (sales == null)
+            {
+                sales = 0;
+            }
+            var customers = db.user.Where(a => (a.role == "customer")).Count();
+            var vendors = db.user.Where(a => (a.role == "vendor")).Count();
+            var users = db.user.Where(a => (a.role != "customer" && a.role != "vendor")).Count();
+
+            string html = @"<html>
 <head>
   <style>
     .main{
@@ -47,7 +63,7 @@ namespace RIAB_Restaurent_Management_System.Views
     }
     .blocks p{
       text-align: center;
-      font-size: 28px;
+      font-size: 45px;
     }
     p.a{
       color:rgb(98, 147, 211);
@@ -63,61 +79,73 @@ namespace RIAB_Restaurent_Management_System.Views
     }
   </style>
 </head>
-<body>
+<body style='background-color:#f0f0f0'>
   <div class='main'>
     <div class='blocks'>
       <h4>Sales</h4>
-      <p class='a'>30</p>
+      <p class='a'>" + sales + @"</p>
     </div>
     <div class='blocks'>
       <h4>Customers</h4>
-       <p class='b'>30</p>
+       <p class='b'>" + customers + @"</p>
     </div>
     <div class='blocks'>
-      <h4>Sales</h4>
-       <p class='c'>30</p>
+      <h4>Vendors</h4>
+       <p class='c'>" + vendors + @"</p>
     </div>
     <div class='blocks'>
-      <h4>Sales</h4>
-       <p class='d'>30</p>
+      <h4>Users</h4>
+       <p class='d'>" + users + @"</p>
     </div>
   <div>
 </body>
 </html>";
             webview.NavigateToString(html);
-
         }
-        private void hideAdminMenu() {
+        private void hideAdminMenu()
+        {
             m_Staff.Visibility = Visibility.Collapsed;
         }
-        
-        
-        
+
+
+
         #region customer
         private void mi_ViewAllCustomers(object sender, RoutedEventArgs e)
         {
-            new person.List("customer").Show();
+            new user.List("customer").Show();
         }
         private void mi_AddNewCustomer(object sender, RoutedEventArgs e)
         {
-            new person.Add("customer").Show();
+            new user.Add("customer").Show();
         }
         #endregion customer
 
-        
+        #region customer
+        private void mi_ViewAllVendors(object sender, RoutedEventArgs e)
+        {
+            new user.List("vendor").Show();
+        }
+        private void mi_AddNewVendor(object sender, RoutedEventArgs e)
+        {
+            new user.Add("vendor").Show();
+        }
+        #endregion customer
+
+
         #region staff
         private void mi_AddStaff(object sender, RoutedEventArgs e)
         {
             //new Window_AddNewStaff("staff").Show();
-            new person.Add("staff").Show();
+            new user.Add("staff").Show();
         }
 
         private void mi_AllStaff(object sender, RoutedEventArgs e)
         {
             //new Window_ViewAllStaff().Show();
-            new person.List("staff").Show();
+            new user.List("staff").Show();
         }
         #endregion staff
+
 
         #region menuitem_products
         private void productadd(object sender, RoutedEventArgs e)
@@ -180,4 +208,5 @@ namespace RIAB_Restaurent_Management_System.Views
         }
 
     }
+    
 }

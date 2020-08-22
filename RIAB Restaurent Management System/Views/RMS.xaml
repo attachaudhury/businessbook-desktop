@@ -5,10 +5,18 @@
         x:Class="RIAB_Restaurent_Management_System.Views.RMS"
         Title="Business Book" Height="Auto" Width="Auto" WindowState="Maximized">
     <Grid>
-        <Menu Background="#FF363636" Foreground="#DDC7C7C7" VerticalAlignment="Top"   Margin="0,0,0,0">
+        <Menu Background="#FF575757" Foreground="#DDC7C7C7" VerticalAlignment="Top"   Margin="0,0,0,0">
             <MenuItem  Header="Customers">
-                <MenuItem Header="Add New Customer" Click="mi_AddNewCustomer"/>
-                <MenuItem Header="View All Customers" Click="mi_ViewAllCustomers"/>
+                <MenuItem Header="Add" Click="mi_AddNewCustomer"/>
+                <MenuItem Header="List" Click="mi_ViewAllCustomers"/>
+            </MenuItem>
+            <MenuItem  Header="Vendors">
+                <MenuItem Header="Add" Click="mi_AddNewVendor"/>
+                <MenuItem Header="List" Click="mi_ViewAllVendors"/>
+            </MenuItem>
+            <MenuItem x:Name="m_Staff" Header="Staff">
+                <MenuItem Header="Add" Click="mi_AddStaff"/>
+                <MenuItem Header="List" Click="mi_AllStaff"/>
             </MenuItem>
             <MenuItem Header="Products">
                 <MenuItem Header="Add Product" Click="productadd"/>
@@ -25,17 +33,27 @@
                 <MenuItem Header="Expences" Click="expencesshow"/>
                 <MenuItem  Header="Do Closing" Click="mi_DoClosing"/>
             </MenuItem>
-            <MenuItem x:Name="m_Staff" Header="Staff">
-                <MenuItem Header="Add Staff" Click="mi_AddStaff"/>
-                <MenuItem Header="View Staff" Click="mi_AllStaff"/>
-            </MenuItem>
             <MenuItem Header="Others">
                 <MenuItem Header="Setting" Click="mi_Setting"/>
             </MenuItem>
             <MenuItem Header="Log Out" Click="mi_LogOut"/>
         </Menu>
-        <WebBrowser Name="webview" Margin="0,48,0,25"></WebBrowser>
-        <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF363636" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
+        <Grid Background="#f0f0f0" Margin="0,48,0,25">
+            <Expander Background="#f0f0f0" Margin="0,0,0,400">
+                <WebBrowser Name="webview"/>
+            </Expander>
+            <Label Content="BUSINESS BOOK"  VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="80" Foreground="#DDC7C7C7" >
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+        </Grid>
+        <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/09/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF4D4D4D" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
     </Grid>
 
 </Window>

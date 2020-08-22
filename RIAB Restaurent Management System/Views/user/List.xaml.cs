@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace RIAB_Restaurent_Management_System.Views.person
+namespace RIAB_Restaurent_Management_System.Views.user
 {
     /// <summary>
     /// Interaction logic for List.xaml
@@ -27,11 +27,15 @@ namespace RIAB_Restaurent_Management_System.Views.person
             var db = new dbctx();
             if (roletype == "staff")
             {
-                dg_AllStaff.ItemsSource = db.user.Where(a => a.role != "customer").ToList();
+                dg_AllStaff.ItemsSource = db.user.Where(a => (a.role == "admin" || a.role == "user")).ToList();
+            }
+            else if(roletype == "customer")
+            {
+                dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "customer").ToList();
             }
             else
             {
-                dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "customer").ToList();
+                dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "vendor").ToList();
             }
         }
     }

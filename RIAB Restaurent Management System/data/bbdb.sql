@@ -14,6 +14,7 @@ CREATE TABLE [user](
 	[password] varchar(20),
 	username varchar(20),
 	phone varchar(30),
+	phone2 varchar(30),
 	[role] varchar(20) default 'user'
 )
 
@@ -35,7 +36,8 @@ CREATE TABLE tbl_FinanceChart(
 	CREATE TABLE product(
 	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	barcode nvarchar(100),
-    carrycost float,
+    category varchar(50),
+	carrycost float,
     discount float,
     [name] varchar(100),
     purchaseprice float,
