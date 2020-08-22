@@ -138,27 +138,6 @@
     <Compile Include="Views\kitchen\Form_LinkKitchenInventory.xaml.cs">
       <DependentUpon>Form_LinkKitchenInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\foodndeals\Form_AddANewDeal.xaml.cs">
-      <DependentUpon>Form_AddANewDeal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\foodndeals\Form_AddNewFoodItem.xaml.cs">
-      <DependentUpon>Form_AddNewFoodItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\foodndeals\Form_EditADeal.xaml.cs">
-      <DependentUpon>Form_EditADeal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\foodndeals\Form_EditAFoodItem.xaml.cs">
-      <DependentUpon>Form_EditAFoodItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\foodndeals\Form_ManageDeals.xaml.cs">
-      <DependentUpon>Form_ManageDeals.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\foodndeals\Form_ManageFoodItemCatogories.xaml.cs">
-      <DependentUpon>Form_ManageFoodItemCatogories.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\foodndeals\Form_ManageFoodItems.xaml.cs">
-      <DependentUpon>Form_ManageFoodItems.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\others\Form_InputDialog.xaml.cs">
       <DependentUpon>Form_InputDialog.xaml</DependentUpon>
     </Compile>
@@ -254,34 +233,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\kitchen\Form_LinkKitchenInventory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_AddANewDeal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_AddNewFoodItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_EditADeal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_EditAFoodItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_ManageDeals.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_ManageFoodItemCatogories.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\foodndeals\Form_ManageFoodItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

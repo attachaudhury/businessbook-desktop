@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using RIAB_Restaurent_Management_System.Views.foodndeals;
 using RIAB_Restaurent_Management_System.Views.finance;
 using RIAB_Restaurent_Management_System.Views.kitchen;
 using RIAB_Restaurent_Management_System.Views.others;
