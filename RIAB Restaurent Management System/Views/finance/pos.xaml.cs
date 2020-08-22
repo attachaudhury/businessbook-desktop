@@ -20,7 +20,7 @@ using System.Media;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using RIAB_Restaurent_Management_System.bll;
 
-namespace RIAB_Restaurent_Management_System.Views.sale
+namespace RIAB_Restaurent_Management_System.Views.finance
 {
     /// <summary>
     /// Interaction logic for Window_NewSale.xaml
