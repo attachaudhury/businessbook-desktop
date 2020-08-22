@@ -106,6 +106,7 @@
     <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\TimeUtils.cs" />
     <Compile Include="bll\userutils.cs" />
+    <Compile Include="data\DBContext.cs" />
     <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
     <Compile Include="other\Class1.cs" />
     <Compile Include="Views\finance\expencenew.xaml.cs">

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 
-namespace BLL
+namespace RIAB_Restaurent_Management_System.data
 {
     public sealed class DBContext
     {

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using DAL;
 using BLL;
 using System.Data.Entity.Migrations;
+using RIAB_Restaurent_Management_System.data;
 
 namespace RIAB_Restaurent_Management_System.Views.product
 {
