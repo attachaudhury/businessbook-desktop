@@ -12,7 +12,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     class purchaseutils
     {
-        public static void newpurchase(List<productsaleorpurchase> purchaseList, int totalpayment, int remaining, int vendorid)
+        public static void newpurchase(List<productsaleorpurchaseviewmodel> purchaseList, int totalpayment, int remaining, int vendorid)
         {
             var purchaseid = financeutils.insertPurchaseTransactions(purchaseList, totalpayment, vendorid);
             Task.Run(() => {
@@ -20,10 +20,10 @@ namespace RIAB_Restaurent_Management_System.bll
                 updateInventory(purchaseList);
             });
         }
-        private static void insertPurchasingProductsInDatabase(List<productsaleorpurchase> purchaseList, int purchaseid)
+        private static void insertPurchasingProductsInDatabase(List<productsaleorpurchaseviewmodel> purchaseList, int purchaseid)
         {
             var db = new dbctx();
-            foreach (productsaleorpurchase item in purchaseList)
+            foreach (productsaleorpurchaseviewmodel item in purchaseList)
             {
                 salepurchaseproduct saleItem = new salepurchaseproduct();
                 saleItem.price = item.price;
@@ -35,7 +35,7 @@ namespace RIAB_Restaurent_Management_System.bll
             }
             db.SaveChanges();
         }
-        private static void updateInventory(List<productsaleorpurchase> purchaseList)
+        private static void updateInventory(List<productsaleorpurchaseviewmodel> purchaseList)
         {
             var db = new dbctx();
             foreach (var item in purchaseList)
@@ -49,7 +49,7 @@ namespace RIAB_Restaurent_Management_System.bll
                 manageSubProductInventory(item);
             }
         }
-        private static void manageSubProductInventory(productsaleorpurchase purchasingProduct)
+        private static void manageSubProductInventory(productsaleorpurchaseviewmodel purchasingProduct)
         {
             var db = new dbctx();
             var subproducts = db.subproduct.Where(a => (a.fk_product_product_subproduct == purchasingProduct.id)).ToList();

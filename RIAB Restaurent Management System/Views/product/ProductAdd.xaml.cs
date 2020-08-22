@@ -42,7 +42,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         private void btn_Save(object sender, RoutedEventArgs e)
         {
-            var db = DBContext.getInstance();
+            var db = dbctxsinglton.getInstance();
             if (tb_name.Text == "" || tb_saleprice.Text == "" || tb_purchaseprice.Text == "")
             {
                 MessageBox.Show("Please fill form", "Information");
@@ -130,7 +130,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 subproduct.fk_product_product_subproduct = selectedproduct.id;
                 subproduct.fk_subproduct_product_subproduct = products_cb_selectedobject.id;
                 subproduct.quantity = Convert.ToInt32(tb_subproductquantity.Text);
-                var db = DBContext.getInstance();
+                var db = dbctxsinglton.getInstance();
                 db.subproduct.Add(subproduct);
                 db.SaveChanges();
                 dg.Items.Clear();

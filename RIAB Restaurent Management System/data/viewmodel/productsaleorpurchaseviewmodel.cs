@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RIAB_Restaurent_Management_System.data.viewmodel
 {
-    public class productsaleorpurchase
+    public class productsaleorpurchaseviewmodel
     {
         public int id { set; get; }
         public string name { set; get; }

@@ -17,7 +17,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class PrintingUtils
     {
-        public static void printSaleReceipt(int salesId, List<productsaleorpurchase> list, int totalBill,int remaining,int saleType, string customerAddress)
+        public static void printSaleReceipt(int salesId, List<productsaleorpurchaseviewmodel> list, int totalBill,int remaining,int saleType, string customerAddress)
         {
             PrintDialog pd = new PrintDialog();
             var doc = ((IDocumentPaginatorSource)getFlowDocument(salesId, list, totalBill, remaining,saleType,customerAddress)).DocumentPaginator;
@@ -25,7 +25,7 @@ namespace RIAB_Restaurent_Management_System.bll
             pd.PrintQueue = new PrintQueue(new PrintServer(), new PrinterSettings().PrinterName);
             pd.PrintDocument(doc, "Print Document");
         }
-        static FlowDocument getFlowDocument(int salesId, List<productsaleorpurchase> list, int totalBill,int remaining, int saleType,string customerAddress)
+        static FlowDocument getFlowDocument(int salesId, List<productsaleorpurchaseviewmodel> list, int totalBill,int remaining, int saleType,string customerAddress)
         {
             FlowDocument fd = new FlowDocument();
             //fd.PageWidth = 260;
@@ -76,7 +76,7 @@ namespace RIAB_Restaurent_Management_System.bll
             trHeader.Cells.Add(new TableCell(new Paragraph(new Run("Rs"))));
             trHeader.Cells.Add(new TableCell(new Paragraph(new Run("Qty"))));
             trHeader.Cells.Add(new TableCell(new Paragraph(new Run("Ttl"))));
-            foreach (productsaleorpurchase item in list)
+            foreach (productsaleorpurchaseviewmodel item in list)
             {
                 TableRow tr = new TableRow();
                 table.RowGroups[0].Rows.Add(tr);

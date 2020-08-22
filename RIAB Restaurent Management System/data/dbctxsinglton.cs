@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RIAB_Restaurent_Management_System.data
 {
-    public sealed class DBContext
+    public sealed class dbctxsinglton
     {
         private static dbctx db = new dbctx();
 

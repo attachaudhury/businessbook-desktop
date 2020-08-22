@@ -109,7 +109,7 @@
     <Compile Include="data\closing.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
-    <Compile Include="data\DBContext.cs" />
+    <Compile Include="data\dbctxsinglton.cs" />
     <Compile Include="data\financeaccount.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
@@ -215,7 +215,7 @@
     <Compile Include="data\user.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
-    <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
+    <Compile Include="data\viewmodel\productsaleorpurchaseviewmodel.cs" />
     <Compile Include="other\Class1.cs" />
     <Compile Include="Views\finance\expencenew.xaml.cs">
       <DependentUpon>expencenew.xaml</DependentUpon>

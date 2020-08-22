@@ -12,7 +12,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class financeutils
     {
-        public static int insertSaleTransactions(List<productsaleorpurchase> purchaseList,float totalpayment, int targetuserid)
+        public static int insertSaleTransactions(List<productsaleorpurchaseviewmodel> purchaseList,float totalpayment, int targetuserid)
         {
             var loggedinuserid = userutils.loggedinuser.id;
             var db = new dbctx();
@@ -130,7 +130,7 @@ namespace RIAB_Restaurent_Management_System.bll
             
         }
 
-        public static int insertPurchaseTransactions(List<productsaleorpurchase> purchaseList, float totalpayment, int targetuserid)
+        public static int insertPurchaseTransactions(List<productsaleorpurchaseviewmodel> purchaseList, float totalpayment, int targetuserid)
         {
             var loggedinuserid = userutils.loggedinuser.id;
             var db = new dbctx();

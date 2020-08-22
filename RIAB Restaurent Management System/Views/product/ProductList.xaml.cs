@@ -28,7 +28,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         private void initFormOperations()
         {
-            var db = DBContext.getInstance();
+            var db = dbctxsinglton.getInstance();
             dg_ProductList.ItemsSource = null;
             dg_ProductList.ItemsSource = db.product.ToList();
             UpdateLayout();

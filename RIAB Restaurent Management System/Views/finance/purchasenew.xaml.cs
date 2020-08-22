@@ -23,8 +23,8 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     /// </summary>
     public partial class purchasenew : Window
     {
-        List<productsaleorpurchase> mappedproducts;
-        List<productsaleorpurchase> purchaselist = new List<productsaleorpurchase>();
+        List<productsaleorpurchaseviewmodel> mappedproducts;
+        List<productsaleorpurchaseviewmodel> purchaselist = new List<productsaleorpurchaseviewmodel>();
         int vendorid = 0;
         
         public purchasenew()
@@ -41,9 +41,9 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             tb_Search.Focus();
         }
 
-        void addItem_To_purchase(productsaleorpurchase item)
+        void addItem_To_purchase(productsaleorpurchaseviewmodel item)
         {
-            foreach (productsaleorpurchase oldItem in purchaselist)
+            foreach (productsaleorpurchaseviewmodel oldItem in purchaselist)
             {
                 if (item.id == oldItem.id)
                 {
@@ -51,7 +51,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     oldItem.total = oldItem.quantity * oldItem.price;
                     dg.Items.Clear();
                     double totalBill1 = 0;
-                    foreach (productsaleorpurchase item1 in purchaselist)
+                    foreach (productsaleorpurchaseviewmodel item1 in purchaselist)
                     {
                         totalBill1 += item1.total;
                         dg.Items.Add(item1);
@@ -63,7 +63,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             purchaselist.Add(item);
             dg.Items.Clear();
             double totalBill = 0;
-            foreach (productsaleorpurchase item1 in purchaselist)
+            foreach (productsaleorpurchaseviewmodel item1 in purchaselist)
             {
                 totalBill += item1.total;
                 dg.Items.Add(item1);
@@ -73,15 +73,15 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         private void btn_AddQuantity(object sender, RoutedEventArgs e)
         {
-            productsaleorpurchase obj = ((FrameworkElement)sender).DataContext as productsaleorpurchase;
+            productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
             addItem_To_purchase(obj);
         }
 
         private void btn_RemoveQuantity(object sender, RoutedEventArgs e)
         {
-            productsaleorpurchase obj = ((FrameworkElement)sender).DataContext as productsaleorpurchase;
+            productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
 
-            foreach (productsaleorpurchase oldItem in purchaselist)
+            foreach (productsaleorpurchaseviewmodel oldItem in purchaselist)
             {
                 if (obj.id == oldItem.id)
                 {
@@ -91,7 +91,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                         oldItem.total = oldItem.quantity * oldItem.price;
                         dg.Items.Clear();
                         double totalBill1 = 0;
-                        foreach (productsaleorpurchase item1 in purchaselist)
+                        foreach (productsaleorpurchaseviewmodel item1 in purchaselist)
                         {
                             totalBill1 += item1.total;
                             dg.Items.Add(item1);
@@ -104,7 +104,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                         purchaselist.Remove(obj);
                         dg.Items.Clear();
                         double totalBill1 = 0;
-                        foreach (productsaleorpurchase item1 in purchaselist)
+                        foreach (productsaleorpurchaseviewmodel item1 in purchaselist)
                         {
                             totalBill1 += item1.total;
                             dg.Items.Add(item1);
@@ -121,7 +121,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             if (tb_Search.Text != "")
             {
                 string s = tb_Search.Text;
-                List<productsaleorpurchase> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).ToList();
+                List<productsaleorpurchaseviewmodel> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).ToList();
                 lv_SearchFoodItem.ItemsSource = null;
                 lv_SearchFoodItem.ItemsSource = productList;
                 lv_SearchFoodItem.Visibility = Visibility.Visible;
@@ -158,7 +158,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             {
                 if (lv_SearchFoodItem.SelectedItem != null)
                 {
-                    productsaleorpurchase item = (productsaleorpurchase)lv_SearchFoodItem.SelectedItem;
+                    productsaleorpurchaseviewmodel item = (productsaleorpurchaseviewmodel)lv_SearchFoodItem.SelectedItem;
                     addItem_To_purchase(item);
                     tb_Search.Text = "";
                     lv_SearchFoodItem.Visibility = Visibility.Hidden;

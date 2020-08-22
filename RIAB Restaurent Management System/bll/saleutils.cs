@@ -13,7 +13,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class saleutils
     {
-        public static void newsale(List<productsaleorpurchase> saleList, int totalpayment, int remaining, int customerId, bool receipt1, bool receipt2, bool receipt3, int saletype, string customerAddress, int deliveryBoyId)
+        public static void newsale(List<productsaleorpurchaseviewmodel> saleList, int totalpayment, int remaining, int customerId, bool receipt1, bool receipt2, bool receipt3, int saletype, string customerAddress, int deliveryBoyId)
         {
             var saleid = financeutils.insertSaleTransactions(saleList, totalpayment, customerId);
             if (receipt1)
@@ -34,10 +34,10 @@ namespace RIAB_Restaurent_Management_System.bll
                 updateInventory(saleList);
             });
         }
-        private static void insertSellingProductsInDatabase(List<productsaleorpurchase> saleList, int saleid)
+        private static void insertSellingProductsInDatabase(List<productsaleorpurchaseviewmodel> saleList, int saleid)
         {
             var db = new dbctx();
-            foreach (productsaleorpurchase item in saleList)
+            foreach (productsaleorpurchaseviewmodel item in saleList)
             {
                 salepurchaseproduct saleItem = new salepurchaseproduct();
                 saleItem.price = item.price;
@@ -49,7 +49,7 @@ namespace RIAB_Restaurent_Management_System.bll
             }
             db.SaveChanges();
         }
-        private static void updateInventory(List<productsaleorpurchase> salelist)
+        private static void updateInventory(List<productsaleorpurchaseviewmodel> salelist)
         {
             var db = new dbctx();
             foreach (var item in salelist)
@@ -63,7 +63,7 @@ namespace RIAB_Restaurent_Management_System.bll
                 manageSubProductInventory(item);
             }
         }
-        private static void manageSubProductInventory(productsaleorpurchase sellingProduct)
+        private static void manageSubProductInventory(productsaleorpurchaseviewmodel sellingProduct)
         {
             var db = new dbctx();
             var subproducts = db.subproduct.Where(a => (a.fk_product_product_subproduct == sellingProduct.id)).ToList();
@@ -89,13 +89,13 @@ namespace RIAB_Restaurent_Management_System.bll
             var soldproducts = db.salepurchaseproduct.Where(a => a.fk_financetransaction_salepurchaseproduct_financetransaction == saleid).ToList();
 
             float totalbill = 0;
-            var salelist = new List<productsaleorpurchase>();
+            var salelist = new List<productsaleorpurchaseviewmodel>();
 
             foreach (var item in soldproducts)
             {
                 totalbill = totalbill + (float)(item.price * item.quantity);
                 var dbproduct = db.product.Find(item.fk_product_salepurchaseproduct_product);
-                var p = new productsaleorpurchase();
+                var p = new productsaleorpurchaseviewmodel();
                 p.id = dbproduct.id;
                 p.name = dbproduct.name;
                 p.price = (double)item.price;
