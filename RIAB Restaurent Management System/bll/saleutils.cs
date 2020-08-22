@@ -1,5 +1,6 @@
 ﻿
-using DAL;
+
+using RIAB_Restaurent_Management_System.data;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace RIAB_Restaurent_Management_System.bll
         }
         private static void insertSellingProductsInDatabase(List<productsaleorpurchase> saleList, int saleid)
         {
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
             foreach (productsaleorpurchase item in saleList)
             {
                 salepurchaseproduct saleItem = new salepurchaseproduct();
@@ -50,7 +51,7 @@ namespace RIAB_Restaurent_Management_System.bll
         }
         private static void updateInventory(List<productsaleorpurchase> salelist)
         {
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
             foreach (var item in salelist)
             {
                 product p = db.product.Find(item.id);
@@ -64,7 +65,7 @@ namespace RIAB_Restaurent_Management_System.bll
         }
         private static void manageSubProductInventory(productsaleorpurchase sellingProduct)
         {
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
             var subproducts = db.subproduct.Where(a => (a.fk_product_product_subproduct == sellingProduct.id)).ToList();
             foreach (var item in subproducts)
             {
@@ -79,7 +80,7 @@ namespace RIAB_Restaurent_Management_System.bll
         }
         public static void printDuplicateRecipt(int saleid)
         {
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             var ft = db.financetransaction.Find(saleid);
             user customer = null;
             if (ft.fk_targettouser_user_financetransaction != null) {

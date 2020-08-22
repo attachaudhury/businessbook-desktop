@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿
 using RIAB_Restaurent_Management_System.data;
 using System;
 using System.Collections.Generic;
@@ -28,14 +28,14 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         private void initFormOperations()
         {
-            RMSDBEntities db = DBContext.getInstance();
+            var db = DBContext.getInstance();
             dg_ProductList.ItemsSource = null;
             dg_ProductList.ItemsSource = db.product.ToList();
             UpdateLayout();
         }
         public void details(object sender, RoutedEventArgs e)
         {
-            DAL.product obj = ((FrameworkElement)sender).DataContext as DAL.product;
+            data.product obj = ((FrameworkElement)sender).DataContext as data.product;
             new ProductAdd(obj.id).Show();
         }
     }

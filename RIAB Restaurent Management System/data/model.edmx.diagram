@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1edd36221509449c8af8cde9703ea96e" Name="Diagram1">
+        <EntityTypeShape EntityType="bbdbModel.closing" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.financeaccount" Width="1.5" PointX="6.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.financetransaction" Width="1.5" PointX="9" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.product" Width="1.5" PointX="9" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.salepurchaseproduct" Width="1.5" PointX="11.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.subproduct" Width="1.5" PointX="11.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Customer" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Deal" Width="1.5" PointX="16" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_DealFoodItem" Width="1.5" PointX="18.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_DeliveryQueue" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Deposit" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_DepositHead" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_DetuctInventory" Width="1.5" PointX="15.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Expence" Width="1.5" PointX="18.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_ExpenceHead" Width="1.5" PointX="13.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_ExpenceSubHead" Width="1.5" PointX="16" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_FinanceChart" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_FoodItem" Width="1.5" PointX="16" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_FoodItemCategory" Width="1.5" PointX="13.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_KitchenInventory" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_KitchenInventoryCategory" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_PaymentMode" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_PurchaseOrder" Width="1.5" PointX="18" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_PurchaseOrderItem" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Sale" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_SaleItem" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Sitting" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Staff" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_StaffCategory" Width="1.5" PointX="1.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_Supplier" Width="1.5" PointX="15.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbdbModel.user" Width="1.5" PointX="3.75" PointY="10.875" IsExpanded="true" />
+        <AssociationConnector Association="bbdbModel.fk_user_closing_user" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_financeaccount_financeaccount_financetransaction" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_parent_financeaccount" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_createdbyuser_user_financetransaction" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_financetransaction_salepurchaseproduct_financetransaction" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_targettouser_user_financetransaction" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_product_product_subproduct" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_product_salepurchaseproduct_product" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.fk_subproduct_product_subproduct" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Deliv__Custo__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Sale__Custom__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Deal__Catego__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_DealF__Deal___5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_DealF__FoodI__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Deliv__Deliv__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Deliv__Sale___6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Depos__Depos__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Detuc__Kitch__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Expen__Expen__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Expen__Expen__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Expen__Expen__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_FoodI__Categ__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Kitch__Kitch__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Purch__Suppl__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Sale__Staff___4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_SaleI__Sale___619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="bbdbModel.FK__tbl_Staff__Staff__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

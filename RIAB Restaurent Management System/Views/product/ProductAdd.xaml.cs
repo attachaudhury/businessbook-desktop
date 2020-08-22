@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DAL;
+
 using System.Data.Entity.Migrations;
 using RIAB_Restaurent_Management_System.data;
 
@@ -23,7 +23,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
     public partial class ProductAdd : Window
     {
         bool createmode = true;
-        DAL.product selectedproduct = null;
+        data.product selectedproduct = null;
         public ProductAdd(int? productId = null)
         {
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         private void btn_Save(object sender, RoutedEventArgs e)
         {
-            RMSDBEntities db = DBContext.getInstance();
+            var db = DBContext.getInstance();
             if (tb_name.Text == "" || tb_saleprice.Text == "" || tb_purchaseprice.Text == "")
             {
                 MessageBox.Show("Please fill form", "Information");
@@ -50,7 +50,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
             }
             if (this.createmode)
             {
-                DAL.product r = new DAL.product();
+                data.product r = new data.product();
                 r.name = tb_name.Text;
                 r.saleprice = Convert.ToInt32(tb_saleprice.Text);
                 r.purchaseprice = Convert.ToInt32(tb_purchaseprice.Text);
@@ -125,12 +125,12 @@ namespace RIAB_Restaurent_Management_System.Views.product
                     MessageBox.Show("Please add quantity", "Information");
                     return;
                 }
-                var products_cb_selectedobject = products_cb.SelectedItem as DAL.product;
-                DAL.subproduct subproduct = new DAL.subproduct();
+                var products_cb_selectedobject = products_cb.SelectedItem as data.product;
+                subproduct subproduct = new subproduct();
                 subproduct.fk_product_product_subproduct = selectedproduct.id;
                 subproduct.fk_subproduct_product_subproduct = products_cb_selectedobject.id;
                 subproduct.quantity = Convert.ToInt32(tb_subproductquantity.Text);
-                RMSDBEntities db = DBContext.getInstance();
+                var db = DBContext.getInstance();
                 db.subproduct.Add(subproduct);
                 db.SaveChanges();
                 dg.Items.Clear();
@@ -146,7 +146,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         public void btn_removeSubProduct(object sender, RoutedEventArgs e)
         {
             subproduct obj = ((FrameworkElement)sender).DataContext as subproduct;
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
             var dbsubproduct = db.subproduct.Find(obj.id);
             db.subproduct.Remove(dbsubproduct);
             db.SaveChanges();
@@ -165,11 +165,11 @@ namespace RIAB_Restaurent_Management_System.Views.product
         {
             //var types = new string[] {"product", "deal", "raw"};
             //cb_Type.ItemsSource = types;
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
 
             var products = db.product.ToList();
 
-            foreach (DAL.product item1 in products)
+            foreach (data.product item1 in products)
             {
                 products_cb.ItemsSource = products;
                 products_cb.DisplayMemberPath = "name";
@@ -178,7 +178,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         void getone(int productid)
         {
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
             selectedproduct = db.product.Find(productid);
             tb_name.Text = selectedproduct.name;
             if (selectedproduct.saleprice != null)

@@ -1,5 +1,6 @@
-﻿using DAL;
+﻿
 using RIAB_Restaurent_Management_System.bll;
+using RIAB_Restaurent_Management_System.data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             InitializeComponent();
             saleid = saleId;
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             var productsinsale = db.salepurchaseproduct.Where(a => a.fk_financetransaction_salepurchaseproduct_financetransaction == saleid).ToList();
             foreach (var item in productsinsale)
             {

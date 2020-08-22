@@ -1,0 +1,2020 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bbdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="closing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="expence" Type="float" />
+          <Property Name="income" Type="float" />
+          <Property Name="closingbalance" Type="float" />
+          <Property Name="comment" Type="varchar" MaxLength="200" />
+          <Property Name="fk_user_closing_user" Type="int" />
+        </EntityType>
+        <EntityType Name="financeaccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="fk_parent_financeaccount" Type="int" />
+        </EntityType>
+        <EntityType Name="financetransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupid" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="amount" Type="float" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="childof" Type="int" />
+          <Property Name="paymentmethod" Type="varchar" MaxLength="30" />
+          <Property Name="referencenumber" Type="varchar" MaxLength="50" />
+          <Property Name="bank" Type="varchar" MaxLength="50" />
+          <Property Name="branch" Type="varchar" MaxLength="100" />
+          <Property Name="chequedate" Type="datetime" />
+          <Property Name="details" Type="varchar" MaxLength="200" />
+          <Property Name="fk_createdbyuser_user_financetransaction" Type="int" />
+          <Property Name="fk_targettouser_user_financetransaction" Type="int" />
+          <Property Name="fk_financeaccount_financeaccount_financetransaction" Type="int" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="barcode" Type="nvarchar" MaxLength="100" />
+          <Property Name="carrycost" Type="float" />
+          <Property Name="discount" Type="float" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="purchaseprice" Type="float" />
+          <Property Name="purchaseactive" Type="bit" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="saleprice" Type="float" />
+          <Property Name="saleactive" Type="bit" />
+          <Property Name="type" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="salepurchaseproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="fk_product_salepurchaseproduct_product" Type="int" />
+          <Property Name="fk_financetransaction_salepurchaseproduct_financetransaction" Type="int" />
+        </EntityType>
+        <EntityType Name="subproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_product_product_subproduct" Type="int" />
+          <Property Name="fk_subproduct_product_subproduct" Type="int" />
+          <Property Name="quantity" Type="float" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="varchar" MaxLength="150" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="tbl_Deal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="SalePrice" Type="float" />
+          <Property Name="ManageInventory" Type="bit" />
+          <Property Name="Recipe" Type="varchar" MaxLength="1000" />
+          <Property Name="Category_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_DealFoodItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Deal_Id" Type="int" />
+          <Property Name="FoodItem_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_DeliveryQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Delivered" Type="bit" />
+          <Property Name="DatenTime" Type="datetime" />
+          <Property Name="Sale_Id" Type="int" />
+          <Property Name="Customer_Id" Type="int" />
+          <Property Name="DeliveryBoyId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Deposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ammount" Type="float" />
+          <Property Name="Comment" Type="varchar" MaxLength="30" />
+          <Property Name="DatenTime" Type="datetime" />
+          <Property Name="DepositHead_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_DepositHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tbl_DetuctInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodItem_Id" Type="int" />
+          <Property Name="DeductedQuantity" Type="float" />
+          <Property Name="KitchenInventory_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Expence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="50" />
+          <Property Name="DatenTime" Type="datetime" />
+          <Property Name="ExpenseHead_Id" Type="int" />
+          <Property Name="ExpenceSubHead_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_ExpenceHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_ExpenceSubHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="ExpenseHead_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_FinanceChart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="OpeningBalance" Type="float" />
+          <Property Name="Sale" Type="float" />
+          <Property Name="Delivery" Type="float" />
+          <Property Name="TotalSale" Type="float" />
+          <Property Name="TotalCash" Type="float" />
+          <Property Name="Deposit" Type="float" />
+          <Property Name="Expence" Type="float" />
+          <Property Name="ClosingBalance" Type="float" />
+        </EntityType>
+        <EntityType Name="tbl_FoodItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="SalePrice" Type="float" />
+          <Property Name="ManageInventory" Type="bit" />
+          <Property Name="Recipe" Type="varchar" MaxLength="1000" />
+          <Property Name="Category_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_FoodItemCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_KitchenInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="MinimumQuantity" Type="float" />
+          <Property Name="PurchasePrice" Type="float" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="KitchenInventoryCategory_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_KitchenInventoryCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_PaymentMode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier_id" Type="int" />
+          <Property Name="DatenTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseOrderItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Quantity" Type="float" />
+        </EntityType>
+        <EntityType Name="tbl_Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_Time" Type="datetime" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="SaleType" Type="int" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Customer_Id" Type="int" />
+          <Property Name="Staff_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_SaleItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="Sale_id" Type="int" />
+          <Property Name="Item_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Sitting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbl_Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Designation" Type="varchar" MaxLength="20" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="CNIC" Type="varchar" MaxLength="20" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="JoiningDate" Type="datetime" />
+          <Property Name="LeavingDate" Type="datetime" />
+          <Property Name="Salary" Type="float" />
+          <Property Name="DutyStart" Type="int" />
+          <Property Name="DutyEnd" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="50" />
+          <Property Name="StaffCategory_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_StaffCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbl_Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Balance" Type="float" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="200" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="username" Type="varchar" MaxLength="20" />
+          <Property Name="phone" Type="varchar" MaxLength="30" />
+          <Property Name="role" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__tbl_Deal__Catego__5AEE82B9">
+          <End Role="tbl_FoodItemCategory" Type="Self.tbl_FoodItemCategory" Multiplicity="0..1" />
+          <End Role="tbl_Deal" Type="Self.tbl_Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodItemCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Deal">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_DealF__Deal___5DCAEF64">
+          <End Role="tbl_Deal" Type="Self.tbl_Deal" Multiplicity="0..1" />
+          <End Role="tbl_DealFoodItem" Type="Self.tbl_DealFoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Deal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DealFoodItem">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_DealF__FoodI__5EBF139D">
+          <End Role="tbl_FoodItem" Type="Self.tbl_FoodItem" Multiplicity="0..1" />
+          <End Role="tbl_DealFoodItem" Type="Self.tbl_DealFoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DealFoodItem">
+              <PropertyRef Name="FoodItem_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deliv__Custo__656C112C">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_DeliveryQueue" Type="Self.tbl_DeliveryQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DeliveryQueue">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deliv__Deliv__66603565">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_DeliveryQueue" Type="Self.tbl_DeliveryQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DeliveryQueue">
+              <PropertyRef Name="DeliveryBoyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deliv__Sale___6477ECF3">
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="0..1" />
+          <End Role="tbl_DeliveryQueue" Type="Self.tbl_DeliveryQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DeliveryQueue">
+              <PropertyRef Name="Sale_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Depos__Depos__693CA210">
+          <End Role="tbl_DepositHead" Type="Self.tbl_DepositHead" Multiplicity="0..1" />
+          <End Role="tbl_Deposit" Type="Self.tbl_Deposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_DepositHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Deposit">
+              <PropertyRef Name="DepositHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Detuc__Kitch__3B75D760">
+          <End Role="tbl_KitchenInventory" Type="Self.tbl_KitchenInventory" Multiplicity="0..1" />
+          <End Role="tbl_DetuctInventory" Type="Self.tbl_DetuctInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_KitchenInventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DetuctInventory">
+              <PropertyRef Name="KitchenInventory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Expen__Expen__3E52440B">
+          <End Role="tbl_ExpenceHead" Type="Self.tbl_ExpenceHead" Multiplicity="0..1" />
+          <End Role="tbl_ExpenceSubHead" Type="Self.tbl_ExpenceSubHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ExpenceHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_ExpenceSubHead">
+              <PropertyRef Name="ExpenseHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Expen__Expen__412EB0B6">
+          <End Role="tbl_ExpenceHead" Type="Self.tbl_ExpenceHead" Multiplicity="0..1" />
+          <End Role="tbl_Expence" Type="Self.tbl_Expence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ExpenceHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Expence">
+              <PropertyRef Name="ExpenseHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Expen__Expen__4222D4EF">
+          <End Role="tbl_ExpenceSubHead" Type="Self.tbl_ExpenceSubHead" Multiplicity="0..1" />
+          <End Role="tbl_Expence" Type="Self.tbl_Expence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ExpenceSubHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Expence">
+              <PropertyRef Name="ExpenceSubHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_FoodI__Categ__52593CB8">
+          <End Role="tbl_FoodItemCategory" Type="Self.tbl_FoodItemCategory" Multiplicity="0..1" />
+          <End Role="tbl_FoodItem" Type="Self.tbl_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodItemCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_FoodItem">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Kitch__Kitch__38996AB5">
+          <End Role="tbl_KitchenInventoryCategory" Type="Self.tbl_KitchenInventoryCategory" Multiplicity="0..1" />
+          <End Role="tbl_KitchenInventory" Type="Self.tbl_KitchenInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_KitchenInventoryCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_KitchenInventory">
+              <PropertyRef Name="KitchenInventoryCategory_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Purch__Suppl__49C3F6B7">
+          <End Role="tbl_Supplier" Type="Self.tbl_Supplier" Multiplicity="0..1" />
+          <End Role="tbl_PurchaseOrder" Type="Self.tbl_PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_PurchaseOrder">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Sale__Custom__4E88ABD4">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Sale">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Sale__Staff___4F7CD00D">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Sale">
+              <PropertyRef Name="Staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_SaleI__Sale___619B8048">
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="0..1" />
+          <End Role="tbl_SaleItem" Type="Self.tbl_SaleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_SaleItem">
+              <PropertyRef Name="Sale_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Staff__Staff__46E78A0C">
+          <End Role="tbl_StaffCategory" Type="Self.tbl_StaffCategory" Multiplicity="0..1" />
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_StaffCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Staff">
+              <PropertyRef Name="StaffCategory_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_createdbyuser_user_financetransaction">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_createdbyuser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financeaccount_financeaccount_financetransaction">
+          <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_financeaccount_financeaccount_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financetransaction_salepurchaseproduct_financetransaction">
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="0..1" />
+          <End Role="salepurchaseproduct" Type="Self.salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financetransaction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_financetransaction_salepurchaseproduct_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_parent_financeaccount">
+          <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
+          <End Role="financeaccount1" Type="Self.financeaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financeaccount1">
+              <PropertyRef Name="fk_parent_financeaccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_product_subproduct">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="subproduct" Type="Self.subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_product_product_subproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_salepurchaseproduct_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="salepurchaseproduct" Type="Self.salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_product_salepurchaseproduct_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subproduct_product_subproduct">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="subproduct" Type="Self.subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_subproduct_product_subproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_targettouser_user_financetransaction">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_targettouser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_closing_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="closing" Type="Self.closing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="closing">
+              <PropertyRef Name="fk_user_closing_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bbdbModelStoreContainer">
+          <EntitySet Name="closing" EntityType="Self.closing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="financeaccount" EntityType="Self.financeaccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="financetransaction" EntityType="Self.financetransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salepurchaseproduct" EntityType="Self.salepurchaseproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subproduct" EntityType="Self.subproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Deal" EntityType="Self.tbl_Deal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DealFoodItem" EntityType="Self.tbl_DealFoodItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DeliveryQueue" EntityType="Self.tbl_DeliveryQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Deposit" EntityType="Self.tbl_Deposit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DepositHead" EntityType="Self.tbl_DepositHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DetuctInventory" EntityType="Self.tbl_DetuctInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Expence" EntityType="Self.tbl_Expence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ExpenceHead" EntityType="Self.tbl_ExpenceHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ExpenceSubHead" EntityType="Self.tbl_ExpenceSubHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FinanceChart" EntityType="Self.tbl_FinanceChart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FoodItem" EntityType="Self.tbl_FoodItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FoodItemCategory" EntityType="Self.tbl_FoodItemCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_KitchenInventory" EntityType="Self.tbl_KitchenInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_KitchenInventoryCategory" EntityType="Self.tbl_KitchenInventoryCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PaymentMode" EntityType="Self.tbl_PaymentMode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PurchaseOrder" EntityType="Self.tbl_PurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PurchaseOrderItem" EntityType="Self.tbl_PurchaseOrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Sale" EntityType="Self.tbl_Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SaleItem" EntityType="Self.tbl_SaleItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Sitting" EntityType="Self.tbl_Sitting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Staff" EntityType="Self.tbl_Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_StaffCategory" EntityType="Self.tbl_StaffCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Supplier" EntityType="Self.tbl_Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_Deal__Catego__5AEE82B9" Association="Self.FK__tbl_Deal__Catego__5AEE82B9">
+            <End Role="tbl_FoodItemCategory" EntitySet="tbl_FoodItemCategory" />
+            <End Role="tbl_Deal" EntitySet="tbl_Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_DealF__Deal___5DCAEF64" Association="Self.FK__tbl_DealF__Deal___5DCAEF64">
+            <End Role="tbl_Deal" EntitySet="tbl_Deal" />
+            <End Role="tbl_DealFoodItem" EntitySet="tbl_DealFoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_DealF__FoodI__5EBF139D" Association="Self.FK__tbl_DealF__FoodI__5EBF139D">
+            <End Role="tbl_FoodItem" EntitySet="tbl_FoodItem" />
+            <End Role="tbl_DealFoodItem" EntitySet="tbl_DealFoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deliv__Custo__656C112C" Association="Self.FK__tbl_Deliv__Custo__656C112C">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_DeliveryQueue" EntitySet="tbl_DeliveryQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deliv__Deliv__66603565" Association="Self.FK__tbl_Deliv__Deliv__66603565">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_DeliveryQueue" EntitySet="tbl_DeliveryQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deliv__Sale___6477ECF3" Association="Self.FK__tbl_Deliv__Sale___6477ECF3">
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+            <End Role="tbl_DeliveryQueue" EntitySet="tbl_DeliveryQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Depos__Depos__693CA210" Association="Self.FK__tbl_Depos__Depos__693CA210">
+            <End Role="tbl_DepositHead" EntitySet="tbl_DepositHead" />
+            <End Role="tbl_Deposit" EntitySet="tbl_Deposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Detuc__Kitch__3B75D760" Association="Self.FK__tbl_Detuc__Kitch__3B75D760">
+            <End Role="tbl_KitchenInventory" EntitySet="tbl_KitchenInventory" />
+            <End Role="tbl_DetuctInventory" EntitySet="tbl_DetuctInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Expen__Expen__3E52440B" Association="Self.FK__tbl_Expen__Expen__3E52440B">
+            <End Role="tbl_ExpenceHead" EntitySet="tbl_ExpenceHead" />
+            <End Role="tbl_ExpenceSubHead" EntitySet="tbl_ExpenceSubHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Expen__Expen__412EB0B6" Association="Self.FK__tbl_Expen__Expen__412EB0B6">
+            <End Role="tbl_ExpenceHead" EntitySet="tbl_ExpenceHead" />
+            <End Role="tbl_Expence" EntitySet="tbl_Expence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Expen__Expen__4222D4EF" Association="Self.FK__tbl_Expen__Expen__4222D4EF">
+            <End Role="tbl_ExpenceSubHead" EntitySet="tbl_ExpenceSubHead" />
+            <End Role="tbl_Expence" EntitySet="tbl_Expence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_FoodI__Categ__52593CB8" Association="Self.FK__tbl_FoodI__Categ__52593CB8">
+            <End Role="tbl_FoodItemCategory" EntitySet="tbl_FoodItemCategory" />
+            <End Role="tbl_FoodItem" EntitySet="tbl_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Kitch__Kitch__38996AB5" Association="Self.FK__tbl_Kitch__Kitch__38996AB5">
+            <End Role="tbl_KitchenInventoryCategory" EntitySet="tbl_KitchenInventoryCategory" />
+            <End Role="tbl_KitchenInventory" EntitySet="tbl_KitchenInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Purch__Suppl__49C3F6B7" Association="Self.FK__tbl_Purch__Suppl__49C3F6B7">
+            <End Role="tbl_Supplier" EntitySet="tbl_Supplier" />
+            <End Role="tbl_PurchaseOrder" EntitySet="tbl_PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Sale__Custom__4E88ABD4" Association="Self.FK__tbl_Sale__Custom__4E88ABD4">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Sale__Staff___4F7CD00D" Association="Self.FK__tbl_Sale__Staff___4F7CD00D">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_SaleI__Sale___619B8048" Association="Self.FK__tbl_SaleI__Sale___619B8048">
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+            <End Role="tbl_SaleItem" EntitySet="tbl_SaleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Staff__Staff__46E78A0C" Association="Self.FK__tbl_Staff__Staff__46E78A0C">
+            <End Role="tbl_StaffCategory" EntitySet="tbl_StaffCategory" />
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="fk_createdbyuser_user_financetransaction" Association="Self.fk_createdbyuser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financeaccount_financeaccount_financetransaction" Association="Self.fk_financeaccount_financeaccount_financetransaction">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financetransaction_salepurchaseproduct_financetransaction" Association="Self.fk_financetransaction_salepurchaseproduct_financetransaction">
+            <End Role="financetransaction" EntitySet="financetransaction" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_parent_financeaccount" Association="Self.fk_parent_financeaccount">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financeaccount1" EntitySet="financeaccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_product_subproduct" Association="Self.fk_product_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_salepurchaseproduct_product" Association="Self.fk_product_salepurchaseproduct_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subproduct_product_subproduct" Association="Self.fk_subproduct_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_targettouser_user_financetransaction" Association="Self.fk_targettouser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_closing_user" Association="Self.fk_user_closing_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="closing" EntitySet="closing" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bbdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="closing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="expence" Type="Double" />
+          <Property Name="income" Type="Double" />
+          <Property Name="closingbalance" Type="Double" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fk_user_closing_user" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="Self.fk_user_closing_user" FromRole="closing" ToRole="user" />
+        </EntityType>
+        <EntityType Name="financeaccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fk_parent_financeaccount" Type="Int32" />
+          <NavigationProperty Name="financetransaction" Relationship="Self.fk_financeaccount_financeaccount_financetransaction" FromRole="financeaccount" ToRole="financetransaction" />
+          <NavigationProperty Name="financeaccount1" Relationship="Self.fk_parent_financeaccount" FromRole="financeaccount" ToRole="financeaccount1" />
+          <NavigationProperty Name="financeaccount2" Relationship="Self.fk_parent_financeaccount" FromRole="financeaccount1" ToRole="financeaccount" />
+        </EntityType>
+        <EntityType Name="financetransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupid" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="childof" Type="Int32" />
+          <Property Name="paymentmethod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="referencenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="branch" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="chequedate" Type="DateTime" Precision="3" />
+          <Property Name="details" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fk_createdbyuser_user_financetransaction" Type="Int32" />
+          <Property Name="fk_targettouser_user_financetransaction" Type="Int32" />
+          <Property Name="fk_financeaccount_financeaccount_financetransaction" Type="Int32" />
+          <NavigationProperty Name="financeaccount" Relationship="Self.fk_financeaccount_financeaccount_financetransaction" FromRole="financetransaction" ToRole="financeaccount" />
+          <NavigationProperty Name="user" Relationship="Self.fk_createdbyuser_user_financetransaction" FromRole="financetransaction" ToRole="user" />
+          <NavigationProperty Name="salepurchaseproduct" Relationship="Self.fk_financetransaction_salepurchaseproduct_financetransaction" FromRole="financetransaction" ToRole="salepurchaseproduct" />
+          <NavigationProperty Name="user1" Relationship="Self.fk_targettouser_user_financetransaction" FromRole="financetransaction" ToRole="user" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="carrycost" Type="Double" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="purchaseprice" Type="Double" />
+          <Property Name="purchaseactive" Type="Boolean" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="saleprice" Type="Double" />
+          <Property Name="saleactive" Type="Boolean" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="subproduct" Relationship="Self.fk_product_product_subproduct" FromRole="product" ToRole="subproduct" />
+          <NavigationProperty Name="salepurchaseproduct" Relationship="Self.fk_product_salepurchaseproduct_product" FromRole="product" ToRole="salepurchaseproduct" />
+          <NavigationProperty Name="subproduct1" Relationship="Self.fk_subproduct_product_subproduct" FromRole="product" ToRole="subproduct" />
+        </EntityType>
+        <EntityType Name="salepurchaseproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="price" Type="Double" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="fk_product_salepurchaseproduct_product" Type="Int32" />
+          <Property Name="fk_financetransaction_salepurchaseproduct_financetransaction" Type="Int32" />
+          <NavigationProperty Name="financetransaction" Relationship="Self.fk_financetransaction_salepurchaseproduct_financetransaction" FromRole="salepurchaseproduct" ToRole="financetransaction" />
+          <NavigationProperty Name="product" Relationship="Self.fk_product_salepurchaseproduct_product" FromRole="salepurchaseproduct" ToRole="product" />
+        </EntityType>
+        <EntityType Name="subproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_product_product_subproduct" Type="Int32" />
+          <Property Name="fk_subproduct_product_subproduct" Type="Int32" />
+          <Property Name="quantity" Type="Double" />
+          <NavigationProperty Name="product" Relationship="Self.fk_product_product_subproduct" FromRole="subproduct" ToRole="product" />
+          <NavigationProperty Name="product1" Relationship="Self.fk_subproduct_product_subproduct" FromRole="subproduct" ToRole="product" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_DeliveryQueue" Relationship="Self.FK__tbl_Deliv__Custo__656C112C" FromRole="tbl_Customer" ToRole="tbl_DeliveryQueue" />
+          <NavigationProperty Name="tbl_Sale" Relationship="Self.FK__tbl_Sale__Custom__4E88ABD4" FromRole="tbl_Customer" ToRole="tbl_Sale" />
+        </EntityType>
+        <EntityType Name="tbl_Deal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalePrice" Type="Double" />
+          <Property Name="ManageInventory" Type="Boolean" />
+          <Property Name="Recipe" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Category_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_FoodItemCategory" Relationship="Self.FK__tbl_Deal__Catego__5AEE82B9" FromRole="tbl_Deal" ToRole="tbl_FoodItemCategory" />
+          <NavigationProperty Name="tbl_DealFoodItem" Relationship="Self.FK__tbl_DealF__Deal___5DCAEF64" FromRole="tbl_Deal" ToRole="tbl_DealFoodItem" />
+        </EntityType>
+        <EntityType Name="tbl_DealFoodItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Deal_Id" Type="Int32" />
+          <Property Name="FoodItem_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_Deal" Relationship="Self.FK__tbl_DealF__Deal___5DCAEF64" FromRole="tbl_DealFoodItem" ToRole="tbl_Deal" />
+          <NavigationProperty Name="tbl_FoodItem" Relationship="Self.FK__tbl_DealF__FoodI__5EBF139D" FromRole="tbl_DealFoodItem" ToRole="tbl_FoodItem" />
+        </EntityType>
+        <EntityType Name="tbl_DeliveryQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Delivered" Type="Boolean" />
+          <Property Name="DatenTime" Type="DateTime" Precision="3" />
+          <Property Name="Sale_Id" Type="Int32" />
+          <Property Name="Customer_Id" Type="Int32" />
+          <Property Name="DeliveryBoyId" Type="Int32" />
+          <NavigationProperty Name="tbl_Customer" Relationship="Self.FK__tbl_Deliv__Custo__656C112C" FromRole="tbl_DeliveryQueue" ToRole="tbl_Customer" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK__tbl_Deliv__Deliv__66603565" FromRole="tbl_DeliveryQueue" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_Sale" Relationship="Self.FK__tbl_Deliv__Sale___6477ECF3" FromRole="tbl_DeliveryQueue" ToRole="tbl_Sale" />
+        </EntityType>
+        <EntityType Name="tbl_Deposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ammount" Type="Double" />
+          <Property Name="Comment" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DatenTime" Type="DateTime" Precision="3" />
+          <Property Name="DepositHead_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_DepositHead" Relationship="Self.FK__tbl_Depos__Depos__693CA210" FromRole="tbl_Deposit" ToRole="tbl_DepositHead" />
+        </EntityType>
+        <EntityType Name="tbl_DepositHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Deposit" Relationship="Self.FK__tbl_Depos__Depos__693CA210" FromRole="tbl_DepositHead" ToRole="tbl_Deposit" />
+        </EntityType>
+        <EntityType Name="tbl_DetuctInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodItem_Id" Type="Int32" />
+          <Property Name="DeductedQuantity" Type="Double" />
+          <Property Name="KitchenInventory_id" Type="Int32" />
+          <NavigationProperty Name="tbl_KitchenInventory" Relationship="Self.FK__tbl_Detuc__Kitch__3B75D760" FromRole="tbl_DetuctInventory" ToRole="tbl_KitchenInventory" />
+        </EntityType>
+        <EntityType Name="tbl_Expence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DatenTime" Type="DateTime" Precision="3" />
+          <Property Name="ExpenseHead_Id" Type="Int32" />
+          <Property Name="ExpenceSubHead_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_ExpenceHead" Relationship="Self.FK__tbl_Expen__Expen__412EB0B6" FromRole="tbl_Expence" ToRole="tbl_ExpenceHead" />
+          <NavigationProperty Name="tbl_ExpenceSubHead" Relationship="Self.FK__tbl_Expen__Expen__4222D4EF" FromRole="tbl_Expence" ToRole="tbl_ExpenceSubHead" />
+        </EntityType>
+        <EntityType Name="tbl_ExpenceHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Expence" Relationship="Self.FK__tbl_Expen__Expen__412EB0B6" FromRole="tbl_ExpenceHead" ToRole="tbl_Expence" />
+          <NavigationProperty Name="tbl_ExpenceSubHead" Relationship="Self.FK__tbl_Expen__Expen__3E52440B" FromRole="tbl_ExpenceHead" ToRole="tbl_ExpenceSubHead" />
+        </EntityType>
+        <EntityType Name="tbl_ExpenceSubHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExpenseHead_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_Expence" Relationship="Self.FK__tbl_Expen__Expen__4222D4EF" FromRole="tbl_ExpenceSubHead" ToRole="tbl_Expence" />
+          <NavigationProperty Name="tbl_ExpenceHead" Relationship="Self.FK__tbl_Expen__Expen__3E52440B" FromRole="tbl_ExpenceSubHead" ToRole="tbl_ExpenceHead" />
+        </EntityType>
+        <EntityType Name="tbl_FinanceChart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="OpeningBalance" Type="Double" />
+          <Property Name="Sale" Type="Double" />
+          <Property Name="Delivery" Type="Double" />
+          <Property Name="TotalSale" Type="Double" />
+          <Property Name="TotalCash" Type="Double" />
+          <Property Name="Deposit" Type="Double" />
+          <Property Name="Expence" Type="Double" />
+          <Property Name="ClosingBalance" Type="Double" />
+        </EntityType>
+        <EntityType Name="tbl_FoodItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalePrice" Type="Double" />
+          <Property Name="ManageInventory" Type="Boolean" />
+          <Property Name="Recipe" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Category_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_DealFoodItem" Relationship="Self.FK__tbl_DealF__FoodI__5EBF139D" FromRole="tbl_FoodItem" ToRole="tbl_DealFoodItem" />
+          <NavigationProperty Name="tbl_FoodItemCategory" Relationship="Self.FK__tbl_FoodI__Categ__52593CB8" FromRole="tbl_FoodItem" ToRole="tbl_FoodItemCategory" />
+        </EntityType>
+        <EntityType Name="tbl_FoodItemCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Deal" Relationship="Self.FK__tbl_Deal__Catego__5AEE82B9" FromRole="tbl_FoodItemCategory" ToRole="tbl_Deal" />
+          <NavigationProperty Name="tbl_FoodItem" Relationship="Self.FK__tbl_FoodI__Categ__52593CB8" FromRole="tbl_FoodItemCategory" ToRole="tbl_FoodItem" />
+        </EntityType>
+        <EntityType Name="tbl_KitchenInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="MinimumQuantity" Type="Double" />
+          <Property Name="PurchasePrice" Type="Double" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="KitchenInventoryCategory_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_DetuctInventory" Relationship="Self.FK__tbl_Detuc__Kitch__3B75D760" FromRole="tbl_KitchenInventory" ToRole="tbl_DetuctInventory" />
+          <NavigationProperty Name="tbl_KitchenInventoryCategory" Relationship="Self.FK__tbl_Kitch__Kitch__38996AB5" FromRole="tbl_KitchenInventory" ToRole="tbl_KitchenInventoryCategory" />
+        </EntityType>
+        <EntityType Name="tbl_KitchenInventoryCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_KitchenInventory" Relationship="Self.FK__tbl_Kitch__Kitch__38996AB5" FromRole="tbl_KitchenInventoryCategory" ToRole="tbl_KitchenInventory" />
+        </EntityType>
+        <EntityType Name="tbl_PaymentMode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_id" Type="Int32" />
+          <Property Name="DatenTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Supplier" Relationship="Self.FK__tbl_Purch__Suppl__49C3F6B7" FromRole="tbl_PurchaseOrder" ToRole="tbl_Supplier" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseOrderItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Double" />
+        </EntityType>
+        <EntityType Name="tbl_Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_Time" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="SaleType" Type="Int32" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Customer_Id" Type="Int32" />
+          <Property Name="Staff_id" Type="Int32" />
+          <NavigationProperty Name="tbl_Customer" Relationship="Self.FK__tbl_Sale__Custom__4E88ABD4" FromRole="tbl_Sale" ToRole="tbl_Customer" />
+          <NavigationProperty Name="tbl_DeliveryQueue" Relationship="Self.FK__tbl_Deliv__Sale___6477ECF3" FromRole="tbl_Sale" ToRole="tbl_DeliveryQueue" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK__tbl_Sale__Staff___4F7CD00D" FromRole="tbl_Sale" ToRole="tbl_Staff" />
+          <NavigationProperty Name="tbl_SaleItem" Relationship="Self.FK__tbl_SaleI__Sale___619B8048" FromRole="tbl_Sale" ToRole="tbl_SaleItem" />
+        </EntityType>
+        <EntityType Name="tbl_SaleItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="Sale_id" Type="Int32" />
+          <Property Name="Item_id" Type="Int32" />
+          <NavigationProperty Name="tbl_Sale" Relationship="Self.FK__tbl_SaleI__Sale___619B8048" FromRole="tbl_SaleItem" ToRole="tbl_Sale" />
+        </EntityType>
+        <EntityType Name="tbl_Sitting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Designation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="3" />
+          <Property Name="LeavingDate" Type="DateTime" Precision="3" />
+          <Property Name="Salary" Type="Double" />
+          <Property Name="DutyStart" Type="Int32" />
+          <Property Name="DutyEnd" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StaffCategory_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_DeliveryQueue" Relationship="Self.FK__tbl_Deliv__Deliv__66603565" FromRole="tbl_Staff" ToRole="tbl_DeliveryQueue" />
+          <NavigationProperty Name="tbl_Sale" Relationship="Self.FK__tbl_Sale__Staff___4F7CD00D" FromRole="tbl_Staff" ToRole="tbl_Sale" />
+          <NavigationProperty Name="tbl_StaffCategory" Relationship="Self.FK__tbl_Staff__Staff__46E78A0C" FromRole="tbl_Staff" ToRole="tbl_StaffCategory" />
+        </EntityType>
+        <EntityType Name="tbl_StaffCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Staff" Relationship="Self.FK__tbl_Staff__Staff__46E78A0C" FromRole="tbl_StaffCategory" ToRole="tbl_Staff" />
+        </EntityType>
+        <EntityType Name="tbl_Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Double" />
+          <NavigationProperty Name="tbl_PurchaseOrder" Relationship="Self.FK__tbl_Purch__Suppl__49C3F6B7" FromRole="tbl_Supplier" ToRole="tbl_PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="closing" Relationship="Self.fk_user_closing_user" FromRole="user" ToRole="closing" />
+          <NavigationProperty Name="financetransaction" Relationship="Self.fk_createdbyuser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
+          <NavigationProperty Name="financetransaction1" Relationship="Self.fk_targettouser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
+        </EntityType>
+        <Association Name="fk_user_closing_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="closing" Type="Self.closing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="closing">
+              <PropertyRef Name="fk_user_closing_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financeaccount_financeaccount_financetransaction">
+          <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_financeaccount_financeaccount_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_parent_financeaccount">
+          <End Role="financeaccount" Type="Self.financeaccount" Multiplicity="0..1" />
+          <End Role="financeaccount1" Type="Self.financeaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financeaccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financeaccount1">
+              <PropertyRef Name="fk_parent_financeaccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_createdbyuser_user_financetransaction">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_createdbyuser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_financetransaction_salepurchaseproduct_financetransaction">
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="0..1" />
+          <End Role="salepurchaseproduct" Type="Self.salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="financetransaction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_financetransaction_salepurchaseproduct_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_targettouser_user_financetransaction">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="financetransaction" Type="Self.financetransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="financetransaction">
+              <PropertyRef Name="fk_targettouser_user_financetransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_product_subproduct">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="subproduct" Type="Self.subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_product_product_subproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_salepurchaseproduct_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="salepurchaseproduct" Type="Self.salepurchaseproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salepurchaseproduct">
+              <PropertyRef Name="fk_product_salepurchaseproduct_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subproduct_product_subproduct">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="subproduct" Type="Self.subproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subproduct">
+              <PropertyRef Name="fk_subproduct_product_subproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deliv__Custo__656C112C">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_DeliveryQueue" Type="Self.tbl_DeliveryQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DeliveryQueue">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Sale__Custom__4E88ABD4">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Sale">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deal__Catego__5AEE82B9">
+          <End Role="tbl_FoodItemCategory" Type="Self.tbl_FoodItemCategory" Multiplicity="0..1" />
+          <End Role="tbl_Deal" Type="Self.tbl_Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodItemCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Deal">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_DealF__Deal___5DCAEF64">
+          <End Role="tbl_Deal" Type="Self.tbl_Deal" Multiplicity="0..1" />
+          <End Role="tbl_DealFoodItem" Type="Self.tbl_DealFoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Deal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DealFoodItem">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_DealF__FoodI__5EBF139D">
+          <End Role="tbl_FoodItem" Type="Self.tbl_FoodItem" Multiplicity="0..1" />
+          <End Role="tbl_DealFoodItem" Type="Self.tbl_DealFoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DealFoodItem">
+              <PropertyRef Name="FoodItem_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deliv__Deliv__66603565">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_DeliveryQueue" Type="Self.tbl_DeliveryQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DeliveryQueue">
+              <PropertyRef Name="DeliveryBoyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Deliv__Sale___6477ECF3">
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="0..1" />
+          <End Role="tbl_DeliveryQueue" Type="Self.tbl_DeliveryQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DeliveryQueue">
+              <PropertyRef Name="Sale_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Depos__Depos__693CA210">
+          <End Role="tbl_DepositHead" Type="Self.tbl_DepositHead" Multiplicity="0..1" />
+          <End Role="tbl_Deposit" Type="Self.tbl_Deposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_DepositHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Deposit">
+              <PropertyRef Name="DepositHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Detuc__Kitch__3B75D760">
+          <End Role="tbl_KitchenInventory" Type="Self.tbl_KitchenInventory" Multiplicity="0..1" />
+          <End Role="tbl_DetuctInventory" Type="Self.tbl_DetuctInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_KitchenInventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_DetuctInventory">
+              <PropertyRef Name="KitchenInventory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Expen__Expen__412EB0B6">
+          <End Role="tbl_ExpenceHead" Type="Self.tbl_ExpenceHead" Multiplicity="0..1" />
+          <End Role="tbl_Expence" Type="Self.tbl_Expence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ExpenceHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Expence">
+              <PropertyRef Name="ExpenseHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Expen__Expen__4222D4EF">
+          <End Role="tbl_ExpenceSubHead" Type="Self.tbl_ExpenceSubHead" Multiplicity="0..1" />
+          <End Role="tbl_Expence" Type="Self.tbl_Expence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ExpenceSubHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Expence">
+              <PropertyRef Name="ExpenceSubHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Expen__Expen__3E52440B">
+          <End Role="tbl_ExpenceHead" Type="Self.tbl_ExpenceHead" Multiplicity="0..1" />
+          <End Role="tbl_ExpenceSubHead" Type="Self.tbl_ExpenceSubHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ExpenceHead">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_ExpenceSubHead">
+              <PropertyRef Name="ExpenseHead_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_FoodI__Categ__52593CB8">
+          <End Role="tbl_FoodItemCategory" Type="Self.tbl_FoodItemCategory" Multiplicity="0..1" />
+          <End Role="tbl_FoodItem" Type="Self.tbl_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodItemCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_FoodItem">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Kitch__Kitch__38996AB5">
+          <End Role="tbl_KitchenInventoryCategory" Type="Self.tbl_KitchenInventoryCategory" Multiplicity="0..1" />
+          <End Role="tbl_KitchenInventory" Type="Self.tbl_KitchenInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_KitchenInventoryCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_KitchenInventory">
+              <PropertyRef Name="KitchenInventoryCategory_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Purch__Suppl__49C3F6B7">
+          <End Role="tbl_Supplier" Type="Self.tbl_Supplier" Multiplicity="0..1" />
+          <End Role="tbl_PurchaseOrder" Type="Self.tbl_PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_PurchaseOrder">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Sale__Staff___4F7CD00D">
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="0..1" />
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Sale">
+              <PropertyRef Name="Staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_SaleI__Sale___619B8048">
+          <End Role="tbl_Sale" Type="Self.tbl_Sale" Multiplicity="0..1" />
+          <End Role="tbl_SaleItem" Type="Self.tbl_SaleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_SaleItem">
+              <PropertyRef Name="Sale_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Staff__Staff__46E78A0C">
+          <End Role="tbl_StaffCategory" Type="Self.tbl_StaffCategory" Multiplicity="0..1" />
+          <End Role="tbl_Staff" Type="Self.tbl_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_StaffCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Staff">
+              <PropertyRef Name="StaffCategory_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbctx" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="closing" EntityType="Self.closing" />
+          <EntitySet Name="financeaccount" EntityType="Self.financeaccount" />
+          <EntitySet Name="financetransaction" EntityType="Self.financetransaction" />
+          <EntitySet Name="product" EntityType="Self.product" />
+          <EntitySet Name="salepurchaseproduct" EntityType="Self.salepurchaseproduct" />
+          <EntitySet Name="subproduct" EntityType="Self.subproduct" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" />
+          <EntitySet Name="tbl_Deal" EntityType="Self.tbl_Deal" />
+          <EntitySet Name="tbl_DealFoodItem" EntityType="Self.tbl_DealFoodItem" />
+          <EntitySet Name="tbl_DeliveryQueue" EntityType="Self.tbl_DeliveryQueue" />
+          <EntitySet Name="tbl_Deposit" EntityType="Self.tbl_Deposit" />
+          <EntitySet Name="tbl_DepositHead" EntityType="Self.tbl_DepositHead" />
+          <EntitySet Name="tbl_DetuctInventory" EntityType="Self.tbl_DetuctInventory" />
+          <EntitySet Name="tbl_Expence" EntityType="Self.tbl_Expence" />
+          <EntitySet Name="tbl_ExpenceHead" EntityType="Self.tbl_ExpenceHead" />
+          <EntitySet Name="tbl_ExpenceSubHead" EntityType="Self.tbl_ExpenceSubHead" />
+          <EntitySet Name="tbl_FinanceChart" EntityType="Self.tbl_FinanceChart" />
+          <EntitySet Name="tbl_FoodItem" EntityType="Self.tbl_FoodItem" />
+          <EntitySet Name="tbl_FoodItemCategory" EntityType="Self.tbl_FoodItemCategory" />
+          <EntitySet Name="tbl_KitchenInventory" EntityType="Self.tbl_KitchenInventory" />
+          <EntitySet Name="tbl_KitchenInventoryCategory" EntityType="Self.tbl_KitchenInventoryCategory" />
+          <EntitySet Name="tbl_PaymentMode" EntityType="Self.tbl_PaymentMode" />
+          <EntitySet Name="tbl_PurchaseOrder" EntityType="Self.tbl_PurchaseOrder" />
+          <EntitySet Name="tbl_PurchaseOrderItem" EntityType="Self.tbl_PurchaseOrderItem" />
+          <EntitySet Name="tbl_Sale" EntityType="Self.tbl_Sale" />
+          <EntitySet Name="tbl_SaleItem" EntityType="Self.tbl_SaleItem" />
+          <EntitySet Name="tbl_Sitting" EntityType="Self.tbl_Sitting" />
+          <EntitySet Name="tbl_Staff" EntityType="Self.tbl_Staff" />
+          <EntitySet Name="tbl_StaffCategory" EntityType="Self.tbl_StaffCategory" />
+          <EntitySet Name="tbl_Supplier" EntityType="Self.tbl_Supplier" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <AssociationSet Name="fk_user_closing_user" Association="Self.fk_user_closing_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="closing" EntitySet="closing" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financeaccount_financeaccount_financetransaction" Association="Self.fk_financeaccount_financeaccount_financetransaction">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_parent_financeaccount" Association="Self.fk_parent_financeaccount">
+            <End Role="financeaccount" EntitySet="financeaccount" />
+            <End Role="financeaccount1" EntitySet="financeaccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_createdbyuser_user_financetransaction" Association="Self.fk_createdbyuser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_financetransaction_salepurchaseproduct_financetransaction" Association="Self.fk_financetransaction_salepurchaseproduct_financetransaction">
+            <End Role="financetransaction" EntitySet="financetransaction" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_targettouser_user_financetransaction" Association="Self.fk_targettouser_user_financetransaction">
+            <End Role="user" EntitySet="user" />
+            <End Role="financetransaction" EntitySet="financetransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_product_subproduct" Association="Self.fk_product_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_salepurchaseproduct_product" Association="Self.fk_product_salepurchaseproduct_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="salepurchaseproduct" EntitySet="salepurchaseproduct" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subproduct_product_subproduct" Association="Self.fk_subproduct_product_subproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="subproduct" EntitySet="subproduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deliv__Custo__656C112C" Association="Self.FK__tbl_Deliv__Custo__656C112C">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_DeliveryQueue" EntitySet="tbl_DeliveryQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Sale__Custom__4E88ABD4" Association="Self.FK__tbl_Sale__Custom__4E88ABD4">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deal__Catego__5AEE82B9" Association="Self.FK__tbl_Deal__Catego__5AEE82B9">
+            <End Role="tbl_FoodItemCategory" EntitySet="tbl_FoodItemCategory" />
+            <End Role="tbl_Deal" EntitySet="tbl_Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_DealF__Deal___5DCAEF64" Association="Self.FK__tbl_DealF__Deal___5DCAEF64">
+            <End Role="tbl_Deal" EntitySet="tbl_Deal" />
+            <End Role="tbl_DealFoodItem" EntitySet="tbl_DealFoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_DealF__FoodI__5EBF139D" Association="Self.FK__tbl_DealF__FoodI__5EBF139D">
+            <End Role="tbl_FoodItem" EntitySet="tbl_FoodItem" />
+            <End Role="tbl_DealFoodItem" EntitySet="tbl_DealFoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deliv__Deliv__66603565" Association="Self.FK__tbl_Deliv__Deliv__66603565">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_DeliveryQueue" EntitySet="tbl_DeliveryQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Deliv__Sale___6477ECF3" Association="Self.FK__tbl_Deliv__Sale___6477ECF3">
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+            <End Role="tbl_DeliveryQueue" EntitySet="tbl_DeliveryQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Depos__Depos__693CA210" Association="Self.FK__tbl_Depos__Depos__693CA210">
+            <End Role="tbl_DepositHead" EntitySet="tbl_DepositHead" />
+            <End Role="tbl_Deposit" EntitySet="tbl_Deposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Detuc__Kitch__3B75D760" Association="Self.FK__tbl_Detuc__Kitch__3B75D760">
+            <End Role="tbl_KitchenInventory" EntitySet="tbl_KitchenInventory" />
+            <End Role="tbl_DetuctInventory" EntitySet="tbl_DetuctInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Expen__Expen__412EB0B6" Association="Self.FK__tbl_Expen__Expen__412EB0B6">
+            <End Role="tbl_ExpenceHead" EntitySet="tbl_ExpenceHead" />
+            <End Role="tbl_Expence" EntitySet="tbl_Expence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Expen__Expen__4222D4EF" Association="Self.FK__tbl_Expen__Expen__4222D4EF">
+            <End Role="tbl_ExpenceSubHead" EntitySet="tbl_ExpenceSubHead" />
+            <End Role="tbl_Expence" EntitySet="tbl_Expence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Expen__Expen__3E52440B" Association="Self.FK__tbl_Expen__Expen__3E52440B">
+            <End Role="tbl_ExpenceHead" EntitySet="tbl_ExpenceHead" />
+            <End Role="tbl_ExpenceSubHead" EntitySet="tbl_ExpenceSubHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_FoodI__Categ__52593CB8" Association="Self.FK__tbl_FoodI__Categ__52593CB8">
+            <End Role="tbl_FoodItemCategory" EntitySet="tbl_FoodItemCategory" />
+            <End Role="tbl_FoodItem" EntitySet="tbl_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Kitch__Kitch__38996AB5" Association="Self.FK__tbl_Kitch__Kitch__38996AB5">
+            <End Role="tbl_KitchenInventoryCategory" EntitySet="tbl_KitchenInventoryCategory" />
+            <End Role="tbl_KitchenInventory" EntitySet="tbl_KitchenInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Purch__Suppl__49C3F6B7" Association="Self.FK__tbl_Purch__Suppl__49C3F6B7">
+            <End Role="tbl_Supplier" EntitySet="tbl_Supplier" />
+            <End Role="tbl_PurchaseOrder" EntitySet="tbl_PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Sale__Staff___4F7CD00D" Association="Self.FK__tbl_Sale__Staff___4F7CD00D">
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_SaleI__Sale___619B8048" Association="Self.FK__tbl_SaleI__Sale___619B8048">
+            <End Role="tbl_Sale" EntitySet="tbl_Sale" />
+            <End Role="tbl_SaleItem" EntitySet="tbl_SaleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Staff__Staff__46E78A0C" Association="Self.FK__tbl_Staff__Staff__46E78A0C">
+            <End Role="tbl_StaffCategory" EntitySet="tbl_StaffCategory" />
+            <End Role="tbl_Staff" EntitySet="tbl_Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bbdbModelStoreContainer" CdmEntityContainer="dbctx">
+          <EntitySetMapping Name="closing">
+            <EntityTypeMapping TypeName="bbdbModel.closing">
+              <MappingFragment StoreEntitySet="closing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="expence" ColumnName="expence" />
+                <ScalarProperty Name="income" ColumnName="income" />
+                <ScalarProperty Name="closingbalance" ColumnName="closingbalance" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="fk_user_closing_user" ColumnName="fk_user_closing_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="financeaccount">
+            <EntityTypeMapping TypeName="bbdbModel.financeaccount">
+              <MappingFragment StoreEntitySet="financeaccount">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="fk_parent_financeaccount" ColumnName="fk_parent_financeaccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="financetransaction">
+            <EntityTypeMapping TypeName="bbdbModel.financetransaction">
+              <MappingFragment StoreEntitySet="financetransaction">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupid" ColumnName="groupid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="childof" ColumnName="childof" />
+                <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
+                <ScalarProperty Name="referencenumber" ColumnName="referencenumber" />
+                <ScalarProperty Name="bank" ColumnName="bank" />
+                <ScalarProperty Name="branch" ColumnName="branch" />
+                <ScalarProperty Name="chequedate" ColumnName="chequedate" />
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="fk_createdbyuser_user_financetransaction" ColumnName="fk_createdbyuser_user_financetransaction" />
+                <ScalarProperty Name="fk_targettouser_user_financetransaction" ColumnName="fk_targettouser_user_financetransaction" />
+                <ScalarProperty Name="fk_financeaccount_financeaccount_financetransaction" ColumnName="fk_financeaccount_financeaccount_financetransaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product">
+            <EntityTypeMapping TypeName="bbdbModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="carrycost" ColumnName="carrycost" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="purchaseprice" ColumnName="purchaseprice" />
+                <ScalarProperty Name="purchaseactive" ColumnName="purchaseactive" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="saleprice" ColumnName="saleprice" />
+                <ScalarProperty Name="saleactive" ColumnName="saleactive" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salepurchaseproduct">
+            <EntityTypeMapping TypeName="bbdbModel.salepurchaseproduct">
+              <MappingFragment StoreEntitySet="salepurchaseproduct">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="fk_product_salepurchaseproduct_product" ColumnName="fk_product_salepurchaseproduct_product" />
+                <ScalarProperty Name="fk_financetransaction_salepurchaseproduct_financetransaction" ColumnName="fk_financetransaction_salepurchaseproduct_financetransaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subproduct">
+            <EntityTypeMapping TypeName="bbdbModel.subproduct">
+              <MappingFragment StoreEntitySet="subproduct">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_product_product_subproduct" ColumnName="fk_product_product_subproduct" />
+                <ScalarProperty Name="fk_subproduct_product_subproduct" ColumnName="fk_subproduct_product_subproduct" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Customer">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Customer">
+              <MappingFragment StoreEntitySet="tbl_Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Deal">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Deal">
+              <MappingFragment StoreEntitySet="tbl_Deal">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="ManageInventory" ColumnName="ManageInventory" />
+                <ScalarProperty Name="Recipe" ColumnName="Recipe" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DealFoodItem">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_DealFoodItem">
+              <MappingFragment StoreEntitySet="tbl_DealFoodItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Deal_Id" ColumnName="Deal_Id" />
+                <ScalarProperty Name="FoodItem_Id" ColumnName="FoodItem_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DeliveryQueue">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_DeliveryQueue">
+              <MappingFragment StoreEntitySet="tbl_DeliveryQueue">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Delivered" ColumnName="Delivered" />
+                <ScalarProperty Name="DatenTime" ColumnName="DatenTime" />
+                <ScalarProperty Name="Sale_Id" ColumnName="Sale_Id" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="DeliveryBoyId" ColumnName="DeliveryBoyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Deposit">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Deposit">
+              <MappingFragment StoreEntitySet="tbl_Deposit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DatenTime" ColumnName="DatenTime" />
+                <ScalarProperty Name="DepositHead_Id" ColumnName="DepositHead_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DepositHead">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_DepositHead">
+              <MappingFragment StoreEntitySet="tbl_DepositHead">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DetuctInventory">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_DetuctInventory">
+              <MappingFragment StoreEntitySet="tbl_DetuctInventory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FoodItem_Id" ColumnName="FoodItem_Id" />
+                <ScalarProperty Name="DeductedQuantity" ColumnName="DeductedQuantity" />
+                <ScalarProperty Name="KitchenInventory_id" ColumnName="KitchenInventory_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Expence">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Expence">
+              <MappingFragment StoreEntitySet="tbl_Expence">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DatenTime" ColumnName="DatenTime" />
+                <ScalarProperty Name="ExpenseHead_Id" ColumnName="ExpenseHead_Id" />
+                <ScalarProperty Name="ExpenceSubHead_Id" ColumnName="ExpenceSubHead_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ExpenceHead">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_ExpenceHead">
+              <MappingFragment StoreEntitySet="tbl_ExpenceHead">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ExpenceSubHead">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_ExpenceSubHead">
+              <MappingFragment StoreEntitySet="tbl_ExpenceSubHead">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExpenseHead_Id" ColumnName="ExpenseHead_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FinanceChart">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_FinanceChart">
+              <MappingFragment StoreEntitySet="tbl_FinanceChart">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="TotalSale" ColumnName="TotalSale" />
+                <ScalarProperty Name="TotalCash" ColumnName="TotalCash" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="Expence" ColumnName="Expence" />
+                <ScalarProperty Name="ClosingBalance" ColumnName="ClosingBalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FoodItem">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_FoodItem">
+              <MappingFragment StoreEntitySet="tbl_FoodItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="ManageInventory" ColumnName="ManageInventory" />
+                <ScalarProperty Name="Recipe" ColumnName="Recipe" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FoodItemCategory">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_FoodItemCategory">
+              <MappingFragment StoreEntitySet="tbl_FoodItemCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_KitchenInventory">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_KitchenInventory">
+              <MappingFragment StoreEntitySet="tbl_KitchenInventory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MinimumQuantity" ColumnName="MinimumQuantity" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="KitchenInventoryCategory_Id" ColumnName="KitchenInventoryCategory_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_KitchenInventoryCategory">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_KitchenInventoryCategory">
+              <MappingFragment StoreEntitySet="tbl_KitchenInventoryCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PaymentMode">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_PaymentMode">
+              <MappingFragment StoreEntitySet="tbl_PaymentMode">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PurchaseOrder">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_PurchaseOrder">
+              <MappingFragment StoreEntitySet="tbl_PurchaseOrder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="DatenTime" ColumnName="DatenTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PurchaseOrderItem">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_PurchaseOrderItem">
+              <MappingFragment StoreEntitySet="tbl_PurchaseOrderItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Sale">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Sale">
+              <MappingFragment StoreEntitySet="tbl_Sale">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="SaleType" ColumnName="SaleType" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Staff_id" ColumnName="Staff_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SaleItem">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_SaleItem">
+              <MappingFragment StoreEntitySet="tbl_SaleItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Sale_id" ColumnName="Sale_id" />
+                <ScalarProperty Name="Item_id" ColumnName="Item_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Sitting">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Sitting">
+              <MappingFragment StoreEntitySet="tbl_Sitting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Staff">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Staff">
+              <MappingFragment StoreEntitySet="tbl_Staff">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="LeavingDate" ColumnName="LeavingDate" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="DutyStart" ColumnName="DutyStart" />
+                <ScalarProperty Name="DutyEnd" ColumnName="DutyEnd" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="StaffCategory_Id" ColumnName="StaffCategory_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_StaffCategory">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_StaffCategory">
+              <MappingFragment StoreEntitySet="tbl_StaffCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Supplier">
+            <EntityTypeMapping TypeName="bbdbModel.tbl_Supplier">
+              <MappingFragment StoreEntitySet="tbl_Supplier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="bbdbModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

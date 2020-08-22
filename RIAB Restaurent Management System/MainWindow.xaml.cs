@@ -14,8 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RIAB_Restaurent_Management_System.Views;
 using System.Globalization;
-using DAL;
+
 using RIAB_Restaurent_Management_System.bll;
+using RIAB_Restaurent_Management_System.data;
 
 namespace RIAB_Restaurent_Management_System
 {
@@ -53,7 +54,7 @@ namespace RIAB_Restaurent_Management_System
 
 
 
-            RMSDBEntities db = new RMSDBEntities();
+            var db = new dbctx();
             user user = db.user.Where(a => (a.username == tb_Name.Text && a.password == tb_Pasword.Password)).FirstOrDefault();
             if (user!=null) {
             userutils.loggedinuser = user;

@@ -106,7 +106,115 @@
     <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\TimeUtils.cs" />
     <Compile Include="bll\userutils.cs" />
+    <Compile Include="data\closing.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
     <Compile Include="data\DBContext.cs" />
+    <Compile Include="data\financeaccount.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\financetransaction.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="data\product.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\salepurchaseproduct.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\subproduct.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Customer.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Deal.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_DealFoodItem.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_DeliveryQueue.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Deposit.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_DepositHead.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_DetuctInventory.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Expence.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_ExpenceHead.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_ExpenceSubHead.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_FinanceChart.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_FoodItem.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_FoodItemCategory.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_KitchenInventory.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_KitchenInventoryCategory.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_PaymentMode.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_PurchaseOrder.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_PurchaseOrderItem.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Sale.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_SaleItem.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Sitting.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Staff.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_StaffCategory.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\tbl_Supplier.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="data\user.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
     <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
     <Compile Include="other\Class1.cs" />
     <Compile Include="Views\finance\expencenew.xaml.cs">
@@ -266,6 +374,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="data\model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="data\model.edmx.diagram">
+      <DependentUpon>model.edmx</DependentUpon>
+    </None>
     <None Include="other\old software\Release.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -278,16 +393,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{70d21d1b-9a9b-4df3-9cd1-a83f1324cd52}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SplashScreen Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\bbdb.sql" />
+    <Content Include="data\model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>model.edmx</DependentUpon>
+      <LastGenOutput>model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="data\model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>model.edmx</DependentUpon>
+      <LastGenOutput>model.cs</LastGenOutput>
+    </Content>
     <Content Include="media\2.wav" />
     <Content Include="other\old software\Old Demo Data.sql" />
     <Content Include="other\old software\Old.sql" />
@@ -303,9 +422,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="data\model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

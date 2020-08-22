@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 
 namespace RIAB_Restaurent_Management_System.data
 {
     public sealed class DBContext
     {
-        private static RMSDBEntities db = new RMSDBEntities();
+        private static dbctx db = new dbctx();
 
-        public static RMSDBEntities getInstance()
+        public static dbctx getInstance()
         {
             if (db == null)
             {
-                return new RMSDBEntities();
+                return new dbctx();
             }
             return db;
         }

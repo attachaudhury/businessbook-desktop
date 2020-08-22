@@ -1,5 +1,6 @@
-﻿using DAL;
+﻿
 using RIAB_Restaurent_Management_System.bll;
+using RIAB_Restaurent_Management_System.data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace RIAB_Restaurent_Management_System.Views.person
         {
             InitializeComponent();
             loggedinperson = userutils.loggedinuser;
-            var db = new RMSDBEntities();
+            var db = new dbctx();
 
             var roles = new string[] { "admin", "user", "customer" };
             if (roletype == "staff")
@@ -69,7 +70,7 @@ namespace RIAB_Restaurent_Management_System.Views.person
 
             }
             catch { }
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             db.user.Add(person);
             db.SaveChanges();
             Close();

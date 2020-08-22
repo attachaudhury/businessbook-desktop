@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RIAB_Restaurent_Management_System.data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DAL;
+
 
 namespace RIAB_Restaurent_Management_System.Views.finance
 {

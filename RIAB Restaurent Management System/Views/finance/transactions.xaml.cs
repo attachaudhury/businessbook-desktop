@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿
+using RIAB_Restaurent_Management_System.data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         public transactions()
         {
             InitializeComponent();
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             foreach (var item in db.financetransaction.ToList())
             {
                 dg.Items.Add(item);

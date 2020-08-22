@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿
+using RIAB_Restaurent_Management_System.data;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace RIAB_Restaurent_Management_System.bll
         public static int insertSaleTransactions(List<productsaleorpurchase> purchaseList,float totalpayment, int targetuserid)
         {
             var loggedinuserid = userutils.loggedinuser.id;
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             List<financeaccount> accounts = db.financeaccount.ToList();
             var possaleaccountid = accounts.Where(a => a.name == "pos sale").FirstOrDefault().id;
             var discountaccountid = accounts.Where(a => a.name == "discount").FirstOrDefault().id;
@@ -132,7 +133,7 @@ namespace RIAB_Restaurent_Management_System.bll
         public static int insertPurchaseTransactions(List<productsaleorpurchase> purchaseList, float totalpayment, int targetuserid)
         {
             var loggedinuserid = userutils.loggedinuser.id;
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             List<financeaccount> accounts = db.financeaccount.ToList();
             var possaleaccountid = accounts.Where(a => a.name == "pos sale").FirstOrDefault().id;
             var discountaccountid = accounts.Where(a => a.name == "discount").FirstOrDefault().id;

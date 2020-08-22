@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿
+using RIAB_Restaurent_Management_System.data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace RIAB_Restaurent_Management_System.Views.person
         public List(string roletype)
         {
             InitializeComponent();
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             if (roletype == "staff")
             {
                 dg_AllStaff.ItemsSource = db.user.Where(a => a.role != "customer").ToList();

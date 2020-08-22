@@ -9,9 +9,9 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class productutils
     {
-        public static dynamic mapproducttoproductsalemodel(List<DAL.product> products) {
+        public static dynamic mapproducttoproductsalemodel(List<data.product> products) {
             var mappedList = new List<productsaleorpurchase>();
-            foreach (DAL.product item in products)
+            foreach (data.product item in products)
             {
                 productsaleorpurchase a = new productsaleorpurchase();
                 a.id = item.id;
@@ -30,10 +30,10 @@ namespace RIAB_Restaurent_Management_System.bll
             }
             return mappedList;
         }
-        public static dynamic mapproducttoproductpurchasemodel(List<DAL.product> products)
+        public static dynamic mapproducttoproductpurchasemodel(List<data.product> products)
         {
             var mappedList = new List<productsaleorpurchase>();
-            foreach (DAL.product item in products)
+            foreach (data.product item in products)
             {
                 productsaleorpurchase a = new productsaleorpurchase();
                 a.id = item.id;

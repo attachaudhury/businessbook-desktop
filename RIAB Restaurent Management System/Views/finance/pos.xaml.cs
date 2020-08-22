@@ -11,11 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DAL;
+
 using System.Reflection;
 using System.Media;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using RIAB_Restaurent_Management_System.bll;
+using RIAB_Restaurent_Management_System.data;
 
 namespace RIAB_Restaurent_Management_System.Views.finance
 {
@@ -40,7 +41,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         void initFormOperations()
         {
-            var db = new RMSDBEntities();
+            var db = new dbctx();
             var products = db.product.ToList();
             mappedproducts = productutils.mapproducttoproductsalemodel(db.product.ToList());
             tb_Search.Focus();
