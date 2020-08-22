@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using RIAB_Restaurent_Management_System.Views.finance;
 using RIAB_Restaurent_Management_System.Views.others;
-using BLL.DBOperations;
 using DAL;
 using RIAB_Restaurent_Management_System.Views.product;
 using RIAB_Restaurent_Management_System.bll;

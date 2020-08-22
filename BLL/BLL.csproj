@@ -55,41 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBContext.cs" />
-    <Compile Include="DBOperations\DeliveryQueue.cs" />
-    <Compile Include="DBOperations\Deposit.cs" />
-    <Compile Include="DBOperations\DepositHead.cs" />
-    <Compile Include="DBOperations\DetuctInventory.cs" />
-    <Compile Include="DBOperations\ExpenceHead.cs" />
-    <Compile Include="DBOperations\ExpenceSubHead.cs" />
-    <Compile Include="DBOperations\Expence.cs" />
-    <Compile Include="DBOperations\FinanceChart.cs" />
-    <Compile Include="DBOperations\PurchaseOrder.cs" />
-    <Compile Include="DBOperations\SaleItem.cs" />
-    <Compile Include="DBOperations\Sale.cs" />
-    <Compile Include="DBOperations\KitchenInventoryCategory.cs" />
-    <Compile Include="DBOperations\KitchenInventory.cs" />
-    <Compile Include="DBOperations\Customer.cs" />
-    <Compile Include="DBOperations\Deal.cs" />
-    <Compile Include="DBOperations\DealFoodItem.cs" />
-    <Compile Include="DBOperations\FoodItem.cs" />
-    <Compile Include="DBOperations\FoodItemCategory.cs" />
-    <Compile Include="DBOperations\Staff.cs" />
-    <Compile Include="DBOperations\StaffCategories.cs" />
-    <Compile Include="DBOperations\TmpModels\DeliveryQueueModel.cs" />
-    <Compile Include="DBOperations\TmpModels\FoodItemViewModelForDSR.cs" />
-    <Compile Include="DBOperations\TmpModels\FoodItemSmallModel.cs" />
-    <Compile Include="DBOperations\TmpModels\ItemOrDealSaleModel.cs" />
-    <Compile Include="DBOperations\TmpModels\ItemSaleSearchModel.cs" />
-    <Compile Include="DBOperations\TmpModels\SubHeadHeadNameModel.cs" />
-    <Compile Include="MyPrinterSetting.cs" />
-    <Compile Include="PrintingUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings1.settings</DependentUpon>
-    </Compile>
-    <Compile Include="TimeUtils.cs" />
+    <Compile Include="Properties\Settings1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
@@ -100,10 +67,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings1.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DAL;
 using BLL;
-using BLL.DBOperations;
 using System.Data.Entity.Migrations;
 
 namespace RIAB_Restaurent_Management_System.Views.product

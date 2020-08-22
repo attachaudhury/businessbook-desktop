@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BLL;
-using BLL.DBOperations;
-using BLL.DBOperations.TmpModels;
 using DAL;
 using System.Reflection;
 using System.Media;

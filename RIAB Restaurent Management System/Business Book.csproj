@@ -98,10 +98,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="bll\financeutils.cs" />
+    <Compile Include="bll\MyPrinterSetting.cs" />
     <Compile Include="bll\printing.cs" />
+    <Compile Include="bll\PrintingUtils.cs" />
     <Compile Include="bll\productutils.cs" />
     <Compile Include="bll\purchaseutils.cs" />
     <Compile Include="bll\saleutils.cs" />
+    <Compile Include="bll\TimeUtils.cs" />
     <Compile Include="bll\userutils.cs" />
     <Compile Include="data\viewmodel\productsaleorpurchase.cs" />
     <Compile Include="other\Class1.cs" />

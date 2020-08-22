@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BLL;
-using BLL.DBOperations;
 using DAL;
 
 namespace RIAB_Restaurent_Management_System.Views.finance
@@ -48,7 +47,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     fc.Deposit = Convert.ToInt32(tb_Deposit.Text);
                     fc.Expence = Convert.ToInt32(tb_Expence.Text);
                     fc.ClosingBalance = Convert.ToInt32(tb_ClosingBalance.Text);
-                    FinanceChart.insert(fc);
+                    //FinanceChart.insert(fc);
                     Close();
                     MessageBox.Show("Closings saved", "Success");
                 }
@@ -62,17 +61,17 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             try
             {
-                tb_OpeningBalance.Text = Convert.ToString(FinanceChart.getLastDayClosingBalance());
-                dp_Date.Content = DateTime.Now.ToShortDateString();
-                tb_Sale.Text = Convert.ToString(Sale.getAllTodayOnRestaurentAmmount());
-                tb_Delivery.Text = Convert.ToString(Sale.getAllTodayOnDeliveryAmmount());
-                tb_TotalSale.Text = Convert.ToString(Sale.getAllTodayOnRestaurentAmmount() + Sale.getAllTodayOnDeliveryAmmount());
-                tb_TotalCash.Text = Convert.ToString(FinanceChart.getLastDayClosingBalance() + Sale.getAllTodayOnRestaurentAmmount() + Sale.getAllTodayOnDeliveryAmmount());
-                tb_Expence.Text = Convert.ToString(Expence.getTodayTotalAmmount());
-                tb_Deposit.Text = Convert.ToString(Deposit.getAllTodayAmmount());
-                int deposit = Convert.ToInt32(tb_Deposit.Text);
-                int ClosingBalance = FinanceChart.getLastDayClosingBalance() + Sale.getAllTodayOnRestaurentAmmount() + Sale.getAllTodayOnDeliveryAmmount() - Expence.getTodayTotalAmmount() - deposit;
-                tb_ClosingBalance.Text = Convert.ToString(ClosingBalance);
+                //tb_OpeningBalance.Text = Convert.ToString(FinanceChart.getLastDayClosingBalance());
+                //dp_Date.Content = DateTime.Now.ToShortDateString();
+                //tb_Sale.Text = Convert.ToString(Sale.getAllTodayOnRestaurentAmmount());
+                //tb_Delivery.Text = Convert.ToString(Sale.getAllTodayOnDeliveryAmmount());
+                //tb_TotalSale.Text = Convert.ToString(Sale.getAllTodayOnRestaurentAmmount() + Sale.getAllTodayOnDeliveryAmmount());
+                //tb_TotalCash.Text = Convert.ToString(FinanceChart.getLastDayClosingBalance() + Sale.getAllTodayOnRestaurentAmmount() + Sale.getAllTodayOnDeliveryAmmount());
+                //tb_Expence.Text = Convert.ToString(Expence.getTodayTotalAmmount());
+                //tb_Deposit.Text = Convert.ToString(Deposit.getAllTodayAmmount());
+                //int deposit = Convert.ToInt32(tb_Deposit.Text);
+                //int ClosingBalance = FinanceChart.getLastDayClosingBalance() + Sale.getAllTodayOnRestaurentAmmount() + Sale.getAllTodayOnDeliveryAmmount() - Expence.getTodayTotalAmmount() - deposit;
+                //tb_ClosingBalance.Text = Convert.ToString(ClosingBalance);
 
                 
             } catch{}

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DAL;
 using BLL;
-using BLL.DBOperations;
 
 namespace RIAB_Restaurent_Management_System.Views
 {
@@ -25,12 +24,12 @@ namespace RIAB_Restaurent_Management_System.Views
         public Form_InputDialogForAddCustomerInNewSale()
         {
             InitializeComponent();
-            foreach (tbl_Staff item in Staff.getAllDeliveryStaff())
-            {
-                cb_DeliveryBoy.ItemsSource = Staff.getAllDeliveryStaff();
-                cb_DeliveryBoy.DisplayMemberPath = "Name";
-                cb_DeliveryBoy.SelectedValuePath = "Id";
-            }
+            //foreach (tbl_Staff item in Staff.getAllDeliveryStaff())
+            //{
+            //    cb_DeliveryBoy.ItemsSource = Staff.getAllDeliveryStaff();
+            //    cb_DeliveryBoy.DisplayMemberPath = "Name";
+            //    cb_DeliveryBoy.SelectedValuePath = "Id";
+            //}
             tb_Phone.Focus();
         }
         public string ResponseName
@@ -70,7 +69,7 @@ namespace RIAB_Restaurent_Management_System.Views
             {
                 c.Address = tb_Address.Text;
             }
-            Customer.insert(c);
+            //Customer.insert(c);
             Customer_Id = c.Id;
             DialogResult = true;
         }
@@ -81,17 +80,17 @@ namespace RIAB_Restaurent_Management_System.Views
             {
                 try
                 {
-                    tbl_Customer customer = Customer.getByPhoneNumber(tb_Phone.Text);
-                    if (customer == null)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        tb_Name.Text = customer.Name;                        
-                        tb_Address.Text = customer.Address;
-                        Customer_Id = customer.Id;
-                    }
+                    //tbl_Customer customer = Customer.getByPhoneNumber(tb_Phone.Text);
+                    //if (customer == null)
+                    //{
+                    //    return;
+                    //}
+                    //else
+                    //{
+                    //    tb_Name.Text = customer.Name;                        
+                    //    tb_Address.Text = customer.Address;
+                    //    Customer_Id = customer.Id;
+                    //}
                 } catch { }
             }
         }

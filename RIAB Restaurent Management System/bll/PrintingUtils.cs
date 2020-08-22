@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BLL.DBOperations;
-using BLL.DBOperations.TmpModels;
 using DAL;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -14,12 +12,14 @@ using System.Drawing.Printing;
 using System.Printing;
 using System.Windows.Media;
 using BLL.Properties;
+using RIAB_Restaurent_Management_System.data.viewmodel;
+using RIAB_Restaurent_Management_System.Properties;
 
-namespace BLL
+namespace RIAB_Restaurent_Management_System.bll
 {
     public class PrintingUtils
     {
-        public static void printSaleReceipt(int salesId, List<ItemOrDealSaleModel> list, int totalBill,int remaining,int saleType, string customerAddress)
+        public static void printSaleReceipt(int salesId, List<productsaleorpurchase> list, int totalBill,int remaining,int saleType, string customerAddress)
         {
             PrintDialog pd = new PrintDialog();
             var doc = ((IDocumentPaginatorSource)getFlowDocument(salesId, list, totalBill, remaining,saleType,customerAddress)).DocumentPaginator;
@@ -27,23 +27,23 @@ namespace BLL
             pd.PrintQueue = new PrintQueue(new PrintServer(), new PrinterSettings().PrinterName);
             pd.PrintDocument(doc, "Print Document");
         }
-        static FlowDocument getFlowDocument(int salesId, List<ItemOrDealSaleModel> list, int totalBill,int remaining, int saleType,string customerAddress)
+        static FlowDocument getFlowDocument(int salesId, List<productsaleorpurchase> list, int totalBill,int remaining, int saleType,string customerAddress)
         {
             FlowDocument fd = new FlowDocument();
             //fd.PageWidth = 260;
-            fd.PageWidth = Settings1.Default.PrinterPageWidth;
-            fd.LineHeight = Settings1.Default.Reciptlineheight;
+            fd.PageWidth = Settings.Default.PrinterPageWidth;
+            fd.LineHeight = Settings.Default.Reciptlineheight;
             fd.FontFamily = new FontFamily("Arial");
 
             //fd.PagePadding = new Thickness(40, 0, 0, 0);
-            fd.PagePadding = new Thickness(Settings1.Default.PrinterMarginLeft, 0, 0, 0);
+            fd.PagePadding = new Thickness(Settings.Default.PrinterMarginLeft, 0, 0, 0);
             fd.TextAlignment = TextAlignment.Center;
             Section header = new Section();
             //Paragraph header1 = new Paragraph(new Bold(new Run("3 Brothers Fast Food")));
             //Paragraph header2 = new Paragraph(new Run("Madni Shopping Mall, Darya Khan Road, Near Boys Degree College Bhakkar. 0305-5189661"));
 
-            Paragraph header1 = new Paragraph(new Bold(new Run(Settings1.Default.Title)));
-            Paragraph header2 = new Paragraph(new Run(Settings1.Default.SubTitle));
+            Paragraph header1 = new Paragraph(new Bold(new Run(Settings.Default.Title)));
+            Paragraph header2 = new Paragraph(new Run(Settings.Default.SubTitle));
 
             string date = DateTime.Now.ToShortDateString();
             Paragraph header3 = new Paragraph(new Run("Sales Id: " + salesId+"   Date:  "+date));
@@ -78,14 +78,14 @@ namespace BLL
             trHeader.Cells.Add(new TableCell(new Paragraph(new Run("Rs"))));
             trHeader.Cells.Add(new TableCell(new Paragraph(new Run("Qty"))));
             trHeader.Cells.Add(new TableCell(new Paragraph(new Run("Ttl"))));
-            foreach (ItemOrDealSaleModel item in list)
+            foreach (productsaleorpurchase item in list)
             {
                 TableRow tr = new TableRow();
                 table.RowGroups[0].Rows.Add(tr);
-                tr.Cells.Add(new TableCell(new Paragraph(new Run(item.Name))));
-                tr.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToString(item.SalePrice)))));
-                tr.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToString(item.Quantity)))));
-                tr.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToString(item.Total)))));
+                tr.Cells.Add(new TableCell(new Paragraph(new Run(item.name))));
+                tr.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToString(item.price)))));
+                tr.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToString(item.quantity)))));
+                tr.Cells.Add(new TableCell(new Paragraph(new Run(Convert.ToString(item.total)))));
             }
             middle.Blocks.Add(table);
             middle.Blocks.Add(new Paragraph(new Run("______________________________________")));
@@ -99,7 +99,7 @@ namespace BLL
 
             Section footer = new Section();
             //Paragraph footer1 = new Paragraph(new Run("Thank You for Purchaings. For Home Delivery please call us at: 0453-510066"));
-            Paragraph footer1 = new Paragraph(new Run(Settings1.Default.Footer));
+            Paragraph footer1 = new Paragraph(new Run(Settings.Default.Footer));
             Paragraph footer2 = new Paragraph(new Run("Software Powered By RIAB"));
             Paragraph footer3 = new Paragraph(new Run("                "));
             Paragraph footer4 = new Paragraph(new Run(customerAddress));

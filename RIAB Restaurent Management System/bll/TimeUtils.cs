@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace RIAB_Restaurent_Management_System.bll
 {
     public class TimeUtils
     {

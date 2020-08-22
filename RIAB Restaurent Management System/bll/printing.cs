@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BLL.DBOperations;
-using BLL.DBOperations.TmpModels;
 using DAL;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -15,6 +13,7 @@ using System.Printing;
 using System.Windows.Media;
 using BLL.Properties;
 using RIAB_Restaurent_Management_System.data.viewmodel;
+using RIAB_Restaurent_Management_System.Properties;
 
 namespace RIAB_Restaurent_Management_System.bll
 {
@@ -32,19 +31,19 @@ namespace RIAB_Restaurent_Management_System.bll
         {
             FlowDocument fd = new FlowDocument();
             //fd.PageWidth = 260;
-            fd.PageWidth = Settings1.Default.PrinterPageWidth;
-            fd.LineHeight = Settings1.Default.Reciptlineheight;
+            fd.PageWidth = Settings.Default.PrinterPageWidth;
+            fd.LineHeight = Settings.Default.Reciptlineheight;
             fd.FontFamily = new FontFamily("Arial");
 
             //fd.PagePadding = new Thickness(40, 0, 0, 0);
-            fd.PagePadding = new Thickness(Settings1.Default.PrinterMarginLeft, 0, 0, 0);
+            fd.PagePadding = new Thickness(Settings.Default.PrinterMarginLeft, 0, 0, 0);
             fd.TextAlignment = TextAlignment.Center;
             Section header = new Section();
             //Paragraph header1 = new Paragraph(new Bold(new Run("3 Brothers Fast Food")));
             //Paragraph header2 = new Paragraph(new Run("Madni Shopping Mall, Darya Khan Road, Near Boys Degree College Bhakkar. 0305-5189661"));
 
-            Paragraph header1 = new Paragraph(new Bold(new Run(Settings1.Default.Title)));
-            Paragraph header2 = new Paragraph(new Run(Settings1.Default.SubTitle));
+            Paragraph header1 = new Paragraph(new Bold(new Run(Settings.Default.Title)));
+            Paragraph header2 = new Paragraph(new Run(Settings.Default.SubTitle));
 
             string date = DateTime.Now.ToShortDateString();
             Paragraph header3 = new Paragraph(new Run("Sales Id: " + salesId + "   Date:  " + date));
@@ -100,7 +99,7 @@ namespace RIAB_Restaurent_Management_System.bll
 
             Section footer = new Section();
             //Paragraph footer1 = new Paragraph(new Run("Thank You for Purchaings. For Home Delivery please call us at: 0453-510066"));
-            Paragraph footer1 = new Paragraph(new Run(Settings1.Default.Footer));
+            Paragraph footer1 = new Paragraph(new Run(Settings.Default.Footer));
             Paragraph footer2 = new Paragraph(new Run("Software By Ravicosoft 03024759550"));
             Paragraph footer3 = new Paragraph(new Run("                "));
             Paragraph footer4 = new Paragraph(new Run(customerAddress));
