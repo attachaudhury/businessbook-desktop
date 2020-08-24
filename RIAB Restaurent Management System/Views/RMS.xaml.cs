@@ -45,6 +45,7 @@ namespace RIAB_Restaurent_Management_System.Views
             string html = @"<html>
 <head>
   <style>
+html{overflow:hidden;height:200px;}
     .main{
       font-family: arial;
     }
@@ -79,7 +80,7 @@ namespace RIAB_Restaurent_Management_System.Views
     }
   </style>
 </head>
-<body style='background-color:#f0f0f0'>
+<body style='background-color:#f0f0f0' scroll='no'>
   <div class='main'>
     <div class='blocks'>
       <h4>Sales</h4>
