@@ -133,18 +133,27 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         private void tb_Search_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.Key == Key.Down)
-            //{
-            //    int index = lv_SearchFoodItem.SelectedIndex + 1;
-            //    lv_SearchFoodItem.SelectedIndex = index;
-            //    return;
-            //}
-            //if (e.Key == Key.Up)
-            //{
-            //    int index = lv_SearchFoodItem.SelectedIndex - 1;
-            //    lv_SearchFoodItem.SelectedIndex = index;
-            //    return;
-            //}
+            if (e.Key == Key.F1)
+            {
+                var dialog = new Form_InputDialogForAddCustomerInNewSale();
+                if (dialog.ShowDialog() == true)
+                {
+                    vendorid = dialog.Customer_Id;
+                    return;
+                }
+            }
+            if (e.Key == Key.Down)
+            {
+                int index = lv_SearchFoodItem.SelectedIndex + 1;
+                lv_SearchFoodItem.SelectedIndex = index;
+                return;
+            }
+            if (e.Key == Key.Up)
+            {
+                int index = lv_SearchFoodItem.SelectedIndex - 1;
+                lv_SearchFoodItem.SelectedIndex = index;
+                return;
+            }
             if (e.Key == Key.Enter)
             {
                 if (lv_SearchFoodItem.SelectedItem != null)
