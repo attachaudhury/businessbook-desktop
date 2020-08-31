@@ -56,7 +56,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                         totalBill1 += item1.total;
                         dg.Items.Add(item1);
                     }
-                    lbl_Total.Content = totalBill1;
+                    total_label.Content = totalBill1;
                     return;
                 }
             }
@@ -68,7 +68,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                 totalBill += item1.total;
                 dg.Items.Add(item1);
             }
-            lbl_Total.Content = totalBill;
+            total_label.Content = totalBill;
         }
 
         private void btn_AddQuantity(object sender, RoutedEventArgs e)
@@ -96,7 +96,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                             totalBill1 += item1.total;
                             dg.Items.Add(item1);
                         }
-                        lbl_Total.Content = totalBill1;
+                        total_label.Content = totalBill1;
                         return;
                     }
                     else
@@ -109,7 +109,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                             totalBill1 += item1.total;
                             dg.Items.Add(item1);
                         }
-                        lbl_Total.Content = totalBill1;
+                        total_label.Content = totalBill1;
                         return;
                     }
                 }
@@ -175,12 +175,12 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         void donePurchase()
         {
 
-            if (tb_Paying.Text == "") 
+            if (paying_textbox.Text == "") 
             {
                 MessageBox.Show("Please Enter payment", "Success");
             }
-            int totalBill = Convert.ToInt32(lbl_Total.Content);
-            int totalPayment = Convert.ToInt32(tb_Paying.Text);
+            int totalBill = Convert.ToInt32(total_label.Content);
+            int totalPayment = Convert.ToInt32(paying_textbox.Text);
             
             purchaseutils.newpurchase(purchaselist, totalBill, totalPayment, vendorid);
 
