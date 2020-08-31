@@ -23,7 +23,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     /// <summary>
     /// Interaction logic for Window_NewSale.xaml
     /// </summary>
-    public partial class pos : Window
+    public partial class salenew : Window
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
         List<productsaleorpurchaseviewmodel> salelist = new List<productsaleorpurchaseviewmodel>();
@@ -32,7 +32,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         int deliveryBoyId;
         string customerAddress = "";
 
-        public pos()
+        public salenew()
         {
             InitializeComponent();
             initFormOperations();
@@ -227,37 +227,24 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             try 
             {
-                if (salelist.Count == 0)
-                {
-                    MessageBox.Show("Add products to cart", "Information");
-                    return;
-                }
-                data.user customer = null;
-                if (customer_combobox.SelectedItem != null) 
-                {
-                    customer = customer_combobox.SelectedItem as data.user;
-                }
-                var totalbill = salelist.Sum(a => a.total);
-                var totalpayment = Convert.ToDouble(paying_textbox.Text);
-                var printCustomerInfoOnReceipt = true;
-                var totalnumberofReceipts = 0;
-                if ((bool)cbx_Receipt1.IsChecked) 
-                {
-                    totalnumberofReceipts++;
-                }
-                if ((bool)cbx_Receipt2.IsChecked)
-                {
-                    totalnumberofReceipts++;
-                }
-                if ((bool)cbx_Receipt3.IsChecked)
-                {
-                    totalnumberofReceipts++;
-                }
 
+
+                if ((bool)ledger_checkbox.IsChecked) 
+                {
+
+                }
+                int saleType = 1;
+                if (isDelivery)
+                {
+                    saleType = 3;
+                }
                 int totalBill = Convert.ToInt32(total_label.Content);
                 int Remaining = Convert.ToInt32(change_label.Content);
-                
-                //saleutils.possale(salelist, totalBill, totalpayment, customer, totalnumberofReceipts, printCustomerInfoOnReceipt);
+                bool reciept1 = cbx_Receipt1.IsChecked.Value;
+                bool reciept2 = cbx_Receipt2.IsChecked.Value;
+                bool reciept3 = cbx_Receipt3.IsChecked.Value;
+                double discount = 0;
+                saleutils.newsale(salelist, totalBill, Remaining, customerId, reciept1, reciept2, reciept3, saleType, customerAddress, deliveryBoyId);
 
                 MessageBox.Show("Ammount " + totalBill, "Success");
                 Close();

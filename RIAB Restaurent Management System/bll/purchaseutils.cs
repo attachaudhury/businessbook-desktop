@@ -12,7 +12,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     class purchaseutils
     {
-        public static void newpurchase(List<productsaleorpurchaseviewmodel> purchaseList, int totalpayment, int remaining, int vendorid)
+        public static void newpurchase(List<productsaleorpurchaseviewmodel> purchaseList, double totalpayment, int vendorid)
         {
             var purchaseid = financeutils.insertPurchaseTransactions(purchaseList, totalpayment, vendorid);
             Task.Run(() => {

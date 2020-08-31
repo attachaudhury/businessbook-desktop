@@ -130,7 +130,7 @@ namespace RIAB_Restaurent_Management_System.bll
             
         }
 
-        public static int insertPurchaseTransactions(List<productsaleorpurchaseviewmodel> purchaseList, float totalpayment, int targetuserid)
+        public static int insertPurchaseTransactions(List<productsaleorpurchaseviewmodel> purchaseList, double totalpayment, int targetuserid)
         {
             var loggedinuserid = userutils.loggedinuser.id;
             var db = new dbctx();
@@ -185,11 +185,11 @@ namespace RIAB_Restaurent_Management_System.bll
 
 
             // New AP Transaction if TotalRemaining has ammount
-            if (totalpayment != totalbill)
+            if ( totalbill!= totalpayment)
             {
                 financetransaction ftap = new financetransaction();
                 ftap.amount = -(totalbill - totalpayment);
-                ftap.name = "--account payable-- against Purchase no " + ftpurchase.id ;
+                ftap.name = "--account payable-- against purchase # " + ftpurchase.id ;
                 ftap.fk_financeaccount_financeaccount_financetransaction = accountpayableableaccountid;
                 ftap.fk_targettouser_user_financetransaction = targetuserid;
                 ftap.date = DateTime.Now;

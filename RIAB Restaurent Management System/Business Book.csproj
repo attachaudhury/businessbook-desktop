@@ -155,6 +155,9 @@
     <Compile Include="Views\finance\Form_DoClosing.xaml.cs">
       <DependentUpon>Form_DoClosing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\finance\salenew.xaml.cs">
+      <DependentUpon>salenew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\finance\purchasedetails.xaml.cs">
       <DependentUpon>purchasedetails.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
     <Page Include="Views\finance\Form_DoClosing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\salenew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\finance\purchasedetails.xaml">
       <SubType>Designer</SubType>

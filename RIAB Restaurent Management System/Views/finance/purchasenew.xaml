@@ -16,7 +16,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <TextBox Name="tb_Search" PreviewKeyDown="tb_Search_PreviewKeyDown" TextChanged="tb_Search_TextChanged" HorizontalAlignment="Left" Height="30" Margin="25,15,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="364"/>
-        <ListView HorizontalAlignment="Left" Visibility="Hidden" Name="lv_SearchFoodItem" Height="164" Margin="10,47,0,0" VerticalAlignment="Top" Width="382">
+        <ListView HorizontalAlignment="Left" Visibility="Hidden" Name="lv_SearchFoodItem" Height="253" Margin="10,47,0,0" VerticalAlignment="Top" Width="382">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=name}" />
@@ -53,16 +53,14 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Vendor" HorizontalAlignment="Left" Margin="28,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
-        <ComboBox SelectedIndex="0" Name="vendor_combobox" HorizontalAlignment="Left" Margin="28,240,0,0" VerticalAlignment="Top" Width="363" Height="30"/>
+        <Label Content="Vendor" HorizontalAlignment="Left" Margin="28,322,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
+        <ComboBox SelectedIndex="0" Name="vendor_combobox" HorizontalAlignment="Left" Margin="28,338,0,0" VerticalAlignment="Top" Width="363" Height="30"/>
 
-        <Label Content="Total Payable Bill" HorizontalAlignment="Left" Margin="28,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
-        <Label Name="total_label" FontSize="40" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="28,320,0,0" VerticalAlignment="Top" Width="363" Background="#FF508548" Height="52" Foreground="#DDFFFFFF"/>
-        <Label Content="Total Payment" HorizontalAlignment="Left" Margin="28,390,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.232,2.208"/>
-        <CheckBox IsChecked="True" x:Name="ledger_checkbox" Content="Ledger" HorizontalAlignment="Left" Margin="330,388,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="paying_textbox" FontSize="30" HorizontalContentAlignment="Right" TabIndex="1" HorizontalAlignment="Left" Height="46" Margin="28,406,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
-        <Label Content="Remaining Balance" HorizontalAlignment="Left" Margin="28,462,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
-        <Label x:Name="remaining_label" FontSize="40" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="28,490,0,0" VerticalAlignment="Top" Width="364" Background="#FF405A93" Height="52" Foreground="#DDFFFFFF"/>
+        <Label Content="Total Payable Bill" HorizontalAlignment="Left" Margin="28,391,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
+        <Label Name="total_label" FontSize="40" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="28,418,0,0" VerticalAlignment="Top" Width="363" Background="#FF508548" Height="52" Foreground="#DDFFFFFF"/>
+        <Label Content="Total Payment" HorizontalAlignment="Left" Margin="28,488,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.232,2.208"/>
+        <CheckBox IsChecked="False" x:Name="ledger_checkbox" Content="Ledger" HorizontalAlignment="Left" Margin="330,486,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="paying_textbox" FontSize="30" HorizontalContentAlignment="Right" TabIndex="1" HorizontalAlignment="Left" Height="46" Margin="28,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
         <Button Content="Purchase" Click="btn_doPurchase" HorizontalAlignment="Left" Margin="28,562,0,0" VerticalAlignment="Top" Width="363" Height="50"/>
     </Grid>
 </Window>

@@ -25,7 +25,6 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
         List<productsaleorpurchaseviewmodel> purchaselist = new List<productsaleorpurchaseviewmodel>();
-        int vendorid = 0;
         
         public purchasenew()
         {
@@ -36,9 +35,13 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         void initFormOperations()
         {
             var db = new dbctx();
-            var products = db.product.ToList();
             mappedproducts = productutils.mapproducttoproductpurchasemodel(db.product.ToList());
             tb_Search.Focus();
+            var vendors = db.user.Where(a => a.role == "vendor").ToList();
+            vendor_combobox.ItemsSource = vendors;
+            vendor_combobox.DisplayMemberPath = "name";
+            vendor_combobox.SelectedValuePath = "id";
+            
         }
 
         void addItem_To_purchase(productsaleorpurchaseviewmodel item)
@@ -133,15 +136,6 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         private void tb_Search_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F1)
-            {
-                var dialog = new Form_InputDialogForAddCustomerInNewSale();
-                if (dialog.ShowDialog() == true)
-                {
-                    vendorid = dialog.Customer_Id;
-                    return;
-                }
-            }
             if (e.Key == Key.Down)
             {
                 int index = lv_SearchFoodItem.SelectedIndex + 1;
@@ -164,7 +158,6 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     lv_SearchFoodItem.Visibility = Visibility.Hidden;
                 }
             }
-
         }
 
         private void btn_doPurchase(object sender, RoutedEventArgs e)
@@ -175,17 +168,56 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         void donePurchase()
         {
 
-            if (paying_textbox.Text == "") 
+            try 
             {
-                MessageBox.Show("Please Enter payment", "Success");
-            }
-            int totalBill = Convert.ToInt32(total_label.Content);
-            int totalPayment = Convert.ToInt32(paying_textbox.Text);
-            
-            purchaseutils.newpurchase(purchaselist, totalBill, totalPayment, vendorid);
+                
+                if (purchaselist.Count == 0)
+                {
+                    MessageBox.Show("Add products to cart", "Information");
+                    return;
+                }
 
-            MessageBox.Show("Ammount " + totalBill, "Success");
-            Close();
+                var totalbill = purchaselist.Sum(a => a.total);
+                var totalpayment = Convert.ToDouble(paying_textbox.Text);
+
+                if (paying_textbox.Text == "")
+                {
+                    MessageBox.Show("Please Enter payment", "Information");
+                    return;
+                }
+                if (!(bool)ledger_checkbox.IsChecked)
+                {
+                    if (totalbill != totalpayment)
+                    {
+                        MessageBox.Show("Ledger is not checked", "Information");
+                        return;
+                    }
+                }
+                if (vendor_combobox.SelectedItem==null)
+                {
+                    MessageBox.Show("Please Select vendor", "Information");
+                    return;
+                }
+                var vendor = vendor_combobox.SelectedItem as data.user;
+
+
+
+
+                purchaseutils.newpurchase(purchaselist, totalpayment, vendor.id);
+
+                MessageBox.Show("Purchase Done::: Total Bill :" + totalbill+"   Total Payment:"+totalpayment, "Success");
+                Close();
+                new purchasenew().Show();
+
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Please fill all fields", "Information");
+                return;
+            }
+            
+            
+            
             
         }
     }
