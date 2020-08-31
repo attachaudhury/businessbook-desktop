@@ -27,10 +27,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
         List<productsaleorpurchaseviewmodel> salelist = new List<productsaleorpurchaseviewmodel>();
-        int customerId = 0;
-        bool isDelivery = false;
-        int deliveryBoyId;
-        string customerAddress = "";
+        data.user customer = null;
 
         public pos()
         {
@@ -44,10 +41,6 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             mappedproducts = productutils.mapproducttoproductsalemodel(db.product.ToList());
             tb_Search.Focus();
 
-            var customers = db.user.Where(a => a.role == "customer").ToList();
-            customer_combobox.ItemsSource = customers;
-            customer_combobox.DisplayMemberPath = "name";
-            customer_combobox.SelectedValuePath = "id";
 
         }
 
@@ -64,7 +57,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             }
         }
 
-        private void paying_textbox_KeyDownPressEnter(object sender, KeyEventArgs e)
+        private void paying_textbox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -72,19 +65,6 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             }
         }
 
-        private void tb_Discount_KeyDown_PressEnter(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.Key == Key.Enter)
-                {
-                    int total = Convert.ToInt32(total_label.Content);
-                    total_label.Content = Convert.ToInt32(total);
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-        }
 
         void addItem_To_SaleList(productsaleorpurchaseviewmodel item)
         {
@@ -178,21 +158,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         private void tb_Search_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F1)
-            {
-                var dialog = new Form_InputDialogForAddCustomerInNewSale();
-                if (dialog.ShowDialog() == true)
-                {
-                    isDelivery = true;
-                    customerId = dialog.Customer_Id;
-                    customerAddress = dialog.ResponseAddress + " " + dialog.ResponsePhone;
-                    if (dialog.DeliveryBoy_Id != null)
-                    {
-                        deliveryBoyId = (int)dialog.DeliveryBoy_Id;
-                    }
-                    return;
-                }
-            }
+            
             if (e.Key == Key.Down)
             {
                 int index = lv_SearchFoodItem.SelectedIndex + 1;
@@ -218,6 +184,14 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         }
 
+       private void customer_button_click(object sender, RoutedEventArgs e) {
+            var dialog = new DialogSelectUser("customer");
+            if (dialog.ShowDialog() == true)
+            {
+                customer = dialog.seleteduser;
+                return;
+            }
+        }
         private void btn_doSale(object sender, RoutedEventArgs e)
         {
             doneSale();
@@ -232,13 +206,11 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     MessageBox.Show("Add products to cart", "Information");
                     return;
                 }
-                data.user customer = null;
-                if (customer_combobox.SelectedItem != null) 
-                {
-                    customer = customer_combobox.SelectedItem as data.user;
-                }
                 var totalbill = salelist.Sum(a => a.total);
-                var totalpayment = Convert.ToDouble(paying_textbox.Text);
+                double totalpayment = 0;
+                if (paying_textbox.Text != "") {
+                    totalpayment = Convert.ToDouble(paying_textbox.Text);
+                }
                 var printCustomerInfoOnReceipt = true;
                 var totalnumberofReceipts = 0;
                 if ((bool)cbx_Receipt1.IsChecked) 
@@ -253,13 +225,9 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                 {
                     totalnumberofReceipts++;
                 }
+                saleutils.possale(salelist, totalpayment-totalbill, customer, totalnumberofReceipts, printCustomerInfoOnReceipt);
 
-                int totalBill = Convert.ToInt32(total_label.Content);
-                int Remaining = Convert.ToInt32(change_label.Content);
-                
-                //saleutils.possale(salelist, totalBill, totalpayment, customer, totalnumberofReceipts, printCustomerInfoOnReceipt);
-
-                MessageBox.Show("Ammount " + totalBill, "Success");
+                MessageBox.Show("Ammount " + totalbill, "Success");
                 Close();
                 new pos().Show();
             } 

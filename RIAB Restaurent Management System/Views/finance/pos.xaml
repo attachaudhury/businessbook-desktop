@@ -24,15 +24,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Select Customer" Click="customer_button_click" HorizontalAlignment="Left" Margin="21,240,0,0" VerticalAlignment="Top" Width="363" Height="51" Background="#FFF7F7F7" Foreground="#FF918A8A"/>
 
-        <Label Content="Customer" HorizontalAlignment="Left" Margin="21,240,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
-        <ComboBox SelectedIndex="0" x:Name="customer_combobox" HorizontalAlignment="Left" Margin="21,256,0,0" VerticalAlignment="Top" Width="363" Height="30"/>
         <Label Content="Total Payable Bill" HorizontalAlignment="Left" Margin="21,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
         <Label x:Name="total_label" FontSize="40" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="21,336,0,0" VerticalAlignment="Top" Width="363" Background="#FF508548" Height="52" Foreground="#DDFFFFFF"/>
         <Label Content="Total Payment" HorizontalAlignment="Left" Margin="21,406,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.232,2.208"/>
-        <TextBox x:Name="paying_textbox" FontSize="30" HorizontalContentAlignment="Right" TabIndex="1" HorizontalAlignment="Left" Height="46" Margin="21,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
+        <TextBox PreviewKeyDown="paying_textbox_PreviewKeyDown" TextChanged="paying_textbox_TextChanged" x:Name="paying_textbox" FontSize="30" HorizontalContentAlignment="Right" TabIndex="1" HorizontalAlignment="Left" Height="46" Margin="21,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
         <Label Content="Change" HorizontalAlignment="Left" Margin="21,473,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.023,2.917"/>
-        <Label x:Name="change_label" FontSize="40" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="21,500,0,-11" VerticalAlignment="Top" Width="363" Background="#FF508548" Height="52" Foreground="#DDFFFFFF"/>
+        <Label x:Name="change_label" FontSize="40" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="21,500,0,-11" VerticalAlignment="Top" Width="363" Background="#FF485385" Height="52" Foreground="#DDFFFFFF"/>
 
         <DataGrid Name="dg_SellingList" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="458" Margin="443,10,0,0" VerticalAlignment="Top" Width="457">
             <DataGrid.Columns>
@@ -65,7 +64,7 @@
         <CheckBox Name="cbx_Receipt2" Content="R" HorizontalAlignment="Left" Margin="421,515,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbx_Receipt3" Content="R" HorizontalAlignment="Left" Margin="421,533,0,0" VerticalAlignment="Top"/>
         <Button Content="Sale" Click="btn_doSale" HorizontalAlignment="Left" Margin="459,499,0,0" VerticalAlignment="Top" Width="441" Height="51"/>
-      
+
 
 
 

@@ -179,8 +179,8 @@
     <Compile Include="Views\others\Form_InputDialog.xaml.cs">
       <DependentUpon>Form_InputDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\others\Form_InputDialogForAddCustomerInNewSale.xaml.cs">
-      <DependentUpon>Form_InputDialogForAddCustomerInNewSale.xaml</DependentUpon>
+    <Compile Include="Views\others\DialogSelectUser.xaml.cs">
+      <DependentUpon>DialogSelectUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\others\Window_Setting.xaml.cs">
       <DependentUpon>Window_Setting.xaml</DependentUpon>
@@ -259,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\others\Form_InputDialogForAddCustomerInNewSale.xaml">
+    <Page Include="Views\others\DialogSelectUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

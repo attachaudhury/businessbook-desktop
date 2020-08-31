@@ -13,22 +13,31 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class saleutils
     {
-        public static void newsale(List<productsaleorpurchaseviewmodel> saleList, int totalpayment, int remaining, int customerId, bool receipt1, bool receipt2, bool receipt3, int saletype, string customerAddress, int deliveryBoyId)
+        public static void possale(List<productsaleorpurchaseviewmodel> saleList,double change, data.user customer, int numberofrecipiets, bool printCustomerInfoOnReciept)
+        {
+            var totalpayment = saleList.Sum(a => a.total);
+            var customerid = 0;
+            var customeraddress = "";
+            if (customer != null) 
+            {
+                customerid = customer.id;
+                customeraddress = customer.address + " " + customer.phone + " " + customer.phone2;
+            }
+            var saleid = financeutils.insertSaleTransactions(saleList, totalpayment, customerid);
+            for (int i = 0; i < numberofrecipiets; i++)
+            {
+                printing.printSaleReceipt(saleid, saleList, totalpayment,totalpayment+change, change, printCustomerInfoOnReciept, customeraddress);
+
+            }
+
+            Task.Run(() => {
+                insertSellingProductsInDatabase(saleList, saleid);
+                updateInventory(saleList);
+            });
+        }
+        public static void newsale(List<productsaleorpurchaseviewmodel> saleList, double totalpayment, int customerId)
         {
             var saleid = financeutils.insertSaleTransactions(saleList, totalpayment, customerId);
-            if (receipt1)
-            {
-                printing.printSaleReceipt(saleid, saleList, totalpayment, remaining, saletype, customerAddress);
-            }
-            if (receipt2)
-            {
-                printing.printSaleReceipt(saleid, saleList, totalpayment, remaining, saletype, customerAddress);
-            }
-            if (receipt3)
-            {
-                printing.printSaleReceipt(saleid, saleList, totalpayment, remaining, saletype, customerAddress);
-            }
-            
             Task.Run(() => {
                 insertSellingProductsInDatabase(saleList, saleid);
                 updateInventory(saleList);
@@ -109,9 +118,7 @@ namespace RIAB_Restaurent_Management_System.bll
             {
                 customerAddress = customer.address + " " + customer.phone;
             }
-            
-
-            printing.printSaleReceipt(saleid, salelist, (int)totalbill, 0, 3, customerAddress);
+            printing.printSaleReceipt(saleid, salelist, (int)totalbill, (int)totalbill, 0, false, customerAddress);
 
         }
     }

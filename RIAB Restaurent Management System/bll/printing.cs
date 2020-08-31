@@ -18,15 +18,15 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class printing
     {
-        public static void printSaleReceipt(int salesId, List<productsaleorpurchaseviewmodel> list, int totalBill, int remaining, int saleType, string customerAddress)
+        public static void printSaleReceipt(int salesId, List<productsaleorpurchaseviewmodel> list, double totalBill,double totalpayment, double remaining, bool printcustomerinfoonreceipt, string customerAddress)
         {
             PrintDialog pd = new PrintDialog();
-            var doc = ((IDocumentPaginatorSource)getFlowDocument(salesId, list, totalBill, remaining, saleType, customerAddress)).DocumentPaginator;
+            var doc = ((IDocumentPaginatorSource)getFlowDocument(salesId, list, totalBill,totalpayment, remaining, printcustomerinfoonreceipt, customerAddress)).DocumentPaginator;
 
             pd.PrintQueue = new PrintQueue(new PrintServer(), new PrinterSettings().PrinterName);
             pd.PrintDocument(doc, "Print Document");
         }
-        static FlowDocument getFlowDocument(int salesId, List<productsaleorpurchaseviewmodel> list, int totalBill, int remaining, int saleType, string customerAddress)
+        static FlowDocument getFlowDocument(int salesId, List<productsaleorpurchaseviewmodel> list, double totalBill, double totalpayment, double remaining, bool printcustomerinfoonreceipt, string customerAddress)
         {
             FlowDocument fd = new FlowDocument();
             //fd.PageWidth = 260;
@@ -89,7 +89,7 @@ namespace RIAB_Restaurent_Management_System.bll
             middle.Blocks.Add(table);
             middle.Blocks.Add(new Paragraph(new Run("______________________________________")));
             middle.Blocks.Add(new Paragraph(new Bold(new Run("Total                              " + totalBill))));
-            middle.Blocks.Add(new Paragraph(new Run("Paid:   " + (totalBill + remaining) + "   Remaining:   " + remaining)));
+            middle.Blocks.Add(new Paragraph(new Run("Paid:   " + (totalpayment) + "   Remaining:   " + remaining)));
 
 
 
@@ -109,7 +109,7 @@ namespace RIAB_Restaurent_Management_System.bll
             footer.Blocks.Add(footer2);
 
             //if saleType is 3, then it will also print customer address on recipt
-            if (saleType == 3)
+            if (printcustomerinfoonreceipt)
             {
                 footer.Blocks.Add(footer4);
                 footer.Blocks.Add(footer3);
