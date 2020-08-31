@@ -24,7 +24,9 @@
             </MenuItem>
 
             <MenuItem Header="Finances">
+                <MenuItem Header="Accounts" Click="accountsshow"/>
                 <MenuItem Header="POS" Click="pos"/>
+                <MenuItem Header="New Sale" Click="salenewshow"/>
                 <MenuItem Header="View Sales" Click="salesshow"/>
                 <MenuItem Header="New Purchase" Click="purchasenewshow"/>
                 <MenuItem Header="Purchases" Click="purchasesshow"/>

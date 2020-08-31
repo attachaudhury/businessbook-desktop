@@ -24,6 +24,7 @@ namespace RIAB_Restaurent_Management_System.data
     
         public int id { get; set; }
         public string barcode { get; set; }
+        public string category { get; set; }
         public Nullable<double> carrycost { get; set; }
         public Nullable<double> discount { get; set; }
         public string name { get; set; }
@@ -32,7 +33,6 @@ namespace RIAB_Restaurent_Management_System.data
         public Nullable<double> quantity { get; set; }
         public Nullable<double> saleprice { get; set; }
         public Nullable<bool> saleactive { get; set; }
-        public string category { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subproduct> subproduct { get; set; }

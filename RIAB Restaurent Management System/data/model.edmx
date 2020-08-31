@@ -31,12 +31,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="groupid" Type="int" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="amount" Type="float" />
           <Property Name="status" Type="varchar" MaxLength="50" />
           <Property Name="date" Type="datetime" />
-          <Property Name="childof" Type="int" />
           <Property Name="paymentmethod" Type="varchar" MaxLength="30" />
           <Property Name="referencenumber" Type="varchar" MaxLength="50" />
           <Property Name="bank" Type="varchar" MaxLength="50" />
@@ -53,6 +51,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="barcode" Type="nvarchar" MaxLength="100" />
+          <Property Name="category" Type="varchar" MaxLength="50" />
           <Property Name="carrycost" Type="float" />
           <Property Name="discount" Type="float" />
           <Property Name="name" Type="varchar" MaxLength="100" />
@@ -61,7 +60,6 @@
           <Property Name="quantity" Type="float" />
           <Property Name="saleprice" Type="float" />
           <Property Name="saleactive" Type="bit" />
-          <Property Name="category" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="salepurchaseproduct">
           <Key>
@@ -108,8 +106,8 @@
           <Property Name="password" Type="varchar" MaxLength="20" />
           <Property Name="username" Type="varchar" MaxLength="20" />
           <Property Name="phone" Type="varchar" MaxLength="30" />
-          <Property Name="role" Type="varchar" MaxLength="20" />
           <Property Name="phone2" Type="varchar" MaxLength="30" />
+          <Property Name="role" Type="varchar" MaxLength="20" />
         </EntityType>
         <Association Name="fk_createdbyuser_user_financetransaction">
           <End Role="user" Type="Self.user" Multiplicity="0..1" />
@@ -345,12 +343,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="groupid" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="amount" Type="Double" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="childof" Type="Int32" />
           <Property Name="paymentmethod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="referencenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -371,6 +367,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="carrycost" Type="Double" />
           <Property Name="discount" Type="Double" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -382,7 +379,6 @@
           <NavigationProperty Name="subproduct" Relationship="bbdbModel.fk_product_product_subproduct" FromRole="product" ToRole="subproduct" />
           <NavigationProperty Name="salepurchaseproduct" Relationship="bbdbModel.fk_product_salepurchaseproduct_product" FromRole="product" ToRole="salepurchaseproduct" />
           <NavigationProperty Name="subproduct1" Relationship="bbdbModel.fk_subproduct_product_subproduct" FromRole="product" ToRole="subproduct" />
-          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="salepurchaseproduct">
           <Key>
@@ -433,11 +429,11 @@
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="phone2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="closing" Relationship="bbdbModel.fk_user_closing_user" FromRole="user" ToRole="closing" />
           <NavigationProperty Name="financetransaction" Relationship="bbdbModel.fk_createdbyuser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
           <NavigationProperty Name="financetransaction1" Relationship="bbdbModel.fk_targettouser_user_financetransaction" FromRole="user" ToRole="financetransaction" />
-          <Property Name="phone2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_user_closing_user">
           <End Type="bbdbModel.user" Role="user" Multiplicity="0..1" />
@@ -547,7 +543,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -588,12 +584,10 @@
                 <ScalarProperty Name="bank" ColumnName="bank" />
                 <ScalarProperty Name="referencenumber" ColumnName="referencenumber" />
                 <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
-                <ScalarProperty Name="childof" ColumnName="childof" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="groupid" ColumnName="groupid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -601,7 +595,6 @@
           <EntitySetMapping Name="product">
             <EntityTypeMapping TypeName="bbdbModel.product">
               <MappingFragment StoreEntitySet="product">
-                <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="saleactive" ColumnName="saleactive" />
                 <ScalarProperty Name="saleprice" ColumnName="saleprice" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
@@ -610,6 +603,7 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="carrycost" ColumnName="carrycost" />
+                <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="barcode" ColumnName="barcode" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -656,8 +650,8 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="bbdbModel.user">
               <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="phone2" ColumnName="phone2" />
                 <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="phone2" ColumnName="phone2" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />

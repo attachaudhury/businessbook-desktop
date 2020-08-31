@@ -28,8 +28,8 @@ namespace RIAB_Restaurent_Management_System.data
         public string password { get; set; }
         public string username { get; set; }
         public string phone { get; set; }
-        public string role { get; set; }
         public string phone2 { get; set; }
+        public string role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<closing> closing { get; set; }

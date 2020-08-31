@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1edd36221509449c8af8cde9703ea96e" Name="Diagram1">
-        <EntityTypeShape EntityType="bbdbModel.closing" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="bbdbModel.closing" Width="1.5" PointX="3" PointY="11.5" />
         <EntityTypeShape EntityType="bbdbModel.financeaccount" Width="1.5" PointX="0.75" PointY="2.375" />
-        <EntityTypeShape EntityType="bbdbModel.financetransaction" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="bbdbModel.financetransaction" Width="1.5" PointX="3" PointY="5.375" />
         <EntityTypeShape EntityType="bbdbModel.product" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="bbdbModel.salepurchaseproduct" Width="1.5" PointX="5.25" PointY="6.25" />
-        <EntityTypeShape EntityType="bbdbModel.subproduct" Width="1.5" PointX="5.25" PointY="2.375" />
-        <EntityTypeShape EntityType="bbdbModel.tbl_FinanceChart" Width="1.5" PointX="7.75" PointY="3" />
+        <EntityTypeShape EntityType="bbdbModel.salepurchaseproduct" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="bbdbModel.subproduct" Width="1.5" PointX="5.25" PointY="2.5" />
+        <EntityTypeShape EntityType="bbdbModel.tbl_FinanceChart" Width="1.5" PointX="7.75" PointY="3.25" />
         <EntityTypeShape EntityType="bbdbModel.user" Width="1.5" PointX="0.75" PointY="6" />
         <AssociationConnector Association="bbdbModel.fk_user_closing_user" />
         <AssociationConnector Association="bbdbModel.fk_financeaccount_financeaccount_financetransaction" />

@@ -69,12 +69,10 @@ constraint fk_parent_financeaccount foreign key (fk_parent_financeaccount) refer
 
 create table financetransaction(
 id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-groupid int,
 name varchar(50),
 amount float,
 status varchar(50),
 date datetime,
-childof int,
 paymentmethod varchar(30),
 referencenumber varchar(50),
 bank varchar(50),
@@ -135,8 +133,9 @@ insert into financeaccount(id,name,type,fk_parent_financeaccount) values(301,'ow
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(302,'share capital','equity',null);
 /*income Accounts */
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(401,'pos sale','income',null);
-insert into financeaccount(id,name,type,fk_parent_financeaccount) values(402,'service sale','income',null);
-insert into financeaccount(id,name,type,fk_parent_financeaccount) values(403,'other','income',null);
+insert into financeaccount(id,name,type,fk_parent_financeaccount) values(402,'sale','income',null);
+insert into financeaccount(id,name,type,fk_parent_financeaccount) values(403,'service sale','income',null);
+insert into financeaccount(id,name,type,fk_parent_financeaccount) values(404,'other','income',null);
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(405,'inventory gain','income',null);
 /*expence Accounts */
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(501,'operating','expence',null);
@@ -148,6 +147,14 @@ insert into financeaccount(id,name,type,fk_parent_financeaccount) values(510,'ot
 insert into financeaccount(id,name,type,fk_parent_financeaccount) values(511,'inventory loss','expence',null);
 
 SET IDENTITY_INSERT financeaccount OFF
+
+--common transactions entries
+--sale::   pos sale/sale(-totalbill)   cash(+totalpayment)  account receivable(totalbill - totalpayment)  csg(+cost of goods sold) inventory(-cost of goods sold , name=--inventory--on--sale--)
+--customer payment::  some asset account(+totalpayment)  account receivable(-totalpayment)
+--purchase::   inventory(+totalbill, name= --inventory--on--purchase--)   cash(-totalpayment)  account payable(-(totalbill - totalpayment))
+--vendor payment::  some asset account(-totalpayment)  account payable(+totalpayment)
+--expence:: some expence account(+totalpayment)     some asset account(-totalpayment)
+
 
 
 --Must Have Data

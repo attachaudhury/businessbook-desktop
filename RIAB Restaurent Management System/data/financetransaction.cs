@@ -21,12 +21,10 @@ namespace RIAB_Restaurent_Management_System.data
         }
     
         public int id { get; set; }
-        public Nullable<int> groupid { get; set; }
         public string name { get; set; }
         public Nullable<double> amount { get; set; }
         public string status { get; set; }
         public Nullable<System.DateTime> date { get; set; }
-        public Nullable<int> childof { get; set; }
         public string paymentmethod { get; set; }
         public string referencenumber { get; set; }
         public string bank { get; set; }

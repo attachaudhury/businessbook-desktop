@@ -160,9 +160,17 @@ html{overflow:hidden;height:200px;}
         #endregion menuitem_products
 
         #region menuitem_finance
+        private void accountsshow(object sender, RoutedEventArgs e)
+        {
+            new accounts().Show();
+        }
         private void pos(object sender, RoutedEventArgs e)
         {
             new pos().Show();
+        }
+        private void salenewshow(object sender, RoutedEventArgs e)
+        {
+            new salenew().Show();
         }
         private void transactionsshow(object sender, RoutedEventArgs e)
         {

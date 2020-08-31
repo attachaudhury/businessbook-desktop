@@ -23,7 +23,7 @@ namespace RIAB_Restaurent_Management_System.bll
                 customerid = customer.id;
                 customeraddress = customer.address + " " + customer.phone + " " + customer.phone2;
             }
-            var saleid = financeutils.insertSaleTransactions(saleList, totalpayment, customerid);
+            var saleid = financeutils.insertSaleTransactions("pos sale", saleList, totalpayment, customerid);
             for (int i = 0; i < numberofrecipiets; i++)
             {
                 printing.printSaleReceipt(saleid, saleList, totalpayment,totalpayment+change, change, printCustomerInfoOnReciept, customeraddress);
@@ -37,7 +37,7 @@ namespace RIAB_Restaurent_Management_System.bll
         }
         public static void newsale(List<productsaleorpurchaseviewmodel> saleList, double totalpayment, int customerId)
         {
-            var saleid = financeutils.insertSaleTransactions(saleList, totalpayment, customerId);
+            var saleid = financeutils.insertSaleTransactions("sale", saleList, totalpayment, customerId);
             Task.Run(() => {
                 insertSellingProductsInDatabase(saleList, saleid);
                 updateInventory(saleList);
