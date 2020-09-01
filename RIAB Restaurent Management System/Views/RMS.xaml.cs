@@ -31,7 +31,7 @@ namespace RIAB_Restaurent_Management_System.Views
         }
         void initpage()
         {
-
+            initchart();
             var db = new dbctx();
             var sales = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").Sum(a => a.amount);
             if (sales == null)
@@ -102,6 +102,11 @@ html{overflow:hidden;height:200px;}
 </body>
 </html>";
             webview.NavigateToString(html);
+        }
+
+        void initchart() 
+        {
+
         }
         private void hideAdminMenu()
         {
