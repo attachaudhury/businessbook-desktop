@@ -7,6 +7,11 @@ using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
 using System.Runtime.InteropServices;
 using System.Linq;
+using System.Collections.Generic;
+using System;
+using Telerik.Charting;
+using Telerik.Windows.Documents.Lists;
+using System.Collections.ObjectModel;
 
 namespace RIAB_Restaurent_Management_System.Views
 {
@@ -15,6 +20,7 @@ namespace RIAB_Restaurent_Management_System.Views
     public partial class RMS : Window
     {
         data.user loggininuser;
+        List<CategoricalDataPoint> collection = new List<CategoricalDataPoint>();
 
         public RMS()
         {
@@ -31,6 +37,7 @@ namespace RIAB_Restaurent_Management_System.Views
         }
         void initpage()
         {
+
             initchart();
             var db = new dbctx();
             var sales = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").Sum(a => a.amount);
@@ -104,9 +111,17 @@ html{overflow:hidden;height:200px;}
             webview.NavigateToString(html);
         }
 
-        void initchart() 
+        void initchart()
         {
 
+            chartseries.ItemsSource = new ObservableCollection<PlotInfo>
+                {
+                    new PlotInfo() { Day = "Monday", Total = 1002},
+                    new PlotInfo() { Day = "Tuesday", Total = 3000},
+                    new PlotInfo() { Day = "Wednesday", Total = 12000}, 
+                    new PlotInfo() { Day = "Thursday", Total = 8000}, 
+                    new PlotInfo() { Day = "Friday", Total = 9000}, 
+                };
         }
         private void hideAdminMenu()
         {
@@ -222,5 +237,10 @@ html{overflow:hidden;height:200px;}
         }
 
     }
-    
+    public class PlotInfo
+    {
+        public string Day { get; set; }
+        public double Total { get; set; }
+    }
+
 }
