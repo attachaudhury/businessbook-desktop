@@ -164,6 +164,10 @@ html{overflow:hidden;height:200px;}
         {
             new accounts().Show();
         }
+        private void accountsbalanceshow(object sender, RoutedEventArgs e)
+        {
+            new accountsbalance().Show();
+        }
         private void pos(object sender, RoutedEventArgs e)
         {
             new pos().Show();

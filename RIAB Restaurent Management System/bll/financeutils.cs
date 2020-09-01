@@ -280,5 +280,64 @@ namespace RIAB_Restaurent_Management_System.bll
             db.SaveChanges();
         }
 
+        public static dynamic getaccountsbalances()
+        {
+            var db = new dbctx();
+            List<financeaccount> list = db.financeaccount.Include(a => a.financetransaction).ToList();
+            var data = from d in list
+                       select new
+                       {
+                           id = d.id,
+                           name = d.name,
+                           type = d.type,
+                           today = (float)d.financetransaction.Where(a => (a.date >= DateTime.Now.Date && a.date <= DateTime.Now.Date.AddDays(1).AddTicks(-1))).Sum(a => a.amount),
+                           month = (float)d.financetransaction.Where(a => (a.date >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) && a.date <= DateTime.Now.Date.AddMonths(1).AddDays(-1))).Sum(a => a.amount),
+                           total = (float)d.financetransaction.Sum(a => a.amount)
+                       };
+
+            //List<Finance_Account_SumAllTransaction> list1 = new List<Finance_Account_SumAllTransaction>();
+            //foreach (FinanceAccount item in list)
+            //{
+            //    Finance_Account_SumAllTransaction i = new Finance_Account_SumAllTransaction();
+            //    i.AccountId = item.Id;
+            //    i.AccountName = item.Name;
+            //    i.AccountType = item.FinanceAccountType;
+            //    i.AccountAmountToday = (float)item.FinanceTransaction.Where(a=>(a.DateTime>=DateTime.Now.Date && a.DateTime <= DateTime.Now.Date.AddDays(1).AddTicks(-1))).Sum(a => a.Amount);
+            //    i.AccountAmountMonth = (float)item.FinanceTransaction.Where(a => (a.DateTime >= new DateTime(DateTime.Now.Year,DateTime.Now.Month,1) && a.DateTime <= DateTime.Now.Date.AddMonths(1).AddDays(-1))).Sum(a => a.Amount);
+            //    i.AccountAmountTotal = (float)item.FinanceTransaction.Sum(a => a.Amount);
+            //    list1.Add(i);
+            //}
+            return data.ToList();
+        }
+
+        public static dynamic finance_transaction_getAll_groupby_Month(string FinanceAccount)
+        {
+            var db = new dbctx();
+            List<financetransaction> list;
+            list = db.financetransaction.Where(a => a.financeaccount.name == FinanceAccount).Include(a => a.financeaccount).ToList();
+            // var groups = list.GroupBy(x => new { Month=x.DateTime.Value.Month, Year = x.DateTime.Value.Year });
+            var trendData =
+             (from d in db.financetransaction.Where(a => a.financeaccount.name == FinanceAccount)
+              group d by new
+              {
+                  Year = d.date.Value.Year,
+                  Month = d.date.Value.Month
+              } into g
+              select new
+              {
+                  Year = g.Key.Year,
+                  Month = g.Key.Month,
+                  Total = g.Sum(x => x.amount)
+              }
+        ).AsEnumerable()
+         .Select(g => new
+         {
+             Period = g.Year + "-" + g.Month,
+             Total = g.Total
+         });
+            return trendData;
+
+        }
+
     }
 }

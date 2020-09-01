@@ -146,6 +146,9 @@
     </Compile>
     <Compile Include="data\viewmodel\productsaleorpurchaseviewmodel.cs" />
     <Compile Include="other\Class1.cs" />
+    <Compile Include="Views\finance\accountsbalance.xaml.cs">
+      <DependentUpon>accountsbalance.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\finance\Form_DoClosing.xaml.cs">
       <DependentUpon>Form_DoClosing.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\finance\accountsbalance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\finance\Form_DoClosing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
