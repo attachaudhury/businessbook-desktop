@@ -188,10 +188,6 @@ html{overflow:hidden;height:200px;}
         {
             new Views.finance.purchases().Show();
         }
-        private void expencenewshow(object sender, RoutedEventArgs e)
-        {
-            new Views.finance.expencenew().Show();
-        }
         private void expencesshow(object sender, RoutedEventArgs e)
         {
             new Views.finance.expences().Show();

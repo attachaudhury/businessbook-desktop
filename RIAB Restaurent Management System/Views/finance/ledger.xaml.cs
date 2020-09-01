@@ -52,6 +52,10 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                 var totalpending = db.financetransaction.Where(a => (a.fk_targettouser_user_financetransaction == userid) && (a.financeaccount.name == "account payable")).Sum(a => a.amount);
                 remaining_label.Content = totalpending;
             }
+            var assetaccounts = db.financeaccount.Where(a => a.type == "asset").ToList();
+            account_combobox.ItemsSource = assetaccounts;
+            account_combobox.DisplayMemberPath = "name";
+            account_combobox.SelectedValuePath = "id";
         }
 
         private void save(object sender, RoutedEventArgs e) 
