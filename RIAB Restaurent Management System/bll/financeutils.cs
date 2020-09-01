@@ -256,5 +256,29 @@ namespace RIAB_Restaurent_Management_System.bll
             db.SaveChanges();
         }
 
+        public static void inserttransaction(int fromaccount, int toaccount, double amount)
+        {
+            var loggedinuserid = userutils.loggedinuser.id;
+            var db = new dbctx();
+
+            financetransaction ftexpence = new financetransaction();
+            ftexpence.amount = -amount;
+            ftexpence.fk_financeaccount_financeaccount_financetransaction = fromaccount;
+            ftexpence.date = DateTime.Now;
+            ftexpence.status = "posted";
+            ftexpence.fk_createdbyuser_user_financetransaction = loggedinuserid;
+            db.financetransaction.Add(ftexpence);
+            db.SaveChanges();
+
+            financetransaction ftasset = new financetransaction();
+            ftasset.amount = amount;
+            ftasset.fk_financeaccount_financeaccount_financetransaction = toaccount;
+            ftasset.date = DateTime.Now;
+            ftasset.status = "posted";
+            ftasset.fk_createdbyuser_user_financetransaction = loggedinuserid;
+            db.financetransaction.Add(ftasset);
+            db.SaveChanges();
+        }
+
     }
 }

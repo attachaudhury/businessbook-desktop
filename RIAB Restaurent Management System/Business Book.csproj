@@ -146,14 +146,11 @@
     </Compile>
     <Compile Include="data\viewmodel\productsaleorpurchaseviewmodel.cs" />
     <Compile Include="other\Class1.cs" />
-    <Compile Include="Views\finance\expencenew.xaml.cs">
-      <DependentUpon>expencenew.xaml</DependentUpon>
+    <Compile Include="Views\finance\Form_DoClosing.xaml.cs">
+      <DependentUpon>Form_DoClosing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\expences.xaml.cs">
       <DependentUpon>expences.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\Form_DoClosing.xaml.cs">
-      <DependentUpon>Form_DoClosing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\ledger.xaml.cs">
       <DependentUpon>ledger.xaml</DependentUpon>
@@ -221,17 +218,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\finance\expencenew.xaml">
+    <Page Include="Views\finance\Form_DoClosing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\finance\expences.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\Form_DoClosing.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\finance\ledger.xaml">
       <SubType>Designer</SubType>
