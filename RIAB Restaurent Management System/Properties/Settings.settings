@@ -12,13 +12,22 @@
       <Value Profile="(Default)">Business Book</Value>
     </Setting>
     <Setting Name="SubTitle" Type="System.String" Scope="User">
-      <Value Profile="(Default)">H# 52, Hussain park, Harbance Pura pull, Lahore</Value>
+      <Value Profile="(Default)">52, Hussain park, Harbance Pura pull, Lahore</Value>
     </Setting>
     <Setting Name="Footer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Call at   0302-4759550   0322-4574133</Value>
+      <Value Profile="(Default)">Call at   (+92 302 4759550)   (+92 322 4574133)</Value>
     </Setting>
     <Setting Name="Reciptlineheight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="lastsavedate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2020-09-03</Value>
+    </Setting>
+    <Setting Name="activationdate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2020-09-03</Value>
+    </Setting>
+    <Setting Name="expireindays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

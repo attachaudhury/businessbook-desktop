@@ -17,15 +17,67 @@ using System.Globalization;
 
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.Properties;
+using Telerik.Windows.Controls;
+using RIAB_Restaurent_Management_System.Views.others;
 
 namespace RIAB_Restaurent_Management_System
 {
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
-            InitializeComponent();
-            tb_Name.Focus();
+        {   
+            RadDesktopAlertManager manager = new RadDesktopAlertManager();
+            var currentdate = DateTime.Now;
+            var lastsaveddate = Settings.Default.lastsavedate;
+            var activationdate = Settings.Default.activationdate;
+            var expireindays = Settings.Default.expireindays;
+            var activationdatecheck = activationdate.AddDays(expireindays);
+            if (currentdate < lastsaveddate) 
+            {
+                var alert = new RadDesktopAlert();
+                alert.Header = "Business Book Alert";
+                alert.Content = "Please correct your system date first";
+                alert.ShowDuration = 30000;
+                System.Media.SystemSounds.Hand.Play();
+                manager.ShowAlert(alert);
+                Close();
+            }
+            else
+            {
+                Settings.Default.lastsavedate = DateTime.Now;
+                Settings.Default.Save();
+                var expireddifference = (activationdatecheck - currentdate).TotalDays;
+                if (expireddifference < 0)
+                {
+                    InitializeComponent();
+                    tb_Name.Focus();
+
+                }
+                else if (expireddifference < 7) 
+                {
+                    InitializeComponent();
+                    tb_Name.Focus();
+                    var alert = new RadDesktopAlert();
+                    alert.Header = "Business Book Alert";
+                    alert.Content = "Your licence has been expired. Please renew licence";
+                    alert.ShowDuration = 30000;
+                    System.Media.SystemSounds.Hand.Play();
+                    manager.ShowAlert(alert);
+                }
+                else {
+
+                    new registersoftware().Show();
+                    var alert = new RadDesktopAlert();
+                    alert.Header = "Business Book Alert";
+                    alert.Content = "Your licence has been expired. Please renew licence";
+                    alert.ShowDuration = 30000;
+                    System.Media.SystemSounds.Hand.Play();
+                    manager.ShowAlert(alert);
+                }
+
+
+            }
         }
 
         private void btn_Login(object sender, RoutedEventArgs e)

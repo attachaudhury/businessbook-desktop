@@ -100,7 +100,7 @@
 
             </Label>
         </Grid>
-        <Label Content=" Software Licenced By Ravicosoft. 03024759550 .Release Date 01/10/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF4D4D4D" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
+        <Label Content=" Software Licenced By Ravicosoft. +92 302 4759550 .Release Date 01/10/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF4D4D4D" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
     </Grid>
 
 </Window>

@@ -15,8 +15,7 @@ namespace RIAB_Restaurent_Management_System.bll
         public static String SubTitle = Settings.Default.SubTitle;
         public static String Footer = Settings.Default.Footer;
         public static int Reciptlineheight = Settings.Default.Reciptlineheight;
-
-        public static void saveSettings(int pageWidth, int magrinLeft,String title,String subTitle,String footer,int Reciptlineheight)
+        public static void saveSettings(int pageWidth, int magrinLeft, String title, String subTitle, String footer, int Reciptlineheight)
         {
             Settings.Default.PrinterPageWidth = pageWidth;
             Settings.Default.PrinterMarginLeft = magrinLeft;
@@ -25,6 +24,6 @@ namespace RIAB_Restaurent_Management_System.bll
             Settings.Default.Footer = footer;
             Settings.Default.Reciptlineheight = Reciptlineheight;
             Settings.Default.Save();
-    }
+        }
     }
 }

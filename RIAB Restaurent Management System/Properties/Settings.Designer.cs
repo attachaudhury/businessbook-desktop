@@ -61,7 +61,7 @@ namespace RIAB_Restaurent_Management_System.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("H# 52, Hussain park, Harbance Pura pull, Lahore")]
+        [global::System.Configuration.DefaultSettingValueAttribute("52, Hussain park, Harbance Pura pull, Lahore")]
         public string SubTitle {
             get {
                 return ((string)(this["SubTitle"]));
@@ -73,7 +73,7 @@ namespace RIAB_Restaurent_Management_System.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Call at   0302-4759550   0322-4574133")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Call at   (+92 302 4759550)   (+92 322 4574133)")]
         public string Footer {
             get {
                 return ((string)(this["Footer"]));
@@ -92,6 +92,42 @@ namespace RIAB_Restaurent_Management_System.Properties {
             }
             set {
                 this["Reciptlineheight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2020-09-03")]
+        public global::System.DateTime lastsavedate {
+            get {
+                return ((global::System.DateTime)(this["lastsavedate"]));
+            }
+            set {
+                this["lastsavedate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2020-09-03")]
+        public global::System.DateTime activationdate {
+            get {
+                return ((global::System.DateTime)(this["activationdate"]));
+            }
+            set {
+                this["activationdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int expireindays {
+            get {
+                return ((int)(this["expireindays"]));
+            }
+            set {
+                this["expireindays"] = value;
             }
         }
     }
