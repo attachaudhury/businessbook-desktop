@@ -71,7 +71,7 @@
                     </telerik:RadCartesianChart.Series>
                 </telerik:RadCartesianChart>-->
 
-                <telerik:RadCartesianChart>
+                <telerik:RadCartesianChart HorizontalAlignment="Right"  Width="700">
                     <telerik:RadCartesianChart.HorizontalAxis>
                         <telerik:CategoricalAxis/>
                     </telerik:RadCartesianChart.HorizontalAxis>
