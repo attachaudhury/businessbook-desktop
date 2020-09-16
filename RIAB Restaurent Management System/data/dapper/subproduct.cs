@@ -20,6 +20,14 @@ namespace RIAB_Restaurent_Management_System.data.dapper
         public int fk_subproduct_product_subproduct { get; set; }
         public double quantity { get; set; }
 
+
+
+    }
+    public class subproductextented:subproduct
+    {
+        public virtual string productname { get; set; }
+        public virtual string subproductname { get; set; }
+
     }
     public class subproductrepo
     {
@@ -49,6 +57,16 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
+        public List<dapper.subproductextented> getproduct_subproducts(int id)
+        {
+            var sql = "select sp.id,fk_product_product_subproduct,fk_subproduct_product_subproduct,sp.quantity,sp_p.name as productname,sp_sp.name as subproductname from subproduct sp inner join product sp_p on sp.fk_product_product_subproduct = sp_p.id inner join product sp_sp on sp.fk_subproduct_product_subproduct = sp_sp.id where fk_product_product_subproduct = " + id+";";
+            //var sql = "select * from subproduct where fk_product_product_subproduct="+id+";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.subproductextented>(sql).ToList();
+                return res;
+            }
+        }
         public int save(dapper.subproduct subproduct)
         {
 
@@ -64,6 +82,15 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             using (var connection = new MySqlConnection(conn))
             {
                 var identity = connection.Update<dapper.subproduct>(subproduct);
+                return identity;
+            }
+        }
+        public bool delete(dapper.subproduct subproduct)
+        {
+
+            using (var connection = new MySqlConnection(conn))
+            {
+                var identity = connection.Delete<dapper.subproduct>(subproduct);
                 return identity;
             }
         }

@@ -19,15 +19,16 @@ namespace RIAB_Restaurent_Management_System.Views
     [ComVisible(true)]
     public partial class RMS : Window
     {
-        data.user loggininuser;
+       // data.user loggininuser;
+       data.dapper.user loggininuserd;
         List<CategoricalDataPoint> collection = new List<CategoricalDataPoint>();
 
         public RMS()
         {
 
             InitializeComponent();
-            loggininuser = userutils.loggedinuser;
-            if (loggininuser.role != "admin")
+            loggininuserd = userutils.loggedinuserd;
+            if (loggininuserd.role != "admin")
             {
                 hideAdminMenu();
             }

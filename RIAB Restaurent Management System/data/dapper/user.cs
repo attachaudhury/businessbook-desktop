@@ -31,12 +31,12 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             //user u = new user {id=2, username = "atta" };
             // this.save(u);
             //var users = this.get();
-            dapper.user user = this.get(2);
-            user.name = "atta";
-            user.username = "atta";
-            user.password = "atta@123";
-            this.update(user);
-            var i = 1;
+            //dapper.user user = this.get(2);
+            //user.name = "atta";
+            //user.username = "atta";
+            //user.password = "atta@123";
+            //this.update(user);
+            //var i = 1;
         }
         public List<dapper.user> get() {
             var sql = "select * from user;";
@@ -69,6 +69,18 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
+        public List<dapper.user> getbywherein(string key,List<dynamic> values)
+        {
+            string a= baserepo.getWhereInSql(values);
+            string sql = "select * from user where "+key+" in ("+a+");";
+
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<user>(sql).ToList();
+                return res;
+            }
+        }
+
         public void save(dapper.user user)
         {
 
@@ -89,5 +101,6 @@ namespace RIAB_Restaurent_Management_System.data.dapper
 
             }
         }
+
     }
 }

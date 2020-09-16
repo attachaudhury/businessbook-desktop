@@ -23,9 +23,14 @@ namespace RIAB_Restaurent_Management_System.Views.product
     public partial class ProductAdd : Window
     {
         bool createmode = true;
-        data.product selectedproduct = null;
+        //data.product selectedproduct = null;
+        data.dapper.product selectedproduct = null;
+        data.dapper.productrepo productrepo;
+        data.dapper.subproductrepo subproductrepo;
         public ProductAdd(int? productId = null)
         {
+            this.productrepo = new data.dapper.productrepo();
+            this.subproductrepo = new data.dapper.subproductrepo();
             InitializeComponent();
             if (productId == null)
             {
@@ -42,7 +47,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         private void btn_Save(object sender, RoutedEventArgs e)
         {
-            var db = dbctxsinglton.getInstance();
+            //var db = dbctxsinglton.getInstance();
             if (tb_name.Text == "" || tb_saleprice.Text == "" || tb_purchaseprice.Text == "")
             {
                 MessageBox.Show("Please fill form", "Information");
@@ -50,7 +55,7 @@ namespace RIAB_Restaurent_Management_System.Views.product
             }
             if (this.createmode)
             {
-                data.product r = new data.product();
+                data.dapper.product r = new data.dapper.product();
                 r.name = tb_name.Text;
                 r.saleprice = Convert.ToInt32(tb_saleprice.Text);
                 r.purchaseprice = Convert.ToInt32(tb_purchaseprice.Text);
@@ -74,9 +79,9 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 //r.type = (string)cb_Type.SelectedValue;
                 r.saleactive = cbx_SaleActive.IsChecked.Value;
                 r.purchaseactive = cbx_PurchaseActive.IsChecked.Value;
-                db.product.Add(r);
-                db.SaveChanges();
-                selectedproduct = r;
+                var savedproduct = productrepo.save(r);
+                //db.SaveChanges();
+                selectedproduct = savedproduct;
                 this.createmode = false;
                 MessageBox.Show("Product saved", "Information");
             }
@@ -102,8 +107,9 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 //r.type = (string)cb_Type.SelectedValue;
                 selectedproduct.saleactive = cbx_SaleActive.IsChecked.Value;
                 selectedproduct.purchaseactive = cbx_PurchaseActive.IsChecked.Value;
-                db.product.AddOrUpdate(selectedproduct);
-                db.SaveChanges();
+                //db.product.AddOrUpdate(selectedproduct);
+                this.productrepo.update(selectedproduct);
+               // db.SaveChanges();
                 MessageBox.Show("product saved", "Information");
             }
         }
@@ -125,16 +131,17 @@ namespace RIAB_Restaurent_Management_System.Views.product
                     MessageBox.Show("Please add quantity", "Information");
                     return;
                 }
-                var products_cb_selectedobject = products_cb.SelectedItem as data.product;
-                subproduct subproduct = new subproduct();
+                var products_cb_selectedobject = products_cb.SelectedItem as data.dapper.product;
+                data.dapper.subproduct subproduct = new data.dapper.subproduct();
                 subproduct.fk_product_product_subproduct = selectedproduct.id;
                 subproduct.fk_subproduct_product_subproduct = products_cb_selectedobject.id;
                 subproduct.quantity = Convert.ToInt32(tb_subproductquantity.Text);
-                var db = dbctxsinglton.getInstance();
-                db.subproduct.Add(subproduct);
-                db.SaveChanges();
+                subproductrepo.save(subproduct);
+                //var db = dbctxsinglton.getInstance();
+                //db.subproduct.Add(subproduct);
+                //db.SaveChanges();
                 dg.Items.Clear();
-                var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == selectedproduct.id).ToList();
+                var subproducts = this.subproductrepo.getproduct_subproducts(this.selectedproduct.id);
                 foreach (var item in subproducts)
                 {
                     dg.Items.Add(item);
@@ -145,18 +152,24 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         public void btn_removeSubProduct(object sender, RoutedEventArgs e)
         {
-            subproduct obj = ((FrameworkElement)sender).DataContext as subproduct;
-            var db = new dbctx();
-            var dbsubproduct = db.subproduct.Find(obj.id);
-            db.subproduct.Remove(dbsubproduct);
-            db.SaveChanges();
+            data.dapper.subproduct obj = ((FrameworkElement)sender).DataContext as data.dapper.subproduct;
+            this.subproductrepo.delete(obj);
             dg.Items.Clear();
-            var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == selectedproduct.id).ToList();
+            var subproducts = this.subproductrepo.getproduct_subproducts(selectedproduct.id);
             foreach (var item in subproducts)
             {
                 dg.Items.Add(item);
             }
-
+            //var db = new dbctx();
+            //var dbsubproduct = db.subproduct.Find(obj.id);
+            //db.subproduct.Remove(dbsubproduct);
+            //db.SaveChanges();
+            //dg.Items.Clear();
+            //var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == selectedproduct.id).ToList();
+            //foreach (var item in subproducts)
+            //{
+            //    dg.Items.Add(item);
+            //}
         }
 
 
@@ -165,11 +178,13 @@ namespace RIAB_Restaurent_Management_System.Views.product
         {
             //var types = new string[] {"product", "deal", "raw"};
             //cb_Type.ItemsSource = types;
-            var db = new dbctx();
+            //var db = new dbctx();
 
-            var products = db.product.ToList();
+            //var products = db.product.ToList();
 
-            foreach (data.product item1 in products)
+            var products = this.productrepo.get();
+
+            foreach (data.dapper.product item1 in products)
             {
                 products_cb.ItemsSource = products;
                 products_cb.DisplayMemberPath = "name";
@@ -178,8 +193,8 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         void getone(int productid)
         {
-            var db = new dbctx();
-            selectedproduct = db.product.Find(productid);
+            //var db = new dbctx();
+            selectedproduct = productrepo.get(productid);
             tb_name.Text = selectedproduct.name;
             if (selectedproduct.saleprice != null)
             {
@@ -209,7 +224,8 @@ namespace RIAB_Restaurent_Management_System.Views.product
             cbx_SaleActive.IsChecked = selectedproduct.saleactive;
             cbx_PurchaseActive.IsChecked = selectedproduct.purchaseactive;
 
-            var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == productid).ToList();
+            //var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == productid).ToList();
+            var subproducts = this.subproductrepo.getproduct_subproducts(productid);
 
             foreach (var item in subproducts)
             {

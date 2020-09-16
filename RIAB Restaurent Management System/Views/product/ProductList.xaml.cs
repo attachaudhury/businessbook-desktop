@@ -1,5 +1,6 @@
 ﻿
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,14 +29,15 @@ namespace RIAB_Restaurent_Management_System.Views.product
         }
         private void initFormOperations()
         {
-            var db = dbctxsinglton.getInstance();
+            // var db = dbctxsinglton.getInstance();
+            var productrepo = new productrepo().get();
             dg_ProductList.ItemsSource = null;
-            dg_ProductList.ItemsSource = db.product.ToList();
+            dg_ProductList.ItemsSource = productrepo;
             UpdateLayout();
         }
         public void details(object sender, RoutedEventArgs e)
         {
-            data.product obj = ((FrameworkElement)sender).DataContext as data.product;
+            data.dapper.product obj = ((FrameworkElement)sender).DataContext as data.dapper.product;
             new ProductAdd(obj.id).Show();
         }
     }

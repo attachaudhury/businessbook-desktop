@@ -42,7 +42,7 @@
 
                 <DataGrid Name="dg" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,80,0,0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding product1.name}" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding subproductname}" />
                         <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" />
                         <DataGridTemplateColumn Header="Action">
                             <DataGridTemplateColumn.CellTemplate>
