@@ -1,0 +1,72 @@
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
+using MySql.Data.MySqlClient;
+using Remotion.Linq.Clauses.ResultOperators;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RIAB_Restaurent_Management_System.data.dapper
+{
+    [System.ComponentModel.DataAnnotations.Schema.Table("product")]
+
+    public class product
+    {
+        public int id { get; set; }
+        public string barcode { get; set; }
+        public string category { get; set; }
+        public double carrycost { get; set; }
+        public double discount { get; set; }
+        public string name { get; set; }
+        public double purchaseprice { get; set; }
+        public bool purchaseactive { get; set; }
+        public double quantity { get; set; }
+        public double saleprice { get; set; }
+        public bool saleactive { get; set; }
+    }
+    public class productrepo
+    {
+        string conn = baserepo.connectionstring;
+        public void  test()
+        {
+            dapper.product p = new product { barcode = "1231321234234", carrycost = 0, discount = 0, name = "deal 1", purchaseprice = 40,purchaseactive=false, quantity = 0,saleprice=50,saleactive=true };
+            this.save(p);
+        }
+        public List<dapper.product> get() {
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.GetAll<dapper.product>().ToList();
+                return res;
+            }
+        }
+        public dapper.product get(int id)
+        {
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Get<dapper.product>(id);
+                return res;
+            }
+        }
+        public int save(dapper.product product)
+        {
+
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Insert<dapper.product>(product);
+                return (int)res;
+            }
+        }
+        public bool update(dapper.product product)
+        {
+
+            using (var connection = new MySqlConnection(conn))
+            {
+                var identity = connection.Update<dapper.product>(product);
+                return identity;
+            }
+        }
+    }
+}

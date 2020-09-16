@@ -20,13 +20,15 @@ using RIAB_Restaurent_Management_System.data;
 using RIAB_Restaurent_Management_System.Properties;
 using Telerik.Windows.Controls;
 using RIAB_Restaurent_Management_System.Views.others;
+using RIAB_Restaurent_Management_System.data.dapper;
 
 namespace RIAB_Restaurent_Management_System
 {
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {   
+        {
+            new subproductrepo().test();
             RadDesktopAlertManager manager = new RadDesktopAlertManager();
             var currentdate = DateTime.Now;
             var lastsaveddate = Settings.Default.lastsavedate;
@@ -75,8 +77,6 @@ namespace RIAB_Restaurent_Management_System
                     System.Media.SystemSounds.Hand.Play();
                     manager.ShowAlert(alert);
                 }
-
-
             }
         }
 
@@ -107,7 +107,7 @@ namespace RIAB_Restaurent_Management_System
 
 
             var db = new dbctx();
-            user user = db.user.Where(a => (a.username == tb_Name.Text && a.password == tb_Pasword.Password)).FirstOrDefault();
+            data.user user = db.user.Where(a => (a.username == tb_Name.Text && a.password == tb_Pasword.Password)).FirstOrDefault();
             if (user!=null) {
             userutils.loggedinuser = user;
                 new RMS().Show();

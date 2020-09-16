@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
@@ -107,6 +108,10 @@
     <Compile Include="data\closing.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
+    <Compile Include="data\dapper\baserepo.cs" />
+    <Compile Include="data\dapper\subproduct.cs" />
+    <Compile Include="data\dapper\product.cs" />
+    <Compile Include="data\dapper\user.cs" />
     <Compile Include="data\dbctxsinglton.cs" />
     <Compile Include="data\financeaccount.cs">
       <DependentUpon>model.tt</DependentUpon>
@@ -373,8 +378,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Dapper">
+      <Version>2.0.35</Version>
+    </PackageReference>
+    <PackageReference Include="Dapper.Contrib">
+      <Version>2.0.35</Version>
+    </PackageReference>
     <PackageReference Include="EntityFramework">
-      <Version>6.0.0</Version>
+      <Version>6.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="FluentNHibernate">
+      <Version>2.1.2</Version>
     </PackageReference>
     <PackageReference Include="MaterialDesignColors">
       <Version>1.2.6</Version>
@@ -387,6 +401,15 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.18362.2005</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data">
+      <Version>8.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="NHibernate">
+      <Version>5.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SqlClient">
+      <Version>4.8.2</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.WindowsRuntime">
       <Version>4.6.0</Version>
