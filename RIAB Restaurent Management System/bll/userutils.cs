@@ -8,7 +8,7 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class userutils
     {
-        public static data.user loggedinuser { get; set; }
+        //public static data.user loggedinuser { get; set; }
         public static data.dapper.user loggedinuserd { get; set; }
     }
 }

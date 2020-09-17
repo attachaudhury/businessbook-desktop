@@ -133,8 +133,8 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 }
                 var products_cb_selectedobject = products_cb.SelectedItem as data.dapper.product;
                 data.dapper.subproduct subproduct = new data.dapper.subproduct();
-                subproduct.fk_product_product_subproduct = selectedproduct.id;
-                subproduct.fk_subproduct_product_subproduct = products_cb_selectedobject.id;
+                subproduct.fk_product_main_in_subproduct = selectedproduct.id;
+                subproduct.fk_product_sub_in_subproduct = products_cb_selectedobject.id;
                 subproduct.quantity = Convert.ToInt32(tb_subproductquantity.Text);
                 subproductrepo.save(subproduct);
                 //var db = dbctxsinglton.getInstance();

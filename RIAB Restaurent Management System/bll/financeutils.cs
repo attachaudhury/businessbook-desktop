@@ -1,5 +1,6 @@
 ﻿
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,14 @@ namespace RIAB_Restaurent_Management_System.bll
     {
         public static int insertSaleTransactions(string accountname,List<productsaleorpurchaseviewmodel> saleList,double totalpayment, int targetuserid)
         {
-            var loggedinuserid = userutils.loggedinuser.id;
-            var db = new dbctx();
-            List<financeaccount> accounts = db.financeaccount.ToList();
+            var loggedinuserid = userutils.loggedinuserd.id;
+            //var db = new dbctx();
+            productrepo productrepo = new productrepo();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+
+            //List<financeaccount> accounts = db.financeaccount.ToList();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
             var saleaccountid = accounts.Where(a => a.name == accountname).FirstOrDefault().id;
             var discountaccountid = accounts.Where(a => a.name == "discount").FirstOrDefault().id;
             var cashaccountid = accounts.Where(a => a.name == "cash").FirstOrDefault().id;
@@ -29,7 +35,8 @@ namespace RIAB_Restaurent_Management_System.bll
             foreach (var item in saleList)
             {
                 totalbill += (item.price * item.quantity);
-                product p = db.product.Find(item.id);
+                //product p = db.product.Find(item.id);
+                data.dapper.product p = productrepo.get(item.id);
                 double productcarrycost = 0;
                 if (p.carrycost != null) {
                     productcarrycost = (double)p.carrycost;
@@ -43,71 +50,81 @@ namespace RIAB_Restaurent_Management_System.bll
             }
 
             //New Sale Transaction
-            financetransaction ftsale = new financetransaction();
+            //financetransaction ftsale = new financetransaction();
+            data.dapper.financetransaction ftsale = new data.dapper.financetransaction();
             ftsale.amount = -totalbill;
-            ftsale.fk_financeaccount_financeaccount_financetransaction = saleaccountid;
+            ftsale.fk_financeaccount_in_financetransaction = saleaccountid;
             if (targetuserid != 0)
             {
-                ftsale.fk_targettouser_user_financetransaction = targetuserid;
+                ftsale.fk_user_targetto_in_financetransaction = targetuserid;
             }
             ftsale.date = DateTime.Now;
             ftsale.status = "posted";
-            ftsale.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftsale);
-            db.SaveChanges();
+            ftsale.fk_user_createdby_in_financetransaction = loggedinuserid;
+            financetransactionrepo.save(ftsale);
+            //db.financetransaction.Add(ftsale);
+            //db.SaveChanges();
             
             //New Payment Transaction against sale . if customer is paying some money
             if (totalpayment > 0)
             {
-                financetransaction ftpayment = new financetransaction();
+                //financetransaction ftpayment = new financetransaction();
+                data.dapper.financetransaction ftpayment = new data.dapper.financetransaction();
                 ftpayment.amount = totalpayment;
-                ftpayment.fk_financeaccount_financeaccount_financetransaction = cashaccountid;
+                ftpayment.fk_financeaccount_in_financetransaction = cashaccountid;
                 ftpayment.date = DateTime.Now;
                 ftpayment.status = "posted";
-                ftpayment.fk_createdbyuser_user_financetransaction = loggedinuserid;
-                db.financetransaction.Add(ftpayment);
-                db.SaveChanges();
+                ftpayment.fk_user_createdby_in_financetransaction = loggedinuserid;
+                //db.financetransaction.Add(ftpayment);
+                //db.SaveChanges();
+                financetransactionrepo.save(ftpayment);
             }
 
 
             // New AR Transaction if Ledger is true
             if (totalpayment!=totalbill)
             {
-                financetransaction ftar = new financetransaction();
+                //financetransaction ftar = new financetransaction();
+                data.dapper.financetransaction ftar = new data.dapper.financetransaction();
                 ftar.amount = totalbill - totalpayment;
-                ftar.fk_financeaccount_financeaccount_financetransaction = accountreciveableaccountid;
+                ftar.fk_financeaccount_in_financetransaction = accountreciveableaccountid;
                 if (targetuserid != 0)
                 {
-                    ftar.fk_targettouser_user_financetransaction = targetuserid;
+                    ftar.fk_user_targetto_in_financetransaction = targetuserid;
                 }
                 ftar.date = DateTime.Now;
                 ftar.status = "posted";
-                ftar.fk_createdbyuser_user_financetransaction = loggedinuserid;
-                db.financetransaction.Add(ftar);
-                db.SaveChanges();
+                ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
+                //db.financetransaction.Add(ftar);
+                //db.SaveChanges();
+                financetransactionrepo.save(ftar);
             }
 
             // new cost of goods transaction against sale
-            financetransaction ftcgs = new financetransaction();
+            //financetransaction ftcgs = new financetransaction();
+            data.dapper.financetransaction ftcgs = new data.dapper.financetransaction();
             ftcgs.amount = costofgoodssold;
-            ftcgs.fk_financeaccount_financeaccount_financetransaction = cgsaccountid;
+            ftcgs.fk_financeaccount_in_financetransaction = cgsaccountid;
             ftcgs.date = DateTime.Now;
             ftcgs.status = "posted";
-            ftcgs.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftcgs);
-            db.SaveChanges();
+            ftcgs.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftcgs);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftcgs);
 
 
             // new inventory detct transaction against against sale
-            financetransaction ftid = new financetransaction();
+            //financetransaction ftid = new financetransaction();
+            data.dapper.financetransaction ftid = new data.dapper.financetransaction();
             ftid.name = "--inventory--on--sale--";
             ftid.amount = -costofgoodssold;
-            ftid.fk_financeaccount_financeaccount_financetransaction = inventoryaccountid;
+            ftid.fk_financeaccount_in_financetransaction = inventoryaccountid;
             ftid.date = DateTime.Now;
             ftid.status = "posted";
-            ftid.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftid);
-            db.SaveChanges();
+            ftid.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftid);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftid);
 
 
             return ftsale.id;
@@ -116,9 +133,17 @@ namespace RIAB_Restaurent_Management_System.bll
 
         public static int insertPurchaseTransactions(List<productsaleorpurchaseviewmodel> purchaseList, double totalpayment, int targetuserid)
         {
-            var loggedinuserid = userutils.loggedinuser.id;
-            var db = new dbctx();
-            List<financeaccount> accounts = db.financeaccount.ToList();
+            var loggedinuserid = userutils.loggedinuserd.id;
+            //var db = new dbctx();
+
+            productrepo productrepo = new productrepo();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+
+            //List<financeaccount> accounts = db.financeaccount.ToList();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+
+            //List<financeaccount> accounts = db.financeaccount.ToList();
             var discountaccountid = accounts.Where(a => a.name == "discount").FirstOrDefault().id;
             var cashaccountid = accounts.Where(a => a.name == "cash").FirstOrDefault().id;
             var accountreciveableaccountid = accounts.Where(a => a.name == "account receivable").FirstOrDefault().id;
@@ -134,43 +159,47 @@ namespace RIAB_Restaurent_Management_System.bll
 
 
             //New purchase Transaction
-            financetransaction ftpurchase = new financetransaction();
+            //financetransaction ftpurchase = new financetransaction();
+            data.dapper.financetransaction ftpurchase = new data.dapper.financetransaction();
             ftpurchase.amount = totalbill;
             ftpurchase.name = "--inventory--on--purchase--";
-            ftpurchase.fk_financeaccount_financeaccount_financetransaction = inventoryaccountid;
-            ftpurchase.fk_targettouser_user_financetransaction = targetuserid;
+            ftpurchase.fk_financeaccount_in_financetransaction = inventoryaccountid;
+            ftpurchase.fk_user_targetto_in_financetransaction = targetuserid;
             ftpurchase.date = DateTime.Now;
             ftpurchase.status = "posted";
-            ftpurchase.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftpurchase);
-            db.SaveChanges();
-            
+            ftpurchase.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftpurchase);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftpurchase);
+
             //New Payment Transaction against sale . if we are paying some money
             if (totalpayment > 0)
             {
-                financetransaction ftpayment = new financetransaction();
+                data.dapper.financetransaction ftpayment = new data.dapper.financetransaction();
                 ftpayment.amount = -(totalpayment);
-                ftpayment.fk_financeaccount_financeaccount_financetransaction = cashaccountid;
+                ftpayment.fk_financeaccount_in_financetransaction = cashaccountid;
                 ftpayment.date = DateTime.Now;
                 ftpayment.status = "posted";
-                ftpayment.fk_createdbyuser_user_financetransaction = loggedinuserid;
-                db.financetransaction.Add(ftpayment);
-                db.SaveChanges();
+                ftpayment.fk_user_createdby_in_financetransaction = loggedinuserid;
+                //db.financetransaction.Add(ftpayment);
+                //db.SaveChanges();
+                financetransactionrepo.save(ftpayment);
             }
 
 
             // New AP Transaction if TotalRemaining has ammount
             if ( totalbill!= totalpayment)
             {
-                financetransaction ftap = new financetransaction();
+                data.dapper.financetransaction ftap = new data.dapper.financetransaction();
                 ftap.amount = -(totalbill - totalpayment);
-                ftap.fk_financeaccount_financeaccount_financetransaction = accountpayableableaccountid;
-                ftap.fk_targettouser_user_financetransaction = targetuserid;
+                ftap.fk_financeaccount_in_financetransaction = accountpayableableaccountid;
+                ftap.fk_user_targetto_in_financetransaction = targetuserid;
                 ftap.date = DateTime.Now;
                 ftap.status = "Posted";
-                ftap.fk_createdbyuser_user_financetransaction = loggedinuserid;
-                db.financetransaction.Add(ftap);
-                db.SaveChanges();
+                ftap.fk_user_createdby_in_financetransaction = loggedinuserid;
+                //db.financetransaction.Add(ftap);
+                //db.SaveChanges();
+                financetransactionrepo.save(ftap);
             }
             return ftpurchase.id;
 
@@ -178,112 +207,136 @@ namespace RIAB_Restaurent_Management_System.bll
 
         public static void insertCustomerPayment(int accountid, double amount, int targetid) 
         {
-            var loggedinuserid = userutils.loggedinuser.id;
-            var db = new dbctx();
-            List<financeaccount> accounts = db.financeaccount.ToList();
-            var accountreciveableaccountid = accounts.Where(a => a.name == "account receivable").FirstOrDefault().id;
-            
+            var loggedinuserid = userutils.loggedinuserd.id;
+            //var db = new dbctx();
 
-            financetransaction ftcash = new financetransaction();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+            //List<financeaccount> accounts = db.financeaccount.ToList();
+            var accountreciveableaccountid = accounts.Where(a => a.name == "account receivable").FirstOrDefault().id;
+
+
+            data.dapper.financetransaction ftcash = new data.dapper.financetransaction();
             ftcash.amount = amount;
-            ftcash.fk_financeaccount_financeaccount_financetransaction = accountid;
+            ftcash.fk_financeaccount_in_financetransaction = accountid;
             ftcash.date = DateTime.Now;
             ftcash.status = "posted";
-            ftcash.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftcash);
-            db.SaveChanges();
+            ftcash.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftcash);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftcash);
 
 
-            financetransaction ftar = new financetransaction();
+            data.dapper.financetransaction ftar = new data.dapper.financetransaction();
             ftar.amount = -amount;
-            ftar.fk_financeaccount_financeaccount_financetransaction = accountreciveableaccountid;
+            ftar.fk_financeaccount_in_financetransaction = accountreciveableaccountid;
             ftar.date = DateTime.Now;
             ftar.status = "posted";
-            ftar.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftar);
-            db.SaveChanges();
+            ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftar);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftar);
         }
 
         public static void insertVendorPayment(int accountid, double amount, int targetid)
         {
-            var loggedinuserid = userutils.loggedinuser.id;
-            var db = new dbctx();
-            List<financeaccount> accounts = db.financeaccount.ToList();
+            var loggedinuserid = userutils.loggedinuserd.id;
+            //var db = new dbctx();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+            //List<financeaccount> accounts = db.financeaccount.ToList();
             var accountpayableableaccountid = accounts.Where(a => a.name == "account payable").FirstOrDefault().id; ;
 
 
-            financetransaction ftcash = new financetransaction();
+            data.dapper.financetransaction ftcash = new data.dapper.financetransaction();
             ftcash.amount = -amount;
-            ftcash.fk_financeaccount_financeaccount_financetransaction = accountid;
+            ftcash.fk_financeaccount_in_financetransaction = accountid;
             ftcash.date = DateTime.Now;
             ftcash.status = "posted";
-            ftcash.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftcash);
-            db.SaveChanges();
+            ftcash.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftcash);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftcash);
 
 
-            financetransaction ftar = new financetransaction();
+            data.dapper.financetransaction ftar = new data.dapper.financetransaction();
             ftar.amount = amount;
-            ftar.fk_financeaccount_financeaccount_financetransaction = accountpayableableaccountid;
+            ftar.fk_financeaccount_in_financetransaction = accountpayableableaccountid;
             ftar.date = DateTime.Now;
             ftar.status = "posted";
-            ftar.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftar);
-            db.SaveChanges();
+            ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftar);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftar);
         }
 
         public static void insertexpence(int payingaccount,  int expenceaccount, double amount)
         {
-            var loggedinuserid = userutils.loggedinuser.id;
-            var db = new dbctx();
-            
-            financetransaction ftexpence = new financetransaction();
+            var loggedinuserid = userutils.loggedinuserd.id;
+            //var db = new dbctx();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+            data.dapper.financetransaction ftexpence = new data.dapper.financetransaction();
             ftexpence.amount = -amount;
-            ftexpence.fk_financeaccount_financeaccount_financetransaction = expenceaccount;
+            ftexpence.fk_financeaccount_in_financetransaction = expenceaccount;
             ftexpence.date = DateTime.Now;
             ftexpence.status = "posted";
-            ftexpence.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftexpence);
-            db.SaveChanges();
+            ftexpence.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftexpence);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftexpence);
 
-            financetransaction ftasset = new financetransaction();
+            data.dapper.financetransaction ftasset = new data.dapper.financetransaction();
             ftasset.amount = amount;
-            ftasset.fk_financeaccount_financeaccount_financetransaction = payingaccount;
+            ftasset.fk_financeaccount_in_financetransaction = payingaccount;
             ftasset.date = DateTime.Now;
             ftasset.status = "posted";
-            ftasset.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftasset);
-            db.SaveChanges();
+            ftasset.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftasset);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftasset);
         }
 
         public static void inserttransaction(int fromaccount, int toaccount, double amount)
         {
-            var loggedinuserid = userutils.loggedinuser.id;
-            var db = new dbctx();
+            var loggedinuserid = userutils.loggedinuserd.id;
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+            //var db = new dbctx();
 
-            financetransaction ftexpence = new financetransaction();
+            data.dapper.financetransaction ftexpence = new data.dapper.financetransaction();
             ftexpence.amount = -amount;
-            ftexpence.fk_financeaccount_financeaccount_financetransaction = fromaccount;
+            ftexpence.fk_financeaccount_in_financetransaction = fromaccount;
             ftexpence.date = DateTime.Now;
             ftexpence.status = "posted";
-            ftexpence.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftexpence);
-            db.SaveChanges();
+            ftexpence.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftexpence);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftexpence);
 
-            financetransaction ftasset = new financetransaction();
+            data.dapper.financetransaction ftasset = new data.dapper.financetransaction();
             ftasset.amount = amount;
-            ftasset.fk_financeaccount_financeaccount_financetransaction = toaccount;
+            ftasset.fk_financeaccount_in_financetransaction = toaccount;
             ftasset.date = DateTime.Now;
             ftasset.status = "posted";
-            ftasset.fk_createdbyuser_user_financetransaction = loggedinuserid;
-            db.financetransaction.Add(ftasset);
-            db.SaveChanges();
+            ftasset.fk_user_createdby_in_financetransaction = loggedinuserid;
+            //db.financetransaction.Add(ftasset);
+            //db.SaveChanges();
+            financetransactionrepo.save(ftasset);
         }
 
         public static dynamic getaccountsbalances()
         {
             var db = new dbctx();
-            List<financeaccount> list = db.financeaccount.Include(a => a.financetransaction).ToList();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+
+            List<data.financeaccount> list = db.financeaccount.Include(a => a.financetransaction).ToList();
             var data = from d in list
                        select new
                        {
@@ -313,7 +366,11 @@ namespace RIAB_Restaurent_Management_System.bll
         public static dynamic finance_transaction_getAll_groupby_Month(string FinanceAccount)
         {
             var db = new dbctx();
-            List<financetransaction> list;
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financetransactionrepo financetransactionrepo = new financetransactionrepo();
+            List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
+
+            List<data.financetransaction> list;
             list = db.financetransaction.Where(a => a.financeaccount.name == FinanceAccount).Include(a => a.financeaccount).ToList();
             // var groups = list.GroupBy(x => new { Month=x.DateTime.Value.Month, Year = x.DateTime.Value.Year });
             var trendData =

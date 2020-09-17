@@ -217,11 +217,6 @@ html{overflow:hidden;height:200px;}
         {
             new Views.finance.expences().Show();
         }
-        private void mi_DoClosing(object sender, RoutedEventArgs e)
-        {
-            new Form_DoClosing().Show();
-        }
-
         #endregion menuitem_finance
 
         #region others

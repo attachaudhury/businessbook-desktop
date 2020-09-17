@@ -109,6 +109,9 @@
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
     <Compile Include="data\dapper\baserepo.cs" />
+    <Compile Include="data\dapper\financetransaction.cs" />
+    <Compile Include="data\dapper\financeaccount.cs" />
+    <Compile Include="data\dapper\salepurchaseproduct.cs" />
     <Compile Include="data\dapper\subproduct.cs" />
     <Compile Include="data\dapper\product.cs" />
     <Compile Include="data\dapper\user.cs" />
@@ -154,9 +157,6 @@
     <Compile Include="Views\finance\accountsbalance.xaml.cs">
       <DependentUpon>accountsbalance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\finance\Form_DoClosing.xaml.cs">
-      <DependentUpon>Form_DoClosing.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\finance\expences.xaml.cs">
       <DependentUpon>expences.xaml</DependentUpon>
     </Compile>
@@ -187,14 +187,8 @@
     <Compile Include="Views\finance\transactions.xaml.cs">
       <DependentUpon>transactions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\others\Form_InputDialog.xaml.cs">
-      <DependentUpon>Form_InputDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\others\DialogSelectUser.xaml.cs">
       <DependentUpon>DialogSelectUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\others\registersoftware.xaml.cs">
-      <DependentUpon>registersoftware.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\others\Window_Setting.xaml.cs">
       <DependentUpon>Window_Setting.xaml</DependentUpon>
@@ -232,10 +226,6 @@
     <Page Include="Views\finance\accountsbalance.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\finance\Form_DoClosing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\finance\expences.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -277,15 +267,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\others\Form_InputDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\others\DialogSelectUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\others\registersoftware.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -356,6 +338,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\HTMLPage1.html" />
     <Resource Include="favicon.ico" />
+    <Content Include="data\bbdb-mysql.sql" />
     <Content Include="data\bbdb.sql" />
     <Content Include="data\model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

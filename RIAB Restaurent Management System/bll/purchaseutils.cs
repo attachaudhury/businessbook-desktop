@@ -1,5 +1,6 @@
 ﻿
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;
 using System.Collections.Generic;
@@ -22,45 +23,54 @@ namespace RIAB_Restaurent_Management_System.bll
         }
         private static void insertPurchasingProductsInDatabase(List<productsaleorpurchaseviewmodel> purchaseList, int purchaseid)
         {
-            var db = new dbctx();
+            var salepurchaseproducrepo = new salepurchaseproductrepo();
+            //var db = new dbctx();
             foreach (productsaleorpurchaseviewmodel item in purchaseList)
             {
-                salepurchaseproduct saleItem = new salepurchaseproduct();
+                data.dapper.salepurchaseproduct saleItem = new data.dapper.salepurchaseproduct();
                 saleItem.price = item.price;
                 saleItem.quantity = item.quantity;
                 saleItem.total = item.total;
-                saleItem.fk_product_salepurchaseproduct_product = item.id;
-                saleItem.fk_financetransaction_salepurchaseproduct_financetransaction = purchaseid;
-                db.salepurchaseproduct.Add(saleItem);
+                saleItem.fk_product_in_salepurchaseproduct = item.id;
+                saleItem.fk_financetransaction_in_salepurchaseproduct = purchaseid;
+                //db.salepurchaseproduct.Add(saleItem);
+                salepurchaseproducrepo.save(saleItem);
             }
-            db.SaveChanges();
+            //db.SaveChanges();
         }
         private static void updateInventory(List<productsaleorpurchaseviewmodel> purchaseList)
         {
-            var db = new dbctx();
+            //var db = new dbctx();
+            var productrepo = new data.dapper.productrepo();
             foreach (var item in purchaseList)
             {
-                product p = db.product.Find(item.id);
+                data.dapper.product p = productrepo.get(item.id);
                 p.quantity = p.quantity + item.quantity;
-                db.Entry(p).State = EntityState.Modified;
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                db.Configuration.ValidateOnSaveEnabled = true;
+                productrepo.update(p);
+                //db.Entry(p).State = EntityState.Modified;
+                //db.Configuration.ValidateOnSaveEnabled = false;
+                //db.SaveChanges();
+                //db.Configuration.ValidateOnSaveEnabled = true;
                 manageSubProductInventory(item);
             }
         }
         private static void manageSubProductInventory(productsaleorpurchaseviewmodel purchasingProduct)
         {
-            var db = new dbctx();
-            var subproducts = db.subproduct.Where(a => (a.fk_product_product_subproduct == purchasingProduct.id)).ToList();
+            var productrepo = new productrepo();
+            var subproductrepo = new subproductrepo();
+            var subproducts = subproductrepo.getproduct_subproducts(purchasingProduct.id);
+            //var db = new dbctx();
+            //var subproducts = db.subproduct.Where(a => (a.fk_product_main_in_subproduct == purchasingProduct.id)).ToList();
             foreach (var item in subproducts)
             {
-                product p = db.product.Find(item.fk_subproduct_product_subproduct);
+                data.dapper.product p = productrepo.get(item.fk_product_sub_in_subproduct);
+                //data.dapper.product p = db.product.Find(item.fk_product_sub_in_subproduct);
                 p.quantity = p.quantity + (purchasingProduct.quantity * item.quantity);
-                db.Entry(p).State = EntityState.Modified;
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                db.Configuration.ValidateOnSaveEnabled = true;
+                productrepo.update(p);
+                //db.Entry(p).State = EntityState.Modified;
+                //db.Configuration.ValidateOnSaveEnabled = false;
+                //db.SaveChanges();
+                //db.Configuration.ValidateOnSaveEnabled = true;
             }
 
         }

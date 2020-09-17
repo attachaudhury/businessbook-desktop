@@ -9,9 +9,9 @@ namespace RIAB_Restaurent_Management_System.bll
 {
     public class productutils
     {
-        public static dynamic mapproducttoproductsalemodel(List<data.product> products) {
+        public static dynamic mapproducttoproductsalemodel(List<data.dapper.product> products) {
             var mappedList = new List<productsaleorpurchaseviewmodel>();
-            foreach (data.product item in products)
+            foreach (var item in products)
             {
                 productsaleorpurchaseviewmodel a = new productsaleorpurchaseviewmodel();
                 a.id = item.id;

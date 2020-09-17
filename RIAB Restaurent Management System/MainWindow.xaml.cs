@@ -69,7 +69,7 @@ namespace RIAB_Restaurent_Management_System
                 }
                 else {
 
-                    new registersoftware().Show();
+                    //new registersoftware().Show();
                     var alert = new RadDesktopAlert();
                     alert.Header = "Business Book Alert";
                     alert.Content = "Your licence has been expired. Please renew licence";

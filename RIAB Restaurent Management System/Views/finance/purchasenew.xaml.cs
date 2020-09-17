@@ -1,6 +1,6 @@
 ﻿
 using RIAB_Restaurent_Management_System.bll;
-using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,8 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
         List<productsaleorpurchaseviewmodel> purchaselist = new List<productsaleorpurchaseviewmodel>();
-        
+        productrepo productrepo = new productrepo();
+        userrepo userrepo = new userrepo();
         public purchasenew()
         {
             InitializeComponent();
@@ -34,10 +35,13 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         void initFormOperations()
         {
-            var db = new dbctx();
-            mappedproducts = productutils.mapproducttoproductpurchasemodel(db.product.ToList());
+            //var db = new dbctx();
+            //mappedproducts = productutils.mapproducttoproductpurchasemodel(db.product.ToList());
+            var products = this.productrepo.get();
+            mappedproducts = productutils.mapproducttoproductsalemodel(products);
             tb_Search.Focus();
-            var vendors = db.user.Where(a => a.role == "vendor").ToList();
+           // var vendors = db.user.Where(a => a.role == "vendor").ToList();
+            var vendors = userrepo.getbywherein("role", new List<dynamic> { "vendor" });
             vendor_combobox.ItemsSource = vendors;
             vendor_combobox.DisplayMemberPath = "name";
             vendor_combobox.SelectedValuePath = "id";

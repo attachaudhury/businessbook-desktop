@@ -1,6 +1,7 @@
 ﻿
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace RIAB_Restaurent_Management_System.Views.user
     /// </summary>
     public partial class Add : Window
     {
-        data.user loggedinperson;
+        string rtype;
+        data.dapper.user loggedinpersond;
         public Add(string roletype)
         {
             InitializeComponent();
-            loggedinperson = userutils.loggedinuser;
-            var db = new dbctx();
+            this.loggedinpersond = userutils.loggedinuserd;
+            this.rtype = roletype;
+            //var db = new dbctx();
 
             var roles = new string[] { "admin", "user", "customer","vendor" };
             if (roletype == "staff")
@@ -62,7 +65,7 @@ namespace RIAB_Restaurent_Management_System.Views.user
                     return;
                 }
             }
-            data.user person = new data.user();
+            data.dapper.user person = new data.dapper .user();
             person.name = tb_Name.Text;
             person.role = (string)cb_Role.SelectedValue;
             try
@@ -74,10 +77,17 @@ namespace RIAB_Restaurent_Management_System.Views.user
 
             }
             catch { }
-            var db = new dbctx();
-            db.user.Add(person);
-            db.SaveChanges();
+            //var db = new dbctx();
+
+            //db.user.Add(person);
+            //db.SaveChanges();
+            userrepo a = new userrepo();
+            a.save(person);
+            MessageBox.Show("User Saved", "Failed");
             Close();
+            new Add(this.rtype).Show();
+                    
+            
         }
     }
 }

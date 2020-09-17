@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RIAB_Restaurent_Management_System.data.dapper;
 
 
 namespace RIAB_Restaurent_Management_System.Views
@@ -23,26 +24,34 @@ namespace RIAB_Restaurent_Management_System.Views
     public partial class DialogSelectUser : Window
     {
         string roletype = null;
-        public data.user seleteduser { get; set; }
-        List<data.user> allusers = null;
+        public data.dapper.user seleteduser { get; set; }
+        List<data.dapper.user> allusers = null;
         
         public DialogSelectUser(string roletype)
         {
             InitializeComponent();
             tb_Phone.Focus();
             this.roletype = roletype;
-            var db = new dbctx();
+            // var db = new dbctx();
+            var userrepo = new userrepo();
+            ////var db = new dbctx();
             if (roletype == "staff")
             {
-                allusers = db.user.Where(a => (a.role == "admin" || a.role == "user")).ToList();
+                //dg_AllStaff.ItemsSource = db.user.Where(a => (a.role == "admin" || a.role == "user")).ToList();
+                var roles = new List<dynamic>() { "admin","user" };
+                allusers = userrepo.getbywherein("role",roles);
             }
             else if (roletype == "customer")
             {
-                allusers = db.user.Where(a => a.role == "customer").ToList();
+                //dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "customer").ToList();
+                var roles = new List<dynamic>() { "customer" };
+                allusers = userrepo.getbywherein("role", roles);
             }
             else
             {
-                allusers = db.user.Where(a => a.role == "vendor").ToList();
+                //dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "vendor").ToList();
+                var roles = new List<dynamic>() { "vendor" };
+                allusers = userrepo.getbywherein("role", roles);
             }
             dg.ItemsSource = allusers;
         }
@@ -62,7 +71,7 @@ namespace RIAB_Restaurent_Management_System.Views
 
         public void select(object sender, RoutedEventArgs e)
         {
-            data.user obj = ((FrameworkElement)sender).DataContext as data.user;
+            data.dapper.user obj = ((FrameworkElement)sender).DataContext as data.dapper.user;
             this.seleteduser = obj;
             DialogResult = true;
         }
@@ -75,15 +84,18 @@ namespace RIAB_Restaurent_Management_System.Views
 
         private void SaveAndSelect(object sender, System.Windows.RoutedEventArgs e)
         {
-            var db = new dbctx();
-            data.user c = new data.user();
+            //var db = new dbctx();
+            data.dapper.user c = new data.dapper.user();
             c.phone = tb_Phone.Text;
             c.role = roletype;
             c.name = tb_Name.Text;
             c.address = tb_Address.Text;
-            db.user.Add(c);
-            db.SaveChanges();
-            this.seleteduser = c;
+
+            //db.user.Add(c);
+            //db.SaveChanges();
+            var userrepo = new userrepo();
+            var customer = userrepo.save(c);
+            this.seleteduser = customer;
             DialogResult = true;
         }
 

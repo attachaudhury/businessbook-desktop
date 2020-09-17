@@ -81,14 +81,14 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             }
         }
 
-        public void save(dapper.user user)
+        public dapper.user save(dapper.user user)
         {
 
             using (var connection = new MySqlConnection(conn))
             {
                 var identity = connection.Insert<dapper.user>(user);
-                var i = 0;
-
+                user.id = (int)identity;
+                return user;
             }
         }
         public void update(dapper.user user)

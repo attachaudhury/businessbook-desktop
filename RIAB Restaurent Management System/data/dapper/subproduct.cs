@@ -16,8 +16,8 @@ namespace RIAB_Restaurent_Management_System.data.dapper
     public class subproduct
     {
         public int id { get; set; }
-        public int fk_product_product_subproduct { get; set; }
-        public int fk_subproduct_product_subproduct { get; set; }
+        public int fk_product_main_in_subproduct { get; set; }
+        public int fk_product_sub_in_subproduct { get; set; }
         public double quantity { get; set; }
 
 
@@ -34,8 +34,8 @@ namespace RIAB_Restaurent_Management_System.data.dapper
         string conn = baserepo.connectionstring;
         public void  test()
         {
-            //dapper.subproduct p = new subproduct { fk_product_product_subproduct=3,fk_subproduct_product_subproduct=1,quantity=2};
-            //dapper.subproduct p2 = new subproduct { fk_product_product_subproduct=3,fk_subproduct_product_subproduct=2,quantity=2};
+            //dapper.subproduct p = new subproduct { fk_product_main_in_subproduct=3,fk_product_sub_in_subproduct=1,quantity=2};
+            //dapper.subproduct p2 = new subproduct { fk_product_main_in_subproduct=3,fk_product_sub_in_subproduct=2,quantity=2};
             //var save = this.save(p);
             //var save2 = this.save(p2);
             var subproduct = this.get(1);
@@ -59,8 +59,8 @@ namespace RIAB_Restaurent_Management_System.data.dapper
         }
         public List<dapper.subproductextented> getproduct_subproducts(int id)
         {
-            var sql = "select sp.id,fk_product_product_subproduct,fk_subproduct_product_subproduct,sp.quantity,sp_p.name as productname,sp_sp.name as subproductname from subproduct sp inner join product sp_p on sp.fk_product_product_subproduct = sp_p.id inner join product sp_sp on sp.fk_subproduct_product_subproduct = sp_sp.id where fk_product_product_subproduct = " + id+";";
-            //var sql = "select * from subproduct where fk_product_product_subproduct="+id+";";
+            var sql = "select sp.id,fk_product_main_in_subproduct,fk_product_sub_in_subproduct,sp.quantity,sp_p.name as productname,sp_sp.name as subproductname from subproduct sp inner join product sp_p on sp.fk_product_main_in_subproduct = sp_p.id inner join product sp_sp on sp.fk_product_sub_in_subproduct = sp_sp.id where fk_product_main_in_subproduct = " + id+";";
+            //var sql = "select * from subproduct where fk_product_main_in_subproduct="+id+";";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<dapper.subproductextented>(sql).ToList();

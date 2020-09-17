@@ -17,6 +17,7 @@ using System.Media;
 using RIAB_Restaurent_Management_System.data.viewmodel;
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 
 namespace RIAB_Restaurent_Management_System.Views.finance
 {
@@ -27,7 +28,8 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
         List<productsaleorpurchaseviewmodel> salelist = new List<productsaleorpurchaseviewmodel>();
-        data.user customer = null;
+        data.dapper.user customer = null;
+        productrepo productrepo = new productrepo();
 
         public pos()
         {
@@ -37,8 +39,9 @@ namespace RIAB_Restaurent_Management_System.Views.finance
 
         void initFormOperations()
         {
-            var db = new dbctx();
-            mappedproducts = productutils.mapproducttoproductsalemodel(db.product.ToList());
+            //var db = new dbctx();
+            var products = this.productrepo.get();
+            mappedproducts = productutils.mapproducttoproductsalemodel(products);
             tb_Search.Focus();
 
 
