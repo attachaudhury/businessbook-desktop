@@ -12,6 +12,7 @@ using System;
 using Telerik.Charting;
 using Telerik.Windows.Documents.Lists;
 using System.Collections.ObjectModel;
+using RIAB_Restaurent_Management_System.data.dapper;
 
 namespace RIAB_Restaurent_Management_System.Views
 {
@@ -40,16 +41,22 @@ namespace RIAB_Restaurent_Management_System.Views
         {
 
             initchart();
-            var db = new dbctx();
-            var sales = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").Sum(a => a.amount);
-            if (sales == null)
-            {
-                sales = 0;
-            }
-            var customers = db.user.Where(a => (a.role == "customer")).Count();
-            var vendors = db.user.Where(a => (a.role == "vendor")).Count();
-            var users = db.user.Where(a => (a.role != "customer" && a.role != "vendor")).Count();
+            //var db = new dbctx();
+            //var sales = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").Sum(a => a.amount);
+            //if (sales == null)
+            //{
+            //    sales = 0;
+            //}
+            //var customers = db.user.Where(a => (a.role == "customer")).Count();
+            //var vendors = db.user.Where(a => (a.role == "vendor")).Count();
+            //var users = db.user.Where(a => (a.role != "customer" && a.role != "vendor")).Count();
 
+            var userrepo = new userrepo();
+            var financetransactionrepo = new financetransactionrepo();
+            var sales = financetransactionrepo.gettransactionsumbyaccountname("pos sale");
+                var customers = userrepo.getbywherein("role",new object[] { "customer" });
+                var vendors = userrepo.getbywherein("role", new object[] { "vendor" });
+            var users = userrepo.getbywherein("role", new object[] { "admin", "user" });
             string html = @"<html>
 <head>
   <style>

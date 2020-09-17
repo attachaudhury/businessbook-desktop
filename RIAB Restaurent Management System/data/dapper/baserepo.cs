@@ -45,7 +45,7 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             }
             return s;
         }
-        public static string getWhereInSql(List<object> values)
+        public static string getWhereInSql(object[] values)
         {
             var s = "";
             foreach (object value in values) {

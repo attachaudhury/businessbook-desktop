@@ -43,7 +43,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             mappedproducts = productutils.mapproducttoproductsalemodel(products);
             tb_Search.Focus();
 
-            var customers = userrepo.getbywherein("role",new List<dynamic> { "customer" });
+            var customers = userrepo.getbywherein("role",new dynamic[] { "customer" });
             customer_combobox.ItemsSource = customers;
             customer_combobox.DisplayMemberPath = "name";
             customer_combobox.SelectedValuePath = "id";

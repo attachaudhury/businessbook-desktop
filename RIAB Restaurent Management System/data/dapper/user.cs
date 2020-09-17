@@ -69,7 +69,7 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
-        public List<dapper.user> getbywherein(string key,List<dynamic> values)
+        public List<dapper.user> getbywherein(string key,object[] values)
         {
             string a= baserepo.getWhereInSql(values);
             string sql = "select * from user where "+key+" in ("+a+");";

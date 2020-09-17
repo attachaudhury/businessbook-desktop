@@ -77,10 +77,11 @@ namespace RIAB_Restaurent_Management_System.data.dapper
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             List<financeaccount> financeaccounts = financeaccountrepo.getmanybytype(financeaccounttype);
-            List<object> financeaccountids=  new List<object>();
-            foreach (var item in financeaccounts)
+            object[] financeaccountids = new object[financeaccounts.Count()];
+            for (int i = 0; i < financeaccounts.Count(); i++)
             {
-                financeaccountids.Add(item.id);
+
+                financeaccountids[i] = financeaccounts[i];
             }
             string whereincontent = baserepo.getWhereInSql(financeaccountids);
             string sql = "select * from financetransaction where fk_financeaccount_in_financetransaction in" + whereincontent + ";";
@@ -98,10 +99,11 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             list.Add(new KeyValuePair<string, object>("name", "sale"));
 
             List<financeaccount> financeaccounts = financeaccountrepo.getmanybysqlor(list);
-            List<object> financeaccountids = new List<object>();
-            foreach (var item in financeaccounts)
+            object[] financeaccountids = new object[financeaccounts.Count()];
+            for (int i = 0; i < financeaccounts.Count(); i++)
             {
-                financeaccountids.Add(item.id);
+
+                financeaccountids[i] = financeaccounts[i];
             }
             string whereincontent = baserepo.getWhereInSql(financeaccountids);
             string sql = "select * from financetransaction where fk_user_targetto_in_financetransaction="+ userid + " and fk_financeaccount_in_financetransaction in" + whereincontent + ";";
@@ -111,14 +113,14 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
-        public List<dapper.financetransaction> getuserreceiveablessum(int userid)
+        public int getuserreceiveablessum(int userid)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             financeaccount financeaccount = financeaccountrepo.getonebyname("account receivable");
             string sql = "select sum(amount) from financetransaction where fk_user_targetto_in_financetransaction=" + userid + " and fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                var res = connection.ExecuteScalar<int>(sql);
                 return res;
             }
         }
@@ -138,7 +140,7 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
-        public List<dapper.financetransaction> getuserpayablesum(int userid)
+        public int getuserpayablesum(int userid)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             financeaccount financeaccount = financeaccountrepo.getonebyname("account payable");
@@ -149,11 +151,23 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             string sql = "select sum(amount) from financetransaction where "+and+";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                var res = connection.ExecuteScalar<int>(sql);
                 return res;
             }
         }
 
+        public int gettransactionsumbyaccountname(string name)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccount financeaccount = financeaccountrepo.getonebyname(name);
+            string sql = "select sum(amount) from financetransaction where fk_financeaccount_in_financetransaction=" + financeaccount.id  + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.ExecuteScalar<int>(sql);
+                return res;
+            }
+
+        }
 
         public dapper.financetransaction save(dapper.financetransaction financetransaction)
         {
