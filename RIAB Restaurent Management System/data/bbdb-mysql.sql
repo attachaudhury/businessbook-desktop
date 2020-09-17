@@ -50,11 +50,10 @@ INSERT INTO `financeaccount` (`id`, `name`, `type`, `fk_parent_in_financeaccount
 
 CREATE TABLE `financetransaction` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
+  `name` varchar(60) DEFAULT NULL,
   `amount` float DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` varchar(15) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `duedate` datetime DEFAULT NULL,
   `details` varchar(200) DEFAULT NULL,
   `fk_user_createdby_in_financetransaction` int(11) DEFAULT NULL,
   `fk_user_targetto_in_financetransaction` int(11) DEFAULT NULL,

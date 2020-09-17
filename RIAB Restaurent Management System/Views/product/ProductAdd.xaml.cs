@@ -84,6 +84,8 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 selectedproduct = savedproduct;
                 this.createmode = false;
                 MessageBox.Show("Product saved", "Information");
+                Close();
+                new ProductAdd().Show();
             }
             else
             {
@@ -110,7 +112,9 @@ namespace RIAB_Restaurent_Management_System.Views.product
                 //db.product.AddOrUpdate(selectedproduct);
                 this.productrepo.update(selectedproduct);
                // db.SaveChanges();
-                MessageBox.Show("product saved", "Information");
+                MessageBox.Show("product update", "Information");
+                Close();
+                new ProductAdd(selectedproduct.id).Show();
             }
         }
         private void btn_AddSubProduct(object sender, RoutedEventArgs e)

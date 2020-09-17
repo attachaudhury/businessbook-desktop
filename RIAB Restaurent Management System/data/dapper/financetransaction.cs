@@ -20,11 +20,6 @@ namespace RIAB_Restaurent_Management_System.data.dapper
         public Nullable<double> amount { get; set; }
         public string status { get; set; }
         public Nullable<System.DateTime> date { get; set; }
-        public string paymentmethod { get; set; }
-        public string referencenumber { get; set; }
-        public string bank { get; set; }
-        public string branch { get; set; }
-        public Nullable<System.DateTime> chequedate { get; set; }
         public string details { get; set; }
         public Nullable<int> fk_user_createdby_in_financetransaction { get; set; }
         public Nullable<int> fk_user_targetto_in_financetransaction { get; set; }

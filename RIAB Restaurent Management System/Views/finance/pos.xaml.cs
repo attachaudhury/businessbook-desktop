@@ -230,14 +230,15 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                 }
                 saleutils.possale(salelist, totalpayment-totalbill, customer, totalnumberofReceipts, printCustomerInfoOnReceipt);
 
-                MessageBox.Show("Ammount " + totalbill, "Success");
+                MessageBox.Show("Sale done Ammount :: " + totalbill, "Success");
                 Close();
                 new pos().Show();
             } 
             catch (Exception ex) 
             {
+                MessageBox.Show("Sale not saved \n" + ex.Message, "Info");
             }
-            
+
         }
     }
 

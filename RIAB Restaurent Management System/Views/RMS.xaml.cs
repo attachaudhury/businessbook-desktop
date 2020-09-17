@@ -20,8 +20,8 @@ namespace RIAB_Restaurent_Management_System.Views
     [ComVisible(true)]
     public partial class RMS : Window
     {
-       // data.user loggininuser;
-       data.dapper.user loggininuserd;
+        // data.user loggininuser;
+        data.dapper.user loggininuserd;
         List<CategoricalDataPoint> collection = new List<CategoricalDataPoint>();
 
         public RMS()
@@ -54,9 +54,9 @@ namespace RIAB_Restaurent_Management_System.Views
             var userrepo = new userrepo();
             var financetransactionrepo = new financetransactionrepo();
             var sales = financetransactionrepo.gettransactionsumbyaccountname("pos sale");
-                var customers = userrepo.getbywherein("role",new object[] { "customer" });
-                var vendors = userrepo.getbywherein("role", new object[] { "vendor" });
-            var users = userrepo.getbywherein("role", new object[] { "admin", "user" });
+            var customers = userrepo.getbywherein("role", new object[] { "customer" }).Count();
+            var vendors = userrepo.getbywherein("role", new object[] { "vendor" }).Count();
+            var users = userrepo.getbywherein("role", new object[] { "admin", "user" }).Count();
             string html = @"<html>
 <head>
   <style>
@@ -69,49 +69,61 @@ html{overflow:hidden;height:200px;}
       width: 20%;
       margin: 1%;
       border: 1px solid #ddd;
-      padding: 10px 20px;
+      padding: 10px 20px 10px 20px;
       border-radius: 4px; 
     }
-    .blocks h4{
+    .blocks .title{
       margin: 0;
-      font-weight: 600;
+      font-weight: 300;
       color: #888;
     }
-    .blocks p{
+.blocks p{
       text-align: center;
-      font-size: 45px;
+      font-size: 55px;
     }
     p.a{
       color:rgb(98, 147, 211);
     }
     p.b{
-      color:red;
+      color:#f5584c;
     }
     p.c{
-      color:#8418e6;
+      color:#aa6edb;
     }
     p.d{
-      color:green;
+      color:#7fb856;
     }
+.blocks .footer{
+      margin: 0;
+      font-weight: 100;
+      color: #888;
+      font-size:10px;
+      text-align: center;
+    }
+    
   </style>
 </head>
 <body style='background-color:#f0f0f0' scroll='no'>
   <div class='main'>
     <div class='blocks'>
-      <h4>Sales</h4>
+      <span class='title'>Sales</span>
       <p class='a'>" + sales + @"</p>
+      <span class='footer'>Total Sales</span>
     </div>
     <div class='blocks'>
-      <h4>Customers</h4>
+      <span class='title'>Customers</span>
        <p class='b'>" + customers + @"</p>
+        <span class='footer'>Included All Types</span>
     </div>
     <div class='blocks'>
-      <h4>Vendors</h4>
+      <span class='title'>Vendors</span>
        <p class='c'>" + vendors + @"</p>
+        <span class='footer'>Included All Types</span>
     </div>
     <div class='blocks'>
-      <h4>Users</h4>
+      <span class='title'>Users</span>
        <p class='d'>" + users + @"</p>
+        <span class='footer'>All software users</span>
     </div>
   <div>
 </body>
@@ -126,9 +138,9 @@ html{overflow:hidden;height:200px;}
                 {
                     new PlotInfo() { Day = "Monday", Total = 1002},
                     new PlotInfo() { Day = "Tuesday", Total = 3000},
-                    new PlotInfo() { Day = "Wednesday", Total = 12000}, 
-                    new PlotInfo() { Day = "Thursday", Total = 8000}, 
-                    new PlotInfo() { Day = "Friday", Total = 9000}, 
+                    new PlotInfo() { Day = "Wednesday", Total = 12000},
+                    new PlotInfo() { Day = "Thursday", Total = 8000},
+                    new PlotInfo() { Day = "Friday", Total = 9000},
                 };
         }
         private void hideAdminMenu()

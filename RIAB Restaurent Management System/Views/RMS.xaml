@@ -40,13 +40,11 @@
             <MenuItem Header="Log Out" Click="mi_LogOut"/>
         </Menu>
         <Grid Background="#f0f0f0" Margin="0,48,0,25">
-            <Expander Background="#f0f0f0" VerticalAlignment="Top" Height="210">
-                <WebBrowser Name="webview"
+            <WebBrowser Name="webview" VerticalAlignment="Top" Height="210"
                              OverridesDefaultStyle="False"
                             ScrollViewer.CanContentScroll="False"
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                             ScrollViewer.VerticalScrollBarVisibility="Hidden"></WebBrowser>
-            </Expander>
             <Grid VerticalAlignment="Center" Margin="180,0,180,0">
                 <Calendar HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <!--<telerik:RadCartesianChart HorizontalAlignment="Right" Width="700">
@@ -93,10 +91,10 @@
                 </telerik:RadCartesianChart>
 
             </Grid>
-            
-            
-            <Label Content="BUSINESS BOOK"  VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="80" Foreground="#DDC7C7C7" >
 
+
+            <Label Content="BUSINESS BOOK"  VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="80" Foreground="#DDC7C7C7" >
+               
             </Label>
         </Grid>
         <Label Content=" Software Licenced By Ravicosoft. +92 302 4759550 .Release Date 01/10/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF4D4D4D" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
