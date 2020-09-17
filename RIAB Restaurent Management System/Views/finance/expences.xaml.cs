@@ -21,22 +21,27 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     /// </summary>
     public partial class expences : Window
     {
-        List<financeaccount> financeaccounts = null;
+        //List<financeaccount> financeaccounts = null;
+        List<data.dapper.financeaccount> financeaccounts = null;
         public expences()
         {
             InitializeComponent();
-            var db = new dbctx();
-            financeaccounts = db.financeaccount.ToList();
-            var list = db.financetransaction.Where(a => (a.financeaccount.type == "expence")).ToList();
+            //var db = new dbctx();
+            //financeaccounts = db.financeaccount.ToList();
+            var financeaccountrepo = new data.dapper.financeaccountrepo();
+            var financetransactionrepo = new data.dapper.financetransactionrepo();
+            financeaccounts = financeaccountrepo.get();
+            //var list = db.financetransaction.Where(a => (a.financeaccount.type == "expence")).ToList();
+            var list = financetransactionrepo.getmanybyfinanceaccounttype("expence");
             foreach (var item in list)
             {
                 dg.Items.Add(item);
             }
-            var assetaccounts = db.financeaccount.Where(a => a.type == "asset").ToList();
+            var assetaccounts = financeaccounts.Where(a => a.type == "asset").ToList();
             payingaccount_combobox.ItemsSource = assetaccounts;
             payingaccount_combobox.DisplayMemberPath = "name";
             payingaccount_combobox.SelectedValuePath = "id";
-            var expenceaccounts = db.financeaccount.Where(a => a.type == "expence").ToList();
+            var expenceaccounts = financeaccounts.Where(a => a.type == "expence").ToList();
             expenceaccount_combobox.ItemsSource = expenceaccounts;
             expenceaccount_combobox.DisplayMemberPath = "name";
             expenceaccount_combobox.SelectedValuePath = "id";

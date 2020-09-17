@@ -27,12 +27,12 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         {
             InitializeComponent();
             
-            var db = new dbctx();
-            var list = financeutils.getaccountsbalances();
-            foreach (var item in list)
-            {
-                dg.Items.Add(item);
-            }   
+            //var db = new dbctx();
+            //var list = financeutils.getaccountsbalances();
+            //foreach (var item in list)
+            //{
+            //    dg.Items.Add(item);
+            //}   
         }
     }
     

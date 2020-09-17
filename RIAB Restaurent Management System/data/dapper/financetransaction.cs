@@ -34,11 +34,6 @@ namespace RIAB_Restaurent_Management_System.data.dapper
     public class financetransactionrepo
     {
         string conn = baserepo.connectionstring;
-        public void  test()
-        {
-            //dapper.financetransaction p = new financetransaction { barcode = "1231321234234", carrycost = 0, discount = 0, name = "deal 1", purchaseprice = 40,purchaseactive=false, quantity = 0,saleprice=50,saleactive=true };
-            //this.save(p);
-        }
         public List<dapper.financetransaction> get() {
             using (var connection = new MySqlConnection(conn))
             {
@@ -54,6 +49,112 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
+        public List<dapper.financetransaction> getmanybyfinanceaccountname(string financeaccountname)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccount financeaccount = financeaccountrepo.getonebyname(financeaccountname);
+
+            string sql = "select * from financetransaction where fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.GetAll<dapper.financetransaction>().ToList();
+                return res;
+            }
+        }
+        public List<dapper.financetransaction> getmanybyselfnameandfinanceaccountname(string selfname,string financeaccountname)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccount financeaccount = financeaccountrepo.getonebyname(financeaccountname);
+
+            string sql = "select * from financetransaction where name='"+selfname+"' and fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.GetAll<dapper.financetransaction>().ToList();
+                return res;
+            }
+        }
+        public List<dapper.financetransaction> getmanybyfinanceaccounttype(string financeaccounttype)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            List<financeaccount> financeaccounts = financeaccountrepo.getmanybytype(financeaccounttype);
+            List<object> financeaccountids=  new List<object>();
+            foreach (var item in financeaccounts)
+            {
+                financeaccountids.Add(item.id);
+            }
+            string whereincontent = baserepo.getWhereInSql(financeaccountids);
+            string sql = "select * from financetransaction where fk_financeaccount_in_financetransaction in" + whereincontent + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                return res;
+            }
+        }
+        public List<dapper.financetransaction> getusersales(int userid)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            var list = new List<KeyValuePair<string, object>>();
+            list.Add(new KeyValuePair<string, object>("name", "pos sale"));
+            list.Add(new KeyValuePair<string, object>("name", "sale"));
+
+            List<financeaccount> financeaccounts = financeaccountrepo.getmanybysqlor(list);
+            List<object> financeaccountids = new List<object>();
+            foreach (var item in financeaccounts)
+            {
+                financeaccountids.Add(item.id);
+            }
+            string whereincontent = baserepo.getWhereInSql(financeaccountids);
+            string sql = "select * from financetransaction where fk_user_targetto_in_financetransaction="+ userid + " and fk_financeaccount_in_financetransaction in" + whereincontent + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                return res;
+            }
+        }
+        public List<dapper.financetransaction> getuserreceiveablessum(int userid)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccount financeaccount = financeaccountrepo.getonebyname("account receivable");
+            string sql = "select sum(amount) from financetransaction where fk_user_targetto_in_financetransaction=" + userid + " and fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                return res;
+            }
+        }
+        public List<dapper.financetransaction> getuserpurchases(int userid)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccount financeaccounts = financeaccountrepo.getonebyname("inventory");
+            var list = new List<KeyValuePair<string, object>>();
+            list.Add(new KeyValuePair<string, object>("fk_user_targetto_in_financetransaction", userid));
+            list.Add(new KeyValuePair<string, object>("name", "--inventory--on--purchase--"));
+            list.Add(new KeyValuePair<string, object>("fk_financeaccount_in_financetransaction", financeaccounts.id));
+            string sqland = baserepo.getkeyValuestoSqlAnd(list);
+            string sql = "select * from financetransaction where "+ sqland + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                return res;
+            }
+        }
+        public List<dapper.financetransaction> getuserpayablesum(int userid)
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccount financeaccount = financeaccountrepo.getonebyname("account payable");
+            var list = new List<KeyValuePair<string, object>>();
+            list.Add(new KeyValuePair<string, object>("fk_user_targetto_in_financetransaction", userid));
+            list.Add(new KeyValuePair<string, object>("fk_financeaccount_in_financetransaction", financeaccount.id));
+            string and = baserepo.getkeyValuestoSqlAnd(list);
+            string sql = "select sum(amount) from financetransaction where "+and+";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                return res;
+            }
+        }
+
+
         public dapper.financetransaction save(dapper.financetransaction financetransaction)
         {
 

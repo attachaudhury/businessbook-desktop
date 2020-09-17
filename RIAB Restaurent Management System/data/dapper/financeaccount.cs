@@ -43,6 +43,44 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                 return res;
             }
         }
+        public dapper.financeaccount getonebyname(string name)
+        {
+            var sql = "select * from financeaccount where name='"+name+"';";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financeaccount>(sql).FirstOrDefault();
+                return res;
+            }
+        }
+        public List<dapper.financeaccount> getmanybytype(string type)
+        {
+            var sql = "select * from financeaccount where type='" + type + "';";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financeaccount>(sql).ToList();
+                return res;
+            }
+        }
+        public List<dapper.financeaccount> getmanybysqlor(dynamic listofkeyvaluepairs)
+        {
+            string orsql = baserepo.getkeyValuesToSqlOr(listofkeyvaluepairs);
+            var sql = "select * from financeaccount where "+ orsql + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financeaccount>(sql).ToList();
+                return res;
+            }
+        }
+        public List<dapper.financeaccount> getmanybysqland(dynamic listofkeyvaluepairs)
+        {
+            string andsql = baserepo.getkeyValuestoSqlAnd(listofkeyvaluepairs);
+            var sql = "select * from financeaccount where " + andsql + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financeaccount>(sql).ToList();
+                return res;
+            }
+        }
         public dapper.financeaccount save(dapper.financeaccount financeaccount)
         {
 

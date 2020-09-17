@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.SqlServer.Server;
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,11 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             InitializeComponent();
             var accountytpes = new string[] { "asset", "liabitity", "equity", "income", "expence" };
             category_combobox.ItemsSource = accountytpes;
-            
-            var db = new dbctx();
-            var list = db.financeaccount.ToList();
+
+            //var db = new dbctx();
+            //var list = db.financeaccount.ToList();
+            var financeaccountrepo = new financeaccountrepo();
+            var list = financeaccountrepo.get();
             foreach (var item in list)
             {
                 dg.Items.Add(item);
@@ -40,18 +43,21 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         }
         private void save(object sender, RoutedEventArgs e)
         {
-            var financeaccount = new financeaccount();
+            //var financeaccount = new financeaccount();
+            data.dapper.financeaccount financeaccount = new data.dapper.financeaccount();
             financeaccount.name = tb_Name.Text;
             financeaccount.type =(string)category_combobox.SelectedValue;
             
             if (parent_combobox.SelectedItem != null) {
                 var parent = parent_combobox.SelectedItem as data.financeaccount;
-                financeaccount.fk_parent_financeaccount = parent.id;
+                financeaccount.fk_parent_in_financeaccount = parent.id;
                 financeaccount.type = parent.type;
             }
-            var db = new dbctx();
-            db.financeaccount.Add(financeaccount);
-            db.SaveChanges();
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            financeaccountrepo.save(financeaccount);
+            //var db = new dbctx();
+            //db.financeaccount.Add(financeaccount);
+            //db.SaveChanges();
             Close();
             new accounts().Show();
 

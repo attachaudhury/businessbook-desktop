@@ -21,11 +21,18 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     /// </summary>
     public partial class sales : Window
     {
+        List<data.dapper.financeaccount> financeaccounts = null;
+
         public sales()
         {
             InitializeComponent();
-            var db = new dbctx();
-            var list = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").ToList();
+            //var db = new dbctx();
+            var financeaccountrepo = new data.dapper.financeaccountrepo();
+            var financetransactionrepo = new data.dapper.financetransactionrepo();
+            //var financetransactions = financetransactionrepo.get();
+            financeaccounts = financeaccountrepo.get();
+            //var list = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").ToList();
+            var list = financetransactionrepo.getmanybyfinanceaccountname("pos sale");
             foreach (var item in list)
             {
                 dg.Items.Add(item);

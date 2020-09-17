@@ -10,7 +10,7 @@ namespace RIAB_Restaurent_Management_System.data.dapper
     public static class baserepo
     {
         public static string connectionstring = "Server=localhost;Database=bbdb;Uid=root;Pwd=;";
-        public static string keyValuestoSqlAnd(dynamic keyvaluepairs) 
+        public static string getkeyValuestoSqlAnd(dynamic keyvaluepairs) 
         {
             string s = "";
             foreach (KeyValuePair<string, object> kvp in keyvaluepairs)
@@ -21,7 +21,7 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             var ss = s.Remove(s.Length - 5);
             return ss;
         }
-        public static string keyValuesToSqlOr(dynamic keyvaluepairs)
+        public static string getkeyValuesToSqlOr(dynamic keyvaluepairs)
         {
             string s = "";
             foreach (KeyValuePair<string, object> kvp in keyvaluepairs)

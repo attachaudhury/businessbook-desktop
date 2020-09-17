@@ -22,21 +22,26 @@ namespace RIAB_Restaurent_Management_System.Views.finance
     /// </summary>
     public partial class transactions : Window
     {
+        List<data.dapper.financeaccount> financeaccounts = null;
         public transactions()
         {
             InitializeComponent();
-            var db = new dbctx();
-            foreach (var item in db.financetransaction.ToList())
+            var financeaccountrepo = new data.dapper.financeaccountrepo();
+            var financetransactionrepo = new data.dapper.financetransactionrepo();
+            var financetransactions = financetransactionrepo.get();
+            financeaccounts = financeaccountrepo.get();
+            //var db = new dbctx();
+            foreach (var item in financetransactions)
             {
                 dg.Items.Add(item);
             }
 
-            var allaccount = db.financeaccount.ToList();
-            fromaccount_combobox.ItemsSource = allaccount;
+            //var allaccount = db.financeaccount.ToList();
+            fromaccount_combobox.ItemsSource = financeaccounts;
             fromaccount_combobox.DisplayMemberPath = "name";
             fromaccount_combobox.SelectedValuePath = "id";
             
-            toaccount_combobox.ItemsSource = allaccount;
+            toaccount_combobox.ItemsSource = financeaccounts;
             toaccount_combobox.DisplayMemberPath = "name";
             toaccount_combobox.SelectedValuePath = "id";
         }
