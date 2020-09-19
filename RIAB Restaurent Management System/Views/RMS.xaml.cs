@@ -26,7 +26,7 @@ namespace RIAB_Restaurent_Management_System.Views
 
         public RMS()
         {
-
+            
             InitializeComponent();
             loggininuserd = userutils.loggedinuserd;
             if (loggininuserd.role != "admin")

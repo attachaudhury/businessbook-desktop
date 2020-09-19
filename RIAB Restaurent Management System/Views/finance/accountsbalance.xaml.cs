@@ -2,6 +2,7 @@
 using Microsoft.SqlServer.Server;
 using RIAB_Restaurent_Management_System.bll;
 using RIAB_Restaurent_Management_System.data;
+using RIAB_Restaurent_Management_System.data.dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,13 +27,12 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         public accountsbalance()
         {
             InitializeComponent();
-            
-            //var db = new dbctx();
-            //var list = financeutils.getaccountsbalances();
-            //foreach (var item in list)
-            //{
-            //    dg.Items.Add(item);
-            //}   
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            var list = financeaccountrepo.getaccountsbalances();
+            foreach (var item in list)
+            {
+                dg.Items.Add(item);
+            }
         }
     }
     

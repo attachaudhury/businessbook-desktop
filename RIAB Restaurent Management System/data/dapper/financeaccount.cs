@@ -20,6 +20,10 @@ namespace RIAB_Restaurent_Management_System.data.dapper
         public string type { get; set; }
         public Nullable<int> fk_parent_in_financeaccount { get; set; }
     }
+    public class financeaccountbalance: financeaccount
+    {
+        public int total { get; set; }
+    }
     public class financeaccountrepo
     {
         string conn = baserepo.connectionstring;
@@ -98,6 +102,17 @@ namespace RIAB_Restaurent_Management_System.data.dapper
             {
                 var identity = connection.Update<dapper.financeaccount>(financeaccount);
                 return identity;
+            }
+        }
+
+        public dynamic getaccountsbalances()
+        {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            string sql = " select t1.total,t1.id,t2.name from (select count(amount) total,fk_financeaccount_in_financetransaction id FROM financetransaction group by fk_financeaccount_in_financetransaction) as t1 join financeaccount t2 on t1.id = t2.id;";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<financeaccountbalance>(sql);
+                return res;
             }
         }
     }

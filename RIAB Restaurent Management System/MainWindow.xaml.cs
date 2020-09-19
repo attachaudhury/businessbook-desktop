@@ -29,6 +29,9 @@ namespace RIAB_Restaurent_Management_System
     {
         public MainWindow()
         {
+            financeaccountrepo financeaccountrepo = new financeaccountrepo();
+            var a = financeaccountrepo.getaccountsbalances();
+
             RadDesktopAlertManager manager = new RadDesktopAlertManager();
             var currentdate = DateTime.Now;
             var lastsaveddate = Settings.Default.lastsavedate;

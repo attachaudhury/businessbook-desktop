@@ -5,15 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RIAB_Restaurent_Management_System.Views.finance"
         mc:Ignorable="d"
-        Title="Accounts">
+        Title="Accounts Balances">
     <Grid>
         <DataGrid Name="dg" Margin="0,0,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding type}" />
-                <DataGridTextColumn Header="Today" Binding="{Binding today}" />
-                <DataGridTextColumn Header="Month" Binding="{Binding month}" />
                 <DataGridTextColumn Header="Total" Binding="{Binding total}" />
 
             </DataGrid.Columns>
