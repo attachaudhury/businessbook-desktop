@@ -49,7 +49,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
             financeaccount.type =(string)category_combobox.SelectedValue;
             
             if (parent_combobox.SelectedItem != null) {
-                var parent = parent_combobox.SelectedItem as data.financeaccount;
+                var parent = parent_combobox.SelectedItem as data.dapper.financeaccount;
                 financeaccount.fk_parent_in_financeaccount = parent.id;
                 financeaccount.type = parent.type;
             }

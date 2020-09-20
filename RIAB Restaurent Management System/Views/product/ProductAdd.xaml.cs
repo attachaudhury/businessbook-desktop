@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using System.Data.Entity.Migrations;
 using RIAB_Restaurent_Management_System.data;
 
 namespace RIAB_Restaurent_Management_System.Views.product

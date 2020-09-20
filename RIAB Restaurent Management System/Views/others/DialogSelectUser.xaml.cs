@@ -58,15 +58,16 @@ namespace RIAB_Restaurent_Management_System.Views
 
         private void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var db = new dbctx();
-            if (tb_Search.Text != null)
-            {
-                try
-                {
-                    dg.ItemsSource = db.user.Where(a => (a.role == roletype) && (a.phone.Contains(tb_Search.Text))).ToList();
-                }
-                catch { }
-            }
+            //var db = new dbctx();
+
+            //if (tb_Search.Text != null)
+            //{
+            //    try
+            //    {
+            //        dg.ItemsSource = db.user.Where(a => (a.role == roletype) && (a.phone.Contains(tb_Search.Text))).ToList();
+            //    }
+            //    catch { }
+            //}
         }
 
         public void select(object sender, RoutedEventArgs e)

@@ -39,7 +39,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
         }
         public void details(object sender, RoutedEventArgs e)
         {
-            financetransaction obj = ((FrameworkElement)sender).DataContext as financetransaction;
+            data.dapper.financetransaction obj = ((FrameworkElement)sender).DataContext as data.dapper.financetransaction;
             new purchasedetails(obj.id).Show();
         }
     }

@@ -202,7 +202,7 @@ namespace RIAB_Restaurent_Management_System.Views.finance
                     MessageBox.Show("Please Select vendor", "Information");
                     return;
                 }
-                var vendor = vendor_combobox.SelectedItem as data.user;
+                var vendor = vendor_combobox.SelectedItem as data.dapper.user;
 
 
 

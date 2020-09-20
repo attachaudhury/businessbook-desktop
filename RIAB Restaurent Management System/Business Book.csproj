@@ -105,9 +105,6 @@
     <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\TimeUtils.cs" />
     <Compile Include="bll\userutils.cs" />
-    <Compile Include="data\closing.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
     <Compile Include="data\dapper\baserepo.cs" />
     <Compile Include="data\dapper\financetransaction.cs" />
     <Compile Include="data\dapper\financeaccount.cs" />
@@ -115,43 +112,6 @@
     <Compile Include="data\dapper\subproduct.cs" />
     <Compile Include="data\dapper\product.cs" />
     <Compile Include="data\dapper\user.cs" />
-    <Compile Include="data\dbctxsinglton.cs" />
-    <Compile Include="data\financeaccount.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\financetransaction.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="data\product.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\salepurchaseproduct.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\subproduct.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\tbl_FinanceChart.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="data\user.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
     <Compile Include="data\viewmodel\productsaleorpurchaseviewmodel.cs" />
     <Compile Include="other\Class1.cs" />
     <Compile Include="Views\finance\accountsbalance.xaml.cs">
@@ -318,13 +278,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="data\model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="data\model.edmx.diagram">
-      <DependentUpon>model.edmx</DependentUpon>
-    </None>
     <None Include="other\old software\Release.zip" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -340,16 +293,6 @@
     <Resource Include="favicon.ico" />
     <Content Include="data\bbdb-mysql.sql" />
     <Content Include="data\bbdb.sql" />
-    <Content Include="data\model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>model.edmx</DependentUpon>
-      <LastGenOutput>model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="data\model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>model.edmx</DependentUpon>
-      <LastGenOutput>model.cs</LastGenOutput>
-    </Content>
     <Content Include="other\old software\Old Demo Data.sql" />
     <Content Include="other\old software\Old.sql" />
   </ItemGroup>
@@ -366,9 +309,6 @@
     </PackageReference>
     <PackageReference Include="Dapper.Contrib">
       <Version>2.0.35</Version>
-    </PackageReference>
-    <PackageReference Include="EntityFramework">
-      <Version>6.4.4</Version>
     </PackageReference>
     <PackageReference Include="MaterialDesignColors">
       <Version>1.2.6</Version>
