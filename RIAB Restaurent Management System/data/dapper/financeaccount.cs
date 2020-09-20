@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
 using MySql.Data.MySqlClient;
-using Remotion.Linq.Clauses.ResultOperators;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
