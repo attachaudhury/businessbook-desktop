@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FRAGMENT Type="ReadOnly" CreateVersion="17.4" RootPath="." Language="en">
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
+    <ROW PrereqKey="MySQLServer5.5.53" DisplayName="MySQL Server 5.5.53 x86" VersionMin="5.5" SetupFileUrl="mysql-5.5.53-win32.msi" Location="0" ExactSize="0" WinNT64Versions="Windows XP/Vista/Windows 7/Windows 8 x64/Windows 8.1 x64/Windows 10 x64" Operator="1" Options="f" TargetName="MySQL Server 5.5\mysql-5.5.53-win32.msi" Feature="MySQLServer5.5.53"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
+    <ROW SearchKey="Version" Prereq="MySQLServer5.5.53" SearchType="2" SearchString="HKLM\SOFTWARE\MySQL AB\MySQL Server 5.5\Version" VerMin="5.5.53" Order="1" MsiKey="PreReqSearch#2#HKLM\SOFTWARE\MySQL AB\MySQL Server 5.5\Version" Property="PreReqSearch"/>
+  </COMPONENT>
+</FRAGMENT>

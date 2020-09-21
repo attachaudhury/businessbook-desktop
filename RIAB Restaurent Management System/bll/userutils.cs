@@ -10,5 +10,6 @@ namespace RIAB_Restaurent_Management_System.bll
     {
         //public static data.user loggedinuser { get; set; }
         public static data.dapper.user loggedinuserd { get; set; }
+        public static string membership { get; set; }
     }
 }
