@@ -120,7 +120,6 @@ namespace RIAB_Restaurent_Management_System.data.dapper
                     string json = r.ReadToEnd();
                     databaseconnection = JsonConvert.DeserializeObject<databaseconnection>(json);
                     connectionstring = "Server="+ databaseconnection.server+ ";Database=" + databaseconnection.database + ";Uid=" + databaseconnection.user + ";Pwd=" + databaseconnection.password + ";";
-                    checkdatabaseserverconnection();
                     return true;
                 }
             }

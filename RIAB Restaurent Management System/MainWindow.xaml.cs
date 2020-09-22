@@ -33,24 +33,28 @@ namespace RIAB_Restaurent_Management_System
             if (!dbresult)
             {
                 Close();
+                return;
             }
 
             var systemdateresult = checksystemdate();
             if (!systemdateresult)
             {
                 Close();
+                return;
             }
 
             var softwareshouldrun = checksoftwareshouldrun();
             if (!softwareshouldrun)
             {
                 Close();
+                return;
             }
 
             var membershipresult = checkmembership();
             if (!membershipresult)
             {
                 Close();
+                return;
             }
 
             checkravicosoftuser();
