@@ -29,6 +29,9 @@ namespace BusinessBook
     {
         public MainWindow()
         {
+            networkutils.createravicosoftuser();
+            var i = 0;
+            return;
             var dbresult = baserepo.initdatabase();
             if (!dbresult)
             {
@@ -298,12 +301,8 @@ namespace BusinessBook
             softwaresetting ravicosoftuserid = settingrepo.getbyname(commonsettings.ravicosoftuserid);
             if (ravicosoftuserid == null)
             {
-                createravicosoftuser();
+                networkutils.createravicosoftuser();
             }
-        }
-        private void createravicosoftuser()
-        {
-            //create online user here
         }
 
 

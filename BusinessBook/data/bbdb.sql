@@ -97,7 +97,7 @@ CREATE TABLE `softwaresetting` (
 INSERT INTO `softwaresetting` (`id`,`name`, `valuetype`, `stringvalue`, `intvalue`, `boolvalue`, `floatvalue`, `datevalue`) VALUES
 (1,'membershiptype', 'string', 'free', NULL, NULL, NULL, NULL), 
 (2,'softwareshouldrun', 'bool', NULL, NULL, 1, NULL, NULL); 
-/* pre defined softwaresetting membershiptype, ravicosoftuserid, datasyncendpoint, membershipexpirydate,softwareshouldrun */;
+/* pre defined softwaresetting membershiptype, ravicosoftuserid, membershipexpirydate,softwareshouldrun */;
 
 CREATE TABLE `subproduct` (
   `id` int(11) NOT NULL,
