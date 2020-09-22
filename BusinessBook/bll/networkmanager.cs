@@ -16,7 +16,7 @@ namespace BusinessBook.bll
         public static string apipath = "http://localhost:8012/businessbookapi/";
         //public static string apipath = "https://ravicosoft.com/businessbookapi/";
         public static RestClient client = new RestClient(apipath);
-        public static async void createravicosoftuser() 
+        public static async void registerfrombusinessbookdesktop() 
         {
             try
             {
@@ -44,6 +44,35 @@ namespace BusinessBook.bll
             }
             
             
+        }
+        public static async void updatesoftwareshouldrun()
+        {
+            try
+            {
+                var request = new RestRequest("updatesoftwareshouldrun");
+                var response = await client.PostAsync<responsetype>(request);
+                if (response.status == "success")
+                {
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<responseuser>(response.data);
+                    softwaresettingrepo ssr = new softwaresettingrepo();
+
+                    var s = ssr.getbyname(commonsettings.ravicosoftuserid);
+                    if (s == null)
+                    {
+                        var ss = new softwaresetting();
+                        ss.name = commonsettings.ravicosoftuserid;
+                        ss.valuetype = "string";
+                        ss.stringvalue = user._id;
+                        ssr.save(ss);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
         }
     }
     public class responsetype { 

@@ -29,7 +29,7 @@ namespace BusinessBook
     {
         public MainWindow()
         {
-            networkutils.createravicosoftuser();
+            networkutils.updatesoftwareshouldrun();
             var i = 0;
             return;
             var dbresult = baserepo.initdatabase();
@@ -186,7 +186,7 @@ namespace BusinessBook
         {
             Task.Run(() =>
             {
-                updatesoftwareshouldrun();
+                networkutils.updatesoftwareshouldrun();
             });
             try
             {
@@ -206,13 +206,6 @@ namespace BusinessBook
                 return false;
             }
 
-        }
-
-
-
-        private async void updatesoftwareshouldrun()
-        {
-            //update software should run here;
         }
         private Boolean checkmembership()
         {
@@ -301,7 +294,7 @@ namespace BusinessBook
             softwaresetting ravicosoftuserid = settingrepo.getbyname(commonsettings.ravicosoftuserid);
             if (ravicosoftuserid == null)
             {
-                networkutils.createravicosoftuser();
+                networkutils.registerfrombusinessbookdesktop();
             }
         }
 
