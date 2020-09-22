@@ -106,29 +106,5 @@ namespace BusinessBook.Properties {
                 this["lastsavedate"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2020-09-03")]
-        public global::System.DateTime activationdate {
-            get {
-                return ((global::System.DateTime)(this["activationdate"]));
-            }
-            set {
-                this["activationdate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int expireindays {
-            get {
-                return ((int)(this["expireindays"]));
-            }
-            set {
-                this["expireindays"] = value;
-            }
-        }
     }
 }

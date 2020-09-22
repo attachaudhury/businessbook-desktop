@@ -23,11 +23,5 @@
     <Setting Name="lastsavedate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2020-09-03</Value>
     </Setting>
-    <Setting Name="activationdate" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">2020-09-03</Value>
-    </Setting>
-    <Setting Name="expireindays" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
   </Settings>
 </SettingsFile>
