@@ -104,25 +104,29 @@ namespace BusinessBook.bll
                     }
                     membershiptype = userutils.membershiptype;
 
-                    if (membershiptype.stringvalue != "free") 
+                    if (membershiptype.stringvalue != "free")
                     {
-                        var membershipexpirydate = userutils.membershipexpirydate;
-                        if (membershipexpirydate == null)
+                        if (user.membershipexpirydate != null)
                         {
-                            var ss = new softwaresetting();
-                            ss.name = commonsettings.membershipexpirydate;
-                            ss.valuetype = "date";
-                            ss.datevalue = user.membershipexpirydate;
-                            userutils.membershipexpirydate = ssr.save(ss);
+                            var membershipexpirydate = userutils.membershipexpirydate;
+                            if (membershipexpirydate == null)
+                            {
+                                var ss = new softwaresetting();
+                                ss.name = commonsettings.membershipexpirydate;
+                                ss.valuetype = "date";
+                                ss.datevalue = user.membershipexpirydate;
+                                userutils.membershipexpirydate = ssr.save(ss);
+                            }
+                            else
+                            {
+                                membershipexpirydate.valuetype = "string";
+                                membershipexpirydate.datevalue = user.membershipexpirydate;
+                                userutils.membershiptype = ssr.update(membershipexpirydate);
+                            }
                         }
-                        else
-                        {
-                            membershipexpirydate.valuetype = "string";
-                            membershipexpirydate.datevalue = user.membershipexpirydate;
-                            userutils.membershiptype = ssr.update(membershipexpirydate);
-                        }
+
                     }
-                    
+
 
 
                     var canrunsoftware = userutils.canrunsoftware;
@@ -159,7 +163,37 @@ namespace BusinessBook.bll
                         userutils.cansendsms = ssr.update(cansendsms);
                     }
 
+                }
+            }
+            catch (Exception ex)
+            {
 
+            }
+        }
+
+        public static async void updateonlinesetting(dynamic obj)
+        {
+            try
+            {
+                softwaresettingrepo ssr = new softwaresettingrepo();
+                var ravicosoftuser = ssr.getbyname(commonsettings.ravicosoftuserid);
+                if (ravicosoftuser == null)
+                {
+                    return;
+                }
+                var apiendpoint = apiendpointdefault;
+                if (userutils.apiendpoint != null)
+                {
+                    apiendpoint = userutils.apiendpoint.stringvalue;
+                }
+                RestClient client = new RestClient(apiendpoint);
+                var request = new RestRequest("updateonlinesetting");
+                obj.userid = ravicosoftuser.stringvalue;
+                request.AddJsonBody(obj);
+                var response = await client.PostAsync<responsetype>(request);
+                if (response.status == "success")
+                {
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<responseuser>(response.data);
                 }
             }
             catch (Exception ex)

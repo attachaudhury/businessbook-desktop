@@ -51,14 +51,31 @@ namespace BusinessBook.Views.others
             {
                 cansendsms_tb.Text = userutils.cansendsms.boolvalue.ToString();
             }
+            if (userutils.apiendpoint != null)
+            {
+                apiendpoint_tb.Text = userutils.apiendpoint.stringvalue;
+            }
         }
-        private void btn_Save(object sender, RoutedEventArgs e)
+        private void savesetting(object sender, RoutedEventArgs e)
         {
 
             if (username_tb.Text == "")
             {
-                MessageBox.Show("Please fill form", "Information");
+                MessageBox.Show("Please enter username", "Information");
                 return;
+            }
+            if (apiendpoint_tb.IsEnabled && apiendpoint_tb.Text == "")
+            {
+                MessageBox.Show("Please enter apiendpoint", "Information");
+                return;
+            }
+
+            dynamic obj = new { username = username_tb.Text };
+            networkutils.updateonlinesetting(obj);
+            
+            if (apiendpoint_tb.IsEnabled && apiendpoint_tb.Text != "") 
+            {
+                userutils.updateapiendpoint(apiendpoint_tb.Text);
             }
         }
 

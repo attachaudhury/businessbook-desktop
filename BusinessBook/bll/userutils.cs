@@ -45,7 +45,7 @@ namespace BusinessBook.bll
             {
                 membershipokok = true;
             }
-            if (roleok && membershipokok) 
+            if (roleok && membershipokok)
             {
                 window.Show();
             }
@@ -83,8 +83,25 @@ namespace BusinessBook.bll
             cansendsms = ssr.getbyname(commonsettings.cansendsms);
             apiendpoint = ssr.getbyname(commonsettings.apiendpoint);
         }
+        public static void updateapiendpoint(string newurl)
+        {
+            var ssr = new softwaresettingrepo();
+            if (apiendpoint == null)
+            {
+
+                var ss = new softwaresetting() { name = commonsettings.apiendpoint, valuetype = "string", stringvalue = newurl };
+                apiendpoint = ssr.save(ss);
+            }
+            else
+            {
+                apiendpoint.stringvalue = newurl;
+                apiendpoint = ssr.update(apiendpoint);
+            }
+        }
+
     }
-    public class commonsettings {
+    public class commonsettings
+    {
         public static string ravicosoftuserid = "ravicosoftuserid";
         public static string ravicosoftusername = "ravicosoftusername";
         public static string ravicosoftuserpassword = "ravicosoftuserpassword";
