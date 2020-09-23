@@ -10,7 +10,22 @@
         <telerik:RadTabControl telerik:StyleManager.Theme="Fluent">
             <telerik:RadTabControl.Items>
                 <telerik:RadTabItem Header="Account">
-                    
+                    <Grid>
+                        <Label Content="User Id" HorizontalAlignment="Left" Margin="17,24,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="userid_tb" IsEnabled="False" HorizontalAlignment="Left" Margin="140,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534"/>
+                        <Label Content="User Name" HorizontalAlignment="Left" Margin="17,84,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="username_tb" HorizontalAlignment="Left" Margin="140,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534"/>
+                        <Label Content="Password" HorizontalAlignment="Left" Margin="17,144,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="password_tb" IsEnabled="False" HorizontalAlignment="Left" Margin="140,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534"/>
+                        <Label Content="Membership" HorizontalAlignment="Left" Margin="17,204,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="membershiptype_tb" IsEnabled="False" HorizontalAlignment="Left" Margin="140,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534"/>
+                        <Label Content="Membership Expiry" HorizontalAlignment="Left" Margin="17,264,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="membershipexpiry_tb" IsEnabled="False" HorizontalAlignment="Left" Margin="140,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534"/>
+                        <Label Content="SMS Sending" HorizontalAlignment="Left" Margin="17,324,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="cansendsms_tb" IsEnabled="False" HorizontalAlignment="Left" Margin="140,327,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534"/>
+                        <Button Content="Update User Name" Click="btn_Save"  HorizontalAlignment="Left" Margin="274,413,0,0" VerticalAlignment="Top" Width="203" Height="39"/>
+
+                    </Grid>
                 </telerik:RadTabItem>
                 <telerik:RadTabItem Header="SMS">
 

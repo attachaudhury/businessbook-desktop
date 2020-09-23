@@ -246,7 +246,7 @@ html{overflow:hidden;height:200px;}
         private void mi_ravicosoftaccount(object sender, RoutedEventArgs e)
         {
             var w = new ravicosoftaccount();
-            userutils.showauthorize(w, new string[] { "admin" });
+            userutils.authorizerole(w, new string[] { "admin" });
         }
         #endregion others
 

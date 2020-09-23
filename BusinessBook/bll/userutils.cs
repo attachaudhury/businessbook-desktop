@@ -14,9 +14,8 @@ namespace BusinessBook.bll
         //public static data.user loggedinuser { get; set; }
         public static data.dapper.user loggedinuserd { get; set; }
         public static string membership { get; set; }
-        public static void showauthorize(Window window, string[] roles)
+        public static void authorizerole(Window window, string[] roles)
         {
-            
 
             if (roles.Contains(loggedinuserd.role))
             {
@@ -24,7 +23,33 @@ namespace BusinessBook.bll
             }
             else
             {
-                window = null;
+                RadDesktopAlertManager manager = new RadDesktopAlertManager();
+                var alert = new RadDesktopAlert();
+                alert.Header = "Alert";
+                alert.Content = "This page can only accessed by " + String.Join(",", roles);
+                alert.ShowDuration = 5000;
+                System.Media.SystemSounds.Hand.Play();
+                manager.ShowAlert(alert);
+            }
+        }
+        public static void authorizeroleandmembership(Window window, string[] roles, string[] membershiptypes)
+        {
+            bool roleok = false;
+            bool membershipokok = false;
+            if (roles.Contains(loggedinuserd.role))
+            {
+                roleok = true;
+            }
+            if (membershiptypes.Contains(membership))
+            {
+                membershipokok = true;
+            }
+            if (roleok && membershipokok) 
+            {
+                window.Show();
+            }
+            else
+            {
                 RadDesktopAlertManager manager = new RadDesktopAlertManager();
                 var alert = new RadDesktopAlert();
                 alert.Header = "Alert";

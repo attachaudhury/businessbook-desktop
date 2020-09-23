@@ -1,4 +1,5 @@
 ﻿using BusinessBook.bll;
+using BusinessBook.data.dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Windows.ApplicationModel.Search;
 
 namespace BusinessBook.Views.others
 {
@@ -20,9 +22,21 @@ namespace BusinessBook.Views.others
     /// </summary>
     public partial class ravicosoftaccount : Window
     {
+        softwaresettingrepo ssr = new softwaresettingrepo();
         public ravicosoftaccount()
         {
             InitializeComponent();
+            
         }
+        private void btn_Save(object sender, RoutedEventArgs e)
+        {
+
+            if (username_tb.Text == "")
+            {
+                MessageBox.Show("Please fill form", "Information");
+                return;
+            }
+        }
+
     }
 }
