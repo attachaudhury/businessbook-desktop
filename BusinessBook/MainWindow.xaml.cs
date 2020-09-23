@@ -29,9 +29,6 @@ namespace BusinessBook
     {
         public MainWindow()
         {
-            networkutils.updatesoftwareshouldrun();
-            var i = 0;
-            return;
             var dbresult = baserepo.initdatabase();
             if (!dbresult)
             {
@@ -68,7 +65,6 @@ namespace BusinessBook
 
         }
 
-        
         private void btn_CloseApplication(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -84,7 +80,6 @@ namespace BusinessBook
         {
             login();
         }
-
         void login()
         {
             //int nextMonthInt = Convert.ToInt32(DateTime.Now.ToString("MM")) + 1;
@@ -156,7 +151,6 @@ namespace BusinessBook
             //    BLL.AutoClosingMessageBox.Show("Wrong User Name and Password", "Failed", 3000);
             //}
         }
-
         private Boolean checksystemdate()
         {
             RadDesktopAlertManager manager = new RadDesktopAlertManager();
@@ -179,15 +173,9 @@ namespace BusinessBook
                 return true;
             }
         }
-
-        
-
         private Boolean checksoftwareshouldrun()
         {
-            Task.Run(() =>
-            {
-                networkutils.updatesoftwareshouldrun();
-            });
+            networkutils.updatesoftwareshouldrun();
             try
             {
                 softwaresettingrepo settingrepo = new softwaresettingrepo();
@@ -198,30 +186,29 @@ namespace BusinessBook
                 }
                 else
                 {
+                    RadDesktopAlertManager manager = new RadDesktopAlertManager();
+                    var alert = new RadDesktopAlert();
+                    alert.Header = "Alert";
+                    alert.Content = "Software usage not allowed. Please contact Ravicosoft for info";
+                    alert.ShowDuration = 5000;
+                    System.Media.SystemSounds.Hand.Play();
+                    manager.ShowAlert(alert);
                     return false;
                 }
             }
             catch
             {
-                return false;
+                return true;
             }
 
         }
         private Boolean checkmembership()
         {
+            networkutils.updatemembershiptype();
             softwaresettingrepo settingrepo = new softwaresettingrepo();
             softwaresetting membershiptype = settingrepo.getbyname(commonsettings.membershiptype);
             if (membershiptype == null)
             {
-                RadDesktopAlertManager manager = new RadDesktopAlertManager();
-                var alert = new RadDesktopAlert();
-                alert.Header = "Alert";
-                alert.Content = "Updating settings, please restart software";
-                alert.ShowDuration = 5000;
-                System.Media.SystemSounds.Hand.Play();
-                manager.ShowAlert(alert);
-                var setting = new softwaresetting() { name = commonsettings.membershiptype, valuetype = "string", stringvalue = "free" };
-                settingrepo.save(setting);
                 return false;
             }
             else if (membershiptype.stringvalue == "free")
@@ -244,9 +231,9 @@ namespace BusinessBook
                 return false;
             }
         }
-
         private Boolean validatepaidmembership()
         {
+            networkutils.updatemembershipexpirydate();
             try
             {
                 softwaresettingrepo settingrepo = new softwaresettingrepo();
@@ -255,7 +242,7 @@ namespace BusinessBook
                 {
                     var currentdate = DateTime.Now;
                     var expireddifference = ((DateTime)membershipexpirydate.datevalue - currentdate).TotalDays;
-                    if (expireddifference < 0)
+                    if (expireddifference > 0)
                     {
                         return true;
                     }
@@ -273,7 +260,6 @@ namespace BusinessBook
                 }
                 else
                 {
-                    updatemembershipexpirydate();
                     return false;
                 }
             }
@@ -282,12 +268,6 @@ namespace BusinessBook
                 return false;
             }
         }
-
-        private async void updatemembershipexpirydate()
-        {
-            //update membership expirey date here
-        }
-
         private void checkravicosoftuser()
         {
             softwaresettingrepo settingrepo = new softwaresettingrepo();
@@ -297,7 +277,5 @@ namespace BusinessBook
                 networkutils.registerfrombusinessbookdesktop();
             }
         }
-
-
     }
 }

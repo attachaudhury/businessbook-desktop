@@ -243,12 +243,17 @@ html{overflow:hidden;height:200px;}
         {
             new Window_Setting().Show();
         }
+        private void mi_ravicosoftaccount(object sender, RoutedEventArgs e)
+        {
+            var w = new ravicosoftaccount();
+            userutils.showauthorize(w, new string[] { "admin" });
+        }
         #endregion others
 
         private void mi_LogOut(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
             Close();
+            new MainWindow().Show();
         }
 
     }

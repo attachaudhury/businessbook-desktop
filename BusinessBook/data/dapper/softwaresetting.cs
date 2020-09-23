@@ -26,7 +26,7 @@ namespace BusinessBook.data.dapper
     public class commonsettings
     {
         public static string membershiptype = "membershiptype";
-        public static string ravicosoftuserid = "membershipexpirydate";
+        public static string ravicosoftuserid = "ravicosoftuserid";
         public static string membershipexpirydate = "membershipexpirydate";
         public static string softwareshouldrun = "softwareshouldrun";
     }

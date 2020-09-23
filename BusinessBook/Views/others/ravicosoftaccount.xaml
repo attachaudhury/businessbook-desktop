@@ -1,0 +1,21 @@
+﻿<Window x:Class="BusinessBook.Views.others.ravicosoftaccount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusinessBook.Views.others" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="Ravicosoft Account" Height="Auto" Width="Auto">
+    <Grid>
+        <telerik:RadTabControl telerik:StyleManager.Theme="Fluent">
+            <telerik:RadTabControl.Items>
+                <telerik:RadTabItem Header="Account">
+                    
+                </telerik:RadTabItem>
+                <telerik:RadTabItem Header="SMS">
+
+                </telerik:RadTabItem>
+            </telerik:RadTabControl.Items>
+        </telerik:RadTabControl>
+    </Grid>
+</Window>

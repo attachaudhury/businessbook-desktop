@@ -36,6 +36,7 @@
             </MenuItem>
             <MenuItem Header="Others">
                 <MenuItem Header="Setting" Click="mi_Setting"/>
+                <MenuItem Header="Ravicosoft Account" Click="mi_ravicosoftaccount"/>
             </MenuItem>
             <MenuItem Header="Log Out" Click="mi_LogOut"/>
         </Menu>
