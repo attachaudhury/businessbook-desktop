@@ -50,15 +50,9 @@ namespace BusinessBook
                 return;
             }
 
-            var membershipresult = checkmembership();
-            if (!membershipresult)
-            {
-                Close();
-                return;
-            }
-
-            checkravicosoftuser();
-
+            userutils.loadsoftwaresetting();
+            checkmembership();
+            networkutils.updatelocalsetting();
 
             InitializeComponent();
             tb_Name.Focus();
@@ -175,46 +169,44 @@ namespace BusinessBook
         }
         private Boolean checksoftwareshouldrun()
         {
-            networkutils.updatesoftwareshouldrun();
             try
             {
-                softwaresettingrepo settingrepo = new softwaresettingrepo();
-                softwaresetting softwareshouldrun = settingrepo.getbyname(commonsettings.softwareshouldrun);
-                if ((Boolean)softwareshouldrun.boolvalue)
+                softwaresetting softwareshouldrun = userutils.canrunsoftware;
+                if (softwareshouldrun != null)
                 {
-                    return true;
+                    if ((Boolean)softwareshouldrun.boolvalue)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        RadDesktopAlertManager manager = new RadDesktopAlertManager();
+                        var alert = new RadDesktopAlert();
+                        alert.Header = "Alert";
+                        alert.Content = "Software usage not allowed. Please contact Ravicosoft for info";
+                        alert.ShowDuration = 5000;
+                        System.Media.SystemSounds.Hand.Play();
+                        manager.ShowAlert(alert);
+
+                        return false;
+                    }
                 }
                 else
                 {
-                    RadDesktopAlertManager manager = new RadDesktopAlertManager();
-                    var alert = new RadDesktopAlert();
-                    alert.Header = "Alert";
-                    alert.Content = "Software usage not allowed. Please contact Ravicosoft for info";
-                    alert.ShowDuration = 5000;
-                    System.Media.SystemSounds.Hand.Play();
-                    manager.ShowAlert(alert);
-                    return false;
+                    return true;
                 }
             }
             catch
             {
                 return true;
             }
-
         }
-        private Boolean checkmembership()
+        private void checkmembership()
         {
-            networkutils.updatemembershiptype();
-            softwaresettingrepo settingrepo = new softwaresettingrepo();
-            softwaresetting membershiptype = settingrepo.getbyname(commonsettings.membershiptype);
-            if (membershiptype == null)
-            {
-                return false;
-            }
-            else if (membershiptype.stringvalue == "free")
+            softwaresetting membershiptype = userutils.membershiptype;
+            if (membershiptype == null || membershiptype.stringvalue == "free")
             {
                 userutils.membership = "free";
-                return true;
             }
             else if (membershiptype.stringvalue == "paid")
             {
@@ -223,21 +215,14 @@ namespace BusinessBook
                 {
                     userutils.membership = "paid";
                 }
-                return true;
-
-            }
-            else
-            {
-                return false;
+                return;
             }
         }
         private Boolean validatepaidmembership()
         {
-            networkutils.updatemembershipexpirydate();
             try
             {
-                softwaresettingrepo settingrepo = new softwaresettingrepo();
-                softwaresetting membershipexpirydate = settingrepo.getbyname(commonsettings.membershipexpirydate);
+                softwaresetting membershipexpirydate = userutils.membershipexpirydate;
                 if (membershipexpirydate != null)
                 {
                     var currentdate = DateTime.Now;
@@ -266,15 +251,6 @@ namespace BusinessBook
             catch (Exception ex)
             {
                 return false;
-            }
-        }
-        private void checkravicosoftuser()
-        {
-            softwaresettingrepo settingrepo = new softwaresettingrepo();
-            softwaresetting ravicosoftuserid = settingrepo.getbyname(commonsettings.ravicosoftuserid);
-            if (ravicosoftuserid == null)
-            {
-                networkutils.registerfrombusinessbookdesktop();
             }
         }
     }

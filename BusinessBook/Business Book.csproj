@@ -103,7 +103,7 @@
     </ApplicationDefinition>
     <Compile Include="bll\financeutils.cs" />
     <Compile Include="bll\MyPrinterSetting.cs" />
-    <Compile Include="bll\networkmanager.cs" />
+    <Compile Include="bll\networkutils.cs" />
     <Compile Include="bll\printing.cs" />
     <Compile Include="bll\PrintingUtils.cs" />
     <Compile Include="bll\productutils.cs" />

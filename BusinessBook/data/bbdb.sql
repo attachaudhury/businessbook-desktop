@@ -93,11 +93,7 @@ CREATE TABLE `softwaresetting` (
   `floatvalue` float DEFAULT NULL,
   `datevalue` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `softwaresetting` (`id`,`name`, `valuetype`, `stringvalue`, `intvalue`, `boolvalue`, `floatvalue`, `datevalue`) VALUES
-(1,'membershiptype', 'string', 'free', NULL, NULL, NULL, NULL), 
-(2,'softwareshouldrun', 'bool', NULL, NULL, 1, NULL, NULL); 
-/* pre defined softwaresetting membershiptype, ravicosoftuserid, membershipexpirydate,softwareshouldrun */;
+/* pre defined softwaresetting membershiptype, membershipexpirydate, ravicosoftuserid, ravicosoftusername,ravicosoftuserpassword,cansoftwarerun,cansendsms,apiendpoint */;
 
 CREATE TABLE `subproduct` (
   `id` int(11) NOT NULL,

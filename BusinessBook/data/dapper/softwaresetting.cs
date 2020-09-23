@@ -23,15 +23,9 @@ namespace BusinessBook.data.dapper
         public Nullable<double> floatvalue { get; set; }
         public Nullable<System.DateTime> datevalue { get; set; }
     }
-    public class commonsettings
-    {
-        public static string membershiptype = "membershiptype";
-        public static string ravicosoftuserid = "ravicosoftuserid";
-        public static string ravicosoftusername = "ravicosoftusername";
-        public static string membershipexpirydate = "membershipexpirydate";
-        public static string softwareshouldrun = "softwareshouldrun";
-        public static string cansendsms = "cansendsms";
-    }
+    
+
+    
     public class softwaresettingrepo
     {
         string conn = baserepo.connectionstring;
@@ -65,13 +59,13 @@ namespace BusinessBook.data.dapper
                 return softwaresetting;
             }
         }
-        public bool update(dapper.softwaresetting softwaresetting)
+        public softwaresetting update(dapper.softwaresetting softwaresetting)
         {
 
             using (var connection = new MySqlConnection(conn))
             {
                 var identity = connection.Update<dapper.softwaresetting>(softwaresetting);
-                return identity;
+                return softwaresetting;
             }
         }
     }

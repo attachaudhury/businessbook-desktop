@@ -26,7 +26,31 @@ namespace BusinessBook.Views.others
         public ravicosoftaccount()
         {
             InitializeComponent();
-            
+
+            if (userutils.ravicosoftusername != null)
+            {
+                userid_tb.Text = userutils.ravicosoftuserid.stringvalue;
+            }
+            if (userutils.ravicosoftusername != null)
+            {
+                username_tb.Text = userutils.ravicosoftusername.stringvalue;
+            }
+            if (userutils.ravicosoftuserpassword != null)
+            {
+                password_tb.Text = userutils.ravicosoftuserpassword.stringvalue;
+            }
+            if (userutils.membershiptype != null)
+            {
+                membershiptype_tb.Text = userutils.membershiptype.stringvalue;
+            }
+            if (userutils.membershipexpirydate != null)
+            {
+                membershipexpiry_tb.Text = userutils.membershipexpirydate.datevalue.ToString();
+            }
+            if (userutils.cansendsms != null)
+            {
+                cansendsms_tb.Text = userutils.cansendsms.boolvalue.ToString();
+            }
         }
         private void btn_Save(object sender, RoutedEventArgs e)
         {

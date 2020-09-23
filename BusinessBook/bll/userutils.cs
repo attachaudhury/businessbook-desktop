@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessBook.data.dapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -59,5 +60,38 @@ namespace BusinessBook.bll
                 manager.ShowAlert(alert);
             }
         }
+
+
+
+        public static softwaresetting ravicosoftuserid;
+        public static softwaresetting ravicosoftusername;
+        public static softwaresetting ravicosoftuserpassword;
+        public static softwaresetting membershiptype;
+        public static softwaresetting membershipexpirydate;
+        public static softwaresetting canrunsoftware;
+        public static softwaresetting cansendsms;
+        public static softwaresetting apiendpoint;
+        public static void loadsoftwaresetting()
+        {
+            var ssr = new softwaresettingrepo();
+            ravicosoftuserid = ssr.getbyname(commonsettings.ravicosoftuserid);
+            ravicosoftusername = ssr.getbyname(commonsettings.ravicosoftusername);
+            ravicosoftuserpassword = ssr.getbyname(commonsettings.ravicosoftuserpassword);
+            membershiptype = ssr.getbyname(commonsettings.membershipexpirydate);
+            membershipexpirydate = ssr.getbyname(commonsettings.membershipexpirydate);
+            canrunsoftware = ssr.getbyname(commonsettings.canrunsoftware);
+            cansendsms = ssr.getbyname(commonsettings.cansendsms);
+            apiendpoint = ssr.getbyname(commonsettings.apiendpoint);
+        }
+    }
+    public class commonsettings {
+        public static string ravicosoftuserid = "ravicosoftuserid";
+        public static string ravicosoftusername = "ravicosoftusername";
+        public static string ravicosoftuserpassword = "ravicosoftuserpassword";
+        public static string membershiptype = "membershiptype";
+        public static string membershipexpirydate = "membershipexpirydate";
+        public static string canrunsoftware = "canrunsoftware";
+        public static string cansendsms = "cansendsms";
+        public static string apiendpoint = "apiendpoint";
     }
 }
