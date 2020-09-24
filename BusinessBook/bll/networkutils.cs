@@ -71,96 +71,100 @@ namespace BusinessBook.bll
                         userutils.ravicosoftuserid = ssr.update(username);
                     }
 
-                    var userpassword = userutils.ravicosoftuserpassword;
+                    var userpassword = userutils.ravicosoftpassword;
                     if (userpassword == null)
                     {
                         var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftuserpassword;
+                        ss.name = commonsettings.ravicosoftpassword;
                         ss.valuetype = "string";
                         ss.stringvalue = user.password;
-                        userutils.ravicosoftuserpassword = ssr.save(ss);
+                        userutils.ravicosoftpassword = ssr.save(ss);
                     }
                     else
                     {
                         userpassword.valuetype = "string";
                         userpassword.stringvalue = user.password;
-                        userutils.ravicosoftuserpassword = ssr.update(userpassword);
+                        userutils.ravicosoftpassword = ssr.update(userpassword);
                     }
 
-                    var membershiptype = userutils.membershiptype;
+                    var membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
                     if (membershiptype == null)
                     {
                         var ss = new softwaresetting();
-                        ss.name = commonsettings.membershiptype;
+                        ss.name = commonsettings.ravicosoftbusinessbookmembershipplan;
                         ss.valuetype = "string";
-                        ss.stringvalue = user.membershiptype;
-                        userutils.membershiptype = ssr.save(ss);
+                        ss.stringvalue = user.businessbookmembershipplan;
+                        userutils.ravicosoftbusinessbookmembershipplan = ssr.save(ss);
                     }
                     else
                     {
                         userpassword.valuetype = "string";
-                        userpassword.stringvalue = user.membershiptype;
-                        userutils.membershiptype = ssr.update(membershiptype);
-                    }
-                    membershiptype = userutils.membershiptype;
-
-                    if (membershiptype.stringvalue != "free")
-                    {
-                        if (user.membershipexpirydate != null)
+                        userpassword.stringvalue = user.businessbookmembershipplan;
+                        userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
+                        if (userutils.loggedinuserd.role == "superadmin") 
                         {
-                            var membershipexpirydate = userutils.membershipexpirydate;
+                            userutils.membership = "Package 3";
+                            userutils.ravicosoftbusinessbookmembershipplan.stringvalue = "Package 3";
+                        }
+                    }
+                    membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
+
+                    if (membershiptype.stringvalue != "Package 1")
+                    {
+                        if (user.businessbookmembershipexpirydate != null)
+                        {
+                            var membershipexpirydate = userutils.ravicosoftbusinessbookmembershipexpirydate;
                             if (membershipexpirydate == null)
                             {
                                 var ss = new softwaresetting();
-                                ss.name = commonsettings.membershipexpirydate;
+                                ss.name = commonsettings.ravicosoftbusinessbookmembershipexpirydate;
                                 ss.valuetype = "date";
-                                ss.datevalue = user.membershipexpirydate;
-                                userutils.membershipexpirydate = ssr.save(ss);
+                                ss.datevalue = user.businessbookmembershipexpirydate;
+                                userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.save(ss);
                             }
                             else
                             {
-                                membershipexpirydate.valuetype = "string";
-                                membershipexpirydate.datevalue = user.membershipexpirydate;
-                                userutils.membershiptype = ssr.update(membershipexpirydate);
+                                membershipexpirydate.valuetype = "date";
+                                membershipexpirydate.datevalue = user.businessbookmembershipexpirydate;
+                                userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.update(membershipexpirydate);
                             }
                         }
-
                     }
 
 
 
-                    var canrunsoftware = userutils.canrunsoftware;
+                    var canrunsoftware = userutils.ravicosoftbusinessbookcanrun;
                     if (canrunsoftware == null)
                     {
                         var ss = new softwaresetting();
-                        ss.name = commonsettings.canrunsoftware;
+                        ss.name = commonsettings.ravicosoftbusinessbookcanrun;
                         ss.valuetype = "bool";
-                        ss.boolvalue = user.canrunsoftware;
-                        userutils.canrunsoftware = ssr.save(ss);
+                        ss.boolvalue = user.businessbookcanrun;
+                        userutils.ravicosoftbusinessbookcanrun = ssr.save(ss);
                     }
                     else
                     {
                         canrunsoftware.valuetype = "bool";
-                        canrunsoftware.boolvalue = user.canrunsoftware;
-                        userutils.canrunsoftware = ssr.update(canrunsoftware);
+                        canrunsoftware.boolvalue = user.businessbookcanrun;
+                        userutils.ravicosoftbusinessbookcanrun = ssr.update(canrunsoftware);
                     }
 
 
 
-                    var cansendsms = userutils.cansendsms;
+                    var cansendsms = userutils.ravicosoftsmsplan;
                     if (cansendsms == null)
                     {
                         var ss = new softwaresetting();
-                        ss.name = commonsettings.cansendsms;
-                        ss.valuetype = "bool";
-                        ss.boolvalue = user.cansendsms;
-                        userutils.cansendsms = ssr.save(ss);
+                        ss.name = commonsettings.ravicosoftsmsplan;
+                        ss.valuetype = "string";
+                        ss.stringvalue = user.smsplan;
+                        userutils.ravicosoftsmsplan = ssr.save(ss);
                     }
                     else
                     {
-                        cansendsms.valuetype = "bool";
-                        cansendsms.boolvalue = user.cansendsms;
-                        userutils.cansendsms = ssr.update(cansendsms);
+                        cansendsms.valuetype = "string";
+                        cansendsms.stringvalue = user.smsplan;
+                        userutils.ravicosoftsmsplan = ssr.update(cansendsms);
                     }
 
                 }
@@ -213,11 +217,10 @@ namespace BusinessBook.bll
     {
         public string _id { get; set; }
         public string username { get; set; }
-        public DateTime? createddate { get; set; }
-        public string membershiptype { get; set; }
-        public DateTime? membershipexpirydate { get; set; }
         public string password { get; set; }
-        public Boolean? canrunsoftware { get; set; }
-        public Boolean? cansendsms { get; set; }
+        public string businessbookmembershipplan { get; set; }
+        public DateTime? businessbookmembershipexpirydate { get; set; }
+        public Boolean? businessbookcanrun { get; set; }
+        public string smsplan { get; set; }
     }
 }

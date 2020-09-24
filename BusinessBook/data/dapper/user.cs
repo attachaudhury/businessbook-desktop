@@ -58,6 +58,15 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
+        public dapper.user getonerandom()
+        {
+            using (var connection = new MySqlConnection(conn))
+            {
+                //var res = connection.Query<user>(sql).FirstOrDefault();
+                var res = connection.GetAll<dapper.user>().FirstOrDefault();
+                return res;
+            }
+        }
         public dapper.user get(string username,string password)
         {
             var sql = "select * from user where username='" + username + "' and password = '"+password+"';";

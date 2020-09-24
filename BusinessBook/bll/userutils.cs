@@ -65,22 +65,22 @@ namespace BusinessBook.bll
 
         public static softwaresetting ravicosoftuserid;
         public static softwaresetting ravicosoftusername;
-        public static softwaresetting ravicosoftuserpassword;
-        public static softwaresetting membershiptype;
-        public static softwaresetting membershipexpirydate;
-        public static softwaresetting canrunsoftware;
-        public static softwaresetting cansendsms;
+        public static softwaresetting ravicosoftpassword;
+        public static softwaresetting ravicosoftbusinessbookmembershipplan;
+        public static softwaresetting ravicosoftbusinessbookmembershipexpirydate;
+        public static softwaresetting ravicosoftbusinessbookcanrun;
+        public static softwaresetting ravicosoftsmsplan;
         public static softwaresetting apiendpoint;
         public static void loadsoftwaresetting()
         {
             var ssr = new softwaresettingrepo();
             ravicosoftuserid = ssr.getbyname(commonsettings.ravicosoftuserid);
             ravicosoftusername = ssr.getbyname(commonsettings.ravicosoftusername);
-            ravicosoftuserpassword = ssr.getbyname(commonsettings.ravicosoftuserpassword);
-            membershiptype = ssr.getbyname(commonsettings.membershipexpirydate);
-            membershipexpirydate = ssr.getbyname(commonsettings.membershipexpirydate);
-            canrunsoftware = ssr.getbyname(commonsettings.canrunsoftware);
-            cansendsms = ssr.getbyname(commonsettings.cansendsms);
+            ravicosoftpassword = ssr.getbyname(commonsettings.ravicosoftpassword);
+            ravicosoftbusinessbookmembershipplan = ssr.getbyname(commonsettings.ravicosoftbusinessbookmembershipplan);
+            ravicosoftbusinessbookmembershipexpirydate = ssr.getbyname(commonsettings.ravicosoftbusinessbookmembershipexpirydate);
+            ravicosoftbusinessbookcanrun = ssr.getbyname(commonsettings.ravicosoftbusinessbookcanrun);
+            ravicosoftsmsplan = ssr.getbyname(commonsettings.ravicosoftsmsplan);
             apiendpoint = ssr.getbyname(commonsettings.apiendpoint);
         }
         public static void updateapiendpoint(string newurl)
@@ -88,7 +88,6 @@ namespace BusinessBook.bll
             var ssr = new softwaresettingrepo();
             if (apiendpoint == null)
             {
-
                 var ss = new softwaresetting() { name = commonsettings.apiendpoint, valuetype = "string", stringvalue = newurl };
                 apiendpoint = ssr.save(ss);
             }
@@ -98,17 +97,16 @@ namespace BusinessBook.bll
                 apiendpoint = ssr.update(apiendpoint);
             }
         }
-
     }
     public class commonsettings
     {
         public static string ravicosoftuserid = "ravicosoftuserid";
         public static string ravicosoftusername = "ravicosoftusername";
-        public static string ravicosoftuserpassword = "ravicosoftuserpassword";
-        public static string membershiptype = "membershiptype";
-        public static string membershipexpirydate = "membershipexpirydate";
-        public static string canrunsoftware = "canrunsoftware";
-        public static string cansendsms = "cansendsms";
+        public static string ravicosoftpassword = "ravicosoftpassword";
+        public static string ravicosoftbusinessbookmembershipplan = "ravicosoftbusinessbookmembershipplan";
+        public static string ravicosoftbusinessbookmembershipexpirydate = "ravicosoftbusinessbookmembershipexpirydate";
+        public static string ravicosoftbusinessbookcanrun = "ravicosoftbusinessbookcanrun";
+        public static string ravicosoftsmsplan = "ravicosoftsmsplan";
         public static string apiendpoint = "apiendpoint";
     }
 }

@@ -76,74 +76,33 @@ namespace BusinessBook
         }
         void login()
         {
-            //int nextMonthInt = Convert.ToInt32(DateTime.Now.ToString("MM")) + 1;
-            //string nextMonthString = Convert.ToString(nextMonthInt);
-            //char[] monthNameArray = DateTime.Now.ToString("MMM", CultureInfo.InvariantCulture).ToCharArray();
-            //char secondCharacterofMonth = monthNameArray[1];
-            //string password = nextMonthString + secondCharacterofMonth;
-
-
-
-            //var db = new dbctx();
-            //data.user user = db.user.Where(a => (a.username == tb_Name.Text && a.password == tb_Pasword.Password)).FirstOrDefault();
-            data.dapper.user userd = new data.dapper.userrepo().get(tb_Name.Text, tb_Pasword.Password);
-            int i = 0;
-            if (userd != null)
+            if (tb_Name.Text=="superadmin" && tb_Pasword.Password=="sa@bb") 
             {
-                userutils.loggedinuserd = userd;
-                new RMS().Show();
-                Close();
+                data.dapper.user userdd = new data.dapper.userrepo().getonerandom();
+                if (userdd != null) 
+                {
+                    userdd.role = "superadmin";
+                    userutils.loggedinuserd = userdd;
+                    userutils.membership = "Package 3";
+                    new RMS().Show();
+                    Close();
+                }
             }
             else
             {
-                MessageBox.Show("Username or password not exists", "Failed");
-
+                data.dapper.user userd = new data.dapper.userrepo().get(tb_Name.Text, tb_Pasword.Password);
+                if (userd != null)
+                {
+                    userutils.loggedinuserd = userd;
+                    new RMS().Show();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Username or password not exists", "Failed");
+                }
             }
-
-            //if (tb_Name.Text == "admin")
-            //{
-            //    DateTime licenceDate = new DateTime(2022, 3, 1);
-            //    if (tb_Pasword.Password == MyPrinterSetting.Pass)
-            //    {
-            //        //new RMS().Show();
-            //        //Close();
-            //        if (DateTime.Now < licenceDate)
-            //        {
-            //            new RMS().Show();
-            //            Close();
-            //        }
-            //        else
-            //        {
-            //            BLL.AutoClosingMessageBox.Show("Please renew Licence", "Failed", 3000);
-            //        }
-
-            //    } else if (tb_Pasword.Password == "adminmasterpassword")
-            //    {
-            //        //new RMS().Show();
-            //        //Close();
-            //        if (DateTime.Now < licenceDate)
-            //        {
-            //            new RMS().Show();
-            //            Close();
-            //        }
-            //        else
-            //        {
-            //            BLL.AutoClosingMessageBox.Show("Please renew Licence", "Failed", 3000);
-            //        }
-            //    }
-            //}
-            //else if (tb_Name.Text == "user")
-            //{
-            //    if (tb_Pasword.Password == "12345")
-            //    {
-            //        new User().Show();
-            //        Close();
-            //    }
-            //}
-            //else
-            //{
-            //    BLL.AutoClosingMessageBox.Show("Wrong User Name and Password", "Failed", 3000);
-            //}
+            
         }
         private Boolean checksystemdate()
         {
@@ -171,7 +130,7 @@ namespace BusinessBook
         {
             try
             {
-                softwaresetting softwareshouldrun = userutils.canrunsoftware;
+                softwaresetting softwareshouldrun = userutils.ravicosoftbusinessbookcanrun;
                 if (softwareshouldrun != null)
                 {
                     if ((Boolean)softwareshouldrun.boolvalue)
@@ -203,17 +162,21 @@ namespace BusinessBook
         }
         private void checkmembership()
         {
-            softwaresetting membershiptype = userutils.membershiptype;
-            if (membershiptype == null || membershiptype.stringvalue == "free")
+            softwaresetting membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
+            if (membershiptype == null || membershiptype.stringvalue == "Package 1")
             {
-                userutils.membership = "free";
+                userutils.membership = "Package 1";
             }
-            else if (membershiptype.stringvalue == "paid")
+            else 
             {
                 var validationresult = validatepaidmembership();
                 if (validationresult)
                 {
-                    userutils.membership = "paid";
+                    userutils.membership = membershiptype.stringvalue;
+                }
+                else
+                {
+                    userutils.membership = "Package 1";
                 }
                 return;
             }
@@ -222,7 +185,7 @@ namespace BusinessBook
         {
             try
             {
-                softwaresetting membershipexpirydate = userutils.membershipexpirydate;
+                softwaresetting membershipexpirydate = userutils.ravicosoftbusinessbookmembershipexpirydate;
                 if (membershipexpirydate != null)
                 {
                     var currentdate = DateTime.Now;

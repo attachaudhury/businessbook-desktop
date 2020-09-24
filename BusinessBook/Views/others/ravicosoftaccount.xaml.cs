@@ -26,6 +26,10 @@ namespace BusinessBook.Views.others
         public ravicosoftaccount()
         {
             InitializeComponent();
+            if (userutils.loggedinuserd.role == "superadmin") 
+            {
+                apiendpoint_tb.IsEnabled = true;
+            }
 
             if (userutils.ravicosoftusername != null)
             {
@@ -35,21 +39,21 @@ namespace BusinessBook.Views.others
             {
                 username_tb.Text = userutils.ravicosoftusername.stringvalue;
             }
-            if (userutils.ravicosoftuserpassword != null)
+            if (userutils.ravicosoftpassword != null)
             {
-                password_tb.Text = userutils.ravicosoftuserpassword.stringvalue;
+                password_tb.Text = userutils.ravicosoftpassword.stringvalue;
             }
-            if (userutils.membershiptype != null)
+            if (userutils.ravicosoftbusinessbookmembershipplan != null)
             {
-                membershiptype_tb.Text = userutils.membershiptype.stringvalue;
+                membershiptype_tb.Text = userutils.ravicosoftbusinessbookmembershipplan.stringvalue;
             }
-            if (userutils.membershipexpirydate != null)
+            if (userutils.ravicosoftbusinessbookmembershipexpirydate != null)
             {
-                membershipexpiry_tb.Text = userutils.membershipexpirydate.datevalue.ToString();
+                membershipexpiry_tb.Text = userutils.ravicosoftbusinessbookmembershipexpirydate.datevalue.ToString();
             }
-            if (userutils.cansendsms != null)
+            if (userutils.ravicosoftsmsplan != null)
             {
-                cansendsms_tb.Text = userutils.cansendsms.boolvalue.ToString();
+                cansendsms_tb.Text = userutils.ravicosoftsmsplan.stringvalue;
             }
             if (userutils.apiendpoint != null)
             {

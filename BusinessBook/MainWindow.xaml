@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         Title="Start System" Height="328.503" Width="509.79" Background="Gray" Opacity="0.9" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBox x:Name="tb_Name" Text="admin" FontSize="12" HorizontalAlignment="Left" Margin="132,85,0,0"  VerticalAlignment="Top" Width="254" ToolTip="Username" BorderBrush="#FF494646" Foreground="#FFD1D1D1">
+        <TextBox x:Name="tb_Name" Text="superadmin" FontSize="12" HorizontalAlignment="Left" Margin="132,85,0,0"  VerticalAlignment="Top" Width="254" ToolTip="Username" BorderBrush="#FF494646" Foreground="#FFD1D1D1">
         </TextBox>
-        <PasswordBox x:Name="tb_Pasword" Password="admin@123" FontSize="12"  HorizontalAlignment="Left" Margin="132,133,0,0" VerticalAlignment="Top" Width="254" ToolTip="Password" BorderBrush="#FF494646" Foreground="#FFD1D1D1" KeyDown="PressEnter">
+        <PasswordBox x:Name="tb_Pasword" Password="sa@bb" FontSize="12"  HorizontalAlignment="Left" Margin="132,133,0,0" VerticalAlignment="Top" Width="254" ToolTip="Password" BorderBrush="#FF494646" Foreground="#FFD1D1D1" KeyDown="PressEnter">
 
         </PasswordBox>
         <Button Click="btn_Login" Content="Login" HorizontalAlignment="Left" Margin="212,206,0,0" VerticalAlignment="Top" Width="108" Height="36" FontSize="10" Background="#FF575555">

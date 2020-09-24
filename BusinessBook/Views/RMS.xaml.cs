@@ -29,7 +29,10 @@ namespace BusinessBook.Views
             
             InitializeComponent();
             loggininuserd = userutils.loggedinuserd;
-            if (loggininuserd.role != "admin")
+            if (loggininuserd.role == "superadmin" || loggininuserd.role == "admin")
+            {
+            }
+            else
             {
                 hideAdminMenu();
             }
@@ -246,7 +249,7 @@ html{overflow:hidden;height:200px;}
         private void mi_ravicosoftaccount(object sender, RoutedEventArgs e)
         {
             var w = new ravicosoftaccount();
-            userutils.authorizerole(w, new string[] { "admin" });
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         #endregion others
 
