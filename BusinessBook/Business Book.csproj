@@ -160,6 +160,9 @@
     <Compile Include="Views\others\ravicosoftaccount.xaml.cs">
       <DependentUpon>ravicosoftaccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\others\sms.xaml.cs">
+      <DependentUpon>sms.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\others\Window_Setting.xaml.cs">
       <DependentUpon>Window_Setting.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\others\ravicosoftaccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\others\sms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

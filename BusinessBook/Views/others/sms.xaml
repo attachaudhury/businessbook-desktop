@@ -1,0 +1,27 @@
+﻿<Window x:Class="BusinessBook.Views.others.sms"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusinessBook.Views.others" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="sms" Height="Auto" Width="Auto">
+    <Grid >
+        <Grid Margin="0,0,0,80">
+            <telerik:RadGridView x:Name="dg" ShowSearchPanel="True" SelectionMode="Multiple" SelectionUnit="FullRow"
+                     AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding name}" Header="Name"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding phone}" Header="Phone"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding role}" Header="Type"/>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+        </Grid>
+        <Grid  Margin="20,0,20,20"  VerticalAlignment="Bottom">
+            <Label Content="Type Message" HorizontalAlignment="Left"/>
+            <TextBox Margin="100,0"  Height="23"  Text="" />
+            <Button Content="Send" HorizontalAlignment="Right" Click="sendsms"/>
+        </Grid>
+
+    </Grid>
+</Window>

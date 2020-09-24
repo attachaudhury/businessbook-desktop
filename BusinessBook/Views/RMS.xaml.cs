@@ -251,6 +251,11 @@ html{overflow:hidden;height:200px;}
             var w = new ravicosoftaccount();
             userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
+        private void mi_sms(object sender, RoutedEventArgs e)
+        {
+            var w = new sms();
+            w.Show();
+        }
         #endregion others
 
         private void mi_LogOut(object sender, RoutedEventArgs e)
