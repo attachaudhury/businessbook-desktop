@@ -1,6 +1,7 @@
 ﻿
 using BusinessBook.data;
 using BusinessBook.data.dapper;
+using BusinessBook.Views.finance;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -47,6 +48,11 @@ namespace BusinessBook.Views.user
                 var roles = new object[] { "vendor" };
                 dg_AllStaff.ItemsSource = userrepo.getbywherein("role", roles);
             }
+        }
+        public void details(object sender, RoutedEventArgs e)
+        {
+            data.dapper.user obj = ((FrameworkElement)sender).DataContext as data.dapper.user;
+            new ledger(obj.id).Show();
         }
     }
 }

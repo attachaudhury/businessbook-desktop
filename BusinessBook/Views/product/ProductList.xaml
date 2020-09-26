@@ -1,33 +1,36 @@
 ﻿<Window x:Class="BusinessBook.Views.product.ProductList"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BusinessBook.Views.product"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
-        Title="Products">
+        Title="Products" Height="Auto" Width="Auto"
+        >
     <Grid>
-        <DataGrid x:Name="dg_ProductList" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Sale Price" Binding="{Binding saleprice}"/>
-                <DataGridTextColumn Header="Purchase Price" Binding="{Binding purchaseprice}"/>
-                <DataGridTextColumn Header="Discount" Binding="{Binding discount}"/>
-                <DataGridTextColumn Header="Carrycost" Binding="{Binding carrycost}"/>
-                <DataGridTextColumn Header="Barcode" Binding="{Binding barcode}"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}"/>
-                <DataGridTextColumn Header="type" Binding="{Binding type}"/>
-                <DataGridTextColumn Header="saleactive" Binding="{Binding saleactive}"/>
-                <DataGridTextColumn Header="purchaseactive" Binding="{Binding purchaseactive}"/>
-                <DataGridTemplateColumn Header="Details">
-                    <DataGridTemplateColumn.CellTemplate>
+        <telerik:RadGridView x:Name="dg_ProductList" ShowSearchPanel="True"
+                     AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}"/>
+                <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}"/>
+                <telerik:GridViewDataColumn Header="Sale Price" DataMemberBinding="{Binding saleprice}"/>
+                <telerik:GridViewDataColumn Header="Purchase Price" DataMemberBinding="{Binding purchaseprice}"/>
+                <telerik:GridViewDataColumn Header="Discount" DataMemberBinding="{Binding discount}"/>
+                <telerik:GridViewDataColumn Header="Carrycost" DataMemberBinding="{Binding carrycost}"/>
+                <telerik:GridViewDataColumn Header="Barcode" DataMemberBinding="{Binding barcode}"/>
+                <telerik:GridViewDataColumn Header="Quantity" DataMemberBinding="{Binding quantity}"/>
+                <telerik:GridViewDataColumn Header="type" DataMemberBinding="{Binding type}"/>
+                <telerik:GridViewDataColumn Header="saleactive" DataMemberBinding="{Binding saleactive}"/>
+                <telerik:GridViewDataColumn Header="purchaseactive" DataMemberBinding="{Binding purchaseactive}"/>
+                <telerik:GridViewColumn Header="Details" >
+                    <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="details">Details</Button>
+                            <telerik:RadButton Click="details">Details</telerik:RadButton>
+
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
     </Grid>
 </Window>

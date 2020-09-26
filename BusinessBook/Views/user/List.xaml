@@ -8,15 +8,24 @@
         mc:Ignorable="d"
         Title="Person List">
     <Grid>
-        <DataGrid Name="dg_AllStaff" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Role" Binding="{Binding role}"/>
-                <DataGridTextColumn Header="Phone" Binding="{Binding phone}"/>
-                <DataGridTextColumn Header="Phone 2" Binding="{Binding phone2}"/>
-                <DataGridTextColumn Header="Address" Binding="{Binding address}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <telerik:RadGridView Name="dg_AllStaff" ShowSearchPanel="True"
+                     AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}"/>
+                <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}"/>
+                <telerik:GridViewDataColumn Header="Role" DataMemberBinding="{Binding role}"/>
+                <telerik:GridViewDataColumn Header="Phone" DataMemberBinding="{Binding phone}"/>
+                <telerik:GridViewDataColumn Header="Phone2" DataMemberBinding="{Binding phone2}"/>
+                <telerik:GridViewDataColumn Header="Address" DataMemberBinding="{Binding address}"/>
+                <telerik:GridViewColumn Header="Details" >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Click="details">Details</telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
 
     </Grid>
 </Window>

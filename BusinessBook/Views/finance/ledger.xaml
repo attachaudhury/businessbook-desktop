@@ -7,15 +7,14 @@
         mc:Ignorable="d"
         Title="Ledger">
     <Grid>
-        <Label Content="Amount" HorizontalAlignment="Left" Margin="38,12,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_amount" TabIndex="1" Text="" HorizontalAlignment="Left" Height="25" Margin="104,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+        <Label Content="Amount" HorizontalAlignment="Left" Margin="17,12,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_amount" TabIndex="1" Text="" HorizontalAlignment="Left" Height="25" Margin="74,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
 
         <Label Content="Account" HorizontalAlignment="Left" Margin="248,12,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectedIndex="0" x:Name="account_combobox" HorizontalAlignment="Left" Margin="295,4,0,0" VerticalAlignment="Top" Width="145" Height="33"/>
-        <Button Content="Save" Click="save" HorizontalAlignment="Left" Margin="478,6,0,0" VerticalAlignment="Top" Width="266" Height="34"/>
-        <Label Name="dg_Title" Content="Title" HorizontalAlignment="Left" Margin="23,102,0,0" VerticalAlignment="Top"/>
-        <Label  Content="Pending" HorizontalAlignment="Left" Margin="604,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.235,2.583"/>
-        <Label Name="remaining_label" Content="0" HorizontalAlignment="Left" Margin="730,102,0,0" VerticalAlignment="Top"/>
+        <Button Content="Save" Click="save" HorizontalAlignment="Left" Margin="478,6,0,0" VerticalAlignment="Top" Width="102" Height="34"/>
+        <Label  Content="Pending" HorizontalAlignment="Left" Margin="619,12,0,0" VerticalAlignment="Top"/>
+        <Label Name="remaining_label" Content="0" HorizontalAlignment="Left" Margin="730,12,0,0" VerticalAlignment="Top"/>
         <DataGrid Name="dg" Margin="0,146,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
@@ -23,9 +22,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding name}" />
                 <DataGridTextColumn Header="Account" Binding="{Binding financeaccount.name}" />
                 <DataGridTextColumn Header="Creator" Binding="{Binding user.name}" />
-                <DataGridTextColumn Header="Party" Binding="{Binding user1.name}" />
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" />
-                <DataGridTextColumn Header="Group" Binding="{Binding groupid}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding status}" />
             </DataGrid.Columns>
         </DataGrid>

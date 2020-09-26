@@ -53,14 +53,15 @@ namespace BusinessBook.bll
             //financetransaction ftsale = new financetransaction();
             data.dapper.financetransaction ftsale = new data.dapper.financetransaction();
             ftsale.amount = -totalbill;
-            ftsale.fk_financeaccount_in_financetransaction = saleaccountid;
+            
+            ftsale.date = DateTime.Now;
+            ftsale.status = "posted";
+            ftsale.fk_user_createdby_in_financetransaction = loggedinuserid;
             if (targetuserid != 0)
             {
                 ftsale.fk_user_targetto_in_financetransaction = targetuserid;
             }
-            ftsale.date = DateTime.Now;
-            ftsale.status = "posted";
-            ftsale.fk_user_createdby_in_financetransaction = loggedinuserid;
+            ftsale.fk_financeaccount_in_financetransaction = saleaccountid;
             financetransactionrepo.save(ftsale);
             //db.financetransaction.Add(ftsale);
             //db.SaveChanges();
@@ -71,10 +72,14 @@ namespace BusinessBook.bll
                 //financetransaction ftpayment = new financetransaction();
                 data.dapper.financetransaction ftpayment = new data.dapper.financetransaction();
                 ftpayment.amount = totalpayment;
-                ftpayment.fk_financeaccount_in_financetransaction = cashaccountid;
                 ftpayment.date = DateTime.Now;
                 ftpayment.status = "posted";
                 ftpayment.fk_user_createdby_in_financetransaction = loggedinuserid;
+                if (targetuserid != 0)
+                {
+                    ftpayment.fk_user_targetto_in_financetransaction = targetuserid;
+                }
+                ftpayment.fk_financeaccount_in_financetransaction = cashaccountid;
                 //db.financetransaction.Add(ftpayment);
                 //db.SaveChanges();
                 financetransactionrepo.save(ftpayment);
@@ -87,14 +92,15 @@ namespace BusinessBook.bll
                 //financetransaction ftar = new financetransaction();
                 data.dapper.financetransaction ftar = new data.dapper.financetransaction();
                 ftar.amount = totalbill - totalpayment;
-                ftar.fk_financeaccount_in_financetransaction = accountreciveableaccountid;
+                
+                ftar.date = DateTime.Now;
+                ftar.status = "posted";
+                ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
                 if (targetuserid != 0)
                 {
                     ftar.fk_user_targetto_in_financetransaction = targetuserid;
                 }
-                ftar.date = DateTime.Now;
-                ftar.status = "posted";
-                ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
+                ftar.fk_financeaccount_in_financetransaction = accountreciveableaccountid;
                 //db.financetransaction.Add(ftar);
                 //db.SaveChanges();
                 financetransactionrepo.save(ftar);
@@ -177,10 +183,11 @@ namespace BusinessBook.bll
             {
                 data.dapper.financetransaction ftpayment = new data.dapper.financetransaction();
                 ftpayment.amount = -(totalpayment);
-                ftpayment.fk_financeaccount_in_financetransaction = cashaccountid;
                 ftpayment.date = DateTime.Now;
                 ftpayment.status = "posted";
                 ftpayment.fk_user_createdby_in_financetransaction = loggedinuserid;
+                ftpayment.fk_user_targetto_in_financetransaction = targetuserid;
+                ftpayment.fk_financeaccount_in_financetransaction = cashaccountid;
                 //db.financetransaction.Add(ftpayment);
                 //db.SaveChanges();
                 financetransactionrepo.save(ftpayment);
@@ -192,11 +199,11 @@ namespace BusinessBook.bll
             {
                 data.dapper.financetransaction ftap = new data.dapper.financetransaction();
                 ftap.amount = -(totalbill - totalpayment);
-                ftap.fk_financeaccount_in_financetransaction = accountpayableableaccountid;
-                ftap.fk_user_targetto_in_financetransaction = targetuserid;
                 ftap.date = DateTime.Now;
                 ftap.status = "Posted";
                 ftap.fk_user_createdby_in_financetransaction = loggedinuserid;
+                ftap.fk_user_targetto_in_financetransaction = targetuserid;
+                ftap.fk_financeaccount_in_financetransaction = accountpayableableaccountid;
                 //db.financetransaction.Add(ftap);
                 //db.SaveChanges();
                 financetransactionrepo.save(ftap);
@@ -219,10 +226,11 @@ namespace BusinessBook.bll
 
             data.dapper.financetransaction ftcash = new data.dapper.financetransaction();
             ftcash.amount = amount;
-            ftcash.fk_financeaccount_in_financetransaction = accountid;
             ftcash.date = DateTime.Now;
             ftcash.status = "posted";
             ftcash.fk_user_createdby_in_financetransaction = loggedinuserid;
+            ftcash.fk_user_targetto_in_financetransaction = targetid;
+            ftcash.fk_financeaccount_in_financetransaction = accountid;
             //db.financetransaction.Add(ftcash);
             //db.SaveChanges();
             financetransactionrepo.save(ftcash);
@@ -230,10 +238,11 @@ namespace BusinessBook.bll
 
             data.dapper.financetransaction ftar = new data.dapper.financetransaction();
             ftar.amount = -amount;
-            ftar.fk_financeaccount_in_financetransaction = accountreciveableaccountid;
             ftar.date = DateTime.Now;
             ftar.status = "posted";
             ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
+            ftar.fk_user_targetto_in_financetransaction = targetid;
+            ftar.fk_financeaccount_in_financetransaction = accountreciveableaccountid;
             //db.financetransaction.Add(ftar);
             //db.SaveChanges();
             financetransactionrepo.save(ftar);
@@ -252,10 +261,11 @@ namespace BusinessBook.bll
 
             data.dapper.financetransaction ftcash = new data.dapper.financetransaction();
             ftcash.amount = -amount;
-            ftcash.fk_financeaccount_in_financetransaction = accountid;
             ftcash.date = DateTime.Now;
             ftcash.status = "posted";
             ftcash.fk_user_createdby_in_financetransaction = loggedinuserid;
+            ftcash.fk_user_targetto_in_financetransaction = targetid;
+            ftcash.fk_financeaccount_in_financetransaction = accountid;
             //db.financetransaction.Add(ftcash);
             //db.SaveChanges();
             financetransactionrepo.save(ftcash);
@@ -263,10 +273,11 @@ namespace BusinessBook.bll
 
             data.dapper.financetransaction ftar = new data.dapper.financetransaction();
             ftar.amount = amount;
-            ftar.fk_financeaccount_in_financetransaction = accountpayableableaccountid;
             ftar.date = DateTime.Now;
             ftar.status = "posted";
             ftar.fk_user_createdby_in_financetransaction = loggedinuserid;
+            ftar.fk_user_targetto_in_financetransaction = targetid;
+            ftar.fk_financeaccount_in_financetransaction = accountpayableableaccountid;
             //db.financetransaction.Add(ftar);
             //db.SaveChanges();
             financetransactionrepo.save(ftar);

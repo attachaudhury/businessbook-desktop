@@ -23,7 +23,7 @@ namespace BusinessBook.Views.finance
     {
         //List<financeaccount> financeaccounts = null;
         data.dapper.user user;
-        
+
         List<data.dapper.financeaccount> financeaccounts = null;
 
         public ledger(int userid)
@@ -33,50 +33,34 @@ namespace BusinessBook.Views.finance
             var financeaccountrepo = new data.dapper.financeaccountrepo();
             var financetransactionrepo = new data.dapper.financetransactionrepo();
             var userrepo = new data.dapper.userrepo();
-            //var financetransactions = financetransactionrepo.get();
             financeaccounts = financeaccountrepo.get();
-
-
-            //var db = new dbctx();
-            //financeaccounts = db.financeaccount.ToList();
-            //user = db.user.Find(userid);
             user = userrepo.get(userid);
-            if (user.role == "customer") 
+            var list = financetransactionrepo.getusertransactions(userid);
+            foreach (var item in list)
             {
-                dg_Title.Content = "Sales";
-                //var list = db.financetransaction.Where(a => (a.fk_targettouser_user_financetransaction==userid)&&((a.financeaccount.name == "pos sale" || a.financeaccount.name == "sale"))).ToList();
-                var list = financetransactionrepo.getusersales(userid);
-                foreach (var item in list)
-                {
-                    dg.Items.Add(item);
-                }
-                //var totalpending = db.financetransaction.Where(a => (a.fk_targettouser_user_financetransaction == userid)&&(a.financeaccount.name == "account receivable")).Sum(a => a.amount);
-                var totalpending = financetransactionrepo.getuserreceiveablessum(userid);
-                remaining_label.Content = totalpending;
+                dg.Items.Add(item);
             }
-            else if (user.role == "vendor") 
+
+            var totalpending = 0;
+            if (user.role == "customer")
             {
-                dg_Title.Content = "Purchases";
-                //var list = db.financetransaction.Where(a => (a.fk_targettouser_user_financetransaction == userid)  && (a.financeaccount.name == "inventory") && (a.name == "--inventory--on--purchase--")).ToList();
-                var list = financetransactionrepo.getuserpurchases(userid);
-                foreach (var item in list)
-                {
-                    dg.Items.Add(item);
-                }
-               // var totalpending = db.financetransaction.Where(a => (a.fk_targettouser_user_financetransaction == userid) && (a.financeaccount.name == "account payable")).Sum(a => a.amount);
-                var totalpending = financetransactionrepo.getuserpayablesum(userid);
-                remaining_label.Content = totalpending;
+                totalpending = financetransactionrepo.getuserreceiveablessum(userid);
+
             }
-            //var assetaccounts = db.financeaccount.Where(a => a.type == "asset").ToList();
+            else if (user.role == "vendor")
+            {
+                totalpending = financetransactionrepo.getuserpayablesum(userid);
+            }
+            remaining_label.Content = totalpending;
             var assetaccounts = financeaccountrepo.getmanybytype("asset");
             account_combobox.ItemsSource = assetaccounts;
             account_combobox.DisplayMemberPath = "name";
             account_combobox.SelectedValuePath = "id";
         }
 
-        private void save(object sender, RoutedEventArgs e) 
+        private void save(object sender, RoutedEventArgs e)
         {
-            if (account_combobox.SelectedItem == null) 
+            if (account_combobox.SelectedItem == null)
             {
                 MessageBox.Show("Please select account");
             }
@@ -89,16 +73,16 @@ namespace BusinessBook.Views.finance
             var account = (int)account_combobox.SelectedValue;
             if (user.role == "customer")
             {
-                financeutils.insertCustomerPayment(account,amount,user.id);
+                financeutils.insertCustomerPayment(account, amount, user.id);
             }
-            else if (user.role == "vendor") 
+            else if (user.role == "vendor")
             {
                 financeutils.insertVendorPayment(account, amount, user.id);
             }
             MessageBox.Show("Operation Successfull");
             Close();
             new ledger(user.id).Show();
-            
+
         }
     }
 
