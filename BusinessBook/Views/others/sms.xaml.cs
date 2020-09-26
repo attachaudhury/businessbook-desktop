@@ -1,4 +1,5 @@
-﻿using BusinessBook.data.dapper;
+﻿using BusinessBook.bll;
+using BusinessBook.data.dapper;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -32,8 +33,7 @@ namespace BusinessBook.Views.others
 
         private void sendsms(object sender, RoutedEventArgs e)
         {
-            var selecteditems = dg.SelectedItems;
-            var i = 0;
+            networkutils.sendsms(text_tb.Text, dg.SelectedItems);
         }
     }
 }

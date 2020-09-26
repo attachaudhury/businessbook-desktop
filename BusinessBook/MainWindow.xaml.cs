@@ -84,8 +84,27 @@ namespace BusinessBook
                     userdd.role = "superadmin";
                     userutils.loggedinuserd = userdd;
                     userutils.membership = "Package 3";
+
+                    userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettings.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
+
+                    Task.Run(() =>
+                    {
+                        System.Threading.Thread.Sleep(60000);
+
+                        userdd.role = "superadmin";
+                        userutils.loggedinuserd = userdd;
+                        userutils.membership = "Package 3";
+
+                        userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettings.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
+
+                    });
+
                     new RMS().Show();
                     Close();
+
+                    
+
+                    
                 }
             }
             else

@@ -4,7 +4,10 @@ using Newtonsoft.Json.Converters;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Management;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -101,12 +104,9 @@ namespace BusinessBook.bll
                         userpassword.valuetype = "string";
                         userpassword.stringvalue = user.businessbookmembershipplan;
                         userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
-                        if (userutils.loggedinuserd.role == "superadmin") 
-                        {
-                            userutils.membership = "Package 3";
-                            userutils.ravicosoftbusinessbookmembershipplan.stringvalue = "Package 3";
-                        }
                     }
+
+
                     membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
 
                     if (membershiptype.stringvalue != "Package 1")
@@ -166,6 +166,7 @@ namespace BusinessBook.bll
                         cansendsms.stringvalue = user.smsplan;
                         userutils.ravicosoftsmsplan = ssr.update(cansendsms);
                     }
+                    
 
                 }
             }
@@ -206,6 +207,40 @@ namespace BusinessBook.bll
             }
         }
 
+        public static async void sendsms(string message,dynamic obj)
+        {
+            try
+            {
+                var issendingvalid = otherutils.checkmessagevalidation(message,obj);
+                var isuservalid = userutils.checkravicosoftuseridexits();
+                if (!issendingvalid || !isuservalid) 
+                {
+                    otherutils.notify("Info","You can not send sms, Please vist ravicosoft.com for any help",3000);
+                    return;
+                }
+
+                var apiendpoint = getapiendpoint();
+                RestClient client = new RestClient(apiendpoint);
+                var request = new RestRequest("smsfrombusinessbook");
+                List<string> number = otherutils.parsenumbersfromdynamic(obj);
+                var requestobject = new { userid = userutils.ravicosoftuserid.stringvalue,message=message,numbers=number.ToArray()};
+                request.AddJsonBody(requestobject);
+                var response = await client.PostAsync<responsetype>(request);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public static string getapiendpoint() {
+            var apiendpoint = apiendpointdefault;
+            if (userutils.apiendpoint != null)
+            {
+                apiendpoint = userutils.apiendpoint.stringvalue;
+            }
+            return apiendpoint;
+        }
+
     }
     public class responsetype
     {
@@ -218,8 +253,8 @@ namespace BusinessBook.bll
         public string _id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public string businessbookmembershipplan { get; set; }
-        public DateTime? businessbookmembershipexpirydate { get; set; }
+        public string businessbookmembershipplan { get; set; } // values are Package 1,Package 2,Package 3
+        public DateTime? businessbookmembershipexpirydate { get; set; } // values are none,Package 1,Package 2,Package 3,Package 4
         public Boolean? businessbookcanrun { get; set; }
         public string smsplan { get; set; }
     }

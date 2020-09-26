@@ -15,6 +15,15 @@ namespace BusinessBook.bll
         //public static data.user loggedinuser { get; set; }
         public static data.dapper.user loggedinuserd { get; set; }
         public static string membership { get; set; }
+        public static softwaresetting ravicosoftuserid;
+        public static softwaresetting ravicosoftusername;
+        public static softwaresetting ravicosoftpassword;
+        public static softwaresetting ravicosoftbusinessbookmembershipplan;
+        public static softwaresetting ravicosoftbusinessbookmembershipexpirydate;
+        public static softwaresetting ravicosoftbusinessbookcanrun;
+        public static softwaresetting ravicosoftsmsplan;
+        public static softwaresetting apiendpoint;
+
         public static void authorizerole(Window window, string[] roles)
         {
 
@@ -61,16 +70,17 @@ namespace BusinessBook.bll
             }
         }
 
-
-
-        public static softwaresetting ravicosoftuserid;
-        public static softwaresetting ravicosoftusername;
-        public static softwaresetting ravicosoftpassword;
-        public static softwaresetting ravicosoftbusinessbookmembershipplan;
-        public static softwaresetting ravicosoftbusinessbookmembershipexpirydate;
-        public static softwaresetting ravicosoftbusinessbookcanrun;
-        public static softwaresetting ravicosoftsmsplan;
-        public static softwaresetting apiendpoint;
+        public static bool checkravicosoftuseridexits() 
+        {
+            var ravicosoftuser = ravicosoftuserid;
+            if (ravicosoftuser == null)
+            {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
         public static void loadsoftwaresetting()
         {
             var ssr = new softwaresettingrepo();
@@ -82,6 +92,7 @@ namespace BusinessBook.bll
             ravicosoftbusinessbookcanrun = ssr.getbyname(commonsettings.ravicosoftbusinessbookcanrun);
             ravicosoftsmsplan = ssr.getbyname(commonsettings.ravicosoftsmsplan);
             apiendpoint = ssr.getbyname(commonsettings.apiendpoint);
+
         }
         public static void updateapiendpoint(string newurl)
         {
@@ -103,10 +114,10 @@ namespace BusinessBook.bll
         public static string ravicosoftuserid = "ravicosoftuserid";
         public static string ravicosoftusername = "ravicosoftusername";
         public static string ravicosoftpassword = "ravicosoftpassword";
-        public static string ravicosoftbusinessbookmembershipplan = "ravicosoftbusinessbookmembershipplan";
+        public static string ravicosoftbusinessbookmembershipplan = "ravicosoftbusinessbookmembershipplan"; // values are Package 1,Package 2,Package 3
         public static string ravicosoftbusinessbookmembershipexpirydate = "ravicosoftbusinessbookmembershipexpirydate";
         public static string ravicosoftbusinessbookcanrun = "ravicosoftbusinessbookcanrun";
-        public static string ravicosoftsmsplan = "ravicosoftsmsplan";
+        public static string ravicosoftsmsplan = "ravicosoftsmsplan"; // values are none,Package 1,Package 2,Package 3,Package 4
         public static string apiendpoint = "apiendpoint";
     }
 }
