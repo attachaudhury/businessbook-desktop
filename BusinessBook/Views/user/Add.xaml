@@ -5,21 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.user"
         mc:Ignorable="d"
-        Title="New Staff" Height="524.379" Width="1027.158" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb_Name" HorizontalAlignment="Left" Margin="119,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279" Height="37"/>
-        <Label Content="Role" HorizontalAlignment="Left" Margin="33,117,0,0" VerticalAlignment="Top" Width="71"/>
-        <ComboBox SelectedIndex="0" Name="cb_Role" HorizontalAlignment="Left" Margin="119,110,0,0" VerticalAlignment="Top" Width="279" Height="33"/>
-        <Label Content="User Name" HorizontalAlignment="Left" Margin="33,202,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_UserName" HorizontalAlignment="Left" Height="29" Margin="119,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="33,277,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_Password" HorizontalAlignment="Left" Height="42" Margin="119,258,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label Content="Phone" HorizontalAlignment="Left" Margin="33,354,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_Phone" HorizontalAlignment="Left" Margin="119,341,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279" Height="38"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="33,416,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_Address" HorizontalAlignment="Left" Height="45" Margin="119,405,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="445"/>
+        Title="Add User" Height="Auto" Width="Auto" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20,20,20,20">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  >
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Name="tb_Name" HorizontalAlignment="Left" Margin="104,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" />
 
-        <Button Content="Save" Click="btn_Save" HorizontalAlignment="Left" Margin="632,406,0,0" VerticalAlignment="Top" Width="295" Height="54"/>
+            <Label Content="Phone" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="tb_Phone" HorizontalAlignment="Left" Margin="104,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+
+            <Label Content="Phone 2" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="tb_Phone2" HorizontalAlignment="Left" Margin="104,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+
+        </Grid>
+        <Grid  HorizontalAlignment="Right" VerticalAlignment="Top" >
+            <Label Content="Role" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Top" Width="71"/>
+            <ComboBox SelectedIndex="0" Name="cb_Role" HorizontalAlignment="Left" Margin="494,0,0,0" VerticalAlignment="Top" Width="229" />
+            <Label Content="User Name" HorizontalAlignment="Left" Margin="408,64,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="tb_UserName" HorizontalAlignment="Left"  Margin="494,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="229"/>
+            <Label Content="Password" HorizontalAlignment="Left" Margin="408,132,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="tb_Password" HorizontalAlignment="Left"  Margin="494,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="229"/>
+        </Grid>
+
+
+        <Label Content="Address" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_Address" HorizontalAlignment="Left"  Margin="89,200,0,0" Text="" VerticalAlignment="Top" Width="400"/>
+
+        <Button Content="Save" Click="btn_Save" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Window>

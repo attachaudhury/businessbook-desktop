@@ -20,11 +20,11 @@ namespace BusinessBook.Views.finance
     /// <summary>
     /// Interaction logic for saledetails.xaml
     /// </summary>
-    public partial class saledetails : Window
+    public partial class salepurchasedetails : Window
     {
-        public int saleid;
+        public int transactionid;
         List<data.dapper.financeaccount> financeaccounts = null;
-        public saledetails(int saleId)
+        public salepurchasedetails(int transid)
         {
             InitializeComponent();
             var financeaccountrepo = new data.dapper.financeaccountrepo();
@@ -33,10 +33,10 @@ namespace BusinessBook.Views.finance
             //var financetransactions = financetransactionrepo.get();
             financeaccounts = financeaccountrepo.get();
 
-            saleid = saleId;
+            transactionid = transid;
            // var db = new dbctx();
             //var productsinsale = db.salepurchaseproduct.Where(a => a.fk_financetransaction_salepurchaseproduct_financetransaction == saleid).ToList();
-            var productsinsale = salepurchaseproductrepo.getmultiplebytransactionid(saleid);
+            var productsinsale = salepurchaseproductrepo.getmultiplebytransactionid(transactionid);
             foreach (var item in productsinsale)
             {
                 dg.Items.Add(item);
@@ -44,7 +44,7 @@ namespace BusinessBook.Views.finance
         }
         public void printPeceipt(object sender, RoutedEventArgs e)
         {
-            saleutils.printDuplicateRecipt(saleid);
+            saleutils.printDuplicateRecipt(transactionid);
         }
     }
 }

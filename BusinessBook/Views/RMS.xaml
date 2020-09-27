@@ -6,11 +6,11 @@
         Title="Business Book" Height="Auto" Width="Auto" WindowState="Maximized">
     <Grid>
         <Menu Background="#FF575757" Foreground="#DDC7C7C7" VerticalAlignment="Top"   Margin="0,0,0,0">
-            <MenuItem  Header="Customers">
+            <MenuItem  Header="Customer">
                 <MenuItem Header="Add Customer" Click="mi_AddNewCustomer"/>
                 <MenuItem Header="View Customers" Click="mi_ViewAllCustomers"/>
             </MenuItem>
-            <MenuItem  Header="Vendors">
+            <MenuItem  Header="Vendor">
                 <MenuItem Header="Add Vendor" Click="mi_AddNewVendor"/>
                 <MenuItem Header="View Vendors" Click="mi_ViewAllVendors"/>
             </MenuItem>

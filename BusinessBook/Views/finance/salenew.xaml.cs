@@ -27,7 +27,6 @@ namespace BusinessBook.Views.finance
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
         List<productsaleorpurchaseviewmodel> salelist = new List<productsaleorpurchaseviewmodel>();
-        data.dapper.user customer = null;
         productrepo productrepo = new productrepo();
         userrepo userrepo = new userrepo();
 
@@ -215,7 +214,7 @@ namespace BusinessBook.Views.finance
                         return;
                     }
                 }
-
+                var customer = customer_combobox.SelectedItem as data.dapper.user;
 
                 saleutils.newsale(salelist, totalpayment, customer.id);
 

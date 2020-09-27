@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace BusinessBook.data.dapper
 {
@@ -28,9 +29,12 @@ namespace BusinessBook.data.dapper
     public class financetransactionextended : financetransaction 
     {
         public string accountname { get; set; }
+        public string createdby { get; set; }
+        public string target { get; set; }
     }
     public class financetransactionrepo
     {
+        string joinselect = "t1.id,t1.name,t1.amount,t1.status,t1.details,t1.date,t1.fk_user_createdby_in_financetransaction,t1.fk_user_targetto_in_financetransaction,t1.fk_financeaccount_in_financetransaction,t2.name as accountname,t3.name as createdby,t4.name as target  from financetransaction t1 join financeaccount t2 on t1.fk_financeaccount_in_financetransaction = t2.id join `user` t3 on t1.fk_user_createdby_in_financetransaction=t3.id join `user` t4 on  t1.fk_user_targetto_in_financetransaction=t4.id";
         string conn = baserepo.connectionstring;
         public List<dapper.financetransaction> get() {
             using (var connection = new MySqlConnection(conn))
@@ -47,27 +51,26 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
-        public List<dapper.financetransaction> getmanybyfinanceaccountname(string financeaccountname)
+        public List<dapper.financetransactionextended> getmanybyfinanceaccountname(string financeaccountname)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             financeaccount financeaccount = financeaccountrepo.getonebyname(financeaccountname);
-
-            string sql = "select * from financetransaction where fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
+            string sql = "select "+joinselect+" where t1.fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.GetAll<dapper.financetransaction>().ToList();
+                var res = connection.Query<dapper.financetransactionextended>(sql).ToList();
                 return res;
             }
         }
-        public List<dapper.financetransaction> getmanybyselfnameandfinanceaccountname(string selfname,string financeaccountname)
+        public List<dapper.financetransactionextended> getmanybyselfnameandfinanceaccountname(string selfname,string financeaccountname)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             financeaccount financeaccount = financeaccountrepo.getonebyname(financeaccountname);
 
-            string sql = "select * from financetransaction where name='"+selfname+"' and fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
+            string sql = "select " + joinselect + " where t1.name='" + selfname+"' and t1.fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.GetAll<dapper.financetransaction>().ToList();
+                var res = connection.Query<dapper.financetransactionextended>(sql).ToList();
                 return res;
             }
         }
@@ -82,7 +85,7 @@ namespace BusinessBook.data.dapper
                 financeaccountids[i] = financeaccounts[i];
             }
             string whereincontent = baserepo.getWhereInSql(financeaccountids);
-            string sql = "select * from financetransaction where fk_financeaccount_in_financetransaction in" + whereincontent + ";";
+            string sql = "select " + joinselect + " where fk_financeaccount_in_financetransaction in" + whereincontent + ";";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<dapper.financetransaction>(sql).ToList();
@@ -103,7 +106,7 @@ namespace BusinessBook.data.dapper
         public List<financetransactionextended> getusertransactions(int userid)
         {
             
-            string sql = "select t1.id,t1.name,t1.amount,t1.status,t1.details,t1.date,t1.fk_user_createdby_in_financetransaction,t1.fk_user_targetto_in_financetransaction,t1.fk_financeaccount_in_financetransaction,t2.name as accountname from financetransaction t1 join financeaccount t2 on t1.fk_financeaccount_in_financetransaction = t2.id where fk_user_targetto_in_financetransaction=" + userid + ";";
+            string sql = "select " + joinselect + " where t1.fk_user_targetto_in_financetransaction=" + userid + ";";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<dapper.financetransactionextended>(sql).ToList();

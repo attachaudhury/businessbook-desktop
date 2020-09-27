@@ -164,29 +164,27 @@ html{overflow:hidden;height:200px;}
         }
         #endregion customer
 
-        #region customer
+        #region vendor
         private void mi_ViewAllVendors(object sender, RoutedEventArgs e)
         {
-            new user.List("vendor").Show();
+            userutils.authorizerole(new user.List("vendor"), new string[] {"superadmin","admin"});
         }
         private void mi_AddNewVendor(object sender, RoutedEventArgs e)
         {
-            new user.Add("vendor").Show();
+            userutils.authorizerole(new user.Add("vendor"), new string[] { "superadmin", "admin" });
         }
-        #endregion customer
+        #endregion vendor
 
 
         #region staff
         private void mi_AddStaff(object sender, RoutedEventArgs e)
         {
-            //new Window_AddNewStaff("staff").Show();
-            new user.Add("staff").Show();
+            userutils.authorizerole(new user.Add("staff"), new string[] { "superadmin", "admin" });
         }
 
         private void mi_AllStaff(object sender, RoutedEventArgs e)
         {
-            //new Window_ViewAllStaff().Show();
-            new user.List("staff").Show();
+            userutils.authorizerole(new user.List("staff"), new string[] { "superadmin", "admin" });
         }
         #endregion staff
 
@@ -225,11 +223,12 @@ html{overflow:hidden;height:200px;}
         }
         private void salesshow(object sender, RoutedEventArgs e)
         {
-            new Views.finance.sales().Show();
+            new Views.finance.salespurchases("customer").Show();
         }
         private void purchasenewshow(object sender, RoutedEventArgs e)
         {
-            new Views.finance.purchasenew().Show();
+            var w  = new Views.finance.salespurchases("vendor");
+            userutils.authorizeroleandmembership(w,new string[] { "admin"}, new string[] {"Package 2", "Package 3" });
         }
         private void purchasesshow(object sender, RoutedEventArgs e)
         {

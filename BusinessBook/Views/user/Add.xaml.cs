@@ -40,10 +40,14 @@ namespace BusinessBook.Views.user
             else if (roletype == "customer")
             {
                 roles = new string[] { "customer" };
+                tb_Password.IsEnabled = false;
+                tb_UserName.IsEnabled = false;
             }
             else if (roletype == "vendor")
             {
                 roles = new string[] { "vendor" };
+                tb_Password.IsEnabled = false;
+                tb_UserName.IsEnabled = false;
             }
             cb_Role.ItemsSource = roles;
         }
@@ -51,17 +55,17 @@ namespace BusinessBook.Views.user
         {
             if (tb_Name.Text == "")
             {
-                MessageBox.Show("Please enter name", "Failed");
+                MessageBox.Show("Please enter name", "Info");
                 return;
             }
             if (cb_Role.SelectedValue == null)
             {
-                MessageBox.Show("Please select role", "Failed");
+                MessageBox.Show("Please select role", "Info");
                 return;
             }
             if ((string)cb_Role.SelectedValue == "admin" || (string)cb_Role.SelectedValue == "user") {
                 if (tb_UserName.Text == "" || tb_Password.Text=="") {
-                    MessageBox.Show("Enter Username or password", "Failed");
+                    MessageBox.Show("Enter Username or password", "Info");
                     return;
                 }
             }
@@ -72,18 +76,15 @@ namespace BusinessBook.Views.user
             {
                 person.address = tb_Address.Text;
                 person.phone = tb_Phone.Text;
+                person.phone2 = tb_Phone2.Text;
                 person.username = tb_UserName.Text;
                 person.password = tb_Password.Text;
 
             }
             catch { }
-            //var db = new dbctx();
-
-            //db.user.Add(person);
-            //db.SaveChanges();
             userrepo a = new userrepo();
             a.save(person);
-            MessageBox.Show("User Saved", "Failed");
+            MessageBox.Show("User Saved", "Info");
             Close();
             new Add(this.rtype).Show();
                     

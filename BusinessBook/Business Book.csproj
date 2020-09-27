@@ -143,14 +143,14 @@
     <Compile Include="Views\finance\purchases.xaml.cs">
       <DependentUpon>purchases.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\finance\saledetails.xaml.cs">
-      <DependentUpon>saledetails.xaml</DependentUpon>
+    <Compile Include="Views\finance\salepurchasedetails.xaml.cs">
+      <DependentUpon>salepurchasedetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\accounts.xaml.cs">
       <DependentUpon>accounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\finance\sales.xaml.cs">
-      <DependentUpon>sales.xaml</DependentUpon>
+    <Compile Include="Views\finance\salespurchases.xaml.cs">
+      <DependentUpon>salespurchases.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\transactions.xaml.cs">
       <DependentUpon>transactions.xaml</DependentUpon>
@@ -225,7 +225,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\finance\saledetails.xaml">
+    <Page Include="Views\finance\salepurchasedetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,7 +233,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\finance\sales.xaml">
+    <Page Include="Views\finance\salespurchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
