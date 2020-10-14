@@ -74,21 +74,21 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
-        public List<dapper.financetransaction> getmanybyfinanceaccounttype(string financeaccounttype)
+        public List<financetransactionextended> getmanybyfinanceaccounttype(string financeaccounttype)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             List<financeaccount> financeaccounts = financeaccountrepo.getmanybytype(financeaccounttype);
             object[] financeaccountids = new object[financeaccounts.Count()];
             for (int i = 0; i < financeaccounts.Count(); i++)
             {
-
-                financeaccountids[i] = financeaccounts[i];
+                financeaccountids[i] = financeaccounts[i].name;
             }
+            
             string whereincontent = baserepo.getWhereInSql(financeaccountids);
-            string sql = "select " + joinselect + " where fk_financeaccount_in_financetransaction in" + whereincontent + ";";
+            string sql = "select " + joinselect + " where fk_financeaccount_in_financetransaction in (" + whereincontent + ");";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Query<dapper.financetransaction>(sql).ToList();
+                var res = connection.Query<financetransactionextended>(sql).ToList();
                 return res;
             }
         }
