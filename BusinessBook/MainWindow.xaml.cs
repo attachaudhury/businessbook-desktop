@@ -152,11 +152,7 @@ namespace BusinessBook
                 softwaresetting softwareshouldrun = userutils.ravicosoftbusinessbookcanrun;
                 if (softwareshouldrun != null)
                 {
-                    if ((Boolean)softwareshouldrun.boolvalue)
-                    {
-                        return true;
-                    }
-                    else
+                    if (softwareshouldrun.stringvalue =="no")
                     {
                         RadDesktopAlertManager manager = new RadDesktopAlertManager();
                         var alert = new RadDesktopAlert();
@@ -165,8 +161,11 @@ namespace BusinessBook
                         alert.ShowDuration = 5000;
                         System.Media.SystemSounds.Hand.Play();
                         manager.ShowAlert(alert);
-
                         return false;
+                    }
+                    else
+                    {
+                        return true;
                     }
                 }
                 else

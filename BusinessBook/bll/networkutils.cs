@@ -138,14 +138,14 @@ namespace BusinessBook.bll
                     {
                         var ss = new softwaresetting();
                         ss.name = commonsettings.ravicosoftbusinessbookcanrun;
-                        ss.valuetype = "bool";
-                        ss.boolvalue = user.businessbookcanrun;
+                        ss.valuetype = "string";
+                        ss.stringvalue = user.businessbookcanrun;
                         userutils.ravicosoftbusinessbookcanrun = ssr.save(ss);
                     }
                     else
                     {
-                        canrunsoftware.valuetype = "bool";
-                        canrunsoftware.boolvalue = user.businessbookcanrun;
+                        canrunsoftware.valuetype = "string";
+                        canrunsoftware.stringvalue = user.businessbookcanrun;
                         userutils.ravicosoftbusinessbookcanrun = ssr.update(canrunsoftware);
                     }
 
@@ -255,7 +255,7 @@ namespace BusinessBook.bll
         public string password { get; set; }
         public string businessbookmembershipplan { get; set; } // values are Package 1,Package 2,Package 3
         public DateTime? businessbookmembershipexpirydate { get; set; } // values are none,Package 1,Package 2,Package 3,Package 4
-        public Boolean? businessbookcanrun { get; set; }
+        public string businessbookcanrun { get; set; }
         public string smsplan { get; set; }
     }
 }
