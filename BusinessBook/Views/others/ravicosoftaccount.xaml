@@ -30,10 +30,24 @@
                     </Grid>
                 </telerik:RadTabItem>
                 
-                <telerik:RadTabItem Header="Software Packages">
+                <telerik:RadTabItem Header="Change Account">
+                    <Grid>
+                        <Label Content="Username" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                        <TextBox Name="changeaccountusername_tb" Margin="0,27,273,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="261" HorizontalAlignment="Right"/>
+                        <Label Content="Password" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="changeaccountuserpassword_tb" Margin="0,72,273,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="261" HorizontalAlignment="Right"/>
+                        <Button Content="Change Account" Click="changeaccount"  HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </telerik:RadTabItem>
+
+                <telerik:RadTabItem Header="About">
                     <telerik:RadLayoutControl Orientation="Vertical" SelectedItem="{x:Null}">
-                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Margin="15">Businessbook Packages</TextBlock>
-                        <telerik:RadLayoutControl VerticalAlignment="Top" SelectedItem="{x:Null}">
+                        <Grid>
+                            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Margin="15">About</TextBlock>
+
+                            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"  Margin="30,60,100,10">Thanks for using Businessbook. For Consultancy, Businessbook information, business packages and <LineBreak></LineBreak> Branded SMS packages please visit ravicosoft.com</TextBlock>
+                        </Grid>
+                        <!--<telerik:RadLayoutControl VerticalAlignment="Top" SelectedItem="{x:Null}">
                             <telerik:LayoutControlGroup Orientation="Vertical" telerik:StyleManager.Theme="Fluent" Margin="10,0">
                                 <TextBlock Text="Package 1" Background="LightGray" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"/>
                                 <telerik:LayoutControlGroup Orientation="Vertical" VerticalAlignment="Center" Margin="0" telerik:StyleManager.Theme="Fluent">
@@ -74,61 +88,10 @@
                             </telerik:LayoutControlGroup>
 
 
-                        </telerik:RadLayoutControl>
-                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="10" Margin="15">For Update Package, please visit www.ravicosoft.com.</TextBlock>
+                        </telerik:RadLayoutControl>-->
                     </telerik:RadLayoutControl>
                 </telerik:RadTabItem>
-                <telerik:RadTabItem Header="SMS Packages">
-                    <telerik:RadLayoutControl Orientation="Vertical" SelectedItem="{x:Null}">
-                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Margin="15">Branded SMS Packages</TextBlock>
-                        <telerik:RadLayoutControl VerticalAlignment="Top" SelectedItem="{x:Null}">
-                            <telerik:LayoutControlGroup Orientation="Vertical" telerik:StyleManager.Theme="Fluent" Margin="10,0">
-                                <TextBlock Text="Package 1" Background="LightGray" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <telerik:LayoutControlGroup Orientation="Vertical" VerticalAlignment="Center" Margin="0" telerik:StyleManager.Theme="Fluent">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="SMS : 25,000" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Validity : 90 days" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Price : $ 80" Background="LightGray" TextAlignment="Center" Margin="0 0 0 10" />
-                                    </StackPanel>
-                                </telerik:LayoutControlGroup>
-                            </telerik:LayoutControlGroup>
-                            <telerik:LayoutControlGroup Orientation="Vertical" telerik:StyleManager.Theme="Fluent" Margin="10,0">
-                                <TextBlock Text="Package 2" Background="LightGray" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <telerik:LayoutControlGroup Orientation="Vertical" VerticalAlignment="Center" Margin="0" telerik:StyleManager.Theme="Fluent">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="SMS : 50,000" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Validity : 180 days" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Price : $ 140" Background="LightGray" TextAlignment="Center" Margin="0 0 0 10" />
-                                    </StackPanel>
-                                </telerik:LayoutControlGroup>
-                            </telerik:LayoutControlGroup>
-                            <telerik:LayoutControlGroup Orientation="Vertical" telerik:StyleManager.Theme="Fluent" Margin="10,0">
-                                <TextBlock Text="Package 3" Background="LightGray" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <telerik:LayoutControlGroup Orientation="Vertical" VerticalAlignment="Center" Margin="0" telerik:StyleManager.Theme="Fluent">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="SMS : 1,00,000" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Validity : 360 days" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Price : $ 250" Background="LightGray" TextAlignment="Center" Margin="0 0 0 10" />
-                                    </StackPanel>
-                                </telerik:LayoutControlGroup>
-                            </telerik:LayoutControlGroup>
-                            <telerik:LayoutControlGroup Orientation="Vertical" telerik:StyleManager.Theme="Fluent" Margin="10,0">
-                                <TextBlock Text="Package 4" Background="LightGray" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <telerik:LayoutControlGroup Orientation="Vertical" VerticalAlignment="Center" Margin="0" telerik:StyleManager.Theme="Fluent">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="SMS : 5,00,000" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Validity : 360 days" TextAlignment="Center" Margin="0 10 0 10" />
-                                        <TextBlock Text="Price : $ 750" Background="LightGray" TextAlignment="Center" Margin="0 0 0 10" />
-                                    </StackPanel>
-                                </telerik:LayoutControlGroup>
-                            </telerik:LayoutControlGroup>
-
-
-
-                        </telerik:RadLayoutControl>
-                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="10" Margin="15">For Package subscription please visit www.ravicosoft.com. Brandname registration charges are 1000.</TextBlock>
-                    </telerik:RadLayoutControl>
-                </telerik:RadTabItem>
+                
             </telerik:RadTabControl.Items>
         </telerik:RadTabControl>
     </Grid>

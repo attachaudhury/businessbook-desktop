@@ -2,6 +2,7 @@
 using BusinessBook.data.dapper;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace BusinessBook.Views.others
         public ravicosoftaccount()
         {
             InitializeComponent();
-            if (userutils.loggedinuserd.role == "superadmin") 
+            if (userutils.loggedinuserd.role == "superadmin" || userutils.loggedinuserd.role == "admin") 
             {
                 apiendpoint_tb.IsEnabled = true;
             }
@@ -81,6 +82,26 @@ namespace BusinessBook.Views.others
             {
                 userutils.updateapiendpoint(apiendpoint_tb.Text);
             }
+        }
+
+        private void changeaccount(object sender, RoutedEventArgs e)
+        {
+            if (changeaccountusername_tb.Text == "")
+            {
+                MessageBox.Show("Please enter username", "Information");
+                return;
+            }
+            if (changeaccountuserpassword_tb.Text == "")
+            {
+                MessageBox.Show("Please enter password", "Information");
+                return;
+            }
+            dynamic obj  = new ExpandoObject();
+            obj.changeaccountusername = changeaccountusername_tb.Text;
+            obj.changeaccountuserpassword = changeaccountuserpassword_tb.Text;
+            
+            networkutils.changeaccount(obj);
+
         }
 
     }

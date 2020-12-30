@@ -207,6 +207,37 @@ namespace BusinessBook.bll
             }
         }
 
+        public static async void changeaccount(dynamic obj)
+        {
+            try
+            {
+                softwaresettingrepo ssr = new softwaresettingrepo();
+                var ravicosoftuser = ssr.getbyname(commonsettings.ravicosoftuserid);
+                if (ravicosoftuser == null)
+                {
+                    return;
+                }
+                var apiendpoint = apiendpointdefault;
+                if (userutils.apiendpoint != null)
+                {
+                    apiendpoint = userutils.apiendpoint.stringvalue;
+                }
+                RestClient client = new RestClient(apiendpoint);
+                var request = new RestRequest("changeaccount");
+                obj.userid = ravicosoftuser.stringvalue;
+                request.AddJsonBody(obj);
+                var response = await client.PostAsync<responsetype>(request);
+                if (response.status == "success")
+                {
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<responseuser>(response.data);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         public static async void sendsms(string message,dynamic obj)
         {
             try
