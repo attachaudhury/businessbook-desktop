@@ -1,4 +1,5 @@
 ﻿using BusinessBook.data.dapper;
+using BusinessBook.data.viewmodel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RestSharp;
@@ -23,7 +24,7 @@ namespace BusinessBook.bll
             try
             {
                 softwaresettingrepo ssr = new softwaresettingrepo();
-                var ravicosoftuser = ssr.getbyname(commonsettings.ravicosoftuserid);
+                var ravicosoftuser = ssr.getbyname(commonsettingfields.ravicosoftuserid);
 
                 var apiendpoint = apiendpointdefault;
                 if (userutils.apiendpoint != null)
@@ -36,138 +37,11 @@ namespace BusinessBook.bll
                 {
                     request.AddJsonBody(new { userid = ravicosoftuser.stringvalue });
                 }
-                var response = await client.PostAsync<responsetype>(request);
+                var response = await client.PostAsync<apiresponsetype>(request);
                 if (response.status == "success")
                 {
-                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<responseuser>(response.data);
-
-                    var userid = userutils.ravicosoftuserid;
-                    if (userid == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftuserid;
-                        ss.valuetype = "string";
-                        ss.stringvalue = user._id;
-                        userutils.ravicosoftuserid = ssr.save(ss);
-                    }
-                    else
-                    {
-                        userid.valuetype = "string";
-                        userid.stringvalue = user._id;
-                        userutils.ravicosoftuserid = ssr.update(userid);
-                    }
-
-
-                    var username = userutils.ravicosoftusername;
-                    if (username == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftusername;
-                        ss.valuetype = "string";
-                        ss.stringvalue = user.username;
-                        userutils.ravicosoftusername = ssr.save(ss);
-                    }
-                    else
-                    {
-                        username.valuetype = "string";
-                        username.stringvalue = user.username;
-                        userutils.ravicosoftuserid = ssr.update(username);
-                    }
-
-                    var userpassword = userutils.ravicosoftpassword;
-                    if (userpassword == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftpassword;
-                        ss.valuetype = "string";
-                        ss.stringvalue = user.password;
-                        userutils.ravicosoftpassword = ssr.save(ss);
-                    }
-                    else
-                    {
-                        userpassword.valuetype = "string";
-                        userpassword.stringvalue = user.password;
-                        userutils.ravicosoftpassword = ssr.update(userpassword);
-                    }
-
-                    var membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
-                    if (membershiptype == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftbusinessbookmembershipplan;
-                        ss.valuetype = "string";
-                        ss.stringvalue = user.businessbookmembershipplan;
-                        userutils.ravicosoftbusinessbookmembershipplan = ssr.save(ss);
-                    }
-                    else
-                    {
-                        userpassword.valuetype = "string";
-                        userpassword.stringvalue = user.businessbookmembershipplan;
-                        userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
-                    }
-
-
-                    membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
-
-                    if (membershiptype.stringvalue != "Package 1")
-                    {
-                        if (user.businessbookmembershipexpirydate != null)
-                        {
-                            var membershipexpirydate = userutils.ravicosoftbusinessbookmembershipexpirydate;
-                            if (membershipexpirydate == null)
-                            {
-                                var ss = new softwaresetting();
-                                ss.name = commonsettings.ravicosoftbusinessbookmembershipexpirydate;
-                                ss.valuetype = "date";
-                                ss.datevalue = user.businessbookmembershipexpirydate;
-                                userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.save(ss);
-                            }
-                            else
-                            {
-                                membershipexpirydate.valuetype = "date";
-                                membershipexpirydate.datevalue = user.businessbookmembershipexpirydate;
-                                userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.update(membershipexpirydate);
-                            }
-                        }
-                    }
-
-
-
-                    var canrunsoftware = userutils.ravicosoftbusinessbookcanrun;
-                    if (canrunsoftware == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftbusinessbookcanrun;
-                        ss.valuetype = "string";
-                        ss.stringvalue = user.businessbookcanrun;
-                        userutils.ravicosoftbusinessbookcanrun = ssr.save(ss);
-                    }
-                    else
-                    {
-                        canrunsoftware.valuetype = "string";
-                        canrunsoftware.stringvalue = user.businessbookcanrun;
-                        userutils.ravicosoftbusinessbookcanrun = ssr.update(canrunsoftware);
-                    }
-
-
-
-                    var cansendsms = userutils.ravicosoftsmsplan;
-                    if (cansendsms == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettings.ravicosoftsmsplan;
-                        ss.valuetype = "string";
-                        ss.stringvalue = user.smsplan;
-                        userutils.ravicosoftsmsplan = ssr.save(ss);
-                    }
-                    else
-                    {
-                        cansendsms.valuetype = "string";
-                        cansendsms.stringvalue = user.smsplan;
-                        userutils.ravicosoftsmsplan = ssr.update(cansendsms);
-                    }
-                    
-
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<apiresponseuserclass>(response.data);
+                    userutils.updateusersetting(user);
                 }
             }
             catch (Exception ex)
@@ -181,7 +55,7 @@ namespace BusinessBook.bll
             try
             {
                 softwaresettingrepo ssr = new softwaresettingrepo();
-                var ravicosoftuser = ssr.getbyname(commonsettings.ravicosoftuserid);
+                var ravicosoftuser = ssr.getbyname(commonsettingfields.ravicosoftuserid);
                 if (ravicosoftuser == null)
                 {
                     return;
@@ -195,10 +69,11 @@ namespace BusinessBook.bll
                 var request = new RestRequest("updateonlinesetting");
                 obj.userid = ravicosoftuser.stringvalue;
                 request.AddJsonBody(obj);
-                var response = await client.PostAsync<responsetype>(request);
+                var response = await client.PostAsync<apiresponsetype>(request);
                 if (response.status == "success")
                 {
-                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<responseuser>(response.data);
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<apiresponseuserclass>(response.data);
+                    userutils.updateusersetting(user);
                 }
             }
             catch (Exception ex)
@@ -212,7 +87,7 @@ namespace BusinessBook.bll
             try
             {
                 softwaresettingrepo ssr = new softwaresettingrepo();
-                var ravicosoftuser = ssr.getbyname(commonsettings.ravicosoftuserid);
+                var ravicosoftuser = ssr.getbyname(commonsettingfields.ravicosoftuserid);
                 if (ravicosoftuser == null)
                 {
                     return;
@@ -226,10 +101,11 @@ namespace BusinessBook.bll
                 var request = new RestRequest("changeaccount");
                 obj.userid = ravicosoftuser.stringvalue;
                 request.AddJsonBody(obj);
-                var response = await client.PostAsync<responsetype>(request);
+                var response = await client.PostAsync<apiresponsetype>(request);
                 if (response.status == "success")
                 {
-                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<responseuser>(response.data);
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<apiresponseuserclass>(response.data);
+                    userutils.updateusersetting(user);
                 }
             }
             catch (Exception ex)
@@ -256,7 +132,7 @@ namespace BusinessBook.bll
                 List<string> number = otherutils.parsenumbersfromdynamic(obj);
                 var requestobject = new { userid = userutils.ravicosoftuserid.stringvalue,message=message,numbers=number.ToArray()};
                 request.AddJsonBody(requestobject);
-                var response = await client.PostAsync<responsetype>(request);
+                var response = await client.PostAsync<apiresponsetype>(request);
             }
             catch (Exception ex)
             {
@@ -273,20 +149,6 @@ namespace BusinessBook.bll
         }
 
     }
-    public class responsetype
-    {
-        public string status { get; set; }
-        public string data { get; set; }
-        public string ex { get; set; }
-    }
-    public class responseuser
-    {
-        public string _id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string businessbookmembershipplan { get; set; } // values are Package 1,Package 2,Package 3
-        public DateTime? businessbookmembershipexpirydate { get; set; } // values are none,Package 1,Package 2,Package 3,Package 4
-        public string businessbookcanrun { get; set; }
-        public string smsplan { get; set; }
-    }
+    
+    
 }

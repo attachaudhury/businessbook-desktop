@@ -120,6 +120,9 @@
     <Compile Include="data\dapper\subproduct.cs" />
     <Compile Include="data\dapper\product.cs" />
     <Compile Include="data\dapper\user.cs" />
+    <Compile Include="data\viewmodel\apiresponsetype.cs" />
+    <Compile Include="data\viewmodel\apiresponseuserclass.cs" />
+    <Compile Include="data\viewmodel\commonsettingfields.cs" />
     <Compile Include="data\viewmodel\productsaleorpurchaseviewmodel.cs" />
     <Compile Include="other\Class1.cs" />
     <Compile Include="Views\finance\accountsbalance.xaml.cs">

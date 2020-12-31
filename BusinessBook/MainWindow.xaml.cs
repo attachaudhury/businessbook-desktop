@@ -22,6 +22,7 @@ using Telerik.Windows.Controls;
 using BusinessBook.Views.others;
 using BusinessBook.data.dapper;
 using System.Dynamic;
+using BusinessBook.data.viewmodel;
 
 namespace BusinessBook
 {
@@ -85,7 +86,7 @@ namespace BusinessBook
                     userutils.loggedinuserd = userdd;
                     userutils.membership = "Package 3";
 
-                    userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettings.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
+                    userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettingfields.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
 
                     Task.Run(() =>
                     {
@@ -95,7 +96,7 @@ namespace BusinessBook
                         userutils.loggedinuserd = userdd;
                         userutils.membership = "Package 3";
 
-                        userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettings.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
+                        userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettingfields.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
 
                     });
 

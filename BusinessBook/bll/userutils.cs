@@ -1,4 +1,5 @@
 ﻿using BusinessBook.data.dapper;
+using BusinessBook.data.viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,14 +85,14 @@ namespace BusinessBook.bll
         public static void loadsoftwaresetting()
         {
             var ssr = new softwaresettingrepo();
-            ravicosoftuserid = ssr.getbyname(commonsettings.ravicosoftuserid);
-            ravicosoftusername = ssr.getbyname(commonsettings.ravicosoftusername);
-            ravicosoftpassword = ssr.getbyname(commonsettings.ravicosoftpassword);
-            ravicosoftbusinessbookmembershipplan = ssr.getbyname(commonsettings.ravicosoftbusinessbookmembershipplan);
-            ravicosoftbusinessbookmembershipexpirydate = ssr.getbyname(commonsettings.ravicosoftbusinessbookmembershipexpirydate);
-            ravicosoftbusinessbookcanrun = ssr.getbyname(commonsettings.ravicosoftbusinessbookcanrun);
-            ravicosoftsmsplan = ssr.getbyname(commonsettings.ravicosoftsmsplan);
-            apiendpoint = ssr.getbyname(commonsettings.apiendpoint);
+            ravicosoftuserid = ssr.getbyname(commonsettingfields.ravicosoftuserid);
+            ravicosoftusername = ssr.getbyname(commonsettingfields.ravicosoftusername);
+            ravicosoftpassword = ssr.getbyname(commonsettingfields.ravicosoftpassword);
+            ravicosoftbusinessbookmembershipplan = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipplan);
+            ravicosoftbusinessbookmembershipexpirydate = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipexpirydate);
+            ravicosoftbusinessbookcanrun = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookcanrun);
+            ravicosoftsmsplan = ssr.getbyname(commonsettingfields.ravicosoftsmsplan);
+            apiendpoint = ssr.getbyname(commonsettingfields.apiendpoint);
 
         }
         public static void updateapiendpoint(string newurl)
@@ -99,7 +100,7 @@ namespace BusinessBook.bll
             var ssr = new softwaresettingrepo();
             if (apiendpoint == null)
             {
-                var ss = new softwaresetting() { name = commonsettings.apiendpoint, valuetype = "string", stringvalue = newurl };
+                var ss = new softwaresetting() { name = commonsettingfields.apiendpoint, valuetype = "string", stringvalue = newurl };
                 apiendpoint = ssr.save(ss);
             }
             else
@@ -108,16 +109,133 @@ namespace BusinessBook.bll
                 apiendpoint = ssr.update(apiendpoint);
             }
         }
+
+        public static void updateusersetting(apiresponseuserclass user) 
+        {
+            softwaresettingrepo ssr = new softwaresettingrepo();
+            var ravicosoftuserid = ssr.getbyname(commonsettingfields.ravicosoftuserid);
+            if (ravicosoftuserid == null)
+            {
+                var ss = new softwaresetting();
+                ss.name = commonsettingfields.ravicosoftuserid;
+                ss.valuetype = "string";
+                ss.stringvalue = user._id;
+                userutils.ravicosoftuserid = ssr.save(ss);
+            }
+            else
+            {
+                ravicosoftuserid.valuetype = "string";
+                ravicosoftuserid.stringvalue = user._id;
+                userutils.ravicosoftuserid = ssr.update(ravicosoftuserid);
+            }
+
+            var username = ssr.getbyname(commonsettingfields.ravicosoftusername);
+            if (username == null)
+            {
+                var ss = new softwaresetting();
+                ss.name = commonsettingfields.ravicosoftusername;
+                ss.valuetype = "string";
+                ss.stringvalue = user.username;
+                userutils.ravicosoftusername = ssr.save(ss);
+            }
+            else
+            {
+                username.valuetype = "string";
+                username.stringvalue = user.username;
+                userutils.ravicosoftuserid = ssr.update(username);
+            }
+
+
+            var userpassword = ssr.getbyname(commonsettingfields.ravicosoftpassword);
+            if (userpassword == null)
+            {
+                var ss = new softwaresetting();
+                ss.name = commonsettingfields.ravicosoftpassword;
+                ss.valuetype = "string";
+                ss.stringvalue = user.password;
+                userutils.ravicosoftpassword = ssr.save(ss);
+            }
+            else
+            {
+                userpassword.valuetype = "string";
+                userpassword.stringvalue = user.password;
+                userutils.ravicosoftpassword = ssr.update(userpassword);
+            }
+
+            var membershiptype = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipplan);
+            if (membershiptype == null)
+            {
+                var ss = new softwaresetting();
+                ss.name = commonsettingfields.ravicosoftbusinessbookmembershipplan;
+                ss.valuetype = "string";
+                ss.stringvalue = user.businessbookmembershipplan;
+                userutils.ravicosoftbusinessbookmembershipplan = ssr.save(ss);
+            }
+            else
+            {
+                userpassword.valuetype = "string";
+                userpassword.stringvalue = user.businessbookmembershipplan;
+                userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
+            }
+
+            membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
+            if (membershiptype.stringvalue == "Package 2" || membershiptype.stringvalue == "Package 3" || membershiptype.stringvalue == "Package 4")
+            {
+                if (user.businessbookmembershipexpirydate != null)
+                {
+                    var membershipexpirydate = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipexpirydate);
+                    if (membershipexpirydate == null)
+                    {
+                        var ss = new softwaresetting();
+                        ss.name = commonsettingfields.ravicosoftbusinessbookmembershipexpirydate;
+                        ss.valuetype = "date";
+                        ss.datevalue = user.businessbookmembershipexpirydate;
+                        userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.save(ss);
+                    }
+                    else
+                    {
+                        membershipexpirydate.valuetype = "date";
+                        membershipexpirydate.datevalue = user.businessbookmembershipexpirydate;
+                        userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.update(membershipexpirydate);
+                    }
+                }
+            }
+
+
+
+            var canrunsoftware = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookcanrun);
+            if (canrunsoftware == null)
+            {
+                var ss = new softwaresetting();
+                ss.name = commonsettingfields.ravicosoftbusinessbookcanrun;
+                ss.valuetype = "string";
+                ss.stringvalue = user.businessbookcanrun;
+                userutils.ravicosoftbusinessbookcanrun = ssr.save(ss);
+            }
+            else
+            {
+                canrunsoftware.valuetype = "string";
+                canrunsoftware.stringvalue = user.businessbookcanrun;
+                userutils.ravicosoftbusinessbookcanrun = ssr.update(canrunsoftware);
+            }
+
+
+            var cansendsms = ssr.getbyname(commonsettingfields.ravicosoftsmsplan);
+            if (cansendsms == null)
+            {
+                var ss = new softwaresetting();
+                ss.name = commonsettingfields.ravicosoftsmsplan;
+                ss.valuetype = "string";
+                ss.stringvalue = user.smsplan;
+                userutils.ravicosoftsmsplan = ssr.save(ss);
+            }
+            else
+            {
+                cansendsms.valuetype = "string";
+                cansendsms.stringvalue = user.smsplan;
+                userutils.ravicosoftsmsplan = ssr.update(cansendsms);
+            }
+        }
     }
-    public class commonsettings
-    {
-        public static string ravicosoftuserid = "ravicosoftuserid";
-        public static string ravicosoftusername = "ravicosoftusername";
-        public static string ravicosoftpassword = "ravicosoftpassword";
-        public static string ravicosoftbusinessbookmembershipplan = "ravicosoftbusinessbookmembershipplan"; // values are '',undefined,Package 1,Package 2,Package 3,Package 4
-        public static string ravicosoftbusinessbookmembershipexpirydate = "ravicosoftbusinessbookmembershipexpirydate";
-        public static string ravicosoftbusinessbookcanrun = "ravicosoftbusinessbookcanrun"; // values are '',undefined,yes,no  (if no then it can not run) in all other cases it can run
-        public static string ravicosoftsmsplan = "ravicosoftsmsplan"; // values are '',undefined,Package 1,Package 2,Package 3,Package 4
-        public static string apiendpoint = "apiendpoint";
-    }
+    
 }
