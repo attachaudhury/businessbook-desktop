@@ -14,18 +14,20 @@
                         <Label Content="User Id" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
                         <TextBox Name="userid_tb" IsEnabled="False" Margin="0,27,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
                         <Label Content="User Name" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="username_tb" Margin="0,72,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
+                        <TextBox x:Name="username_tb" IsEnabled="False" Margin="0,72,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
                         <Label Content="Password" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="password_tb" IsEnabled="False" Margin="0,117,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
                         <Label Content="Membership" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="membershiptype_tb" IsEnabled="False" Margin="0,162,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
                         <Label Content="Membership Expiry" HorizontalAlignment="Left" Margin="10,219,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="membershipexpiry_tb" IsEnabled="False" Margin="0,207,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
-                        <Label Content="SMS Sending" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="cansendsms_tb" IsEnabled="False" Margin="0,252,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
+                        <Label Content="SMS Plan" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="smsplan_tb" IsEnabled="False" Margin="0,252,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
                         <Label Content="Api Endpoint" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="apiendpoint_tb" IsEnabled="False" Margin="0,297,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="534" HorizontalAlignment="Right"/>
-                        <Button Content="Update Setting" Click="savesetting"  HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom"/>
+                        <Label Content="*For update setting please visit ravicosoft.com" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>
+
+                        <Button Content="Update Ap End Point" Click="updateapiendpoint"  HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom"/>
 
                     </Grid>
                 </telerik:RadTabItem>

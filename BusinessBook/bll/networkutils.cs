@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Telerik.Windows.Controls;
 
 namespace BusinessBook.bll
 {
@@ -50,37 +51,6 @@ namespace BusinessBook.bll
             }
         }
 
-        public static async void updateonlinesetting(dynamic obj)
-        {
-            try
-            {
-                softwaresettingrepo ssr = new softwaresettingrepo();
-                var ravicosoftuser = ssr.getbyname(commonsettingfields.ravicosoftuserid);
-                if (ravicosoftuser == null)
-                {
-                    return;
-                }
-                var apiendpoint = apiendpointdefault;
-                if (userutils.apiendpoint != null)
-                {
-                    apiendpoint = userutils.apiendpoint.stringvalue;
-                }
-                RestClient client = new RestClient(apiendpoint);
-                var request = new RestRequest("updateonlinesetting");
-                obj.userid = ravicosoftuser.stringvalue;
-                request.AddJsonBody(obj);
-                var response = await client.PostAsync<apiresponsetype>(request);
-                if (response.status == "success")
-                {
-                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<apiresponseuserclass>(response.data);
-                    userutils.updateusersetting(user);
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
 
         public static async void changeaccount(dynamic obj)
         {
@@ -106,6 +76,14 @@ namespace BusinessBook.bll
                 {
                     var user = Newtonsoft.Json.JsonConvert.DeserializeObject<apiresponseuserclass>(response.data);
                     userutils.updateusersetting(user);
+                    RadDesktopAlertManager manager = new RadDesktopAlertManager();
+                    var alert = new RadDesktopAlert();
+                    alert.Header = "Information";
+                    alert.Content = "User account changed. Please restart software to apply update";
+                    alert.ShowDuration = 5000;
+                    System.Media.SystemSounds.Hand.Play();
+                    manager.ShowAlert(alert);
+
                 }
             }
             catch (Exception ex)

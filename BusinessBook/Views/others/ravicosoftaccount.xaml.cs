@@ -32,7 +32,7 @@ namespace BusinessBook.Views.others
                 apiendpoint_tb.IsEnabled = true;
             }
 
-            if (userutils.ravicosoftusername != null)
+            if (userutils.ravicosoftuserid != null)
             {
                 userid_tb.Text = userutils.ravicosoftuserid.stringvalue;
             }
@@ -54,30 +54,22 @@ namespace BusinessBook.Views.others
             }
             if (userutils.ravicosoftsmsplan != null)
             {
-                cansendsms_tb.Text = userutils.ravicosoftsmsplan.stringvalue;
+                smsplan_tb.Text = userutils.ravicosoftsmsplan.stringvalue;
             }
             if (userutils.apiendpoint != null)
             {
                 apiendpoint_tb.Text = userutils.apiendpoint.stringvalue;
             }
         }
-        private void savesetting(object sender, RoutedEventArgs e)
+        private void updateapiendpoint(object sender, RoutedEventArgs e)
         {
 
-            if (username_tb.Text == "")
-            {
-                MessageBox.Show("Please enter username", "Information");
-                return;
-            }
             if (apiendpoint_tb.IsEnabled && apiendpoint_tb.Text == "")
             {
                 MessageBox.Show("Please enter apiendpoint", "Information");
                 return;
             }
 
-            dynamic obj = new { username = username_tb.Text };
-            networkutils.updateonlinesetting(obj);
-            
             if (apiendpoint_tb.IsEnabled && apiendpoint_tb.Text != "") 
             {
                 userutils.updateapiendpoint(apiendpoint_tb.Text);

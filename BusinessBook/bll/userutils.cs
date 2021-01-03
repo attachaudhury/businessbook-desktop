@@ -142,7 +142,7 @@ namespace BusinessBook.bll
             {
                 username.valuetype = "string";
                 username.stringvalue = user.username;
-                userutils.ravicosoftuserid = ssr.update(username);
+                userutils.ravicosoftusername = ssr.update(username);
             }
 
 
@@ -173,8 +173,8 @@ namespace BusinessBook.bll
             }
             else
             {
-                userpassword.valuetype = "string";
-                userpassword.stringvalue = user.businessbookmembershipplan;
+                membershiptype.valuetype = "string";
+                membershiptype.stringvalue = user.businessbookmembershipplan;
                 userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
             }
 
