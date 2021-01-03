@@ -42,14 +42,10 @@
                     </Grid>
                 </telerik:RadTabItem>
 
-                <telerik:RadTabItem Header="About">
+                <!--<telerik:RadTabItem Header="About">
                     <telerik:RadLayoutControl Orientation="Vertical" SelectedItem="{x:Null}">
-                        <Grid>
-                            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Margin="15">About</TextBlock>
-
-                            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"  Margin="30,60,100,10">Thanks for using Businessbook. For Consultancy, Businessbook information, business packages and <LineBreak></LineBreak> Branded SMS packages please visit ravicosoft.com</TextBlock>
-                        </Grid>
-                        <!--<telerik:RadLayoutControl VerticalAlignment="Top" SelectedItem="{x:Null}">
+                        
+                        <telerik:RadLayoutControl VerticalAlignment="Top" SelectedItem="{x:Null}">
                             <telerik:LayoutControlGroup Orientation="Vertical" telerik:StyleManager.Theme="Fluent" Margin="10,0">
                                 <TextBlock Text="Package 1" Background="LightGray" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"/>
                                 <telerik:LayoutControlGroup Orientation="Vertical" VerticalAlignment="Center" Margin="0" telerik:StyleManager.Theme="Fluent">
@@ -90,9 +86,9 @@
                             </telerik:LayoutControlGroup>
 
 
-                        </telerik:RadLayoutControl>-->
+                        </telerik:RadLayoutControl>
                     </telerik:RadLayoutControl>
-                </telerik:RadTabItem>
+                </telerik:RadTabItem>-->
                 
             </telerik:RadTabControl.Items>
         </telerik:RadTabControl>

@@ -100,7 +100,7 @@ namespace BusinessBook.bll
                 var isuservalid = userutils.checkravicosoftuseridexits();
                 if (!issendingvalid || !isuservalid) 
                 {
-                    otherutils.notify("Info","You can not send sms, Please vist ravicosoft.com for any help",3000);
+                    otherutils.notify("Info","You can not send sms, Please vist ravicosoft.com for any help",10000);
                     return;
                 }
 
