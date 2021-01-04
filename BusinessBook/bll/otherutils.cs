@@ -22,29 +22,28 @@ namespace BusinessBook.bll
             manager.ShowAlert(alert);
         }
 
-        public static bool checkmessagevalidation(string message, dynamic obj) 
+        public static bool checkmessagevalidation(string message, string[] numbers) 
         {
             if (message == "")
             {
-                otherutils.notify("Info", "Type message", 3000);
+                otherutils.notify("Info", "Type message", 10000);
                 return false;
             }
-            var numbers = otherutils.parsenumbersfromdynamic(obj);
-            if (numbers.Count == 0)
+            if (numbers.Length == 0)
             {
-                otherutils.notify("Info", "No valid numbers selected", 3000);
+                otherutils.notify("Info", "No valid numbers selected", 10000);
                 return false;
             }
             var smsplan = userutils.ravicosoftsmsplan;
-            if (smsplan == null || smsplan.stringvalue == "none")
+            if (smsplan == null || smsplan.stringvalue == "none" || smsplan.stringvalue == "" || smsplan.stringvalue == "undefined")
             {
-                otherutils.notify("Info", "Please update your message plan to send sms", 3000);
+                otherutils.notify("Info", "Please update your message plan to send sms", 10000);
                 return false;
             }
             return true;
         }
 
-        public static List<string> parsenumbersfromdynamic(dynamic obj) 
+        public static string[] parsenumbersfromdynamiclist(dynamic obj) 
         {
             var numbers = new List<string>();
             if (obj is string)
@@ -100,7 +99,24 @@ namespace BusinessBook.bll
                 }
                 
             }
-            return numbers;
+            return numbers.ToArray();
+        }
+
+        public static string[] parsenumbersfromcommaorspaceseperatedstring(string commaorspaceseperatednumbers)
+        {
+
+            var numbers = new List<string>();
+            string[] obj = commaorspaceseperatednumbers.Split(new[] { ',', ' ' },StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < obj.Length; i++)
+            {
+                var parsednumber = parsenumber(obj[i]);
+                if (parsednumber != "")
+                {
+                    numbers.Add(parsednumber);
+                }
+
+            }
+            return numbers.ToArray();
         }
         public static string parsenumberfromuserobject(data.dapper.user user)
         {
@@ -127,7 +143,7 @@ namespace BusinessBook.bll
                 {
                     parsednumber = parsenumber(user.phone);
                 }
-                if (parsednumber!="") 
+                if (parsednumber=="") 
                 {
                     if (phone2exists) 
                     {

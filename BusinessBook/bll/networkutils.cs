@@ -92,24 +92,16 @@ namespace BusinessBook.bll
             }
         }
 
-        public static async void sendsms(string message,dynamic obj)
+        public static async void sendsms(string message,string[] numbers)
         {
             try
             {
-                var issendingvalid = otherutils.checkmessagevalidation(message,obj);
-                var isuservalid = userutils.checkravicosoftuseridexits();
-                if (!issendingvalid || !isuservalid) 
-                {
-                    otherutils.notify("Info","You can not send sms, Please vist ravicosoft.com for any help",10000);
-                    return;
-                }
-
                 var apiendpoint = getapiendpoint();
                 RestClient client = new RestClient(apiendpoint);
                 var request = new RestRequest("smsfrombusinessbook");
-                List<string> number = otherutils.parsenumbersfromdynamic(obj);
-                var requestobject = new { userid = userutils.ravicosoftuserid.stringvalue,message=message,numbers=number.ToArray()};
+                var requestobject = new { userid = userutils.ravicosoftuserid.stringvalue,message=message,numbers= string.Join(",", numbers) };
                 request.AddJsonBody(requestobject);
+                otherutils.notify("Info", "Sending SMS to "+ numbers.Length + " numbers", 10000);
                 var response = await client.PostAsync<apiresponsetype>(request);
             }
             catch (Exception ex)

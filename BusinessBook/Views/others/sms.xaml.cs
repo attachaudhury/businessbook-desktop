@@ -33,7 +33,26 @@ namespace BusinessBook.Views.others
 
         private void sendsms(object sender, RoutedEventArgs e)
         {
-            networkutils.sendsms(text_tb.Text, dg.SelectedItems);
+            string[] dgselectednumbers = otherutils.parsenumbersfromdynamiclist(dg.SelectedItems);
+            if (commaseperatednumbers_tb.Text != "")
+            {
+                string[] commaseperatednumbers =   otherutils.parsenumbersfromcommaorspaceseperatedstring(commaseperatednumbers_tb.Text);
+                dgselectednumbers = commaseperatednumbers.Concat(dgselectednumbers).ToArray();
+            }
+            var isvalid = otherutils.checkmessagevalidation(text_tb.Text, dgselectednumbers);
+            if (isvalid)
+            {
+                var isuservalid = userutils.checkravicosoftuseridexits();
+                if (!isuservalid)
+                {
+                    otherutils.notify("Alert", "Message sending failed, Ravicosoft user does not exists", 10000);
+                    return;
+                }
+                networkutils.sendsms(text_tb.Text, dgselectednumbers);
+                Close();
+                new sms().Show();
+            }
+            
         }
     }
 }
