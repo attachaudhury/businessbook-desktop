@@ -84,7 +84,7 @@ namespace BusinessBook
                 {
                     userdd.role = "superadmin";
                     userutils.loggedinuserd = userdd;
-                    userutils.membership = "Package 3";
+                    userutils.membership = "Package 1";
 
                     userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettingfields.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
 
@@ -94,7 +94,7 @@ namespace BusinessBook
 
                         userdd.role = "superadmin";
                         userutils.loggedinuserd = userdd;
-                        userutils.membership = "Package 3";
+                        userutils.membership = "Package 1";
 
                         userutils.ravicosoftsmsplan = new softwaresetting { name = commonsettingfields.ravicosoftsmsplan, valuetype = "string", stringvalue = "Package 1" };
 
@@ -182,57 +182,13 @@ namespace BusinessBook
         private void checkmembership()
         {
             softwaresetting membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
-            if (membershiptype == null || membershiptype.stringvalue == "Package 1")
+            if (membershiptype == null || membershiptype.stringvalue == null || membershiptype.stringvalue == "null" || membershiptype.stringvalue == "undefined" || membershiptype.stringvalue == "" || membershiptype.stringvalue == "Package 1")
             {
                 userutils.membership = "Package 1";
             }
             else 
             {
-                var validationresult = validatepaidmembership();
-                if (validationresult)
-                {
-                    userutils.membership = membershiptype.stringvalue;
-                }
-                else
-                {
-                    userutils.membership = "Package 1";
-                }
-                return;
-            }
-        }
-        private Boolean validatepaidmembership()
-        {
-            try
-            {
-                softwaresetting membershipexpirydate = userutils.ravicosoftbusinessbookmembershipexpirydate;
-                if (membershipexpirydate != null)
-                {
-                    var currentdate = DateTime.Now;
-                    var expireddifference = ((DateTime)membershipexpirydate.datevalue - currentdate).TotalDays;
-                    if (expireddifference > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        RadDesktopAlertManager manager = new RadDesktopAlertManager();
-                        var alert = new RadDesktopAlert();
-                        alert.Header = "Alert";
-                        alert.Content = "Your Licence has been expired. Please update licence";
-                        alert.ShowDuration = 5000;
-                        System.Media.SystemSounds.Hand.Play();
-                        manager.ShowAlert(alert);
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
+                userutils.membership = membershiptype.stringvalue;
             }
         }
     }

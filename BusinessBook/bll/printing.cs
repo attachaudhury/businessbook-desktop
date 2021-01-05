@@ -99,7 +99,7 @@ namespace BusinessBook.bll
             Section footer = new Section();
             //Paragraph footer1 = new Paragraph(new Run("Thank You for Purchaings. For Home Delivery please call us at: 0453-510066"));
             Paragraph footer1 = new Paragraph(new Run(Settings.Default.Footer));
-            Paragraph footer2 = new Paragraph(new Run("Software By Ravicosoft 03024759550"));
+            Paragraph footer2 = new Paragraph(new Run("Software By Ravicosoft 03322282345"));
             Paragraph footer3 = new Paragraph(new Run("                "));
             Paragraph footer4 = new Paragraph(new Run(customerAddress));
             footer1.FontSize = 9;

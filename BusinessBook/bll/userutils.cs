@@ -43,34 +43,7 @@ namespace BusinessBook.bll
                 manager.ShowAlert(alert);
             }
         }
-        public static void authorizeroleandmembership(Window window, string[] roles, string[] membershiptypes)
-        {
-            bool roleok = false;
-            bool membershipokok = false;
-            if (roles.Contains(loggedinuserd.role))
-            {
-                roleok = true;
-            }
-            if (membershiptypes.Contains(membership))
-            {
-                membershipokok = true;
-            }
-            if (roleok && membershipokok)
-            {
-                window.Show();
-            }
-            else
-            {
-                RadDesktopAlertManager manager = new RadDesktopAlertManager();
-                var alert = new RadDesktopAlert();
-                alert.Header = "Alert";
-                alert.Content = "This page can only accessed by " + String.Join(",", roles);
-                alert.ShowDuration = 5000;
-                System.Media.SystemSounds.Hand.Play();
-                manager.ShowAlert(alert);
-            }
-        }
-
+        
         public static bool checkravicosoftuseridexits() 
         {
             var ravicosoftuser = ravicosoftuserid;
@@ -89,7 +62,6 @@ namespace BusinessBook.bll
             ravicosoftusername = ssr.getbyname(commonsettingfields.ravicosoftusername);
             ravicosoftpassword = ssr.getbyname(commonsettingfields.ravicosoftpassword);
             ravicosoftbusinessbookmembershipplan = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipplan);
-            ravicosoftbusinessbookmembershipexpirydate = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipexpirydate);
             ravicosoftbusinessbookcanrun = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookcanrun);
             ravicosoftsmsplan = ssr.getbyname(commonsettingfields.ravicosoftsmsplan);
             apiendpoint = ssr.getbyname(commonsettingfields.apiendpoint);
@@ -177,31 +149,8 @@ namespace BusinessBook.bll
                 membershiptype.stringvalue = user.businessbookmembershipplan;
                 userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
             }
-
             membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
-            if (membershiptype.stringvalue == "Package 2" || membershiptype.stringvalue == "Package 3" || membershiptype.stringvalue == "Package 4")
-            {
-                if (user.businessbookmembershipexpirydate != null)
-                {
-                    var membershipexpirydate = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipexpirydate);
-                    if (membershipexpirydate == null)
-                    {
-                        var ss = new softwaresetting();
-                        ss.name = commonsettingfields.ravicosoftbusinessbookmembershipexpirydate;
-                        ss.valuetype = "date";
-                        ss.datevalue = user.businessbookmembershipexpirydate;
-                        userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.save(ss);
-                    }
-                    else
-                    {
-                        membershipexpirydate.valuetype = "date";
-                        membershipexpirydate.datevalue = user.businessbookmembershipexpirydate;
-                        userutils.ravicosoftbusinessbookmembershipexpirydate = ssr.update(membershipexpirydate);
-                    }
-                }
-            }
-
-
+            
 
             var canrunsoftware = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookcanrun);
             if (canrunsoftware == null)

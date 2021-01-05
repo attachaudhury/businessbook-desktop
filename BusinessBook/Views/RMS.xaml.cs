@@ -28,38 +28,29 @@ namespace BusinessBook.Views
         {
             
             InitializeComponent();
-            loggininuserd = userutils.loggedinuserd;
-            if (loggininuserd.role == "superadmin" || loggininuserd.role == "admin")
-            {
-            }
-            else
-            {
-                hideAdminMenu();
-            }
-
+            
             initpage();
 
         }
         void initpage()
         {
 
-            initchart();
-            //var db = new dbctx();
-            //var sales = db.financetransaction.Where(a => a.financeaccount.name == "pos sale").Sum(a => a.amount);
-            //if (sales == null)
-            //{
-            //    sales = 0;
-            //}
-            //var customers = db.user.Where(a => (a.role == "customer")).Count();
-            //var vendors = db.user.Where(a => (a.role == "vendor")).Count();
-            //var users = db.user.Where(a => (a.role != "customer" && a.role != "vendor")).Count();
-
+            
             var userrepo = new userrepo();
             var financetransactionrepo = new financetransactionrepo();
-            var sales = financetransactionrepo.gettransactionsumbyaccountname("pos sale");
-            var customers = userrepo.getbywherein("role", new object[] { "customer" }).Count();
-            var vendors = userrepo.getbywherein("role", new object[] { "vendor" }).Count();
-            var users = userrepo.getbywherein("role", new object[] { "admin", "user" }).Count();
+            var sales = 0;
+            var customers = 0;
+            var vendors = 0;
+            var users = 0;
+            if (userutils.loggedinuserd.role == "superadmin" || userutils.loggedinuserd.role == "admin")
+            {
+                initchart();
+                sales = financetransactionrepo.gettransactionsumbyaccountname("pos sale");
+                customers = userrepo.getbywherein("role", new object[] { "customer" }).Count();
+                vendors = userrepo.getbywherein("role", new object[] { "vendor" }).Count();
+                users = userrepo.getbywherein("role", new object[] { "admin", "user" }).Count();
+            }
+            
             string html = @"<html>
 <head>
   <style>
@@ -137,30 +128,28 @@ html{overflow:hidden;height:200px;}
         void initchart()
         {
 
-            chartseries.ItemsSource = new ObservableCollection<PlotInfo>
-                {
-                    new PlotInfo() { Day = "Monday", Total = 1002},
-                    new PlotInfo() { Day = "Tuesday", Total = 3000},
-                    new PlotInfo() { Day = "Wednesday", Total = 12000},
-                    new PlotInfo() { Day = "Thursday", Total = 8000},
-                    new PlotInfo() { Day = "Friday", Total = 9000},
-                };
+            //chartseries.ItemsSource = new ObservableCollection<ChartData>
+            //    {
+            //        new ChartData() { Day = "Monday", Total = 1002},
+            //        new ChartData() { Day = "Tuesday", Total = 3000},
+            //        new ChartData() { Day = "Wednesday", Total = 12000},
+            //        new ChartData() { Day = "Thursday", Total = 8000},
+            //        new ChartData() { Day = "Friday", Total = 9000},
+            //    };
         }
-        private void hideAdminMenu()
-        {
-            m_Staff.Visibility = Visibility.Collapsed;
-        }
+        
 
 
 
         #region customer
-        private void mi_ViewAllCustomers(object sender, RoutedEventArgs e)
-        {
-            new user.List("customer").Show();
-        }
         private void mi_AddNewCustomer(object sender, RoutedEventArgs e)
         {
             new user.Add("customer").Show();
+        }
+        private void mi_ViewAllCustomers(object sender, RoutedEventArgs e)
+        {
+            var w = new user.List("customer");
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         #endregion customer
 
@@ -203,11 +192,13 @@ html{overflow:hidden;height:200px;}
         #region menuitem_finance
         private void accountsshow(object sender, RoutedEventArgs e)
         {
-            new accounts().Show();
+            var w = new accounts();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void accountsbalanceshow(object sender, RoutedEventArgs e)
         {
-            new accountsbalance().Show();
+            var w = new accountsbalance();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void pos(object sender, RoutedEventArgs e)
         {
@@ -219,16 +210,18 @@ html{overflow:hidden;height:200px;}
         }
         private void transactionsshow(object sender, RoutedEventArgs e)
         {
-            new transactions().Show();
+            var w = new transactions();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void salesshow(object sender, RoutedEventArgs e)
         {
-            new Views.finance.salespurchases("customer").Show();
+            var w = new Views.finance.salespurchases("customer");
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void purchasenewshow(object sender, RoutedEventArgs e)
         {
             var w  = new Views.finance.salespurchases("vendor");
-            userutils.authorizeroleandmembership(w,new string[] { "admin"}, new string[] {"Package 2", "Package 3" });
+            userutils.authorizerole(w,new string[] { "superadmin", "admin" });
         }
         private void purchasesshow(object sender, RoutedEventArgs e)
         {
@@ -236,14 +229,16 @@ html{overflow:hidden;height:200px;}
         }
         private void expencesshow(object sender, RoutedEventArgs e)
         {
-            new Views.finance.expences().Show();
+            var w = new Views.finance.expences();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         #endregion menuitem_finance
 
         #region others
         private void mi_Setting(object sender, RoutedEventArgs e)
         {
-            new Window_Setting().Show();
+            var w = new Window_Setting();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void mi_ravicosoftaccount(object sender, RoutedEventArgs e)
         {
@@ -264,7 +259,7 @@ html{overflow:hidden;height:200px;}
         }
 
     }
-    public class PlotInfo
+    public class ChartData
     {
         public string Day { get; set; }
         public double Total { get; set; }

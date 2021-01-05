@@ -84,7 +84,7 @@ namespace BusinessBook.Views.user
             catch { }
             userrepo a = new userrepo();
             a.save(person);
-            MessageBox.Show("User Saved", "Info");
+            MessageBox.Show("Person Saved", "Info");
             Close();
             new Add(this.rtype).Show();
                     

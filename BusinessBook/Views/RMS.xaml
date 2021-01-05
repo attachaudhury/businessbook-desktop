@@ -47,30 +47,10 @@
                             ScrollViewer.CanContentScroll="False"
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                             ScrollViewer.VerticalScrollBarVisibility="Hidden"></WebBrowser>
-            <Grid VerticalAlignment="Center" Margin="180,0,180,0">
-                <Calendar HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <!--<telerik:RadCartesianChart HorizontalAlignment="Right" Width="700">
-                    <telerik:RadCartesianChart.HorizontalAxis>
-                        <telerik:CategoricalAxis />
-                    </telerik:RadCartesianChart.HorizontalAxis>
-                    <telerik:RadCartesianChart.VerticalAxis>
-                        <telerik:LinearAxis/>
-                    </telerik:RadCartesianChart.VerticalAxis>
-                    <telerik:RadCartesianChart.Series>
-                        <telerik:BarSeries>
-                            <telerik:BarSeries.DataPoints>
-                                <telerik:CategoricalDataPoint Category="Monday" Value="10000"/>
-                                <telerik:CategoricalDataPoint Category="Tuesday" Value="20000"/>
-                                <telerik:CategoricalDataPoint Category="Wednesday" Value="15000"/>
-                                <telerik:CategoricalDataPoint Category="Thurday" Value="22000"/>
-                                <telerik:CategoricalDataPoint Category="Friday" Value="10000"/>
-                                <telerik:CategoricalDataPoint Category="Saturday" Value="26000"/>
-                            </telerik:BarSeries.DataPoints>
-                        </telerik:BarSeries>
-                    </telerik:RadCartesianChart.Series>
-                </telerik:RadCartesianChart>-->
+            <!--<Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
 
-                <telerik:RadCartesianChart HorizontalAlignment="Right"  Width="700">
+
+                <telerik:RadCartesianChart HorizontalAlignment="Right"  Width="500" Height="500">
                     <telerik:RadCartesianChart.HorizontalAxis>
                         <telerik:CategoricalAxis/>
                     </telerik:RadCartesianChart.HorizontalAxis>
@@ -80,26 +60,20 @@
                     <telerik:RadCartesianChart.Series >
                         <telerik:SplineAreaSeries Name="chartseries"  ItemsSource="{Binding}" CategoryBinding="Day" ValueBinding="Total" StrokeThickness="3" Fill="#9962B94F" Stroke="#B259C741">
                             <telerik:SplineAreaSeries.DataPoints>
-                                <!--<telerik:CategoricalDataPoint Category="January" Value="2" />
-                                <telerik:CategoricalDataPoint Category="February" Value="5" />
-                                <telerik:CategoricalDataPoint Category="March" Value="3" />
-                                <telerik:CategoricalDataPoint Category="April" Value="10" />
-                                <telerik:CategoricalDataPoint Category="May" Value="9" />
-                                <telerik:CategoricalDataPoint Category="June" Value="7" />
-                                <telerik:CategoricalDataPoint Category="July" Value="1" />-->
+                                
                             </telerik:SplineAreaSeries.DataPoints>
                         </telerik:SplineAreaSeries>
                     </telerik:RadCartesianChart.Series>
                 </telerik:RadCartesianChart>
 
-            </Grid>
+            </Grid>-->
 
 
             <Label Content="BUSINESS BOOK"  VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="80" Foreground="#DDC7C7C7" >
                
             </Label>
         </Grid>
-        <Label Content=" Software Licenced By Ravicosoft. +92 302 4759550 .Release Date 01/10/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF4D4D4D" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
+        <Label Content=" Software Licenced By Ravicosoft. +92 332 2282345 .Release Date 01/10/2020" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF4D4D4D" Height="25" Foreground="#DDC7C7C7" Grid.ColumnSpan="2"/>
     </Grid>
 
 </Window>

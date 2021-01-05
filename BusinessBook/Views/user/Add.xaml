@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.user"
         mc:Ignorable="d"
-        Title="Add User" Height="Auto" Width="Auto" WindowStartupLocation="CenterScreen">
+        Title="Add Person" Height="Auto" Width="Auto" WindowStartupLocation="CenterScreen">
     <Grid Margin="20,20,20,20">
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  >
             <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
