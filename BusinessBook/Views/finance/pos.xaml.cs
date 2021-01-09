@@ -18,6 +18,7 @@ using BusinessBook.data.viewmodel;
 using BusinessBook.bll;
 using BusinessBook.data;
 using BusinessBook.data.dapper;
+using System.Threading;
 
 namespace BusinessBook.Views.finance
 {
@@ -27,7 +28,7 @@ namespace BusinessBook.Views.finance
     public partial class pos : Window
     {
         List<productsaleorpurchaseviewmodel> mappedproducts;
-        List<productsaleorpurchaseviewmodel> salelist = new List<productsaleorpurchaseviewmodel>();
+        List<productsaleorpurchaseviewmodel> cart = new List<productsaleorpurchaseviewmodel>();
         data.dapper.user customer = null;
         productrepo productrepo = new productrepo();
 
@@ -43,6 +44,7 @@ namespace BusinessBook.Views.finance
             var products = this.productrepo.get();
             mappedproducts = productutils.mapproducttoproductsalemodel(products);
             tb_Search.Focus();
+            cart_dg.ItemsSource = cart;
 
 
         }
@@ -69,47 +71,33 @@ namespace BusinessBook.Views.finance
         }
 
 
-        void addItem_To_SaleList(productsaleorpurchaseviewmodel item)
+        void addItem_To_cart(productsaleorpurchaseviewmodel item)
         {
-            foreach (productsaleorpurchaseviewmodel oldItem in salelist)
+            foreach (productsaleorpurchaseviewmodel oldItem in cart)
             {
                 if (item.id == oldItem.id)
                 {
                     oldItem.quantity += 1;
                     oldItem.total = oldItem.quantity * oldItem.price;
-                    dg_SellingList.Items.Clear();
-                    double totalBill1 = 0;
-                    foreach (productsaleorpurchaseviewmodel item1 in salelist)
-                    {
-                        totalBill1 += item1.total;
-                        dg_SellingList.Items.Add(item1);
-                    }
-                    total_label.Content = totalBill1;
+                    refreshCartAndTotal();
                     return;
                 }
             }
-            salelist.Add(item);
-            dg_SellingList.Items.Clear();
-            double totalBill = 0;
-            foreach (productsaleorpurchaseviewmodel item1 in salelist)
-            {
-                totalBill += item1.total;
-                dg_SellingList.Items.Add(item1);
-            }
-            total_label.Content = totalBill;
+            cart.Add(item);
+            refreshCartAndTotal();
         }
         
         private void btn_AddQuantity(object sender, RoutedEventArgs e)
         {
             productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
-            addItem_To_SaleList(obj);
+            addItem_To_cart(obj);
         }
 
         private void btn_RemoveQuantity(object sender, RoutedEventArgs e)
         {
             productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
 
-            foreach (productsaleorpurchaseviewmodel oldItem in salelist)
+            foreach (productsaleorpurchaseviewmodel oldItem in cart)
             {
                 if (obj.id == oldItem.id)
                 {
@@ -117,31 +105,46 @@ namespace BusinessBook.Views.finance
                     {
                         oldItem.quantity -= 1;
                         oldItem.total = oldItem.quantity * oldItem.price;
-                        dg_SellingList.Items.Clear();
-                        double totalBill1 = 0;
-                        foreach (productsaleorpurchaseviewmodel item1 in salelist)
-                        {
-                            totalBill1 += item1.total;
-                            dg_SellingList.Items.Add(item1);
-                        }
-                        total_label.Content = totalBill1;
+                        refreshCartAndTotal();
                         return;
                     }
                     else
                     {
-                        salelist.Remove(obj);
-                        dg_SellingList.Items.Clear();
-                        double totalBill1 = 0;
-                        foreach (productsaleorpurchaseviewmodel item1 in salelist)
-                        {
-                            totalBill1 += item1.total;
-                            dg_SellingList.Items.Add(item1);
-                        }
-                        total_label.Content = totalBill1;
+                        cart.Remove(obj);
+                        refreshCartAndTotal();
                         return;
                     }
                 }
             }
+        }
+
+        private async void cart_dg_roweditending(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            productsaleorpurchaseviewmodel item = e.Row.Item as productsaleorpurchaseviewmodel;
+            if (item != null)
+            {
+                foreach (productsaleorpurchaseviewmodel oldItem in cart)
+                {
+                    if (item.id == oldItem.id)
+                    {
+                        oldItem.total = oldItem.quantity * oldItem.price;
+                        break;
+                    }
+                }
+                await Task.Delay(TimeSpan.FromSeconds(1));
+                refreshCartAndTotal();
+            }
+        }
+
+        private void refreshCartAndTotal()
+        {
+            cart_dg.Items.Refresh();
+            double totalBill1 = 0;
+            foreach (productsaleorpurchaseviewmodel item1 in cart)
+            {
+                totalBill1 += item1.total;
+            }
+            total_label.Content = totalBill1;
         }
 
         private void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
@@ -179,7 +182,7 @@ namespace BusinessBook.Views.finance
                 if (lv_SearchFoodItem.SelectedItem != null)
                 {
                     productsaleorpurchaseviewmodel item = (productsaleorpurchaseviewmodel)lv_SearchFoodItem.SelectedItem;
-                    addItem_To_SaleList(item);
+                    addItem_To_cart(item);
                     tb_Search.Text = "";
                     lv_SearchFoodItem.Visibility = Visibility.Hidden;
                 }
@@ -204,12 +207,12 @@ namespace BusinessBook.Views.finance
         {
             try 
             {
-                if (salelist.Count == 0)
+                if (cart.Count == 0)
                 {
                     MessageBox.Show("Add products to cart", "Information");
                     return;
                 }
-                var totalbill = salelist.Sum(a => a.total);
+                var totalbill = cart.Sum(a => a.total);
                 double totalpayment = 0;
                 if (paying_textbox.Text != "") {
                     totalpayment = Convert.ToDouble(paying_textbox.Text);
@@ -228,7 +231,7 @@ namespace BusinessBook.Views.finance
                 {
                     totalnumberofReceipts++;
                 }
-                saleutils.possale(salelist, totalpayment-totalbill, customer, totalnumberofReceipts, printCustomerInfoOnReceipt);
+                saleutils.possale(cart, totalpayment-totalbill, customer, totalnumberofReceipts, printCustomerInfoOnReceipt);
 
                 MessageBox.Show("Sale done Ammount :: " + totalbill, "Success");
                 Close();
