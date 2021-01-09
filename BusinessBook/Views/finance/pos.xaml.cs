@@ -45,8 +45,6 @@ namespace BusinessBook.Views.finance
             mappedproducts = productutils.mapproducttoproductsalemodel(products);
             tb_Search.Focus();
             cart_dg.ItemsSource = cart;
-
-
         }
 
         private void paying_textbox_TextChanged(object sender, TextChangedEventArgs e)
@@ -86,14 +84,8 @@ namespace BusinessBook.Views.finance
             cart.Add(item);
             refreshCartAndTotal();
         }
-        
-        private void btn_AddQuantity(object sender, RoutedEventArgs e)
-        {
-            productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
-            addItem_To_cart(obj);
-        }
 
-        private void btn_RemoveQuantity(object sender, RoutedEventArgs e)
+        private void removeItemFromCart_btn_click(object sender, RoutedEventArgs e)
         {
             productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
 
@@ -101,19 +93,9 @@ namespace BusinessBook.Views.finance
             {
                 if (obj.id == oldItem.id)
                 {
-                    if (oldItem.quantity > 1)
-                    {
-                        oldItem.quantity -= 1;
-                        oldItem.total = oldItem.quantity * oldItem.price;
-                        refreshCartAndTotal();
-                        return;
-                    }
-                    else
-                    {
-                        cart.Remove(obj);
-                        refreshCartAndTotal();
-                        return;
-                    }
+                    cart.Remove(obj);
+                    refreshCartAndTotal();
+                    break;
                 }
             }
         }
