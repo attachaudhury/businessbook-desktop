@@ -15,7 +15,7 @@
         <Button Click="btn_CloseApplication" Content="Close Application" HorizontalAlignment="Left" Margin="194,253,0,0" VerticalAlignment="Top" Width="143" Height="36" FontSize="10" Background="#FF575555">
         </Button>
         <Label Content="Business Book" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="164" FontFamily="DokChampa" FontSize="24" Foreground="#FFDEDEDE"/>
-        <Label Content=" Software Licenced By Ravicosoft. +92 332 2282345 .Release Date 01/10/2020"  VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF363636" Height="25" Foreground="#DDC7C7C7"/>
+        <Label Content=" Software Licenced By Ravicosoft. +92 332 2282345 .Latest Release (2021.1.10)"  VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,0" FontSize="12" Background="#FF363636" Height="25" Foreground="#DDC7C7C7"/>
         
     </Grid>
 

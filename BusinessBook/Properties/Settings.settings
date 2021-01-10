@@ -14,14 +14,14 @@
     <Setting Name="SubTitle" Type="System.String" Scope="User">
       <Value Profile="(Default)">52, Hussain park, Harbance Pura pull, Lahore</Value>
     </Setting>
-    <Setting Name="Footer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Call at   (+92 332 2282345)</Value>
-    </Setting>
     <Setting Name="Reciptlineheight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="lastsavedate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2020-09-03</Value>
+    </Setting>
+    <Setting Name="Footer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Call at  (+92 332 2282345)</Value>
     </Setting>
   </Settings>
 </SettingsFile>

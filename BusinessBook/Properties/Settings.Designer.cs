@@ -73,18 +73,6 @@ namespace BusinessBook.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Call at   (+92 332 2282345)")]
-        public string Footer {
-            get {
-                return ((string)(this["Footer"]));
-            }
-            set {
-                this["Footer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int Reciptlineheight {
             get {
@@ -104,6 +92,18 @@ namespace BusinessBook.Properties {
             }
             set {
                 this["lastsavedate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Call at  (+92 332 2282345)")]
+        public string Footer {
+            get {
+                return ((string)(this["Footer"]));
+            }
+            set {
+                this["Footer"] = value;
             }
         }
     }
