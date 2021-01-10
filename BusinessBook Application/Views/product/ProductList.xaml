@@ -1,0 +1,36 @@
+﻿<Window x:Class="BusinessBook.Views.product.ProductList"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="Products" Height="Auto" Width="Auto"
+        >
+    <Grid>
+        <telerik:RadGridView x:Name="dg_ProductList" ShowSearchPanel="True"
+                     AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}"/>
+                <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}"/>
+                <telerik:GridViewDataColumn Header="Sale Price" DataMemberBinding="{Binding saleprice}"/>
+                <telerik:GridViewDataColumn Header="Purchase Price" DataMemberBinding="{Binding purchaseprice}"/>
+                <telerik:GridViewDataColumn Header="Discount" DataMemberBinding="{Binding discount}"/>
+                <telerik:GridViewDataColumn Header="Carrycost" DataMemberBinding="{Binding carrycost}"/>
+                <telerik:GridViewDataColumn Header="Barcode" DataMemberBinding="{Binding barcode}"/>
+                <telerik:GridViewDataColumn Header="Quantity" DataMemberBinding="{Binding quantity}"/>
+                <telerik:GridViewDataColumn Header="type" DataMemberBinding="{Binding type}"/>
+                <telerik:GridViewDataColumn Header="saleactive" DataMemberBinding="{Binding saleactive}"/>
+                <telerik:GridViewDataColumn Header="purchaseactive" DataMemberBinding="{Binding purchaseactive}"/>
+                <telerik:GridViewColumn Header="Details" >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Click="details">Details</telerik:RadButton>
+
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</Window>
