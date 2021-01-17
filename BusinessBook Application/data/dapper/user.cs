@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using BusinessBook.bll;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using MySql.Data.MySqlClient;
 using System;
@@ -91,7 +92,14 @@ namespace BusinessBook.data.dapper
 
         public dapper.user save(dapper.user user)
         {
-
+            if (user.phone != null)
+            {
+                user.phone = otherutils.parsenumber(user.phone);
+            }
+            if (user.phone2 != null)
+            {
+                user.phone2 = otherutils.parsenumber(user.phone2);
+            }
             using (var connection = new MySqlConnection(conn))
             {
                 var identity = connection.Insert<dapper.user>(user);
@@ -101,7 +109,14 @@ namespace BusinessBook.data.dapper
         }
         public void update(dapper.user user)
         {
-
+            if (user.phone != null)
+            {
+                user.phone = otherutils.parsenumber(user.phone);
+            }
+            if (user.phone2 != null)
+            {
+                user.phone2 = otherutils.parsenumber(user.phone2);
+            }
             using (var connection = new MySqlConnection(conn))
             {
                 var identity = connection.Update<dapper.user>(user);

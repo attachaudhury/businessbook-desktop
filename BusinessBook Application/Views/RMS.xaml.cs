@@ -166,14 +166,23 @@ html{overflow:hidden;height:200px;}
 
 
         #region staff
-        private void mi_AddStaff(object sender, RoutedEventArgs e)
+        private void mi_AddAdmin(object sender, RoutedEventArgs e)
         {
-            userutils.authorizerole(new user.Add("staff"), new string[] { "superadmin", "admin" });
+            userutils.authorizerole(new user.Add("admin"), new string[] { "superadmin", "admin" });
         }
 
-        private void mi_AllStaff(object sender, RoutedEventArgs e)
+        private void mi_AllAdmin(object sender, RoutedEventArgs e)
         {
-            userutils.authorizerole(new user.List("staff"), new string[] { "superadmin", "admin" });
+            userutils.authorizerole(new user.List("admin"), new string[] { "superadmin", "admin" });
+        }
+        private void mi_AddUser(object sender, RoutedEventArgs e)
+        {
+            userutils.authorizerole(new user.Add("user"), new string[] { "superadmin", "admin" });
+        }
+
+        private void mi_AllUser(object sender, RoutedEventArgs e)
+        {
+            userutils.authorizerole(new user.List("user"), new string[] { "superadmin", "admin" });
         }
         #endregion staff
 

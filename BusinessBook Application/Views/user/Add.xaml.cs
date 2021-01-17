@@ -23,33 +23,71 @@ namespace BusinessBook.Views.user
     /// </summary>
     public partial class Add : Window
     {
-        string rtype;
         data.dapper.user loggedinpersond;
-        public Add(string roletype)
+        bool createmode = true;
+        string selectedrole ="";
+        data.dapper.user selecteduser = null;
+        data.dapper.userrepo userrepo;
+        public Add(string role, int? userId = null)
         {
             InitializeComponent();
-            this.loggedinpersond = userutils.loggedinuserd;
-            this.rtype = roletype;
-            //var db = new dbctx();
+            userrepo = new userrepo();
+            if (role == "")
+            {
+                role = "customer";
+            }
+            this.selectedrole = role;
+            tb_Role.Text = this.selectedrole;
 
-            var roles = new string[] { "admin", "user", "customer","vendor" };
-            if (roletype == "staff")
+            if (userId == null || userId == 0)
             {
-                roles = new string[] { "admin", "user" };
+                this.createmode = true;
             }
-            else if (roletype == "customer")
+            else
             {
-                roles = new string[] { "customer" };
+                this.createmode = false;
+                this.getone((int)userId);
+            }
+
+            this.loggedinpersond = userutils.loggedinuserd;
+            
+            
+            
+            if (selectedrole == "customer"|| selectedrole == "vendor")
+            {
                 tb_Password.IsEnabled = false;
                 tb_UserName.IsEnabled = false;
             }
-            else if (roletype == "vendor")
+            
+        }
+        void getone(int userid)
+        {
+            selecteduser = userrepo.get(userid);
+            tb_Name.Text = selecteduser.name;
+            if (selecteduser.phone != null)
             {
-                roles = new string[] { "vendor" };
-                tb_Password.IsEnabled = false;
-                tb_UserName.IsEnabled = false;
+                tb_Phone.Text = selecteduser.phone;
             }
-            cb_Role.ItemsSource = roles;
+            if (selecteduser.phone2 != null)
+            {
+                tb_Phone2.Text = selecteduser.phone2;
+            }
+            if (selecteduser.address != null)
+            {
+                tb_Address.Text = selecteduser.address;
+            }
+            if (selecteduser.role != null)
+            {
+                tb_Role.Text = selecteduser.role;
+            }
+            if (selecteduser.username != null)
+            {
+                tb_UserName.Text = selecteduser.username;
+            }
+            if (selecteduser.password != null)
+            {
+                tb_Password.Text = selecteduser.password;
+            }
         }
         private void btn_Save(object sender, RoutedEventArgs e)
         {
@@ -58,12 +96,8 @@ namespace BusinessBook.Views.user
                 MessageBox.Show("Please enter name", "Info");
                 return;
             }
-            if (cb_Role.SelectedValue == null)
-            {
-                MessageBox.Show("Please select role", "Info");
-                return;
-            }
-            if ((string)cb_Role.SelectedValue == "admin" || (string)cb_Role.SelectedValue == "user") {
+            
+            if (selectedrole == "admin" || selectedrole == "user") {
                 if (tb_UserName.Text == "" || tb_Password.Text=="") {
                     MessageBox.Show("Enter Username or password", "Info");
                     return;
@@ -71,24 +105,27 @@ namespace BusinessBook.Views.user
             }
             data.dapper.user person = new data.dapper .user();
             person.name = tb_Name.Text;
-            person.role = (string)cb_Role.SelectedValue;
-            try
-            {
-                person.address = tb_Address.Text;
-                person.phone = tb_Phone.Text;
-                person.phone2 = tb_Phone2.Text;
-                person.username = tb_UserName.Text;
-                person.password = tb_Password.Text;
-
-            }
-            catch { }
+            person.address = tb_Address.Text;
+            person.phone = tb_Phone.Text;
+            person.phone2 = tb_Phone2.Text;
+            person.username = tb_UserName.Text;
+            person.password = tb_Password.Text;
+            person.role = this.selectedrole;
             userrepo a = new userrepo();
-            a.save(person);
-            MessageBox.Show("Person Saved", "Info");
-            Close();
-            new Add(this.rtype).Show();
-                    
-            
+            if (this.createmode)
+            {
+                a.save(person);
+                MessageBox.Show("Person Saved", "Info");
+                Close();
+                new Add(this.selectedrole).Show();
+            }
+            else
+            {
+                a.update(person);
+                MessageBox.Show("Person Updated", "Info");
+                Close();
+                new Add(this.selectedrole,selecteduser.id).Show();
+            }
         }
     }
 }

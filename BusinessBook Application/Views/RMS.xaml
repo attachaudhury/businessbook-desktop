@@ -14,9 +14,11 @@
                 <MenuItem Header="Add Vendor" Click="mi_AddNewVendor"/>
                 <MenuItem Header="View Vendors" Click="mi_ViewAllVendors"/>
             </MenuItem>
-            <MenuItem x:Name="m_Staff" Header="Staff">
-                <MenuItem Header="Add Staff" Click="mi_AddStaff"/>
-                <MenuItem Header="View Staff" Click="mi_AllStaff"/>
+            <MenuItem Header="Staff">
+                <MenuItem Header="Add Admin" Click="mi_AddAdmin"/>
+                <MenuItem Header="View Admins" Click="mi_AllAdmin"/>
+                <MenuItem Header="Add User" Click="mi_AddUser"/>
+                <MenuItem Header="View Users" Click="mi_AllUser"/>
             </MenuItem>
             <MenuItem Header="Products">
                 <MenuItem Header="Add Product" Click="productadd"/>

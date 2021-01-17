@@ -19,40 +19,32 @@ using System.Windows.Shapes;
 
 namespace BusinessBook.Views.user
 {
-    /// <summary>
-    /// Interaction logic for List.xaml
-    /// </summary>
     public partial class List : Window
     {
-        public List(string roletype)
+        string selectedrole = "";
+        public List(string role)
         {
+            selectedrole = role;
             InitializeComponent();
             
             var userrepo = new userrepo();
-            ////var db = new dbctx();
-            if (roletype == "staff")
-            {
-                //dg_AllStaff.ItemsSource = db.user.Where(a => (a.role == "admin" || a.role == "user")).ToList();
-                var roles = new object[] { "admin","user" };
-                dg_AllStaff.ItemsSource = userrepo.getbywherein("role",roles);
-            }
-            else if (roletype == "customer")
-            {
-                //dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "customer").ToList();
-                var roles = new object[] { "customer" };
-                dg_AllStaff.ItemsSource = userrepo.getbywherein("role", roles);
-            }
-            else
-            {
-                //dg_AllStaff.ItemsSource = db.user.Where(a => a.role == "vendor").ToList();
-                var roles = new object[] { "vendor" };
-                dg_AllStaff.ItemsSource = userrepo.getbywherein("role", roles);
-            }
+            var roles = new object[] { role };
+            dg_AllStaff.ItemsSource = userrepo.getbywherein("role", roles);
         }
-        public void details(object sender, RoutedEventArgs e)
+        public void edit(object sender, RoutedEventArgs e)
+        {
+            data.dapper.user obj = ((FrameworkElement)sender).DataContext as data.dapper.user;
+            new user.Add(selectedrole, obj.id).Show();
+        }
+
+        public void ledger(object sender, RoutedEventArgs e)
         {
             data.dapper.user obj = ((FrameworkElement)sender).DataContext as data.dapper.user;
             new ledger(obj.id).Show();
+        }
+        public void delete(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

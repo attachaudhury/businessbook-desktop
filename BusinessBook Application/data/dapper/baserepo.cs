@@ -15,7 +15,7 @@ namespace BusinessBook.data.dapper
 {
     public static class baserepo
     {
-        public static string connectionstring = "Server=localhost;Database=bbdb;Uid=root;Pwd=;";
+        public static string connectionstring = "Server=localhost;Database=bbdb;Uid=root;Pwd=brk@1234;";
         public static databaseconnection databaseconnection = null;
         public static string getkeyValuestoSqlAnd(dynamic keyvaluepairs) 
         {

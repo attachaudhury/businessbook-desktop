@@ -17,10 +17,24 @@
                 <telerik:GridViewDataColumn Header="Phone" DataMemberBinding="{Binding phone}"/>
                 <telerik:GridViewDataColumn Header="Phone2" DataMemberBinding="{Binding phone2}"/>
                 <telerik:GridViewDataColumn Header="Address" DataMemberBinding="{Binding address}"/>
-                <telerik:GridViewColumn Header="Details" >
+                <telerik:GridViewColumn Header="Edit" >
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <telerik:RadButton Click="details">Details</telerik:RadButton>
+                            <telerik:RadButton Click="edit">Edit</telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+                <telerik:GridViewColumn Header="Ledger" >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Click="ledger">Ledger</telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+                <telerik:GridViewColumn Header="Delete" >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Click="delete">Delete</telerik:RadButton>
                         </DataTemplate>
                     </telerik:GridViewColumn.CellTemplate>
                 </telerik:GridViewColumn>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Telerik.Windows.Controls;
 
@@ -48,7 +49,7 @@ namespace BusinessBook.bll
             var numbers = new List<string>();
             if (obj is string)
             {
-                var parsednumber = parsenumber(obj);
+                var parsednumber = parsenumberforsms(obj);
                 if (parsednumber != "")
                 {
                     numbers.Add(parsednumber);
@@ -58,7 +59,7 @@ namespace BusinessBook.bll
             {
                 for (int i = 0; i < obj.length; i++)
                 {
-                    var parsednumber = parsenumber(obj[i]);
+                    var parsednumber = parsenumberforsms(obj[i]);
                     if (parsednumber != "")
                     {
                         numbers.Add(parsednumber);
@@ -70,7 +71,7 @@ namespace BusinessBook.bll
             {
                 for (int i = 0; i < obj.Count(); i++)
                 {
-                    var parsednumber = parsenumber(obj[i]);
+                    var parsednumber = parsenumberforsms(obj[i]);
                     if (parsednumber != "")
                     {
                         numbers.Add(parsednumber);
@@ -109,7 +110,7 @@ namespace BusinessBook.bll
             string[] obj = commaorspaceseperatednumbers.Split(new[] { ',', ' ' },StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < obj.Length; i++)
             {
-                var parsednumber = parsenumber(obj[i]);
+                var parsednumber = parsenumberforsms(obj[i]);
                 if (parsednumber != "")
                 {
                     numbers.Add(parsednumber);
@@ -141,13 +142,13 @@ namespace BusinessBook.bll
                 var parsednumber = "";
                 if (phone1exists)
                 {
-                    parsednumber = parsenumber(user.phone);
+                    parsednumber = parsenumberforsms(user.phone);
                 }
                 if (parsednumber=="") 
                 {
                     if (phone2exists) 
                     {
-                        parsednumber = parsenumber(user.phone2);
+                        parsednumber = parsenumberforsms(user.phone2);
                     }
                 }
                 if (parsednumber!="") 
@@ -157,50 +158,77 @@ namespace BusinessBook.bll
                 return res;
             }
         }
-        public static string parsenumber(string num)
+        public static string parsenumberforsms(string num)
         {
             var parsednumber = "";
-            var numberlength = num.Length;
-
-            var acceptedlengths = new int[] { 10, 11, 13, 14 };
-            if (acceptedlengths.Contains(numberlength)) 
+            parsednumber = parsenumber(num);
+            if (parsednumber != "")
             {
-                if (numberlength == 10)
-                {
-                    var substring = num.Substring(0, 1);
-                    if (substring == "3")
-                    {
-                        parsednumber = "+92" + num;
-                    }
-                }
-                else if (numberlength == 11)
-                {
-                    var substring = num.Substring(0, 2);
-                    if (substring == "03")
-                    {
-                        var numberwithout0 = num.Substring(1, numberlength - 1);
-                        parsednumber = "+92" + numberwithout0;
-                    }
-                }
-                else if (numberlength == 13)
-                {
-                    var substring = num.Substring(0, 4);
-                    if (substring == "+923")
-                    {
-                        parsednumber = num;
-                    }
-                }
-                else if (numberlength == 14)
-                {
-                    var substring = num.Substring(0, 5);
-                    if (substring == "00923")
-                    {
-                        var numberwithout00 = num.Substring(2, numberlength - 2);
-                        parsednumber = "+" + numberwithout00;
-                    }
-                }
+                parsednumber += "+92" + parsednumber;
             }
             return parsednumber;
+        }
+        public static string parsenumber(string num)
+        {
+            num = Regex.Replace(num, @"[^\d]", "");
+            try {
+                if (num.Substring(0, 4) == "0092")
+                {
+                    num = num.Substring(4, num.Length - 4);
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
+
+            try
+            {
+                if (num.Substring(0, 3) == "092")
+                {
+                    num = num.Substring(3, num.Length - 3);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
+
+            try
+            {
+                if (num.Substring(0, 2) == "92")
+                {
+                    num = num.Substring(2, num.Length - 2);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
+
+            try
+            {
+                if (num.Substring(0, 1) == "0")
+                {
+                    num = num.Substring(1, num.Length - 1);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            if (num.Length == 10)
+            {
+                return num;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
