@@ -109,7 +109,6 @@ namespace BusinessBook.data.dapper
             {
                 var identity = connection.Update<dapper.user>(user);
                 var i = 0;
-
             }
         }
         public void delete(dapper.user user)
