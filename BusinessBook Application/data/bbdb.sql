@@ -93,7 +93,7 @@ CREATE TABLE `softwaresetting` (
   `floatvalue` float DEFAULT NULL,
   `datevalue` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/* pre defined softwaresetting ravicosoftuserid, ravicosoftusername,ravicosoftuserpassword,ravicosoftbusinessbookmembershipplan,ravicosoftbusinessbookcanrun,ravicosoftsmsplan,apiendpoint */
+/* pre defined softwaresetting ravicosoftuserid, ravicosoftusername,ravicosoftuserpassword,ravicosoftbusinessbookmembershipplan,ravicosoftsmsplan,apiendpoint */
 
 CREATE TABLE `subproduct` (
   `id` int(11) NOT NULL,

@@ -139,7 +139,6 @@ namespace BusinessBook.data.dapper
                 var res = connection.ExecuteScalar<int>(sql);
                 return res;
             }
-
         }
 
         public dapper.financetransaction save(dapper.financetransaction financetransaction)
@@ -159,6 +158,23 @@ namespace BusinessBook.data.dapper
             {
                 var identity = connection.Update<dapper.financetransaction>(financetransaction);
                 return identity;
+            }
+        }
+
+        public bool hasuserfinancetransactions(int userid)
+        {
+            string sql = "select count(*) from financetransaction where fk_user_createdby_in_financetransaction=" + userid + " or fk_user_targetto_in_financetransaction=" + userid + ";";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.ExecuteScalar<int>(sql);
+                if (res != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

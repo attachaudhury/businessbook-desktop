@@ -26,18 +26,6 @@ namespace BusinessBook.data.dapper
     public class userrepo
     {
         string conn = baserepo.connectionstring;
-        public void  test()
-        {
-            //user u = new user {id=2, username = "atta" };
-            // this.save(u);
-            //var users = this.get();
-            //dapper.user user = this.get(2);
-            //user.name = "atta";
-            //user.username = "atta";
-            //user.password = "atta@123";
-            //this.update(user);
-            //var i = 1;
-        }
         public List<dapper.user> get() {
             var sql = "select * from user;";
             using (var connection = new MySqlConnection(conn))
@@ -122,6 +110,23 @@ namespace BusinessBook.data.dapper
                 var identity = connection.Update<dapper.user>(user);
                 var i = 0;
 
+            }
+        }
+        public void delete(dapper.user user)
+        {
+            var finnacetransactionrepo = new financetransactionrepo();
+            bool hasuserfinancetransactions = finnacetransactionrepo.hasuserfinancetransactions(user.id);
+            if (hasuserfinancetransactions==false)
+            {
+                using (var connection = new MySqlConnection(conn))
+                {
+                    var identity = connection.Delete<dapper.user>(user);
+                    var i = 0;
+                }
+            }
+            else
+            {
+                otherutils.notify("Alert", "User has finance transaction, This user can not be deleted", 5000);
             }
         }
 

@@ -62,7 +62,6 @@ namespace BusinessBook.bll
             ravicosoftusername = ssr.getbyname(commonsettingfields.ravicosoftusername);
             ravicosoftpassword = ssr.getbyname(commonsettingfields.ravicosoftpassword);
             ravicosoftbusinessbookmembershipplan = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookmembershipplan);
-            ravicosoftbusinessbookcanrun = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookcanrun);
             ravicosoftsmsplan = ssr.getbyname(commonsettingfields.ravicosoftsmsplan);
             apiendpoint = ssr.getbyname(commonsettingfields.apiendpoint);
 
@@ -149,25 +148,7 @@ namespace BusinessBook.bll
                 membershiptype.stringvalue = user.businessbookmembershipplan;
                 userutils.ravicosoftbusinessbookmembershipplan = ssr.update(membershiptype);
             }
-            membershiptype = userutils.ravicosoftbusinessbookmembershipplan;
             
-
-            var canrunsoftware = ssr.getbyname(commonsettingfields.ravicosoftbusinessbookcanrun);
-            if (canrunsoftware == null)
-            {
-                var ss = new softwaresetting();
-                ss.name = commonsettingfields.ravicosoftbusinessbookcanrun;
-                ss.valuetype = "string";
-                ss.stringvalue = user.businessbookcanrun;
-                userutils.ravicosoftbusinessbookcanrun = ssr.save(ss);
-            }
-            else
-            {
-                canrunsoftware.valuetype = "string";
-                canrunsoftware.stringvalue = user.businessbookcanrun;
-                userutils.ravicosoftbusinessbookcanrun = ssr.update(canrunsoftware);
-            }
-
 
             var cansendsms = ssr.getbyname(commonsettingfields.ravicosoftsmsplan);
             if (cansendsms == null)

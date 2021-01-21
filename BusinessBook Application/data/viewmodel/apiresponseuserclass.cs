@@ -12,7 +12,6 @@ namespace BusinessBook.data.viewmodel
         public string username { get; set; }
         public string password { get; set; }
         public string businessbookmembershipplan { get; set; } // values are Package 1,Package 2,Package 3
-        public string businessbookcanrun { get; set; }
         public string smsplan { get; set; }
     }
 }

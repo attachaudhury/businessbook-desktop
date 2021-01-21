@@ -18,8 +18,8 @@ namespace BusinessBook.bll
 {
     public class networkutils
     {
-        //public static string apiendpointdefault = "http://localhost:8011/api/businessbookapi";
-        public static string apiendpointdefault = "http://ravicosoft.com/api/businessbookapi";
+        public static string apiendpointdefault = "http://localhost:8011/api/businessbookapi";
+        //public static string apiendpointdefault = "http://ravicosoft.com/api/businessbookapi";
         public static async void updatelocalsetting()
         {
             try

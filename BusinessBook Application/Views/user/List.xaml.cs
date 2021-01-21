@@ -22,12 +22,13 @@ namespace BusinessBook.Views.user
     public partial class List : Window
     {
         string selectedrole = "";
+        data.dapper.userrepo userrepo;
         public List(string role)
         {
             selectedrole = role;
             InitializeComponent();
             
-            var userrepo = new userrepo();
+            userrepo = new userrepo();
             var roles = new object[] { role };
             dg_AllStaff.ItemsSource = userrepo.getbywherein("role", roles);
         }
@@ -44,7 +45,13 @@ namespace BusinessBook.Views.user
         }
         public void delete(object sender, RoutedEventArgs e)
         {
-            
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                data.dapper.user obj = ((FrameworkElement)sender).DataContext as data.dapper.user;
+                userrepo.delete(obj);
+                new user.List(selectedrole).Show();
+            }
         }
     }
 }

@@ -121,6 +121,7 @@ namespace BusinessBook.Views.user
             }
             else
             {
+                person.id = selecteduser.id;
                 a.update(person);
                 MessageBox.Show("Person Updated", "Info");
                 Close();
