@@ -50,6 +50,7 @@ namespace BusinessBook.Views.user
             {
                 data.dapper.user obj = ((FrameworkElement)sender).DataContext as data.dapper.user;
                 userrepo.delete(obj);
+                Close();
                 new user.List(selectedrole).Show();
             }
         }

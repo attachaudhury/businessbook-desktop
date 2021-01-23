@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.user"
         mc:Ignorable="d"
-        Title="Person List">
+        Title="Person List" WindowStartupLocation="CenterScreen">
     <Grid>
         <telerik:RadGridView Name="dg_AllStaff" ShowSearchPanel="True"
                      AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >

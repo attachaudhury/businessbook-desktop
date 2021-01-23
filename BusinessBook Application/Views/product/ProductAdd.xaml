@@ -5,12 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.product"
         mc:Ignorable="d"
-        Title="Add" Height="450" Width="800">
+        Title="Add" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="514*"/>
-            <ColumnDefinition Width="279*"/>
-        </Grid.ColumnDefinitions>
         <Label Content="Name" HorizontalAlignment="Left" Margin="25,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.521"/>
         <TextBox x:Name="tb_name" HorizontalAlignment="Left" Height="26" Margin="110,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
         <Label Content="Sale Price" HorizontalAlignment="Left" Margin="25,63,0,0" VerticalAlignment="Top"/>
@@ -22,14 +18,14 @@
         <Label Content="Carry Cost" HorizontalAlignment="Left" Margin="25,191,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_carrycost" HorizontalAlignment="Left" Height="26" Margin="110,189,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="184"/>
         <Label Content="Barcode" HorizontalAlignment="Left" Margin="25,235,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_barcode" HorizontalAlignment="Left" Height="26" Margin="110,233,0,0" TextWrapping="Wrap" Text="1234567" VerticalAlignment="Top" Width="184"/>
+        <TextBox x:Name="tb_barcode" HorizontalAlignment="Left" Height="26" Margin="110,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
         <Label Content="Quantity" HorizontalAlignment="Left" Margin="25,273,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_quantity" HorizontalAlignment="Left" Height="26" Margin="110,271,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="184"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="25,313,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_category" HorizontalAlignment="Left" Height="26" Margin="110,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
 
-        <!--<Label Content="Type" HorizontalAlignment="Left" Margin="25,310,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="cb_Type" SelectedIndex="0" HorizontalAlignment="Left" Margin="110,310,0,0" VerticalAlignment="Top" Width="264" Height="26"/>-->
-        <CheckBox IsChecked="True" x:Name="cbx_SaleActive" Content="Sale Active" HorizontalAlignment="Left" Margin="110,313,0,0" VerticalAlignment="Top"/>
-        <CheckBox IsChecked="True" x:Name="cbx_PurchaseActive" Content="Purchase Active" HorizontalAlignment="Left" Margin="194,314,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="True" x:Name="cbx_SaleActive" Content="Sale Active" HorizontalAlignment="Left" Margin="110,358,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="True" x:Name="cbx_PurchaseActive" Content="Purchase Active" HorizontalAlignment="Left" Margin="194,359,0,0" VerticalAlignment="Top"/>
 
 
         <Button Click="btn_Save" Content="Save" HorizontalAlignment="Left" Margin="356,377,0,0" VerticalAlignment="Top" Width="399" Grid.ColumnSpan="2"/>

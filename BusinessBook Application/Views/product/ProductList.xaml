@@ -19,7 +19,7 @@
                 <telerik:GridViewDataColumn Header="Carrycost" DataMemberBinding="{Binding carrycost}"/>
                 <telerik:GridViewDataColumn Header="Barcode" DataMemberBinding="{Binding barcode}"/>
                 <telerik:GridViewDataColumn Header="Quantity" DataMemberBinding="{Binding quantity}"/>
-                <telerik:GridViewDataColumn Header="type" DataMemberBinding="{Binding type}"/>
+                <telerik:GridViewDataColumn Header="Category" DataMemberBinding="{Binding category}"/>
                 <telerik:GridViewDataColumn Header="saleactive" DataMemberBinding="{Binding saleactive}"/>
                 <telerik:GridViewDataColumn Header="purchaseactive" DataMemberBinding="{Binding purchaseactive}"/>
                 <telerik:GridViewColumn Header="Details" >

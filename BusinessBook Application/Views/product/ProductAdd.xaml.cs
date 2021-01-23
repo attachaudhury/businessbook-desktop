@@ -56,6 +56,8 @@ namespace BusinessBook.Views.product
             {
                 data.dapper.product r = new data.dapper.product();
                 r.name = tb_name.Text;
+                r.barcode = tb_barcode.Text;
+                r.category = tb_category.Text;
                 r.saleprice = Convert.ToInt32(tb_saleprice.Text);
                 r.purchaseprice = Convert.ToInt32(tb_purchaseprice.Text);
                 if (tb_discount.Text != "")
@@ -70,25 +72,27 @@ namespace BusinessBook.Views.product
                 {
                     r.discount = Convert.ToInt32(tb_discount.Text);
                 }
-                r.barcode = tb_barcode.Text;
+                
                 if (tb_quantity.Text != "")
                 {
                     r.quantity = Convert.ToInt32(tb_quantity.Text);
                 }
-                //r.type = (string)cb_Type.SelectedValue;
+                
                 r.saleactive = cbx_SaleActive.IsChecked.Value;
                 r.purchaseactive = cbx_PurchaseActive.IsChecked.Value;
-                var savedproduct = productrepo.save(r);
-                //db.SaveChanges();
-                selectedproduct = savedproduct;
-                this.createmode = false;
-                MessageBox.Show("Product saved", "Information");
-                Close();
-                new ProductAdd().Show();
+                var savedproductresult = productrepo.save(r);
+                if (savedproductresult)
+                {
+                    MessageBox.Show("Product saved", "Information");
+                    Close();
+                    new ProductAdd().Show();
+                }
             }
             else
             {
                 selectedproduct.name = tb_name.Text;
+                selectedproduct.barcode = tb_barcode.Text;
+                selectedproduct.category = tb_category.Text;
                 selectedproduct.saleprice = Convert.ToInt32(tb_saleprice.Text);
                 selectedproduct.purchaseprice = Convert.ToInt32(tb_purchaseprice.Text);
                 if (tb_discount.Text != "")
@@ -103,17 +107,19 @@ namespace BusinessBook.Views.product
                 {
                     selectedproduct.discount = Convert.ToInt32(tb_discount.Text);
                 }
-                selectedproduct.barcode = tb_barcode.Text;
-
-                //r.type = (string)cb_Type.SelectedValue;
                 selectedproduct.saleactive = cbx_SaleActive.IsChecked.Value;
                 selectedproduct.purchaseactive = cbx_PurchaseActive.IsChecked.Value;
-                //db.product.AddOrUpdate(selectedproduct);
-                this.productrepo.update(selectedproduct);
-               // db.SaveChanges();
-                MessageBox.Show("product update", "Information");
-                Close();
-                new ProductAdd(selectedproduct.id).Show();
+
+
+
+                var updateproductresult = this.productrepo.update(selectedproduct);
+                if (updateproductresult)
+                {
+                    MessageBox.Show("product update", "Information");
+                    Close();
+                    new ProductAdd(selectedproduct.id).Show();
+                }
+                
             }
         }
         private void btn_AddSubProduct(object sender, RoutedEventArgs e)
@@ -199,6 +205,7 @@ namespace BusinessBook.Views.product
             //var db = new dbctx();
             selectedproduct = productrepo.get(productid);
             tb_name.Text = selectedproduct.name;
+            tb_category.Text = selectedproduct.category;
             if (selectedproduct.saleprice != null)
             {
                 tb_saleprice.Text = selectedproduct.saleprice.ToString();

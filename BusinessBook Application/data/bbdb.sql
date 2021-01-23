@@ -62,7 +62,7 @@ CREATE TABLE `financetransaction` (
 
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `barcode` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `barcode` varchar(100) DEFAULT NULL,
   `category` varchar(50) DEFAULT NULL,
   `carrycost` float DEFAULT NULL,
   `discount` float DEFAULT NULL,

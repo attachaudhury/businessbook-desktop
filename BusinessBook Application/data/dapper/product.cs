@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using BusinessBook.bll;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using MySql.Data.MySqlClient;
 using System;
@@ -49,23 +50,75 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
-        public dapper.product save(dapper.product product)
+        public bool save(dapper.product product)
         {
-
-            using (var connection = new MySqlConnection(conn))
+            var isbarcodeexists = checkisbarcodeexists(product);
+            if (isbarcodeexists)
             {
-                var res = connection.Insert<dapper.product>(product);
-                product.id = (int)res;
-                return product;
+                return false;
+            }
+            else
+            {
+                using (var connection = new MySqlConnection(conn))
+                {
+                    var res = connection.Insert<dapper.product>(product);
+                    return true;
+                }
+
             }
         }
         public bool update(dapper.product product)
         {
-
-            using (var connection = new MySqlConnection(conn))
+            var isbarcodeexists = checkisbarcodeexists(product);
+            if (isbarcodeexists)
             {
-                var identity = connection.Update<dapper.product>(product);
-                return identity;
+                return false;
+            }
+            else
+            {
+                using (var connection = new MySqlConnection(conn))
+                {
+                    var identity = connection.Update<dapper.product>(product);
+                    return true;
+                }
+            }
+        }
+
+        public bool checkisbarcodeexists(dapper.product product)
+        {
+            if (product.barcode == "")
+            {
+                product.barcode = null;
+            }
+
+            if (product.barcode == null)
+            {
+                return false;
+            }
+            else
+            {
+                var sql = "select * from product where barcode=" + product.barcode + ";";
+
+                using (var connection = new MySqlConnection(conn))
+                {
+                    var res = connection.Query<dapper.product>(sql).FirstOrDefault();
+                    if (res == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        if (product.id == res.id)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            otherutils.notify("Alert", "Barcode already exists", 5000);
+                            return true;
+                        }
+                    }
+                }
             }
         }
     }
