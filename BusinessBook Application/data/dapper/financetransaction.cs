@@ -34,7 +34,7 @@ namespace BusinessBook.data.dapper
     }
     public class financetransactionrepo
     {
-        string joinselect = "t1.id,t1.name,t1.amount,t1.status,t1.details,t1.date,t1.fk_user_createdby_in_financetransaction,t1.fk_user_targetto_in_financetransaction,t1.fk_financeaccount_in_financetransaction,t2.name as accountname,t3.name as createdby,t4.name as target  from financetransaction t1 join financeaccount t2 on t1.fk_financeaccount_in_financetransaction = t2.id join `user` t3 on t1.fk_user_createdby_in_financetransaction=t3.id join `user` t4 on  t1.fk_user_targetto_in_financetransaction=t4.id";
+        string joinselect = "t1.id,t1.name,t1.amount,t1.status,t1.details,t1.date,t1.fk_user_createdby_in_financetransaction,t1.fk_user_targetto_in_financetransaction,t1.fk_financeaccount_in_financetransaction,t2.name as accountname,t3.name as createdby,t4.name as target  from financetransaction t1 join financeaccount t2 on t1.fk_financeaccount_in_financetransaction = t2.id join `user` t3 on t1.fk_user_createdby_in_financetransaction=t3.id left join `user` t4 on  t1.fk_user_targetto_in_financetransaction=t4.id";
         string conn = baserepo.connectionstring;
         public List<dapper.financetransaction> get() {
             using (var connection = new MySqlConnection(conn))

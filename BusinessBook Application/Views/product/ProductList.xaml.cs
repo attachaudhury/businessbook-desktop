@@ -35,7 +35,7 @@ namespace BusinessBook.Views.product
             dg_ProductList.ItemsSource = productrepo;
             UpdateLayout();
         }
-        public void details(object sender, RoutedEventArgs e)
+        public void edit(object sender, RoutedEventArgs e)
         {
             data.dapper.product obj = ((FrameworkElement)sender).DataContext as data.dapper.product;
             new ProductAdd(obj.id).Show();
