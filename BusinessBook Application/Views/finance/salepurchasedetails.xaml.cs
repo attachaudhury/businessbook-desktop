@@ -24,22 +24,20 @@ namespace BusinessBook.Views.finance
     {
         public int transactionid;
         List<data.dapper.financeaccount> financeaccounts = null;
-        public salepurchasedetails(int transid)
+        public salepurchasedetails(int transid,string type) // type is sale or purchase
         {
             InitializeComponent();
-            var financeaccountrepo = new data.dapper.financeaccountrepo();
-            var financetransactionrepo = new data.dapper.financetransactionrepo();
             var salepurchaseproductrepo = new data.dapper.salepurchaseproductrepo();
-            //var financetransactions = financetransactionrepo.get();
-            financeaccounts = financeaccountrepo.get();
-
+       
             transactionid = transid;
-           // var db = new dbctx();
-            //var productsinsale = db.salepurchaseproduct.Where(a => a.fk_financetransaction_salepurchaseproduct_financetransaction == saleid).ToList();
             var productsinsale = salepurchaseproductrepo.getmultiplebytransactionid(transactionid);
             foreach (var item in productsinsale)
             {
                 dg.Items.Add(item);
+            }
+            if (type == "sale")
+            {
+                print_btn.IsEnabled = true;
             }
         }
         public void printPeceipt(object sender, RoutedEventArgs e)

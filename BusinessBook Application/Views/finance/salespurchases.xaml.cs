@@ -28,17 +28,17 @@ namespace BusinessBook.Views.finance
         public salespurchases(string type)
         {
             InitializeComponent();
-            this.listtype = type;
+            listtype = type;
             var financeaccountrepo = new data.dapper.financeaccountrepo();
             var financetransactionrepo = new data.dapper.financetransactionrepo();
                 financeaccounts = financeaccountrepo.get();
             
             List<financetransactionextended> list = new List<financetransactionextended>();
-            if (type == "customer") 
+            if (type == "sale") 
             {
                 list = financetransactionrepo.getmanybyfinanceaccountname("pos sale");
             }
-            else if(type == "vendor")
+            else if(type == "purchase")
             {
                 list = financetransactionrepo.getmanybyselfnameandfinanceaccountname("--inventory--on--purchase--", "inventory");
             }
@@ -50,7 +50,7 @@ namespace BusinessBook.Views.finance
         public void details(object sender, RoutedEventArgs e)
         {
             data.dapper.financetransaction obj = ((FrameworkElement)sender).DataContext as data.dapper.financetransaction;
-            new salepurchasedetails(obj.id).Show();
+            new salepurchasedetails(obj.id, listtype).Show();
         }
     }
 }

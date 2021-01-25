@@ -35,12 +35,9 @@ namespace BusinessBook.Views.finance
 
         void initFormOperations()
         {
-            //var db = new dbctx();
-            //mappedproducts = productutils.mapproducttoproductpurchasemodel(db.product.ToList());
             var products = this.productrepo.get();
-            mappedproducts = productutils.mapproducttoproductsalemodel(products);
+            mappedproducts = productutils.mapproducttoproductpurchasemodel(products);
             tb_Search.Focus();
-           // var vendors = db.user.Where(a => a.role == "vendor").ToList();
             var vendors = userrepo.getbywherein("role", new object[] { "vendor" });
             vendor_combobox.ItemsSource = vendors;
             vendor_combobox.DisplayMemberPath = "name";
@@ -182,13 +179,14 @@ namespace BusinessBook.Views.finance
                 }
 
                 var totalbill = purchaselist.Sum(a => a.total);
-                var totalpayment = Convert.ToDouble(paying_textbox.Text);
+                
 
                 if (paying_textbox.Text == "")
                 {
                     MessageBox.Show("Please Enter payment", "Information");
                     return;
                 }
+                var totalpayment = Convert.ToDouble(paying_textbox.Text);
                 if (!(bool)ledger_checkbox.IsChecked)
                 {
                     if (totalbill != totalpayment)

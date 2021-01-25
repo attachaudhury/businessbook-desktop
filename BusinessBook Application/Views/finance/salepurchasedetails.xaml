@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.finance"
         mc:Ignorable="d"
-        Title="Details">
+        Title="Details" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Click="printPeceipt" Margin="10,10,10,10" VerticalAlignment="Top">Print</Button>
+        <Button Name="print_btn" IsEnabled="False" Click="printPeceipt" Margin="10,10,10,10" VerticalAlignment="Top">Print</Button>
         <DataGrid Name="dg" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding product.name}" />
+                <DataGridTextColumn Header="Product Name" Binding="{Binding productname}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding price}" />
                 <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" />
                 <DataGridTextColumn Header="Total" Binding="{Binding total}" />
+                <DataGridTextColumn Header="Product Id" Binding="{Binding fk_product_in_salepurchaseproduct}" />
+                <DataGridTextColumn Header="Transaction Id" Binding="{Binding fk_financetransaction_in_salepurchaseproduct}" />
             </DataGrid.Columns>
         </DataGrid>
 

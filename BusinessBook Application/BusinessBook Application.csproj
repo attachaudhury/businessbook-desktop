@@ -162,14 +162,8 @@
     <Compile Include="Views\finance\salenew.xaml.cs">
       <DependentUpon>salenew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\finance\purchasedetails.xaml.cs">
-      <DependentUpon>purchasedetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\finance\purchasenew.xaml.cs">
       <DependentUpon>purchasenew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\finance\purchases.xaml.cs">
-      <DependentUpon>purchases.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\salepurchasedetails.xaml.cs">
       <DependentUpon>salepurchasedetails.xaml</DependentUpon>
@@ -241,15 +235,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\finance\purchasedetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\finance\purchasenew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\finance\purchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

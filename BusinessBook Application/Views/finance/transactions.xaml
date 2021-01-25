@@ -22,7 +22,7 @@
                 <telerik:GridViewDataColumn Header="Account" DataMemberBinding="{Binding fk_financeaccount_in_financetransaction}" />
                 <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}" />
                 <telerik:GridViewDataColumn Header="Creator" DataMemberBinding="{Binding fk_user_createdby_in_financetransaction}" />
-                <telerik:GridViewDataColumn Header="Target" DataMemberBinding="{Binding fk_user_targetto_in_financetransaction}" />
+                <telerik:GridViewDataColumn Header="Party" DataMemberBinding="{Binding fk_user_targetto_in_financetransaction}" />
                 <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding status}" />
                 <telerik:GridViewDataColumn Header="Amount" DataMemberBinding="{Binding amount}" />
             </telerik:RadGridView.Columns>

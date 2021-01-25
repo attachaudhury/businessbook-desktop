@@ -21,36 +21,22 @@ namespace BusinessBook.data.dapper
         public Nullable<int> fk_product_in_salepurchaseproduct { get; set; }
         public Nullable<int> fk_financetransaction_in_salepurchaseproduct { get; set; }
     }
+    public class salepurchaseproductextended : salepurchaseproduct
+    {
+        public string productname { get; set; }
+    }
     public class salepurchaseproductrepo
     {
-        string conn = baserepo.connectionstring;
-        public void  test()
-        {
-            //dapper.salepurchaseproduct p = new salepurchaseproduct { barcode = "1231321234234", carrycost = 0, discount = 0, name = "deal 1", purchaseprice = 40,purchaseactive=false, quantity = 0,saleprice=50,saleactive=true };
-            //this.save(p);
-        }
-        public List<dapper.salepurchaseproduct> get() {
-            using (var connection = new MySqlConnection(conn))
-            {
-                var res = connection.GetAll<dapper.salepurchaseproduct>().ToList();
-                return res;
-            }
-        }
-        public dapper.salepurchaseproduct get(int id)
-        {
-            using (var connection = new MySqlConnection(conn))
-            {
-                var res = connection.Get<dapper.salepurchaseproduct>(id);
-                return res;
-            }
-        }
+        string joinselect = "t1.id,t1.price,t1.quantity,t1.total,t1.fk_product_in_salepurchaseproduct,t1.fk_financetransaction_in_salepurchaseproduct,t2.name as productname from salepurchaseproduct t1 join product t2 on t1.fk_product_in_salepurchaseproduct = t2.id";
 
-        public List<dapper.salepurchaseproduct> getmultiplebytransactionid(int financetransactionid)
+        string conn = baserepo.connectionstring;
+        
+        public List<dapper.salepurchaseproductextended> getmultiplebytransactionid(int financetransactionid)
         {
-            var sql = "select * from salepurchaseproduct where fk_financetransaction_in_salepurchaseproduct="+ financetransactionid + ";";
+            var sql = "select " + joinselect + " where fk_financetransaction_in_salepurchaseproduct=" + financetransactionid + ";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Query<dapper.salepurchaseproduct>(sql).ToList();
+                var res = connection.Query<dapper.salepurchaseproductextended>(sql).ToList();
                 return res;
             }
         }
@@ -62,15 +48,6 @@ namespace BusinessBook.data.dapper
                 var res = connection.Insert<dapper.salepurchaseproduct>(salepurchaseproduct);
                 salepurchaseproduct.id = (int)res;
                 return salepurchaseproduct;
-            }
-        }
-        public bool update(dapper.salepurchaseproduct salepurchaseproduct)
-        {
-
-            using (var connection = new MySqlConnection(conn))
-            {
-                var identity = connection.Update<dapper.salepurchaseproduct>(salepurchaseproduct);
-                return identity;
             }
         }
     }

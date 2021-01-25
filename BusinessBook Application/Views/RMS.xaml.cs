@@ -224,17 +224,18 @@ html{overflow:hidden;height:200px;}
         }
         private void salesshow(object sender, RoutedEventArgs e)
         {
-            var w = new Views.finance.salespurchases("customer");
+            var w = new Views.finance.salespurchases("sale");
             userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void purchasenewshow(object sender, RoutedEventArgs e)
         {
-            var w  = new Views.finance.salespurchases("vendor");
+            var w  = new Views.finance.purchasenew();
             userutils.authorizerole(w,new string[] { "superadmin", "admin" });
         }
         private void purchasesshow(object sender, RoutedEventArgs e)
         {
-            new Views.finance.purchases().Show();
+            var w = new Views.finance.salespurchases("purchase");
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void expencesshow(object sender, RoutedEventArgs e)
         {

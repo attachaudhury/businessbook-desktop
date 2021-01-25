@@ -13,7 +13,7 @@
                 <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}" />
                 <telerik:GridViewDataColumn Header="Date" DataMemberBinding="{Binding date}" />
                 <telerik:GridViewDataColumn Header="Account" DataMemberBinding="{Binding accountname}" />
-                <telerik:GridViewDataColumn Header="Description" DataMemberBinding="{Binding name}" />
+                <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}" />
                 <telerik:GridViewDataColumn Header="Creator" DataMemberBinding="{Binding createdby}" />
                 <telerik:GridViewDataColumn Header="Party" DataMemberBinding="{Binding target}" />
                 <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding status}" />
