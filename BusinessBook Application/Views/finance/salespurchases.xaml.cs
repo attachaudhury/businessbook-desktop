@@ -36,7 +36,7 @@ namespace BusinessBook.Views.finance
             List<financetransactionextended> list = new List<financetransactionextended>();
             if (type == "sale") 
             {
-                list = financetransactionrepo.getmanybyfinanceaccountname("pos sale");
+                list = financetransactionrepo.getmanybymanyfinanceaccountnames(new string[]{ "pos sale","sale","service sale"});
             }
             else if(type == "purchase")
             {

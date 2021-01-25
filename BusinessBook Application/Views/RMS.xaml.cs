@@ -45,7 +45,7 @@ namespace BusinessBook.Views
             if (userutils.loggedinuserd.role == "superadmin" || userutils.loggedinuserd.role == "admin")
             {
                 initchart();
-                sales = financetransactionrepo.gettransactionsumbyaccountname("pos sale");
+                sales = -financetransactionrepo.gettransactionsumbyaccountnames(new string[] { "pos sale","sale","service sale"});
                 customers = userrepo.getbywherein("role", new object[] { "customer" }).Count();
                 vendors = userrepo.getbywherein("role", new object[] { "vendor" }).Count();
                 users = userrepo.getbywherein("role", new object[] { "admin", "user" }).Count();

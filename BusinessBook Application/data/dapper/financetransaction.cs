@@ -51,11 +51,17 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
-        public List<dapper.financetransactionextended> getmanybyfinanceaccountname(string financeaccountname)
+        public List<dapper.financetransactionextended> getmanybymanyfinanceaccountnames(string[] financeaccountnames)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
-            financeaccount financeaccount = financeaccountrepo.getonebyname(financeaccountname);
-            string sql = "select "+joinselect+" where t1.fk_financeaccount_in_financetransaction=" + financeaccount.id + ";";
+            List<financeaccount> financeaccounts = financeaccountrepo.getmanybynames(financeaccountnames);
+            object[] financeaccountids = new object[financeaccounts.Count()];
+            for (int i = 0; i < financeaccounts.Count(); i++)
+            {
+                financeaccountids[i] = financeaccounts[i].id;
+            }
+            var financeaccountsidarray = baserepo.getWhereInSql(financeaccountids);
+            string sql = "select " + joinselect + " where t1.fk_financeaccount_in_financetransaction in (" + financeaccountsidarray + ");";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<dapper.financetransactionextended>(sql).ToList();
@@ -129,11 +135,17 @@ namespace BusinessBook.data.dapper
             }
         }
 
-        public int gettransactionsumbyaccountname(string name)
+        public int gettransactionsumbyaccountnames(string[] financeaccountnames)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
-            financeaccount financeaccount = financeaccountrepo.getonebyname(name);
-            string sql = "select sum(amount) from financetransaction where fk_financeaccount_in_financetransaction=" + financeaccount.id  + ";";
+            List<financeaccount> financeaccounts = financeaccountrepo.getmanybynames(financeaccountnames);
+            object[] financeaccountids = new object[financeaccounts.Count()];
+            for (int i = 0; i < financeaccounts.Count(); i++)
+            {
+                financeaccountids[i] = financeaccounts[i].id;
+            }
+            var financeaccountsidarray = baserepo.getWhereInSql(financeaccountids);
+            string sql = "select sum(amount) from financetransaction where fk_financeaccount_in_financetransaction in (" + financeaccountsidarray + ");";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.ExecuteScalar<int>(sql);

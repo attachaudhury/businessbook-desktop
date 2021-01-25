@@ -55,6 +55,16 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
+        public List<dapper.financeaccount> getmanybynames(string[] names)
+        {
+            var nameswhereinstatement = baserepo.getWhereInSql(names);
+            var sql = "select * from financeaccount where name in (" + nameswhereinstatement + ");";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financeaccount>(sql).ToList();
+                return res;
+            }
+        }
         public List<dapper.financeaccount> getmanybytype(string type)
         {
             var sql = "select * from financeaccount where type='" + type + "';";
@@ -64,6 +74,7 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
+        
         public List<dapper.financeaccount> getmanybysqlor(dynamic listofkeyvaluepairs)
         {
             string orsql = baserepo.getkeyValuesToSqlOr(listofkeyvaluepairs);
