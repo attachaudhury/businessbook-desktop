@@ -195,6 +195,9 @@
     <Compile Include="Views\finance\pos.xaml.cs">
       <DependentUpon>pos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\product\inventoryreport.xaml.cs">
+      <DependentUpon>inventoryreport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\user\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,10 @@
     <Page Include="Views\finance\pos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\product\inventoryreport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\user\Add.xaml">
       <SubType>Designer</SubType>

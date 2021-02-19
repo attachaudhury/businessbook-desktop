@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using BusinessBook.bll;
 using BusinessBook.data;
 
 namespace BusinessBook.Views.product
@@ -38,7 +38,6 @@ namespace BusinessBook.Views.product
             else
             {
                 this.createmode = false;
-                tb_quantity.IsEnabled = false;
                 this.getone((int)productId);
             }
 
@@ -46,7 +45,6 @@ namespace BusinessBook.Views.product
         }
         private void btn_Save(object sender, RoutedEventArgs e)
         {
-            //var db = dbctxsinglton.getInstance();
             if (tb_name.Text == "" || tb_saleprice.Text == "" || tb_purchaseprice.Text == "")
             {
                 MessageBox.Show("Please fill form", "Information");
@@ -62,20 +60,27 @@ namespace BusinessBook.Views.product
                 r.purchaseprice = Convert.ToInt32(tb_purchaseprice.Text);
                 if (tb_discount.Text != "")
                 {
-                    r.discount = Convert.ToInt32(tb_discount.Text);
+                    try
+                    {
+                        r.discount = Convert.ToInt32(tb_discount.Text);
+                    }
+                    catch (Exception ex) { }
                 }
                 if (tb_carrycost.Text != "")
                 {
-                    r.carrycost = Convert.ToInt32(tb_carrycost.Text);
+                    try
+                    {
+                        r.carrycost = Convert.ToInt32(tb_carrycost.Text);
+                    }
+                    catch (Exception ex) { }
                 }
-                if (tb_discount.Text != "")
-                {
-                    r.discount = Convert.ToInt32(tb_discount.Text);
-                }
-                
+                r.quantity = 0;
                 if (tb_quantity.Text != "")
                 {
-                    r.quantity = Convert.ToInt32(tb_quantity.Text);
+                    try 
+                    {
+                        r.quantity = Convert.ToDouble(tb_quantity.Text);
+                    }catch(Exception ex) { }
                 }
                 
                 r.saleactive = cbx_SaleActive.IsChecked.Value;
@@ -83,6 +88,7 @@ namespace BusinessBook.Views.product
                 var savedproductresult = productrepo.save(r);
                 if (savedproductresult)
                 {
+                    inventoryutils.updateinventoryreportonproductcreate(r);
                     MessageBox.Show("Product saved", "Information");
                     Close();
                     new ProductAdd().Show();
@@ -103,9 +109,14 @@ namespace BusinessBook.Views.product
                 {
                     selectedproduct.carrycost = Convert.ToInt32(tb_carrycost.Text);
                 }
-                if (tb_discount.Text != "")
+                double selectedproductoldinventory = (selectedproduct.quantity==null)? (double)selectedproduct.quantity:0;
+                if (tb_quantity.Text != "")
                 {
-                    selectedproduct.discount = Convert.ToInt32(tb_discount.Text);
+                    try
+                    {
+                        selectedproduct.quantity = Convert.ToDouble(tb_quantity.Text);
+                    }
+                    catch (Exception ex) { }
                 }
                 selectedproduct.saleactive = cbx_SaleActive.IsChecked.Value;
                 selectedproduct.purchaseactive = cbx_PurchaseActive.IsChecked.Value;
@@ -115,6 +126,7 @@ namespace BusinessBook.Views.product
                 var updateproductresult = this.productrepo.update(selectedproduct);
                 if (updateproductresult)
                 {
+                    inventoryutils.updateinventoryreportonproductupdate(selectedproduct.id,(double)selectedproduct.quantity, selectedproductoldinventory);
                     MessageBox.Show("product update", "Information");
                     Close();
                     new ProductAdd(selectedproduct.id).Show();
@@ -146,9 +158,6 @@ namespace BusinessBook.Views.product
                 productsub.fk_product_sub_in_productsub = products_cb_selectedobject.id;
                 productsub.quantity = Convert.ToInt32(tb_productsubquantity.Text);
                 productsubrepo.save(productsub);
-                //var db = dbctxsinglton.getInstance();
-                //db.productsub.Add(productsub);
-                //db.SaveChanges();
                 dg.Items.Clear();
                 var productsubs = this.productsubrepo.getproduct_productsubs(this.selectedproduct.id);
                 foreach (var item in productsubs)

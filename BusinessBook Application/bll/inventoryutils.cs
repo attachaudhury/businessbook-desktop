@@ -89,5 +89,40 @@ namespace BusinessBook.bll
             ir.note = "Added inventory on purchase id " + purchaseid+inventoryreportcomment;
             inventoryreportrepo.save(ir);
         }
+        public static void updateinventoryreportonproductcreate(data.dapper.product p)
+        {
+            if (p.quantity != 0)
+            {
+                var inventoryreportrepo = new inventoryreportrepo();
+                data.dapper.inventoryreport ir = new inventoryreport();
+                ir.quantity = p.quantity;
+                ir.date = DateTime.Now;
+                ir.fk_product_in_inventoryreport = p.id;
+                ir.note = "Added inventory on product create";
+                inventoryreportrepo.save(ir);
+            }
+        }
+
+        public static void updateinventoryreportonproductupdate(int productid, double newinventory, double oldinventory)
+        {
+            if (newinventory==oldinventory)
+            {
+                return;
+            }
+            var inventoryreportrepo = new inventoryreportrepo();
+            data.dapper.inventoryreport ir = new inventoryreport();
+            ir.date = DateTime.Now;
+            ir.fk_product_in_inventoryreport = productid;
+            ir.quantity = newinventory- oldinventory;
+            if (newinventory > oldinventory)
+            {
+                ir.note = "Added inventory on product update";
+            }
+            else if(newinventory < oldinventory)
+            {
+                ir.note = "Detucted inventory on product update";
+            }
+            inventoryreportrepo.save(ir);
+        }
     }
 }

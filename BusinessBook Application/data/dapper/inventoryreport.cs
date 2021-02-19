@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using BusinessBook.bll;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using MySql.Data.MySqlClient;
 using System;
@@ -24,9 +25,18 @@ namespace BusinessBook.data.dapper
     {
         string conn = baserepo.connectionstring;
 
-        public List<dapper.inventoryreport> get(int productid)
+        public List<dapper.inventoryreport> get(int productid, DateTime? FromDate = null, DateTime? ToDate = null)
         {
+            
             var sql = "select * from inventoryreport where fk_product_in_inventoryreport=" + productid + ";";
+            if (FromDate != null)
+            {
+                TimeUtils.getStartDate(FromDate);
+            }
+            if (ToDate != null)
+            {
+                TimeUtils.getEndDate(FromDate);
+            }
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<dapper.inventoryreport>(sql).ToList();
