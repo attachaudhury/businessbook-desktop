@@ -595,13 +595,13 @@
 //                        List<Dealproductorreciperaw> dealProducts = db.Dealproductorreciperaw.Where(a => a.FkMainId == p.Id).ToList();
 //                        foreach (Dealproductorreciperaw dealProduct in dealProducts)
 //                        {
-//                            Product subProduct = db.Product.Find(dealProduct.FkSubId);
-//                            subProduct.Quantity -= (dealProduct.Quantity * item.quantity);
-//                            db.Entry(subProduct).State = EntityState.Modified;
+//                            Product productsub = db.Product.Find(dealProduct.FkSubId);
+//                            productsub.Quantity -= (dealProduct.Quantity * item.quantity);
+//                            db.Entry(productsub).State = EntityState.Modified;
 
 //                            if (p.Quantity <= p.LowInventoryNotification)
 //                            {
-//                                string message = "Product " + subProduct.Name + " Inventory is Redusing. Remaining quantity is " + subProduct.Quantity + ". Please Make a Purchase Order.";
+//                                string message = "Product " + productsub.Name + " Inventory is Redusing. Remaining quantity is " + productsub.Quantity + ". Please Make a Purchase Order.";
 //                                Notification_insert("Inventory Notice", message, "yellow");
 //                            }
 
@@ -613,9 +613,9 @@
 //                        List<Dealproductorreciperaw> dealProducts = db.Dealproductorreciperaw.Where(a => a.FkMainId == p.Id).ToList();
 //                        foreach (Dealproductorreciperaw dealProduct in dealProducts)
 //                        {
-//                            Product subProduct = db.Product.Find(dealProduct.FkSubId);
-//                            subProduct.Quantity -= (dealProduct.Quantity * item.quantity);
-//                            db.Entry(subProduct).State = EntityState.Modified;
+//                            Product productsub = db.Product.Find(dealProduct.FkSubId);
+//                            productsub.Quantity -= (dealProduct.Quantity * item.quantity);
+//                            db.Entry(productsub).State = EntityState.Modified;
 //                        }
 //                        db.SaveChanges();
 //                    }
@@ -652,9 +652,9 @@
 //                    List<Dealproductorreciperaw> dealProducts = db.Dealproductorreciperaw.Where(a => a.FkMainId == p.Id).ToList();
 //                    foreach (Dealproductorreciperaw dealProduct in dealProducts)
 //                    {
-//                        Product subProduct = db.Product.Find(dealProduct.FkSubId);
-//                        subProduct.Quantity += (dealProduct.Quantity * item.quantity);
-//                        db.Entry(subProduct).State = EntityState.Modified;
+//                        Product productsub = db.Product.Find(dealProduct.FkSubId);
+//                        productsub.Quantity += (dealProduct.Quantity * item.quantity);
+//                        db.Entry(productsub).State = EntityState.Modified;
 //                    }
 //                    db.SaveChanges();
 //                }
@@ -663,9 +663,9 @@
 //                    List<Dealproductorreciperaw> dealProducts = db.Dealproductorreciperaw.Where(a => a.FkMainId == p.Id).ToList();
 //                    foreach (Dealproductorreciperaw dealProduct in dealProducts)
 //                    {
-//                        Product subProduct = db.Product.Find(dealProduct.FkSubId);
-//                        subProduct.Quantity += (dealProduct.Quantity * item.quantity);
-//                        db.Entry(subProduct).State = EntityState.Modified;
+//                        Product productsub = db.Product.Find(dealProduct.FkSubId);
+//                        productsub.Quantity += (dealProduct.Quantity * item.quantity);
+//                        db.Entry(productsub).State = EntityState.Modified;
 //                    }
 //                    db.SaveChanges();
 //                }

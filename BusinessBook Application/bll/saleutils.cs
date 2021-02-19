@@ -34,7 +34,7 @@ namespace BusinessBook.bll
 
             Task.Run(() => {
                 insertSellingProductsInDatabase(saleList, saleid);
-                updateInventory(saleList);
+                inventoryutils.updateInventoryonsale(saleList, saleid);
             });
         }
         public static void newsale(List<productsaleorpurchaseviewmodel> saleList, double totalpayment, int customerId)
@@ -42,80 +42,36 @@ namespace BusinessBook.bll
             var saleid = financeutils.insertSaleTransactions("sale", saleList, totalpayment, customerId);
             Task.Run(() => {
                 insertSellingProductsInDatabase(saleList, saleid);
-                updateInventory(saleList);
+                inventoryutils.updateInventoryonsale(saleList, saleid);
             });
         }
         private static void insertSellingProductsInDatabase(List<productsaleorpurchaseviewmodel> saleList, int saleid)
         {
-            // var db = new dbctx();
-            var salepurchaseproducrepo = new salepurchaseproductrepo();
+            var salepurchaseproducrepo = new productsalepurchaserepo();
             foreach (productsaleorpurchaseviewmodel item in saleList)
             {
-                data.dapper.salepurchaseproduct saleItem = new data.dapper.salepurchaseproduct();
+                data.dapper.productsalepurchase saleItem = new data.dapper.productsalepurchase();
                 saleItem.price = item.price;
                 saleItem.quantity = item.quantity;
                 saleItem.total = item.total;
-                saleItem.fk_product_in_salepurchaseproduct = item.id;
-                saleItem.fk_financetransaction_in_salepurchaseproduct = saleid;
-                //db.salepurchaseproduct.Add(saleItem);
+                saleItem.fk_product_in_productsalepurchase = item.id;
+                saleItem.fk_financetransaction_in_productsalepurchase = saleid;
                 salepurchaseproducrepo.save(saleItem);
             }
-            //db.SaveChanges();
-        }
-        private static void updateInventory(List<productsaleorpurchaseviewmodel> salelist)
-        {
-            // var db = new dbctx();
-            var productrepo = new data.dapper.productrepo();
-            foreach (var item in salelist)
-            {
-                data.dapper.product p = productrepo.get(item.id);
-                p.quantity = p.quantity - item.quantity;
-                productrepo.update(p);
-                //db.Entry(p).State = EntityState.Modified;
-                //db.Configuration.ValidateOnSaveEnabled = false;
-                //db.SaveChanges();
-                //db.Configuration.ValidateOnSaveEnabled = true;
-                manageSubProductInventory(item);
-            }
-        }
-        private static void manageSubProductInventory(productsaleorpurchaseviewmodel sellingProduct)
-        {
-            // var db = new dbctx();
-            var productrepo = new productrepo();
-            var subproductrepo = new subproductrepo();
-            var subproducts = subproductrepo.getproduct_subproducts(sellingProduct.id);
-            //var subproducts = db.subproduct.Where(a => (a.fk_product_main_in_subproduct == sellingProduct.id)).ToList();
-            foreach (var item in subproducts)
-            {
-                data.dapper.product p = productrepo.get(item.fk_product_sub_in_subproduct);
-                p.quantity = p.quantity - (sellingProduct.quantity*item.quantity);
-                productrepo.update(p);
-                //db.Entry(p).State = EntityState.Modified;
-                //db.Configuration.ValidateOnSaveEnabled = false;
-                //db.SaveChanges();
-                //db.Configuration.ValidateOnSaveEnabled = true;
-            }
-            
         }
         public static void printDuplicateRecipt(int saleid)
         {
-            //var db = new dbctx();
-
             var financetransactionrepo = new financetransactionrepo();
             var userrepo = new userrepo();
             var productrepo = new productrepo();
-            var salepurchaseproductrepo = new salepurchaseproductrepo();
-            //var ft = db.financetransaction.Find(saleid);
+            var productsalepurchaserepo = new productsalepurchaserepo();
             var ft = financetransactionrepo.get(saleid);
             data.dapper.user customer = null;
-
             if (ft.fk_user_targetto_in_financetransaction != null) {
-
-                //customer = db.user.Find(ft.fk_user_targetto_in_financetransaction);
                 customer = userrepo.get((int)ft.fk_user_targetto_in_financetransaction);
             }
-           // var soldproducts = db.salepurchaseproduct.Where(a => a.fk_financetransaction_in_salepurchaseproduct == saleid).ToList();
-            var soldproducts = salepurchaseproductrepo.getmultiplebytransactionid(saleid);
+           // var soldproducts = db.productsalepurchase.Where(a => a.fk_financetransaction_in_productsalepurchase == saleid).ToList();
+            var soldproducts = productsalepurchaserepo.getmultiplebytransactionid(saleid);
 
             float totalbill = 0;
             var salelist = new List<productsaleorpurchaseviewmodel>();
@@ -123,8 +79,8 @@ namespace BusinessBook.bll
             foreach (var item in soldproducts)
             {
                 totalbill = totalbill + (float)(item.price * item.quantity);
-                //var dbproduct = db.product.Find(item.fk_product_in_salepurchaseproduct);
-                var dbproduct = productrepo.get((int)item.fk_product_in_salepurchaseproduct);
+                //var dbproduct = db.product.Find(item.fk_product_in_productsalepurchase);
+                var dbproduct = productrepo.get((int)item.fk_product_in_productsalepurchase);
                 
                 var p = new productsaleorpurchaseviewmodel();
                 p.id = dbproduct.id;

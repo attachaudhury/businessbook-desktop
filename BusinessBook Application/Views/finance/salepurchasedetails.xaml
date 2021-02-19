@@ -15,8 +15,8 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding price}" />
                 <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" />
                 <DataGridTextColumn Header="Total" Binding="{Binding total}" />
-                <DataGridTextColumn Header="Product Id" Binding="{Binding fk_product_in_salepurchaseproduct}" />
-                <DataGridTextColumn Header="Transaction Id" Binding="{Binding fk_financetransaction_in_salepurchaseproduct}" />
+                <DataGridTextColumn Header="Product Id" Binding="{Binding fk_product_in_productsalepurchase}" />
+                <DataGridTextColumn Header="Transaction Id" Binding="{Binding fk_financetransaction_in_productsalepurchase}" />
             </DataGrid.Columns>
         </DataGrid>
 

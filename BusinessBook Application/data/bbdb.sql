@@ -53,7 +53,7 @@ CREATE TABLE `financetransaction` (
   `name` varchar(60) DEFAULT NULL,
   `amount` float DEFAULT NULL,
   `status` varchar(15) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
   `details` varchar(200) DEFAULT NULL,
   `fk_user_createdby_in_financetransaction` int(11) DEFAULT NULL,
   `fk_user_targetto_in_financetransaction` int(11) DEFAULT NULL,
@@ -73,14 +73,25 @@ CREATE TABLE `product` (
   `saleprice` float DEFAULT NULL,
   `saleactive` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/* in case of product has subproducts, its quantity will not be updated on sale purchase, only its subproducts inventory will be updated, it is better approach for handling inventory of deal in case of  purchase purchase */
+/* total num of product sale/purchase will be fetched through productsalepurchase product */
+/* for sale like super store (1pcs of rio bicuit, 12pcs of rio buiscuits) we need extra table like unitstable*/
 
-CREATE TABLE `salepurchaseproduct` (
+
+CREATE TABLE `productsub` (
+  `id` int(11) NOT NULL,
+  `fk_product_main_in_productsub` int(11) DEFAULT NULL,
+  `fk_product_sub_in_productsub` int(11) DEFAULT NULL,
+  `quantity` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `productsalepurchase` (
   `id` int(11) NOT NULL,
   `price` float DEFAULT NULL,
   `quantity` float DEFAULT NULL,
   `total` float DEFAULT NULL,
-  `fk_product_in_salepurchaseproduct` int(11) DEFAULT NULL,
-  `fk_financetransaction_in_salepurchaseproduct` int(11) DEFAULT NULL
+  `fk_product_in_productsalepurchase` int(11) DEFAULT NULL,
+  `fk_financetransaction_in_productsalepurchase` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `softwaresetting` (
@@ -94,13 +105,6 @@ CREATE TABLE `softwaresetting` (
   `datevalue` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /* pre defined softwaresetting ravicosoftuserid, ravicosoftusername,ravicosoftuserpassword,ravicosoftbusinessbookmembershipplan,ravicosoftsmsplan,apiendpoint */
-
-CREATE TABLE `subproduct` (
-  `id` int(11) NOT NULL,
-  `fk_product_main_in_subproduct` int(11) DEFAULT NULL,
-  `fk_product_sub_in_subproduct` int(11) DEFAULT NULL,
-  `quantity` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
@@ -116,6 +120,26 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `address`, `name`, `password`, `username`, `phone`, `phone2`, `role`) VALUES
 (1, NULL, 'admin', 'admin@123', 'admin', '00000000000', NULL, 'admin');
 
+CREATE TABLE `inventoryreport` (
+  `id` int(11) NOT NULL,
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `note` varchar(200) DEFAULT NULL,
+  `quantity` float DEFAULT NULL,
+  `fk_product_in_inventoryreport` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/* quantity will be plus in case of purchase and minus in case of sale */
+
+
+CREATE TABLE `cashclosing` (
+  `id` int(11) NOT NULL,
+  `closingbalance` float DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `expence` float DEFAULT NULL,
+  `note` varchar(200) DEFAULT NULL,
+  `sale` float DEFAULT NULL,
+  `fk_user_in_cashclosing` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 ALTER TABLE `financeaccount`
   ADD PRIMARY KEY (`id`),
@@ -130,22 +154,32 @@ ALTER TABLE `financetransaction`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `salepurchaseproduct`
+ALTER TABLE `productsub`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_product_in_salepurchaseproduct` (`fk_product_in_salepurchaseproduct`),
-  ADD KEY `fk_financetransaction_in_salepurchaseproduct` (`fk_financetransaction_in_salepurchaseproduct`);
+  ADD KEY `fk_product_main_in_productsub` (`fk_product_main_in_productsub`),
+  ADD KEY `fk_product_sub_in_productsub` (`fk_product_sub_in_productsub`);
+
+ALTER TABLE `productsalepurchase`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_product_in_productsalepurchase` (`fk_product_in_productsalepurchase`),
+  ADD KEY `fk_financetransaction_in_productsalepurchase` (`fk_financetransaction_in_productsalepurchase`);
 
 
 ALTER TABLE `softwaresetting`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `subproduct`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_product_main_in_subproduct` (`fk_product_main_in_subproduct`),
-  ADD KEY `fk_product_sub_in_subproduct` (`fk_product_sub_in_subproduct`);
-
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+  
+  
+ALTER TABLE `inventoryreport`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_product_in_inventoryreport` (`fk_product_in_inventoryreport`);
+  
+  
+ALTER TABLE `cashclosing`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_in_cashclosing` (`fk_user_in_cashclosing`);
 
 
 ALTER TABLE `financeaccount`
@@ -156,18 +190,24 @@ ALTER TABLE `financetransaction`
 
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+ALTER TABLE `productsub`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `salepurchaseproduct`
+ALTER TABLE `productsalepurchase`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `softwaresetting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `subproduct`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  
+ALTER TABLE `inventoryreport`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+ALTER TABLE `cashclosing`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `financeaccount`
@@ -178,13 +218,21 @@ ALTER TABLE `financetransaction`
   ADD CONSTRAINT `fk_financeaccount_in_financetransaction` FOREIGN KEY (`fk_financeaccount_in_financetransaction`) REFERENCES `financeaccount` (`id`),
   ADD CONSTRAINT `fk_user_targetto_in_financetransaction` FOREIGN KEY (`fk_user_targetto_in_financetransaction`) REFERENCES `user` (`id`);
 
-ALTER TABLE `salepurchaseproduct`
-  ADD CONSTRAINT `fk_financetransaction_in_salepurchaseproduct` FOREIGN KEY (`fk_financetransaction_in_salepurchaseproduct`) REFERENCES `financetransaction` (`id`),
-  ADD CONSTRAINT `fk_product_in_salepurchaseproduct` FOREIGN KEY (`fk_product_in_salepurchaseproduct`) REFERENCES `product` (`id`);
+ALTER TABLE `productsub`
+  ADD CONSTRAINT `fk_product_main_in_productsub` FOREIGN KEY (`fk_product_main_in_productsub`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `fk_product_sub_in_productsub` FOREIGN KEY (`fk_product_sub_in_productsub`) REFERENCES `product` (`id`);
 
-ALTER TABLE `subproduct`
-  ADD CONSTRAINT `fk_product_main_in_subproduct` FOREIGN KEY (`fk_product_main_in_subproduct`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `fk_product_sub_in_subproduct` FOREIGN KEY (`fk_product_sub_in_subproduct`) REFERENCES `product` (`id`);
+ALTER TABLE `productsalepurchase`
+  ADD CONSTRAINT `fk_financetransaction_in_productsalepurchase` FOREIGN KEY (`fk_financetransaction_in_productsalepurchase`) REFERENCES `financetransaction` (`id`),
+  ADD CONSTRAINT `fk_product_in_productsalepurchase` FOREIGN KEY (`fk_product_in_productsalepurchase`) REFERENCES `product` (`id`);
+
+ALTER TABLE `inventoryreport`
+  ADD CONSTRAINT `fk_product_in_inventoryreport` FOREIGN KEY (`fk_product_in_inventoryreport`) REFERENCES `product` (`id`);
+  
+ALTER TABLE `cashclosing`
+  ADD CONSTRAINT `fk_user_in_cashclosing` FOREIGN KEY (`fk_user_in_cashclosing`) REFERENCES `user` (`id`);
+  
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

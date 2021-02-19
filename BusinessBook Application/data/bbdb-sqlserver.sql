@@ -48,12 +48,12 @@ CREATE TABLE tbl_FinanceChart(
 	--[type] nvarchar(100), -- eg product raw deal
 )
 
-	CREATE TABLE subproduct(
+	CREATE TABLE productsub(
 	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	fk_product_product_subproduct int,
-	constraint fk_product_product_subproduct foreign key (fk_product_product_subproduct) references product(id),
-	fk_subproduct_product_subproduct int,
-	constraint fk_subproduct_product_subproduct foreign key (fk_subproduct_product_subproduct) references product(id),
+	fk_product_product_productsub int,
+	constraint fk_product_product_productsub foreign key (fk_product_product_productsub) references product(id),
+	fk_productsub_product_productsub int,
+	constraint fk_productsub_product_productsub foreign key (fk_productsub_product_productsub) references product(id),
 	quantity float,
 )
 
@@ -83,15 +83,15 @@ fk_financeaccount_financeaccount_financetransaction int,
 constraint fk_financeaccount_financeaccount_financetransaction foreign key (fk_financeaccount_financeaccount_financetransaction) references financeaccount(id),
 );
 
-create table salepurchaseproduct(
+create table productsalepurchase(
 id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 price float,
 quantity float,
 total float,
-fk_product_salepurchaseproduct_product int,
-constraint fk_product_salepurchaseproduct_product foreign key (fk_product_salepurchaseproduct_product) references product(id),
-fk_financetransaction_salepurchaseproduct_financetransaction int,
-constraint fk_financetransaction_salepurchaseproduct_financetransaction foreign key (fk_financetransaction_salepurchaseproduct_financetransaction) references financetransaction(id),
+fk_product_productsalepurchase_product int,
+constraint fk_product_productsalepurchase_product foreign key (fk_product_productsalepurchase_product) references product(id),
+fk_financetransaction_productsalepurchase_financetransaction int,
+constraint fk_financetransaction_productsalepurchase_financetransaction foreign key (fk_financetransaction_productsalepurchase_financetransaction) references financetransaction(id),
 );
 
 create table closing(

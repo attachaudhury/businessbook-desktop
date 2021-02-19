@@ -25,11 +25,11 @@ namespace BusinessBook.Views.product
         //data.product selectedproduct = null;
         data.dapper.product selectedproduct = null;
         data.dapper.productrepo productrepo;
-        data.dapper.subproductrepo subproductrepo;
+        data.dapper.productsubrepo productsubrepo;
         public ProductAdd(int? productId = null)
         {
             this.productrepo = new data.dapper.productrepo();
-            this.subproductrepo = new data.dapper.subproductrepo();
+            this.productsubrepo = new data.dapper.productsubrepo();
             InitializeComponent();
             if (productId == null)
             {
@@ -122,7 +122,7 @@ namespace BusinessBook.Views.product
                 
             }
         }
-        private void btn_AddSubProduct(object sender, RoutedEventArgs e)
+        private void btn_Addproductsub(object sender, RoutedEventArgs e)
         {
             if (this.createmode)
             {
@@ -135,47 +135,47 @@ namespace BusinessBook.Views.product
                     MessageBox.Show("Please select product", "Information");
                     return;
                 }
-                if (tb_subproductquantity.Text == "" || tb_subproductquantity.Text == "0")
+                if (tb_productsubquantity.Text == "" || tb_productsubquantity.Text == "0")
                 {
                     MessageBox.Show("Please add quantity", "Information");
                     return;
                 }
                 var products_cb_selectedobject = products_cb.SelectedItem as data.dapper.product;
-                data.dapper.subproduct subproduct = new data.dapper.subproduct();
-                subproduct.fk_product_main_in_subproduct = selectedproduct.id;
-                subproduct.fk_product_sub_in_subproduct = products_cb_selectedobject.id;
-                subproduct.quantity = Convert.ToInt32(tb_subproductquantity.Text);
-                subproductrepo.save(subproduct);
+                data.dapper.productsub productsub = new data.dapper.productsub();
+                productsub.fk_product_main_in_productsub = selectedproduct.id;
+                productsub.fk_product_sub_in_productsub = products_cb_selectedobject.id;
+                productsub.quantity = Convert.ToInt32(tb_productsubquantity.Text);
+                productsubrepo.save(productsub);
                 //var db = dbctxsinglton.getInstance();
-                //db.subproduct.Add(subproduct);
+                //db.productsub.Add(productsub);
                 //db.SaveChanges();
                 dg.Items.Clear();
-                var subproducts = this.subproductrepo.getproduct_subproducts(this.selectedproduct.id);
-                foreach (var item in subproducts)
+                var productsubs = this.productsubrepo.getproduct_productsubs(this.selectedproduct.id);
+                foreach (var item in productsubs)
                 {
                     dg.Items.Add(item);
                 }
                 products_cb.SelectedItem = null;
-                tb_subproductquantity.Text = "";
+                tb_productsubquantity.Text = "";
             }
         }
-        public void btn_removeSubProduct(object sender, RoutedEventArgs e)
+        public void btn_removeproductsub(object sender, RoutedEventArgs e)
         {
-            data.dapper.subproduct obj = ((FrameworkElement)sender).DataContext as data.dapper.subproduct;
-            this.subproductrepo.delete(obj);
+            data.dapper.productsub obj = ((FrameworkElement)sender).DataContext as data.dapper.productsub;
+            this.productsubrepo.delete(obj);
             dg.Items.Clear();
-            var subproducts = this.subproductrepo.getproduct_subproducts(selectedproduct.id);
-            foreach (var item in subproducts)
+            var productsubs = this.productsubrepo.getproduct_productsubs(selectedproduct.id);
+            foreach (var item in productsubs)
             {
                 dg.Items.Add(item);
             }
             //var db = new dbctx();
-            //var dbsubproduct = db.subproduct.Find(obj.id);
-            //db.subproduct.Remove(dbsubproduct);
+            //var dbproductsub = db.productsub.Find(obj.id);
+            //db.productsub.Remove(dbproductsub);
             //db.SaveChanges();
             //dg.Items.Clear();
-            //var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == selectedproduct.id).ToList();
-            //foreach (var item in subproducts)
+            //var productsubs = db.productsub.Where(a => a.fk_product_product_productsub == selectedproduct.id).ToList();
+            //foreach (var item in productsubs)
             //{
             //    dg.Items.Add(item);
             //}
@@ -234,10 +234,10 @@ namespace BusinessBook.Views.product
             cbx_SaleActive.IsChecked = selectedproduct.saleactive;
             cbx_PurchaseActive.IsChecked = selectedproduct.purchaseactive;
 
-            //var subproducts = db.subproduct.Where(a => a.fk_product_product_subproduct == productid).ToList();
-            var subproducts = this.subproductrepo.getproduct_subproducts(productid);
+            //var productsubs = db.productsub.Where(a => a.fk_product_product_productsub == productid).ToList();
+            var productsubs = this.productsubrepo.getproduct_productsubs(productid);
 
-            foreach (var item in subproducts)
+            foreach (var item in productsubs)
             {
                 dg.Items.Add(item);
             }

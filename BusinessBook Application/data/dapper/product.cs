@@ -30,11 +30,6 @@ namespace BusinessBook.data.dapper
     public class productrepo
     {
         string conn = baserepo.connectionstring;
-        public void  test()
-        {
-            //dapper.product p = new product { barcode = "1231321234234", carrycost = 0, discount = 0, name = "deal 1", purchaseprice = 40,purchaseactive=false, quantity = 0,saleprice=50,saleactive=true };
-            //this.save(p);
-        }
         public List<dapper.product> get() {
             using (var connection = new MySqlConnection(conn))
             {

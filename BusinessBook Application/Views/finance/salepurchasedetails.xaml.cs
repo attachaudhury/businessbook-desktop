@@ -27,10 +27,10 @@ namespace BusinessBook.Views.finance
         public salepurchasedetails(int transid,string type) // type is sale or purchase
         {
             InitializeComponent();
-            var salepurchaseproductrepo = new data.dapper.salepurchaseproductrepo();
+            var productsalepurchaserepo = new data.dapper.productsalepurchaserepo();
        
             transactionid = transid;
-            var productsinsale = salepurchaseproductrepo.getmultiplebytransactionid(transactionid);
+            var productsinsale = productsalepurchaserepo.getmultiplebytransactionid(transactionid);
             foreach (var item in productsinsale)
             {
                 dg.Items.Add(item);
