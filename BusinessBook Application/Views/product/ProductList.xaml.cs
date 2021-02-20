@@ -40,5 +40,10 @@ namespace BusinessBook.Views.product
             data.dapper.product obj = ((FrameworkElement)sender).DataContext as data.dapper.product;
             new ProductAdd(obj.id).Show();
         }
+        public void inventoryreport(object sender, RoutedEventArgs e)
+        {
+            data.dapper.product obj = ((FrameworkElement)sender).DataContext as data.dapper.product;
+            new Views.product.inventoryreport(obj.id).Show();
+        }
     }
 }

@@ -38,7 +38,9 @@ namespace BusinessBook.Views.product
         }
         private void search(object sender, RoutedEventArgs e)
         {
-            var report = new inventoryreportrepo().get(this.productid);
+            var fromdate = fromdate_datepicker.SelectedDate;
+            var todate = tb_todate_datepicker.SelectedDate;
+            var report = new inventoryreportrepo().get(this.productid,fromdate,todate);
             dg.ItemsSource = null;
             dg.ItemsSource = report;
         }

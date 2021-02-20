@@ -22,10 +22,17 @@
                 <telerik:GridViewDataColumn Header="Category" DataMemberBinding="{Binding category}"/>
                 <telerik:GridViewDataColumn Header="saleactive" DataMemberBinding="{Binding saleactive}"/>
                 <telerik:GridViewDataColumn Header="purchaseactive" DataMemberBinding="{Binding purchaseactive}"/>
-                <telerik:GridViewColumn Header="Details" >
+                <telerik:GridViewColumn Header="Edit" >
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
                             <telerik:RadButton Click="edit">Edit</telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+                <telerik:GridViewColumn Header="Report" >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Click="inventoryreport">Report</telerik:RadButton>
                         </DataTemplate>
                     </telerik:GridViewColumn.CellTemplate>
                 </telerik:GridViewColumn>

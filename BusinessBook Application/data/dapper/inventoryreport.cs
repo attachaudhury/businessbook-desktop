@@ -28,15 +28,19 @@ namespace BusinessBook.data.dapper
         public List<dapper.inventoryreport> get(int productid, DateTime? FromDate = null, DateTime? ToDate = null)
         {
             
-            var sql = "select * from inventoryreport where fk_product_in_inventoryreport=" + productid + ";";
+            var sql = "select * from inventoryreport where fk_product_in_inventoryreport=" + productid + "";
             if (FromDate != null)
             {
-                TimeUtils.getStartDate(FromDate);
+                var fromdate = TimeUtils.getStartDate(FromDate);
+                sql += " and date>='"+fromdate.Year+"-"+ fromdate.Month+"-"+ fromdate.Day+ "'";
             }
             if (ToDate != null)
             {
-                TimeUtils.getEndDate(FromDate);
+                var todate = TimeUtils.getEndDate(ToDate);
+                todate = todate.AddDays(1); //add day mean next day at 00:00:00, so it will be todate end
+                sql += " and date<='" + todate.Year + "-" + todate.Month + "-" + todate.Day + "'";
             }
+            sql +=";";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<dapper.inventoryreport>(sql).ToList();

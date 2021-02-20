@@ -109,7 +109,7 @@ namespace BusinessBook.Views.product
                 {
                     selectedproduct.carrycost = Convert.ToInt32(tb_carrycost.Text);
                 }
-                double selectedproductoldinventory = (selectedproduct.quantity==null)? (double)selectedproduct.quantity:0;
+                double selectedproductoldinventory = (selectedproduct.quantity!=null)? (double)selectedproduct.quantity:0;
                 if (tb_quantity.Text != "")
                 {
                     try

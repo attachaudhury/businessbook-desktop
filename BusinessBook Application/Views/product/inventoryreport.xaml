@@ -8,11 +8,11 @@
         Title="Products" Height="Auto" Width="Auto"
         >
     <Grid>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="13,12,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_Name" TabIndex="1" Text="" HorizontalAlignment="Left" Height="25" Margin="59,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
-        <Label Content="Parent" HorizontalAlignment="Left" Margin="188,12,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectedIndex="0" x:Name="parent_combobox" HorizontalAlignment="Left" Margin="235,4,0,0" VerticalAlignment="Top" Width="145" Height="33"/>
-        <Button Content="Save" Click="search" HorizontalAlignment="Right" Margin="0,6,20,0" VerticalAlignment="Top" Width="110" Height="34"/>
+        <Label Content="From Date" HorizontalAlignment="Left" Margin="13,12,0,0" VerticalAlignment="Top"/>
+        <DatePicker  x:Name="fromdate_datepicker"  HorizontalAlignment="Left" Height="25" Margin="75,10,0,0" VerticalAlignment="Top" Width="115"/>
+        <Label Content="To Date" HorizontalAlignment="Left" Margin="210,12,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="tb_todate_datepicker" HorizontalAlignment="Left" Margin="260,4,0,0" VerticalAlignment="Top" Width="145" Height="33"/>
+        <Button Content="Search" Click="search" HorizontalAlignment="Right" Margin="0,6,20,0" VerticalAlignment="Top" Width="110" Height="34"/>
         <telerik:RadGridView x:Name="dg" ShowSearchPanel="True"
                      AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" Margin="0,50,0,0" >
             <telerik:RadGridView.Columns>
