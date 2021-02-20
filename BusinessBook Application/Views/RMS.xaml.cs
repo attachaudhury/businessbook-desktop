@@ -242,6 +242,15 @@ html{overflow:hidden;height:200px;}
             var w = new Views.finance.expences();
             userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
+        private void cashclosingadd(object sender, RoutedEventArgs e)
+        {
+            new Views.finance.cashclosingadd().Show();
+        }
+        private void cashclosing(object sender, RoutedEventArgs e)
+        {
+            var w = new Views.finance.cashclosing();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
+        }
         #endregion menuitem_finance
 
         #region others

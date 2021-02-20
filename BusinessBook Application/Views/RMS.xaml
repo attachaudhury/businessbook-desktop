@@ -35,6 +35,8 @@
                 <MenuItem Header="Purchases" Click="purchasesshow"/>
                 <MenuItem Header="Expences" Click="expencesshow"/>
                 <MenuItem Header="Transactions" Click="transactionsshow"/>
+                <MenuItem Header="Cash closing" Click="cashclosingadd"/>
+                <MenuItem Header="Cash closing report" Click="cashclosing"/>
             </MenuItem>
             <MenuItem Header="Others">
                 <MenuItem Header="Setting" Click="mi_Setting"/>

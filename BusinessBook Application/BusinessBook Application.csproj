@@ -156,6 +156,9 @@
     <Compile Include="Views\finance\accountsbalance.xaml.cs">
       <DependentUpon>accountsbalance.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\finance\cashclosingadd.xaml.cs">
+      <DependentUpon>cashclosingadd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\finance\expences.xaml.cs">
       <DependentUpon>expences.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,9 @@
     </Compile>
     <Compile Include="Views\finance\salespurchases.xaml.cs">
       <DependentUpon>salespurchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\finance\cashclosing.xaml.cs">
+      <DependentUpon>cashclosing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\finance\transactions.xaml.cs">
       <DependentUpon>transactions.xaml</DependentUpon>
@@ -229,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\finance\cashclosingadd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\finance\expences.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -256,6 +266,10 @@
     <Page Include="Views\finance\salespurchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\finance\cashclosing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\finance\transactions.xaml">
       <SubType>Designer</SubType>

@@ -15,39 +15,49 @@ namespace BusinessBook.data.dapper
     public class cashclosing
     {
         public int id { get; set; }
-        public Nullable<double> price { get; set; }
-        public Nullable<double> quantity { get; set; }
-        public Nullable<double> total { get; set; }
-        public Nullable<int> fk_product_in_productsalepurchase { get; set; }
-        public Nullable<int> fk_financetransaction_in_productsalepurchase { get; set; }
+        public Nullable<double> closingbalance { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public Nullable<double> expence { get; set; }
+        public string note { get; set; }
+        public Nullable<double> sale { get; set; }
+        public Nullable<int> fk_user_in_cashclosing { get; set; }
     }
     public class cashclosingextended : cashclosing
     {
-        public string productname { get; set; }
+        public string username { get; set; }
     }
     public class cashclosingrepo
     {
-        string joinselect = "t1.id,t1.price,t1.quantity,t1.total,t1.fk_product_in_productsalepurchase,t1.fk_financetransaction_in_productsalepurchase,t2.name as productname from productsalepurchase t1 join product t2 on t1.fk_product_in_productsalepurchase = t2.id";
+        string joinselect = "t1.id,t1.closingbalance,t1.date,t1.expence,t1.note,t1.fk_user_in_cashclosing,t2.name as username from cashclosing t1 join user t2 on t1.fk_user_in_cashclosing = t2.id";
 
         string conn = baserepo.connectionstring;
         
-        public List<dapper.productsalepurchaseextended> getmultiplebytransactionid(int financetransactionid)
+        public List<dapper.cashclosingextended> get()
         {
-            var sql = "select " + joinselect + " where fk_financetransaction_in_productsalepurchase=" + financetransactionid + ";";
+            var sql = "select " + joinselect + ";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Query<dapper.productsalepurchaseextended>(sql).ToList();
+                var res = connection.Query<dapper.cashclosingextended>(sql).ToList();
                 return res;
             }
         }
-        public dapper.productsalepurchase save(dapper.productsalepurchase productsalepurchase)
+        public dapper.cashclosingextended getlast()
+        {
+            var sql = "select * from cashclosing order by id desc limit 1;";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.cashclosingextended>(sql).FirstOrDefault();
+                return res;
+            }
+        }
+        public dapper.cashclosing save(dapper.cashclosing cashclosingtransaction)
         {
 
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Insert<dapper.productsalepurchase>(productsalepurchase);
-                productsalepurchase.id = (int)res;
-                return productsalepurchase;
+                var res = connection.Insert<dapper.cashclosing>(cashclosingtransaction);
+                cashclosingtransaction.id = (int)res;
+                return cashclosingtransaction;
             }
         }
     }
