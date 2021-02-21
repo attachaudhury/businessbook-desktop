@@ -21,13 +21,14 @@ namespace BusinessBook.Views
     [ComVisible(true)]
     public partial class RMS : Window
     {
-        // data.user loggininuser;
+       
         data.dapper.user loggininuserd;
         List<CategoricalDataPoint> collection = new List<CategoricalDataPoint>();
 
         public RMS()
-        {   
+        {
             InitializeComponent();
+           
             loaccounts();
             TimeUtils.setIntervalInUIThread(() =>
             {
