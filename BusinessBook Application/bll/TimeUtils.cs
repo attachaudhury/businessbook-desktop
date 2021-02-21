@@ -20,5 +20,30 @@ namespace BusinessBook.bll
             DateTime endDate = Convert.ToDateTime(tempEndDate.ToShortDateString() + " 11:59:59 PM");
             return endDate;
         }
+        public static void setTimeout(Func<int> function, int timeout)
+        {
+            Task.Delay(timeout).ContinueWith((Task task) =>
+            {
+                function();
+            });
+        }
+        public static void setIntervalInUIThread(Func<int> function, int timeout)
+        {
+            Task.Delay(timeout).ContinueWith((Task task) =>
+            {
+                //ivoking in UI Thread
+                System.Windows.Application.Current.Dispatcher.Invoke(
+                System.Windows.Threading.DispatcherPriority.Normal, (Action)delegate
+                {
+                    function();
+                    setIntervalInUIThread(() =>
+                    {
+                        function();
+                        return 0;
+                    }, timeout);
+                });
+            });
+            
+        }
     }
 }

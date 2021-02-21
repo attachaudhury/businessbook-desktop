@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using BusinessBook.bll;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using MySql.Data.MySqlClient;
 using System;
@@ -135,7 +136,7 @@ namespace BusinessBook.data.dapper
             }
         }
 
-        public int gettransactionsumbyaccountnames(string[] financeaccountnames)
+        public int gettransactionsumbyaccountnamesandfromtodate(string[] financeaccountnames,DateTime? FromDate, DateTime? ToDate)
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
             List<financeaccount> financeaccounts = financeaccountrepo.getmanybynames(financeaccountnames);
@@ -145,7 +146,19 @@ namespace BusinessBook.data.dapper
                 financeaccountids[i] = financeaccounts[i].id;
             }
             var financeaccountsidarray = baserepo.getWhereInSql(financeaccountids);
-            string sql = "select sum(amount) from financetransaction where fk_financeaccount_in_financetransaction in (" + financeaccountsidarray + ");";
+            string sql = "select sum(amount) from financetransaction where fk_financeaccount_in_financetransaction in (" + financeaccountsidarray + ")";
+            if (FromDate != null)
+            {
+                var fromdate = TimeUtils.getStartDate(FromDate);
+                sql += " and date>='" + fromdate.Year + "-" + fromdate.Month + "-" + fromdate.Day + "'";
+            }
+            if (ToDate != null)
+            {
+                var todate = TimeUtils.getEndDate(ToDate);
+                todate = todate.AddDays(1); //add day mean next day at 00:00:00, so it will be todate end
+                sql += " and date<='" + todate.Year + "-" + todate.Month + "-" + todate.Day + "'";
+            }
+            sql += ";";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.ExecuteScalar<int>(sql);

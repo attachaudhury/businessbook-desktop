@@ -13,6 +13,7 @@ using Telerik.Charting;
 using Telerik.Windows.Documents.Lists;
 using System.Collections.ObjectModel;
 using BusinessBook.data.dapper;
+using System.Windows.Controls;
 
 namespace BusinessBook.Views
 {
@@ -25,17 +26,17 @@ namespace BusinessBook.Views
         List<CategoricalDataPoint> collection = new List<CategoricalDataPoint>();
 
         public RMS()
-        {
-            
+        {   
             InitializeComponent();
-            
-            initpage();
-
+            loaccounts();
+            TimeUtils.setIntervalInUIThread(() =>
+            {
+                loaccounts();
+                return 0;
+            }, 30000);
         }
-        void initpage()
+        void loaccounts()
         {
-
-            
             var userrepo = new userrepo();
             var financetransactionrepo = new financetransactionrepo();
             var sales = 0;
@@ -44,8 +45,7 @@ namespace BusinessBook.Views
             var users = 0;
             if (userutils.loggedinuserd.role == "superadmin" || userutils.loggedinuserd.role == "admin")
             {
-                initchart();
-                sales = -financetransactionrepo.gettransactionsumbyaccountnames(new string[] { "pos sale","sale","service sale"});
+                sales = -financetransactionrepo.gettransactionsumbyaccountnamesandfromtodate(new string[] { "pos sale","sale","service sale"},DateTime.Now,DateTime.Now);
                 customers = userrepo.getbywherein("role", new object[] { "customer" }).Count();
                 vendors = userrepo.getbywherein("role", new object[] { "vendor" }).Count();
                 users = userrepo.getbywherein("role", new object[] { "admin", "user" }).Count();
@@ -124,22 +124,6 @@ html{overflow:hidden;height:200px;}
 </html>";
             webview.NavigateToString(html);
         }
-
-        void initchart()
-        {
-
-            //chartseries.ItemsSource = new ObservableCollection<ChartData>
-            //    {
-            //        new ChartData() { Day = "Monday", Total = 1002},
-            //        new ChartData() { Day = "Tuesday", Total = 3000},
-            //        new ChartData() { Day = "Wednesday", Total = 12000},
-            //        new ChartData() { Day = "Thursday", Total = 8000},
-            //        new ChartData() { Day = "Friday", Total = 9000},
-            //    };
-        }
-        
-
-
 
         #region customer
         private void mi_AddNewCustomer(object sender, RoutedEventArgs e)
