@@ -137,6 +137,7 @@
     <Compile Include="bll\productutils.cs" />
     <Compile Include="bll\purchaseutils.cs" />
     <Compile Include="bll\inventoryutils.cs" />
+    <Compile Include="bll\reportingutils.cs" />
     <Compile Include="bll\saleutils.cs" />
     <Compile Include="bll\TimeUtils.cs" />
     <Compile Include="bll\userutils.cs" />
@@ -206,8 +207,8 @@
     <Compile Include="Views\product\inventoryreport.xaml.cs">
       <DependentUpon>inventoryreport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\reporta.xaml.cs">
-      <DependentUpon>reporta.xaml</DependentUpon>
+    <Compile Include="Views\report\reportviewer.xaml.cs">
+      <DependentUpon>reportviewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\user\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
@@ -304,7 +305,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\reporta.xaml">
+    <Page Include="Views\report\reportviewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,6 +350,9 @@
     </EmbeddedResource>
     <None Include="Business Book_TemporaryKey.pfx" />
     <None Include="data\databaseconnection.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\reporttemplates\invoice.rdl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="other\old software\Release.zip" />
@@ -455,9 +459,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="data\reporttemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

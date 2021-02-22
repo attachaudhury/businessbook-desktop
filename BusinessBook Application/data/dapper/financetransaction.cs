@@ -44,11 +44,12 @@ namespace BusinessBook.data.dapper
                 return res;
             }
         }
-        public dapper.financetransaction get(int id)
+        public dapper.financetransactionextended get(int id)
         {
+            string sql = "select " + joinselect + " where t1.id="+id+";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Get<dapper.financetransaction>(id);
+                var res = connection.Query<financetransactionextended>(sql).FirstOrDefault();
                 return res;
             }
         }

@@ -30,7 +30,6 @@ namespace BusinessBook
     {
         public MainWindow()
         {
-            new Views.reporta().Show();
             var dbresult = baserepo.initdatabase();
             if (!dbresult)
             {
@@ -58,6 +57,7 @@ namespace BusinessBook
 
             InitializeComponent();
             tb_Name.Focus();
+
 
         }
 
