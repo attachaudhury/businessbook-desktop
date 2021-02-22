@@ -25,6 +25,13 @@
                         </DataTemplate>
                     </telerik:GridViewColumn.CellTemplate>
                 </telerik:GridViewColumn>
+                <telerik:GridViewColumn Header="Report" >
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Click="report">Report</telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
     </Grid>

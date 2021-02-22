@@ -142,7 +142,7 @@
     <Compile Include="bll\TimeUtils.cs" />
     <Compile Include="bll\userutils.cs" />
     <Compile Include="data\dapper\baserepo.cs" />
-    <Compile Include="data\dapper\inventoryreport.cs" />
+    <Compile Include="data\dapper\inventorylog.cs" />
     <Compile Include="data\dapper\financetransaction.cs" />
     <Compile Include="data\dapper\financeaccount.cs" />
     <Compile Include="data\dapper\cashclosing.cs" />
@@ -204,8 +204,8 @@
     <Compile Include="Views\finance\pos.xaml.cs">
       <DependentUpon>pos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\product\inventoryreport.xaml.cs">
-      <DependentUpon>inventoryreport.xaml</DependentUpon>
+    <Compile Include="Views\product\inventoryrlog.xaml.cs">
+      <DependentUpon>inventoryrlog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\report\reportviewer.xaml.cs">
       <DependentUpon>reportviewer.xaml</DependentUpon>
@@ -301,7 +301,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\product\inventoryreport.xaml">
+    <Page Include="Views\product\inventoryrlog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

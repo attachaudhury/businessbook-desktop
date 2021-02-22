@@ -33,7 +33,7 @@ namespace BusinessBook.bll
                 new reportviewer("data/reporttemplates/invoice.rdl", parms,dss).Show();
             }
         }
-        public static DataTable ToDataTable<T>(List<T> items)
+        private static DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
             PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);

@@ -23,8 +23,8 @@ namespace BusinessBook.bll
             }
         }
 
-        //inventoryreportcomment argument for inserting value in inventory report to check wheather it is sold as it is on as a subproduct
-        private static void recursiveupdateinventoryonsale(int productid,double productquantity, int saleid,string inventoryreportcomment)
+        //inventorylogcomment argument for inserting value in inventory report to check wheather it is sold as it is on as a subproduct
+        private static void recursiveupdateinventoryonsale(int productid,double productquantity, int saleid,string inventorylogcomment)
         {
             var productrepo = new productrepo();
             data.dapper.product p = productrepo.get(productid);
@@ -35,22 +35,22 @@ namespace BusinessBook.bll
                 // if products has no sub product. then its inventory will be updated, it is better approach for handling inventory of deal in case of  purchase purchase
                 p.quantity = p.quantity - productquantity;
                 productrepo.update(p);
-                updateinventoryreportonsale(productid, productquantity, saleid, inventoryreportcomment);
+                updateinventorylogonsale(productid, productquantity, saleid, inventorylogcomment);
             }
             foreach (var productsub in productsubs)
             {
                 recursiveupdateinventoryonsale(productsub.fk_product_sub_in_productsub, productquantity * productsub.quantity,saleid,", sold as sub of "+p.name);
             }
         }
-        private static void updateinventoryreportonsale(int productid, double productquantity, int saleid,string comment)
+        private static void updateinventorylogonsale(int productid, double productquantity, int saleid,string comment)
         {
-            var inventoryreportrepo = new inventoryreportrepo();
-            data.dapper.inventoryreport ir = new inventoryreport();
+            var inventorylogrepo = new inventorylogrepo();
+            data.dapper.inventorylog ir = new inventorylog();
             ir.quantity = -productquantity;
             ir.date = DateTime.Now;
-            ir.fk_product_in_inventoryreport = productid;
+            ir.fk_product_in_inventorylog = productid;
             ir.note = "Detucted inventory on sale id " + saleid+comment;
-            inventoryreportrepo.save(ir);
+            inventorylogrepo.save(ir);
         }
 
         public static void updateInventoryonpurchase(List<productsaleorpurchaseviewmodel> purchaseList,int purchaseid)
@@ -60,8 +60,8 @@ namespace BusinessBook.bll
                 recursiveupdateinventoryonpurchase(item.id, item.quantity, purchaseid,"");
             }
         }
-        //inventoryreportcomment argument for inserting value in inventory report to check wheather it is sold as it is on as a subproduct
-        private static void recursiveupdateinventoryonpurchase(int productid, double productquantity, int purchaseid, string inventoryreportcomment)
+        //inventorylogcomment argument for inserting value in inventory report to check wheather it is sold as it is on as a subproduct
+        private static void recursiveupdateinventoryonpurchase(int productid, double productquantity, int purchaseid, string inventorylogcomment)
         {
             var productrepo = new productrepo();
             data.dapper.product p = productrepo.get(productid);
@@ -72,47 +72,47 @@ namespace BusinessBook.bll
                 // if products has no sub product. then its inventory will be updated, it is better approach for handling inventory of deal in case of  purchase purchase
                 p.quantity = p.quantity + productquantity;
                 productrepo.update(p);
-                updateinventoryreportonpurchase(productid, productquantity, purchaseid, inventoryreportcomment);
+                updateinventorylogonpurchase(productid, productquantity, purchaseid, inventorylogcomment);
             }
             foreach (var productsub in productsubs)
             {
                 recursiveupdateinventoryonpurchase(productsub.fk_product_sub_in_productsub, productquantity * productsub.quantity, purchaseid, ", purchased as sub of " + p.name);
             }
         }
-        private static void updateinventoryreportonpurchase(int productid, double productquantity, int purchaseid, string inventoryreportcomment)
+        private static void updateinventorylogonpurchase(int productid, double productquantity, int purchaseid, string inventorylogcomment)
         {
-            var inventoryreportrepo = new inventoryreportrepo();
-            data.dapper.inventoryreport ir = new inventoryreport();
+            var inventorylogrepo = new inventorylogrepo();
+            data.dapper.inventorylog ir = new inventorylog();
             ir.quantity = productquantity;
             ir.date = DateTime.Now;
-            ir.fk_product_in_inventoryreport = productid;
-            ir.note = "Added inventory on purchase id " + purchaseid+inventoryreportcomment;
-            inventoryreportrepo.save(ir);
+            ir.fk_product_in_inventorylog = productid;
+            ir.note = "Added inventory on purchase id " + purchaseid+inventorylogcomment;
+            inventorylogrepo.save(ir);
         }
-        public static void updateinventoryreportonproductcreate(data.dapper.product p)
+        public static void updateinventorylogonproductcreate(data.dapper.product p)
         {
             if (p.quantity != 0)
             {
-                var inventoryreportrepo = new inventoryreportrepo();
-                data.dapper.inventoryreport ir = new inventoryreport();
+                var inventorylogrepo = new inventorylogrepo();
+                data.dapper.inventorylog ir = new inventorylog();
                 ir.quantity = p.quantity;
                 ir.date = DateTime.Now;
-                ir.fk_product_in_inventoryreport = p.id;
+                ir.fk_product_in_inventorylog = p.id;
                 ir.note = "Added inventory on product create";
-                inventoryreportrepo.save(ir);
+                inventorylogrepo.save(ir);
             }
         }
 
-        public static void updateinventoryreportonproductupdate(int productid, double newinventory, double oldinventory)
+        public static void updateinventorylogonproductupdate(int productid, double newinventory, double oldinventory)
         {
             if (newinventory==oldinventory)
             {
                 return;
             }
-            var inventoryreportrepo = new inventoryreportrepo();
-            data.dapper.inventoryreport ir = new inventoryreport();
+            var inventorylogrepo = new inventorylogrepo();
+            data.dapper.inventorylog ir = new inventorylog();
             ir.date = DateTime.Now;
-            ir.fk_product_in_inventoryreport = productid;
+            ir.fk_product_in_inventorylog = productid;
             ir.quantity = newinventory- oldinventory;
             if (newinventory > oldinventory)
             {
@@ -122,7 +122,7 @@ namespace BusinessBook.bll
             {
                 ir.note = "Detucted inventory on product update";
             }
-            inventoryreportrepo.save(ir);
+            inventorylogrepo.save(ir);
         }
     }
 }

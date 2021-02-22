@@ -32,7 +32,7 @@
                 <telerik:GridViewColumn Header="Report" >
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <telerik:RadButton Click="inventoryreport">Report</telerik:RadButton>
+                            <telerik:RadButton Click="inventorylog">Inventory Log</telerik:RadButton>
                         </DataTemplate>
                     </telerik:GridViewColumn.CellTemplate>
                 </telerik:GridViewColumn>

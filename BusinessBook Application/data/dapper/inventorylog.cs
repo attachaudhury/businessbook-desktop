@@ -11,24 +11,24 @@ using System.Threading.Tasks;
 
 namespace BusinessBook.data.dapper
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("inventoryreport")]
+    [System.ComponentModel.DataAnnotations.Schema.Table("inventorylog")]
 
-    public class inventoryreport
+    public class inventorylog
     {
         public int id { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public string note { get; set; }
         public Nullable<double> quantity { get; set; }
-        public Nullable<int> fk_product_in_inventoryreport { get; set; }
+        public Nullable<int> fk_product_in_inventorylog { get; set; }
     }
-    public class inventoryreportrepo
+    public class inventorylogrepo
     {
         string conn = baserepo.connectionstring;
 
-        public List<dapper.inventoryreport> get(int productid, DateTime? FromDate = null, DateTime? ToDate = null)
+        public List<dapper.inventorylog> get(int productid, DateTime? FromDate = null, DateTime? ToDate = null)
         {
             
-            var sql = "select * from inventoryreport where fk_product_in_inventoryreport=" + productid + "";
+            var sql = "select * from inventorylog where fk_product_in_inventorylog=" + productid + "";
             if (FromDate != null)
             {
                 var fromdate = TimeUtils.getStartDate(FromDate);
@@ -43,15 +43,15 @@ namespace BusinessBook.data.dapper
             sql +=";";
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Query<dapper.inventoryreport>(sql).ToList();
+                var res = connection.Query<dapper.inventorylog>(sql).ToList();
                 return res;
             }
         }
-        public bool save(dapper.inventoryreport product)
+        public bool save(dapper.inventorylog product)
         {
             using (var connection = new MySqlConnection(conn))
             {
-                var res = connection.Insert<dapper.inventoryreport>(product);
+                var res = connection.Insert<dapper.inventorylog>(product);
                 return true;
             }
         }

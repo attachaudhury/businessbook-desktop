@@ -20,10 +20,10 @@ namespace BusinessBook.Views.product
     /// <summary>
     /// Interaction logic for ProductList.xaml
     /// </summary>
-    public partial class inventoryreport : Window
+    public partial class inventorylog : Window
     {
         int productid;
-        public inventoryreport(int productid)
+        public inventorylog(int productid)
         {
             this.productid = productid;
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace BusinessBook.Views.product
         }
         private void initFormOperations()
         {
-            var report = new inventoryreportrepo().get(this.productid);
+            var report = new inventorylogrepo().get(this.productid);
             dg.ItemsSource = null;
             dg.ItemsSource = report;
             UpdateLayout();
@@ -40,7 +40,7 @@ namespace BusinessBook.Views.product
         {
             var fromdate = fromdate_datepicker.SelectedDate;
             var todate = tb_todate_datepicker.SelectedDate;
-            var report = new inventoryreportrepo().get(this.productid,fromdate,todate);
+            var report = new inventorylogrepo().get(this.productid,fromdate,todate);
             dg.ItemsSource = null;
             dg.ItemsSource = report;
         }

@@ -120,12 +120,12 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `address`, `name`, `password`, `username`, `phone`, `phone2`, `role`) VALUES
 (1, NULL, 'admin', 'admin@123', 'admin', '00000000000', NULL, 'admin');
 
-CREATE TABLE `inventoryreport` (
+CREATE TABLE `inventorylog` (
   `id` int(11) NOT NULL,
   `date` datetime DEFAULT CURRENT_TIMESTAMP,
   `note` varchar(200) DEFAULT NULL,
   `quantity` float DEFAULT NULL,
-  `fk_product_in_inventoryreport` int(11) DEFAULT NULL
+  `fk_product_in_inventorylog` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /* quantity will be plus in case of purchase and minus in case of sale */
 
@@ -172,9 +172,9 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
   
   
-ALTER TABLE `inventoryreport`
+ALTER TABLE `inventorylog`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_product_in_inventoryreport` (`fk_product_in_inventoryreport`);
+  ADD KEY `fk_product_in_inventorylog` (`fk_product_in_inventorylog`);
   
   
 ALTER TABLE `cashclosing`
@@ -203,7 +203,7 @@ ALTER TABLE `softwaresetting`
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
   
-ALTER TABLE `inventoryreport`
+ALTER TABLE `inventorylog`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
   
 ALTER TABLE `cashclosing`
@@ -226,8 +226,8 @@ ALTER TABLE `productsalepurchase`
   ADD CONSTRAINT `fk_financetransaction_in_productsalepurchase` FOREIGN KEY (`fk_financetransaction_in_productsalepurchase`) REFERENCES `financetransaction` (`id`),
   ADD CONSTRAINT `fk_product_in_productsalepurchase` FOREIGN KEY (`fk_product_in_productsalepurchase`) REFERENCES `product` (`id`);
 
-ALTER TABLE `inventoryreport`
-  ADD CONSTRAINT `fk_product_in_inventoryreport` FOREIGN KEY (`fk_product_in_inventoryreport`) REFERENCES `product` (`id`);
+ALTER TABLE `inventorylog`
+  ADD CONSTRAINT `fk_product_in_inventorylog` FOREIGN KEY (`fk_product_in_inventorylog`) REFERENCES `product` (`id`);
   
 ALTER TABLE `cashclosing`
   ADD CONSTRAINT `fk_user_in_cashclosing` FOREIGN KEY (`fk_user_in_cashclosing`) REFERENCES `user` (`id`);

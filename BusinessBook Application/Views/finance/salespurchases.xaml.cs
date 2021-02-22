@@ -1,4 +1,5 @@
 ﻿
+using BusinessBook.bll;
 using BusinessBook.data;
 using BusinessBook.data.dapper;
 using System;
@@ -51,6 +52,13 @@ namespace BusinessBook.Views.finance
         {
             data.dapper.financetransaction obj = ((FrameworkElement)sender).DataContext as data.dapper.financetransaction;
             new salepurchasedetails(obj.id, listtype).Show();
+        }
+        public void report(object sender, RoutedEventArgs e)
+        {
+            
+            data.dapper.financetransaction obj = ((FrameworkElement)sender).DataContext as data.dapper.financetransaction;
+            
+            reportingutils.prepareinvoicereport(obj.id);
         }
     }
 }

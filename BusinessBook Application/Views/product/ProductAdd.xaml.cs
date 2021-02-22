@@ -88,7 +88,7 @@ namespace BusinessBook.Views.product
                 var savedproductresult = productrepo.save(r);
                 if (savedproductresult)
                 {
-                    inventoryutils.updateinventoryreportonproductcreate(r);
+                    inventoryutils.updateinventorylogonproductcreate(r);
                     MessageBox.Show("Product saved", "Information");
                     Close();
                     new ProductAdd().Show();
@@ -126,7 +126,7 @@ namespace BusinessBook.Views.product
                 var updateproductresult = this.productrepo.update(selectedproduct);
                 if (updateproductresult)
                 {
-                    inventoryutils.updateinventoryreportonproductupdate(selectedproduct.id,(double)selectedproduct.quantity, selectedproductoldinventory);
+                    inventoryutils.updateinventorylogonproductupdate(selectedproduct.id,(double)selectedproduct.quantity, selectedproductoldinventory);
                     MessageBox.Show("product update", "Information");
                     Close();
                     new ProductAdd(selectedproduct.id).Show();
