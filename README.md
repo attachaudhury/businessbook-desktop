@@ -11,9 +11,11 @@ Install mysql database, then download the [businessbook-desktop installer](https
 
 * All standard features for Point of sales
 * Inventory
+* Accounting
 * Customers and Vendors Ledger
 * Multiple users
 * Invoice printing
+* Reporting
 * Send Branded SMS from software
 * No Data limits
 * Easy to learn and use
@@ -21,6 +23,13 @@ Install mysql database, then download the [businessbook-desktop installer](https
 * 100% free and open source
 * And much more
 
+### Some Sreenshots
+
+![login](screenshots/1.png)
+![dashboard](screenshots/2.png)
+![sales](screenshots/3.png)
+![product](screenshots/4.png)
+![user](screenshots/5.png)
 
 ### Requirements
 * .Net framework >= 4.5
