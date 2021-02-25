@@ -118,7 +118,7 @@ namespace BusinessBook.data.dapper
         public dynamic getaccountsbalances()
         {
             financeaccountrepo financeaccountrepo = new financeaccountrepo();
-            string sql = " select t1.total,t1.id,t2.name from (select count(amount) total,fk_financeaccount_in_financetransaction id FROM financetransaction group by fk_financeaccount_in_financetransaction) as t1 join financeaccount t2 on t1.id = t2.id;";
+            string sql = " select t1.total,t1.id,t2.name from (select sum(amount) total,fk_financeaccount_in_financetransaction id FROM financetransaction group by fk_financeaccount_in_financetransaction) as t1 join financeaccount t2 on t1.id = t2.id;";
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Query<financeaccountbalance>(sql);
