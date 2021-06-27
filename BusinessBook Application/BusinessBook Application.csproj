@@ -207,6 +207,9 @@
     <Compile Include="Views\product\inventoryrlog.xaml.cs">
       <DependentUpon>inventoryrlog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\product\InventoryValueReport.xaml.cs">
+      <DependentUpon>InventoryValueReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\report\reportviewer.xaml.cs">
       <DependentUpon>reportviewer.xaml</DependentUpon>
     </Compile>
@@ -302,6 +305,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\product\inventoryrlog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\product\InventoryValueReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

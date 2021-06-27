@@ -181,6 +181,11 @@ html{overflow:hidden;height:200px;}
         {
             new ProductList().Show();
         }
+        private void product_inventoryValueReport(object sender, RoutedEventArgs e)
+        {
+            var w = new  InventoryValueReport();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
+        }
         #endregion menuitem_products
 
         #region menuitem_finance

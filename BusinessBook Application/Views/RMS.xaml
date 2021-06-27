@@ -23,6 +23,7 @@
             <MenuItem Header="Products">
                 <MenuItem Header="Add Product" Click="productadd"/>
                 <MenuItem Header="All Products" Click="products"/>
+                <MenuItem Header="Inventory Value Report" Click="product_inventoryValueReport"/>
             </MenuItem>
 
             <MenuItem Header="Finances">
