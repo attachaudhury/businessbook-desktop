@@ -8,20 +8,20 @@
         Title="Products" Height="Auto" Width="Auto"
         >
     <Grid>
-        <telerik:RadGridView x:Name="dg_ProductList" ShowSearchPanel="True"
+        <telerik:RadGridView x:Name="dg_ProductList" RowEditEnded="dg_roweditended"  ShowSearchPanel="True"
                      AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}"/>
                 <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}"/>
-                <telerik:GridViewDataColumn Header="Sale Price" DataMemberBinding="{Binding saleprice}"/>
-                <telerik:GridViewDataColumn Header="Purchase Price" DataMemberBinding="{Binding purchaseprice}"/>
-                <telerik:GridViewDataColumn Header="Discount" DataMemberBinding="{Binding discount}"/>
-                <telerik:GridViewDataColumn Header="Carrycost" DataMemberBinding="{Binding carrycost}"/>
                 <telerik:GridViewDataColumn Header="Barcode" DataMemberBinding="{Binding barcode}"/>
-                <telerik:GridViewDataColumn Header="Quantity" DataMemberBinding="{Binding quantity}"/>
                 <telerik:GridViewDataColumn Header="Category" DataMemberBinding="{Binding category}"/>
-                <telerik:GridViewDataColumn Header="saleactive" DataMemberBinding="{Binding saleactive}"/>
-                <telerik:GridViewDataColumn Header="purchaseactive" DataMemberBinding="{Binding purchaseactive}"/>
+                <telerik:GridViewDataColumn Header="Quantity" DataMemberBinding="{Binding quantity}"/>
+                <telerik:GridViewDataColumn Header="Sale Active" DataMemberBinding="{Binding saleactive}"/>
+                <telerik:GridViewDataColumn Header="Purchase Active" DataMemberBinding="{Binding purchaseactive}"/>
+                <telerik:GridViewDataColumn Header="Purchase Price" DataMemberBinding="{Binding purchaseprice}"/>
+                <telerik:GridViewDataColumn Header="Carrycost" DataMemberBinding="{Binding carrycost}"/>
+                <telerik:GridViewDataColumn Header="Sale Price" DataMemberBinding="{Binding saleprice}"/>
+                <telerik:GridViewDataColumn Header="Discount" DataMemberBinding="{Binding discount}"/>
                 <telerik:GridViewColumn Header="Edit" >
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
