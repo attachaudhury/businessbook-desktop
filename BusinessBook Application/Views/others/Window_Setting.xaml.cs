@@ -24,12 +24,13 @@ namespace BusinessBook.Views.others
         public Window_Setting()
         {
             InitializeComponent();
-            tb_PageWidth.Text = Convert.ToString(MyPrinterSetting.pageWidth) ;
-            tb_MarginLeft.Text = Convert.ToString(MyPrinterSetting.marginLeft);
-            tb_Title.Text = MyPrinterSetting.Title;
-            tb_SubTitle.Text = MyPrinterSetting.SubTitle;
-            tb_Footer.Text = MyPrinterSetting.Footer;
-            tb_Reciptlineheight.Text = Convert.ToString(MyPrinterSetting.Reciptlineheight);
+            tb_PageWidth.Text = Convert.ToString(AppSetting.PrinterPageWidth) ;
+            tb_MarginLeft.Text = Convert.ToString(AppSetting.PrinterMarginLeft);
+            tb_Title.Text = AppSetting.Title;
+            tb_SubTitle.Text = AppSetting.SubTitle;
+            tb_Footer.Text = AppSetting.Footer;
+            tb_Reciptlineheight.Text = Convert.ToString(AppSetting.ReciptlineHeight);
+            BarcodeMode_cb.IsChecked = AppSetting.BarcodeMode;
         }
 
         private void btn_Save(object sender, RoutedEventArgs e)
@@ -42,14 +43,20 @@ namespace BusinessBook.Views.others
                 string subTitle = tb_SubTitle.Text;
                 string footer = tb_Footer.Text;
                 int Reciptlineheight = Convert.ToInt32(tb_Reciptlineheight.Text);
-                MyPrinterSetting.saveSettings(pageWidth, marginLeft, title, subTitle, footer, Reciptlineheight);
-                MessageBox.Show("Setting Saved","Success");
+                bool barcodeModel = (bool)BarcodeMode_cb.IsChecked;
+                AppSetting.saveSettings(pageWidth, marginLeft, title, subTitle, footer, Reciptlineheight, barcodeModel);
+                MessageBox.Show("Saved, Restart application to apply setting","Success");
                 
             }
             catch
             {
 
             }
+        }
+
+        private void BarcodeMode_cb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

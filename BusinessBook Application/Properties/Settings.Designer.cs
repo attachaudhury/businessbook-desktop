@@ -12,7 +12,7 @@ namespace BusinessBook.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -74,12 +74,12 @@ namespace BusinessBook.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int Reciptlineheight {
+        public int ReciptlineHeight {
             get {
-                return ((int)(this["Reciptlineheight"]));
+                return ((int)(this["ReciptlineHeight"]));
             }
             set {
-                this["Reciptlineheight"] = value;
+                this["ReciptlineHeight"] = value;
             }
         }
         
@@ -104,6 +104,18 @@ namespace BusinessBook.Properties {
             }
             set {
                 this["Footer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BarcodeMode {
+            get {
+                return ((bool)(this["BarcodeMode"]));
+            }
+            set {
+                this["BarcodeMode"] = value;
             }
         }
     }

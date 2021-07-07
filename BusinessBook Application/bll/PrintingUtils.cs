@@ -30,7 +30,7 @@ namespace BusinessBook.bll
             FlowDocument fd = new FlowDocument();
             //fd.PageWidth = 260;
             fd.PageWidth = Settings.Default.PrinterPageWidth;
-            fd.LineHeight = Settings.Default.Reciptlineheight;
+            fd.LineHeight = Settings.Default.ReciptlineHeight;
             fd.FontFamily = new FontFamily("Arial");
 
             //fd.PagePadding = new Thickness(40, 0, 0, 0);

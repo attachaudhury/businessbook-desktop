@@ -129,7 +129,7 @@
     </ApplicationDefinition>
     <Compile Include="bll\BooleanToVisibilityConverter.cs" />
     <Compile Include="bll\financeutils.cs" />
-    <Compile Include="bll\MyPrinterSetting.cs" />
+    <Compile Include="bll\AppSetting.cs" />
     <Compile Include="bll\networkutils.cs" />
     <Compile Include="bll\otherutils.cs" />
     <Compile Include="bll\printing.cs" />

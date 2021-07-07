@@ -16,6 +16,8 @@
      FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <TextBox Name="tb_Search" PreviewKeyDown="tb_Search_PreviewKeyDown" TextChanged="tb_Search_TextChanged" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+        <CheckBox Content="Brcd" Name="BarcodeMode_cb" HorizontalAlignment="Left" Height="25" Margin="376,10,0,0" VerticalAlignment="Top"/>
+
         <ListView HorizontalAlignment="Left" Visibility="Hidden" Name="lv_SearchFoodItem" Height="200" Margin="8,40,0,0" VerticalAlignment="Top" Width="357">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">

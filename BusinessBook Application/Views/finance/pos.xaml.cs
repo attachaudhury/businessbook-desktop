@@ -31,7 +31,6 @@ namespace BusinessBook.Views.finance
         List<productsaleorpurchaseviewmodel> cart = new List<productsaleorpurchaseviewmodel>();
         data.dapper.user customer = null;
         productrepo productrepo = new productrepo();
-
         public pos()
         {
             InitializeComponent();
@@ -41,6 +40,7 @@ namespace BusinessBook.Views.finance
         void initFormOperations()
         {
             //var db = new dbctx();
+            BarcodeMode_cb.IsChecked = AppSetting.BarcodeMode;
             var products = this.productrepo.get();
             mappedproducts = productutils.mapproducttoproductsalemodel(products);
             tb_Search.Focus();
