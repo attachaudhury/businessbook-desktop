@@ -10,6 +10,7 @@ namespace BusinessBook.data.viewmodel
     {
         public int id { set; get; }
         public string name { set; get; }
+        public string barcode { set; get; }
         public double price { set; get; }
         public double quantity { set; get; }
         public double total { set; get; }

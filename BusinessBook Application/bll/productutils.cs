@@ -16,6 +16,7 @@ namespace BusinessBook.bll
                 productsaleorpurchaseviewmodel a = new productsaleorpurchaseviewmodel();
                 a.id = item.id;
                 a.name = item.name;
+                a.barcode = item.barcode;
                 a.quantity = 1;
                 a.price = 0;
                 if (item.saleprice != null) {
@@ -38,6 +39,7 @@ namespace BusinessBook.bll
                 productsaleorpurchaseviewmodel a = new productsaleorpurchaseviewmodel();
                 a.id = item.id;
                 a.name = item.name;
+                a.barcode = item.barcode;
                 a.quantity = 1;
                 a.price = 0;
                 if (item.purchaseprice != null)

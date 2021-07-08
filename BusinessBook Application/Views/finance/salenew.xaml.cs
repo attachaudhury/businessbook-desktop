@@ -29,7 +29,7 @@ namespace BusinessBook.Views.finance
         List<productsaleorpurchaseviewmodel> cart = new List<productsaleorpurchaseviewmodel>();
         productrepo productrepo = new productrepo();
         userrepo userrepo = new userrepo();
-
+        productsaleorpurchaseviewmodel lastInsertedProductInCart = null;
         public salenew()
         {
             InitializeComponent();
@@ -38,9 +38,26 @@ namespace BusinessBook.Views.finance
 
         void initFormOperations()
         {
+            BarcodeMode_cb.IsChecked = AppSetting.BarcodeMode;
+            if ((bool)BarcodeMode_cb.IsChecked)
+            {
+                tb_Search.Text = "";
+                tb_Search.Visibility = Visibility.Hidden;
+                tb_Search_Barcode.Text = "";
+                lv_SearchFoodItem.Visibility = Visibility.Hidden;
+                tb_Search_Barcode.Visibility = Visibility.Visible;
+                tb_Search_Barcode.Focus();
+            }
+            else
+            {
+                tb_Search.Text = "";
+                tb_Search.Visibility = Visibility.Visible;
+                tb_Search.Focus();
+                tb_Search_Barcode.Text = "";
+                tb_Search_Barcode.Visibility = Visibility.Hidden;
+            }
             var products = this.productrepo.get();
             mappedproducts = productutils.mapproducttoproductsalemodel(products);
-            tb_Search.Focus();
             cart_dg.ItemsSource = cart;
             var customers = userrepo.getbywherein("role",new dynamic[] { "customer" });
             customer_combobox.ItemsSource = customers;
@@ -58,6 +75,7 @@ namespace BusinessBook.Views.finance
         }
         void addItem_To_cart(productsaleorpurchaseviewmodel item)
         {
+            lastInsertedProductInCart = item;
             foreach (productsaleorpurchaseviewmodel oldItem in cart)
             {
                 if (item.id == oldItem.id)
@@ -68,6 +86,7 @@ namespace BusinessBook.Views.finance
                     return;
                 }
             }
+            item.quantity = 1;
             cart.Add(item);
             refreshCartAndTotal();
         }
@@ -75,7 +94,8 @@ namespace BusinessBook.Views.finance
         private void removeItemFromCart_btn_click(object sender, RoutedEventArgs e)
         {
             productsaleorpurchaseviewmodel obj = ((FrameworkElement)sender).DataContext as productsaleorpurchaseviewmodel;
-
+            cart_dg.SelectedItem = null;
+            lastInsertedProductInCart = null;
             foreach (productsaleorpurchaseviewmodel oldItem in cart)
             {
                 if (obj.id == oldItem.id)
@@ -106,6 +126,7 @@ namespace BusinessBook.Views.finance
 
         private void refreshCartAndTotal()
         {
+            cart_dg.SelectedItem = lastInsertedProductInCart;
             cart_dg.Items.Refresh();
             double totalBill1 = 0;
             foreach (productsaleorpurchaseviewmodel item1 in cart)
@@ -138,13 +159,13 @@ namespace BusinessBook.Views.finance
                 lv_SearchFoodItem.SelectedIndex = index;
                 return;
             }
-            if (e.Key == Key.Up)
+            else if (e.Key == Key.Up)
             {
                 int index = lv_SearchFoodItem.SelectedIndex - 1;
                 lv_SearchFoodItem.SelectedIndex = index;
                 return;
             }
-            if (e.Key == Key.Enter)
+            else if (e.Key == Key.Enter)
             {
                 if (lv_SearchFoodItem.SelectedItem != null)
                 {
@@ -160,6 +181,49 @@ namespace BusinessBook.Views.finance
         private void btn_doSale(object sender, RoutedEventArgs e)
         {
             doneSale();
+        }
+        private void tb_Search_Barcode_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (tb_Search_Barcode.Text != "")
+                {
+                    productsaleorpurchaseviewmodel product = mappedproducts.Where(a => a.barcode == tb_Search_Barcode.Text).FirstOrDefault();
+                    if (product != null)
+                    {
+                        addItem_To_cart(product);
+                    }
+                    tb_Search_Barcode.Text = "";
+                }
+                else
+                {
+                    if (lastInsertedProductInCart != null)
+                    {
+                        addItem_To_cart(lastInsertedProductInCart);
+                    }
+                }
+            }
+
+        }
+
+        private void BarcodeMode_cb_Checked(object sender, RoutedEventArgs e)
+        {
+            tb_Search.Text = "";
+            tb_Search.Visibility = Visibility.Hidden;
+            tb_Search_Barcode.Text = "";
+            lv_SearchFoodItem.Visibility = Visibility.Hidden;
+            tb_Search_Barcode.Visibility = Visibility.Visible;
+            tb_Search_Barcode.Focus();
+
+        }
+
+        private void BarcodeMode_cb_UnChecked(object sender, RoutedEventArgs e)
+        {
+            tb_Search.Text = "";
+            tb_Search.Visibility = Visibility.Visible;
+            tb_Search.Focus();
+            tb_Search_Barcode.Text = "";
+            tb_Search_Barcode.Visibility = Visibility.Hidden;
         }
 
         void doneSale()
