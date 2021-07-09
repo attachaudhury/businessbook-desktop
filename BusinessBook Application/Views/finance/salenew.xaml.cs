@@ -141,7 +141,7 @@ namespace BusinessBook.Views.finance
             if (tb_Search.Text != "")
             {
                 string s = tb_Search.Text;
-                List<productsaleorpurchaseviewmodel> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).Take(7).ToList();
+                List<productsaleorpurchaseviewmodel> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).Take(6).ToList();
                 lv_SearchFoodItem.ItemsSource = null;
                 lv_SearchFoodItem.ItemsSource = productList;
                 lv_SearchFoodItem.Visibility = Visibility.Visible;
@@ -180,6 +180,10 @@ namespace BusinessBook.Views.finance
                     tb_Search.Text = "";
                     lv_SearchFoodItem.Visibility = Visibility.Hidden;
                 }
+            }
+            else if (e.Key == Key.End)
+            {
+                doneSale();
             }
 
         }
