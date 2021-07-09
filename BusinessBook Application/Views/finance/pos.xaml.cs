@@ -156,7 +156,7 @@ namespace BusinessBook.Views.finance
             if (tb_Search.Text != "")
             {
                 string s = tb_Search.Text;
-                List<productsaleorpurchaseviewmodel> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).ToList();
+                List<productsaleorpurchaseviewmodel> productList = mappedproducts.Where(a => a.name.ToLower().Contains(s.ToLower())).Take(7).ToList();
                 lv_SearchFoodItem.ItemsSource = null;
                 lv_SearchFoodItem.ItemsSource = productList;
                 lv_SearchFoodItem.Visibility = Visibility.Visible;
@@ -171,13 +171,19 @@ namespace BusinessBook.Views.finance
             if (e.Key == Key.Down)
             {
                 int index = lv_SearchFoodItem.SelectedIndex + 1;
-                lv_SearchFoodItem.SelectedIndex = index;
+                if (index < lv_SearchFoodItem.Items.Count) 
+                {
+                    lv_SearchFoodItem.SelectedIndex = index;
+                }
                 return;
             }
             else if (e.Key == Key.Up)
             {
                 int index = lv_SearchFoodItem.SelectedIndex - 1;
-                lv_SearchFoodItem.SelectedIndex = index;
+                if (index > -1)
+                {
+                    lv_SearchFoodItem.SelectedIndex = index;
+                }
                 return;
             }
             else if (e.Key == Key.Enter)

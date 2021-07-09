@@ -379,6 +379,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="data\bbdb-sqlserver.sql" />
+    <Content Include="other\backups\bbdb_usman_pos_products-10-7-2021.sql" />
+    <Content Include="other\backups\quickpos_usman_pos_backup-10-07-2021.sql" />
     <Content Include="other\old software\Old Demo Data.sql" />
     <Content Include="other\old software\Old.sql" />
   </ItemGroup>

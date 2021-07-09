@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.finance"
         mc:Ignorable="d"
-        Title="POS Terminal"  Height="596.27" Width="944.525"
+        Title="Legered Sale Terminal"
+        Height="600" Width="1050"
+        WindowStartupLocation="CenterOwner"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
@@ -40,10 +42,25 @@
         <CheckBox IsChecked="False" x:Name="ledger_checkbox" Content="Ledger" HorizontalAlignment="Left" Margin="323,476,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="paying_textbox" FontSize="30" HorizontalContentAlignment="Right" TabIndex="1" HorizontalAlignment="Left" Height="46" Margin="21,494,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
 
-        <DataGrid Name="cart_dg" RowEditEnding="cart_dg_roweditending" CanUserAddRows="false" AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="458" Margin="443,10,0,0" VerticalAlignment="Top" Width="457">
+        <DataGrid Name="cart_dg" RowEditEnding="cart_dg_roweditending" CanUserAddRows="false" RowHeight="30" FontSize="12" AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" Height="460" Margin="443,10,10,0" VerticalAlignment="Top" Width="580">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"  Binding="{Binding name,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Qty" >
+
+                <!--<DataGridTextColumn  Header="Name"  Binding="{Binding name,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>-->
+
+                <DataGridTemplateColumn  Header="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding name,UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox Margin="0" Padding="0" Text="{Binding name,UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn  Header="Qty">
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
                             <TextBlock Text="{Binding quantity,UpdateSourceTrigger=PropertyChanged}"/>
@@ -51,7 +68,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding quantity,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Margin="0" Padding="0" Text="{Binding quantity,UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -64,7 +81,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding price,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Margin="0" Padding="0" Text="{Binding price,UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -72,22 +89,23 @@
                 <DataGridTemplateColumn Header="Total" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
-                            <TextBlock Text="{Binding total,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding total}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Action">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Width="20" Height="20" Click="removeItemFromCart_btn_click" Style="{DynamicResource MaterialDesignFloatingActionMiniDarkButton}">
-                                <materialDesign:PackIcon Kind="Delete" Height="12" Width="12" />
+                            <Button Width="13" Height="13" Click="removeItemFromCart_btn_click" Style="{DynamicResource MaterialDesignIconButton}">
+                                <materialDesign:PackIcon Kind="Delete" Height="13" Width="13" Foreground="#FF7575BF"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Sale" Click="btn_doSale" HorizontalAlignment="Left" Margin="459,499,0,0" VerticalAlignment="Top" Width="441" Height="51"/>
+
+        <Button Content="Sale" Click="btn_doSale" HorizontalAlignment="Left" Margin="459,499,0,0" VerticalAlignment="Top" Width="565" Height="51"/>
 
 
 
