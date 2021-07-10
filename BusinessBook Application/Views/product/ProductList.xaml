@@ -5,13 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
-        Title="Products" Height="Auto" Width="Auto"
+        Title="Products" WindowState="Maximized" Height="Auto" Width="Auto" 
         >
     <Grid>
-        <telerik:RadGridView x:Name="dg_ProductList" RowEditEnded="dg_roweditended"  ShowSearchPanel="True"
-                     AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
+        <telerik:RadGridView
+            x:Name="dg_ProductList"
+            RowEditEnded="dg_roweditended"
+            ShowSearchPanel="True"
+            ShowColumnFooters="True"
+            AutoGenerateColumns="False"
+            telerik:StyleManager.Theme="Fluent"
+            >
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}"/>
+                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}" Background="#FFD6D6D6">
+                    <telerik:GridViewDataColumn.AggregateFunctions>
+                        <telerik:CountFunction Caption="Total: " />
+                    </telerik:GridViewDataColumn.AggregateFunctions>
+                </telerik:GridViewDataColumn>
+                
                 <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}"/>
                 <telerik:GridViewDataColumn Header="Barcode" DataMemberBinding="{Binding barcode}"/>
                 <telerik:GridViewDataColumn Header="Category" DataMemberBinding="{Binding category}"/>
