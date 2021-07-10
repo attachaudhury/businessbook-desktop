@@ -10,17 +10,30 @@
         Height="auto"
         Title="List">
     <Grid>
-        <telerik:RadGridView x:Name="dg" ShowSearchPanel="True"
-                     AutoGenerateColumns="False" telerik:StyleManager.Theme="Fluent" >
+        <telerik:RadGridView
+            x:Name="dg" 
+            ShowSearchPanel="True"
+            ShowColumnFooters="True"
+            AutoGenerateColumns="False" 
+            telerik:StyleManager.Theme="Fluent"
+            >
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}" />
+                <telerik:GridViewDataColumn Header="Id" DataMemberBinding="{Binding id}" Background="#FFD6D6D6">
+                    <telerik:GridViewDataColumn.AggregateFunctions>
+                        <telerik:CountFunction Caption="Total: " />
+                    </telerik:GridViewDataColumn.AggregateFunctions>
+                </telerik:GridViewDataColumn>
                 <telerik:GridViewDataColumn Header="Date" DataMemberBinding="{Binding date}" />
                 <telerik:GridViewDataColumn Header="Account" DataMemberBinding="{Binding accountname}" />
                 <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding name}" />
                 <telerik:GridViewDataColumn Header="Creator" DataMemberBinding="{Binding createdby}" />
                 <telerik:GridViewDataColumn Header="Party" DataMemberBinding="{Binding target}" />
                 <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding status}" />
-                <telerik:GridViewDataColumn Header="Amount" DataMemberBinding="{Binding amount}" />
+                <telerik:GridViewDataColumn Header="Amount" DataMemberBinding="{Binding amount}" Background="#FFD6D6D6">
+                    <telerik:GridViewDataColumn.AggregateFunctions>
+                        <telerik:SumFunction Caption="Total: " />
+                    </telerik:GridViewDataColumn.AggregateFunctions>
+                </telerik:GridViewDataColumn>
                 <telerik:GridViewColumn Header="Details" >
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
