@@ -24,7 +24,7 @@ namespace BusinessBook.bll
             var doc = ((IDocumentPaginatorSource)getFlowDocument(salesId, list, totalBill,totalpayment, remaining, printcustomerinfoonreceipt, customerAddress)).DocumentPaginator;
 
             pd.PrintQueue = new PrintQueue(new PrintServer(), new PrinterSettings().PrinterName);
-            pd.PrintDocument(doc, "Print Document");
+            pd.PrintDocument(doc, "Invoice");
         }
         static FlowDocument getFlowDocument(int salesId, List<productsaleorpurchaseviewmodel> list, double totalBill, double totalpayment, double remaining, bool printcustomerinfoonreceipt, string customerAddress)
         {
@@ -99,25 +99,21 @@ namespace BusinessBook.bll
             Section footer = new Section();
             //Paragraph footer1 = new Paragraph(new Run("Thank You for Purchaings. For Home Delivery please call us at: 0453-510066"));
             Paragraph footer1 = new Paragraph(new Run(Settings.Default.Footer));
-            Paragraph footer2 = new Paragraph(new Run("www.ravicosoft.com 03322282345"));
-            Paragraph footer3 = new Paragraph(new Run("                "));
-            Paragraph footer4 = new Paragraph(new Run(customerAddress));
+            Paragraph footer2 = new Paragraph(new Run("Software by www.ravicosoft.com 03322282345"));
+            Paragraph footer3 = new Paragraph(new Run(customerAddress));
+            Paragraph footer4 = new Paragraph(new Run("                "));
             footer1.FontSize = 9;
-            footer2.FontSize = 7;
-            footer4.FontSize = 9;
+            footer2.FontSize = 9;
+            footer3.FontSize = 9;
             footer.Blocks.Add(footer1);
             footer.Blocks.Add(footer2);
 
             //if saleType is 3, then it will also print customer address on recipt
             if (printcustomerinfoonreceipt)
             {
-                footer.Blocks.Add(footer4);
                 footer.Blocks.Add(footer3);
             }
-            else
-            {
-                footer.Blocks.Add(footer3);
-            }
+            footer.Blocks.Add(footer4);
             fd.Blocks.Add(header);
             fd.Blocks.Add(middle);
             fd.Blocks.Add(footer);

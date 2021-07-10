@@ -133,7 +133,6 @@
     <Compile Include="bll\networkutils.cs" />
     <Compile Include="bll\otherutils.cs" />
     <Compile Include="bll\printing.cs" />
-    <Compile Include="bll\PrintingUtils.cs" />
     <Compile Include="bll\productutils.cs" />
     <Compile Include="bll\purchaseutils.cs" />
     <Compile Include="bll\inventoryutils.cs" />

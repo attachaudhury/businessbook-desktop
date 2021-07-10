@@ -63,10 +63,12 @@ namespace BusinessBook.Views.finance
             if (account_combobox.SelectedItem == null)
             {
                 MessageBox.Show("Please select account");
+                return;
             }
             if (tb_amount.Text == "")
             {
                 MessageBox.Show("Please enter amount");
+                return;
             }
 
             var amount = Convert.ToDouble(tb_amount.Text);
