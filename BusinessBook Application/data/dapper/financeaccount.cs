@@ -19,6 +19,10 @@ namespace BusinessBook.data.dapper
         public string type { get; set; }
         public Nullable<int> fk_parent_in_financeaccount { get; set; }
     }
+    public class financeaccountswihparentnames : financeaccount
+    {
+        public string fk_parent_in_financeaccount_name { get; set; }
+    }
     public class financeaccountbalance: financeaccount
     {
         public int total { get; set; }
@@ -43,6 +47,15 @@ namespace BusinessBook.data.dapper
             using (var connection = new MySqlConnection(conn))
             {
                 var res = connection.Get<dapper.financeaccount>(id);
+                return res;
+            }
+        }
+        public List<dapper.financeaccountswihparentnames> getwithparentnames()
+        {
+            string sql = "select t1.id,t1.name,t1.type,t1.fk_parent_in_financeaccount, t2.name as fk_parent_in_financeaccount_name from financeaccount t1 left join financeaccount t2 on t1.fk_parent_in_financeaccount = t2.id;";
+            using (var connection = new MySqlConnection(conn))
+            {
+                var res = connection.Query<dapper.financeaccountswihparentnames>(sql).ToList();
                 return res;
             }
         }

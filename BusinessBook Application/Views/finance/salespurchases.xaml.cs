@@ -37,14 +37,20 @@ namespace BusinessBook.Views.finance
             List<financetransactionextended> list = new List<financetransactionextended>();
             if (type == "sale") 
             {
+                this.Title = "Sales";
                 list = financetransactionrepo.getmanybymanyfinanceaccountnames(new string[]{ "pos sale","sale","service sale"});
             }
             else if(type == "purchase")
             {
+                this.Title = "Purchases";
                 list = financetransactionrepo.getmanybyselfnameandfinanceaccountname("--inventory--on--purchase--", "inventory");
             }
             foreach (var item in list)
             {
+                if (type == "sale") 
+                {
+                    item.amount = -item.amount;
+                };
                 dg.Items.Add(item);
             }
         }

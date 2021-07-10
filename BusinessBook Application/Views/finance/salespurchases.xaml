@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.finance" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
+        WindowState="Maximized"
+        Width="auto"
+        Height="auto"
         Title="List">
     <Grid>
         <telerik:RadGridView x:Name="dg" ShowSearchPanel="True"

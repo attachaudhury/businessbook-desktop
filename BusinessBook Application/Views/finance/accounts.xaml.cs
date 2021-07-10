@@ -32,7 +32,7 @@ namespace BusinessBook.Views.finance
             //var db = new dbctx();
             //var list = db.financeaccount.ToList();
             var financeaccountrepo = new financeaccountrepo();
-            var list = financeaccountrepo.get();
+            var list = financeaccountrepo.getwithparentnames();
             foreach (var item in list)
             {
                 dg.Items.Add(item);

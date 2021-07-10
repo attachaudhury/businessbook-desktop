@@ -11,15 +11,16 @@
         <TextBox x:Name="tb_Name" TabIndex="1" Text="" HorizontalAlignment="Left" Height="25" Margin="59,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
         <Label Content="Parent" HorizontalAlignment="Left" Margin="188,12,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectedIndex="0" x:Name="parent_combobox" HorizontalAlignment="Left" Margin="235,4,0,0" VerticalAlignment="Top" Width="145" Height="33"/>
-        <Label Content="Category"  HorizontalAlignment="Left" Margin="386,13,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type"  HorizontalAlignment="Left" Margin="386,13,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectedIndex="0" x:Name="category_combobox" HorizontalAlignment="Left" Margin="443,4,0,0" VerticalAlignment="Top" Width="155" Height="33"/>
         <Button Content="Save" Click="save" HorizontalAlignment="Left" Margin="634,6,0,0" VerticalAlignment="Top" Width="110" Height="34"/>
         <DataGrid Name="dg" Margin="0,50,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                <DataGridTextColumn Header="Parent" Binding="{Binding financeaccount2.name}" />
-                <DataGridTextColumn Header="Category" Binding="{Binding type}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding type}" />
+                <DataGridTextColumn Header="Parent" Binding="{Binding fk_parent_in_financeaccount_name}" />
+                <DataGridTextColumn Header="Parent id" Binding="{Binding fk_parent_in_financeaccount}" />
 
             </DataGrid.Columns>
         </DataGrid>
