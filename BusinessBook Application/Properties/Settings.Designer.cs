@@ -97,7 +97,7 @@ namespace BusinessBook.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Call at  (+92 332 2282345)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Call at  (+92 302 4759550)")]
         public string Footer {
             get {
                 return ((string)(this["Footer"]));

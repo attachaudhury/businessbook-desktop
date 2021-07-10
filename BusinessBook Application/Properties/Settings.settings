@@ -21,7 +21,7 @@
       <Value Profile="(Default)">2020-09-03</Value>
     </Setting>
     <Setting Name="Footer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Call at  (+92 332 2282345)</Value>
+      <Value Profile="(Default)">Call at  (+92 302 4759550)</Value>
     </Setting>
     <Setting Name="BarcodeMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
