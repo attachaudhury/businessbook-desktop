@@ -175,11 +175,12 @@ html{overflow:hidden;height:200px;}
         #region menuitem_products
         private void productadd(object sender, RoutedEventArgs e)
         {
-            new ProductAdd().Show();
+           new ProductAdd().Show();
         }
         private void products(object sender, RoutedEventArgs e)
         {
-            new ProductList().Show();
+            var w = new ProductList();
+            userutils.authorizerole(w, new string[] { "superadmin", "admin" });
         }
         private void product_inventoryValueReport(object sender, RoutedEventArgs e)
         {
@@ -267,11 +268,6 @@ html{overflow:hidden;height:200px;}
             new MainWindow().Show();
         }
 
-    }
-    public class ChartData
-    {
-        public string Day { get; set; }
-        public double Total { get; set; }
     }
 
 }
