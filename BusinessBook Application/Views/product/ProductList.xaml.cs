@@ -67,6 +67,8 @@ namespace BusinessBook.Views.product
                         originalProduct.carrycost = item.carrycost;
                         originalProduct.saleprice = item.saleprice;
                         originalProduct.discount = item.discount;
+                        originalProduct.saleactive = item.saleactive;
+                        originalProduct.purchaseactive = item.purchaseactive;
                         var updateResult = new productrepo().update(originalProduct);
                         if (updateResult==true) 
                         {
@@ -80,10 +82,9 @@ namespace BusinessBook.Views.product
                             var itemFromGrid = items.SingleOrDefault(x => x.id == item.id);
                             itemFromGrid.barcode = originalProduct2.barcode;
                         }
-
                     }
-
                 }
+
             }
         }
     }
