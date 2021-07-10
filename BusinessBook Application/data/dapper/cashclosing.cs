@@ -28,7 +28,7 @@ namespace BusinessBook.data.dapper
     }
     public class cashclosingrepo
     {
-        string joinselect = "t1.id,t1.closingbalance,t1.date,t1.expence,t1.note,t1.fk_user_in_cashclosing,t2.name as username from cashclosing t1 join user t2 on t1.fk_user_in_cashclosing = t2.id";
+        string joinselect = "t1.id,t1.sale,t1.closingbalance,t1.date,t1.expence,t1.note,t1.fk_user_in_cashclosing,t2.name as username from cashclosing t1 join user t2 on t1.fk_user_in_cashclosing = t2.id";
 
         string conn = baserepo.connectionstring;
         

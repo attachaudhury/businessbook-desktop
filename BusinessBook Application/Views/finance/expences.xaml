@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.finance" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
-        Title="Ledger">
+        WindowState="Maximized"
+        Width="auto"
+        Height="auto"
+        Title="Expences">
     <Grid>
         <Label Content="Amount" HorizontalAlignment="Left" Margin="11,12,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_amount" TabIndex="1" Text="" HorizontalAlignment="Left" Height="25" Margin="64,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83"/>

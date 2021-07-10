@@ -251,22 +251,26 @@ namespace BusinessBook.Views.finance
                     MessageBox.Show("Please select customer", "Information");
                     return;
                 }
+
+                if (paying_textbox.Text == "")
+                {
+                    MessageBox.Show("Please enter payment, 0 for no payment", "Information");
+                    return;
+                }
+
                 var totalbill = cart.Sum(a => a.total);
                 double totalpayment = Convert.ToDouble(paying_textbox.Text);
+
+                if (totalpayment > totalbill)
+                {
+                    MessageBox.Show("Paymet can not be greater than bill", "Information");
+                    return;
+                }
 
                 if ((bool)ledger_checkbox.IsChecked)
                 {
                     
                     if (totalbill == totalpayment)
-                    {
-                        MessageBox.Show("Ledger not set properly", "Information");
-                        return;
-                    }
-                }
-                if (!(bool)ledger_checkbox.IsChecked)
-                {
-
-                    if ( totalpayment<totalbill)
                     {
                         MessageBox.Show("Ledger not set properly", "Information");
                         return;

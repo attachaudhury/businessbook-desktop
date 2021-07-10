@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessBook.Views.finance"
         mc:Ignorable="d"
+        WindowState="Maximized"
+        Width="auto"
+        Height="auto"
         Title="Accounts Balances">
     <Grid>
         <DataGrid Name="dg" Margin="0,0,0,0">

@@ -291,7 +291,7 @@ namespace BusinessBook.bll
             financetransactionrepo financetransactionrepo = new financetransactionrepo();
             List<data.dapper.financeaccount> accounts = financeaccountrepo.get();
             data.dapper.financetransaction ftexpence = new data.dapper.financetransaction();
-            ftexpence.amount = -amount;
+            ftexpence.amount = amount;
             ftexpence.fk_financeaccount_in_financetransaction = expenceaccount;
             ftexpence.date = DateTime.Now;
             ftexpence.status = "posted";
@@ -301,7 +301,7 @@ namespace BusinessBook.bll
             financetransactionrepo.save(ftexpence);
 
             data.dapper.financetransaction ftasset = new data.dapper.financetransaction();
-            ftasset.amount = amount;
+            ftasset.amount = -amount;
             ftasset.fk_financeaccount_in_financetransaction = payingaccount;
             ftasset.date = DateTime.Now;
             ftasset.status = "posted";

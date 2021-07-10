@@ -89,7 +89,7 @@ namespace BusinessBook.data.dapper
             object[] financeaccountids = new object[financeaccounts.Count()];
             for (int i = 0; i < financeaccounts.Count(); i++)
             {
-                financeaccountids[i] = financeaccounts[i].name;
+                financeaccountids[i] = financeaccounts[i].id;
             }
             
             string whereincontent = baserepo.getWhereInSql(financeaccountids);

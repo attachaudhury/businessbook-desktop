@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
-        Title="Invenotry Log" Height="Auto" Width="Auto"
+        Title="Invenotry Log"
+        WindowState="Maximized"
+        Height="Auto" Width="Auto"
         >
     <Grid>
         <Label Content="From Date" HorizontalAlignment="Left" Margin="13,12,0,0" VerticalAlignment="Top"/>
