@@ -78,6 +78,11 @@ namespace BusinessBook
         }
         void login()
         {
+            if (tb_Name.Text == "" || tb_Pasword.Password == "") 
+            {
+                MessageBox.Show("Enter Username and Password", "Failed");
+                return;
+            }
             if (tb_Name.Text=="superadmin" && tb_Pasword.Password=="sa@bb") 
             {
                 data.dapper.user userdd = new data.dapper.userrepo().getonerandom();
